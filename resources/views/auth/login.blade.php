@@ -14,7 +14,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<title>Cout - Connect</title>
+		<title>BGD</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Craft admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="keywords" content="Craft, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
@@ -102,7 +102,7 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="text-center">
 									<!--begin::Submit button-->
 									<button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-										<span class="indicator-label">Continue</span>
+										<span class="indicator-label">Login</span>
 										<span class="indicator-progress">Please wait...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 									</button>
