@@ -269,12 +269,12 @@
                                                         <!--end::Input group-->
 
 
-   <!--begin::Label-->
+  {{-- <div>
    <label class="fs-6 fw-bold form-label mt-3">
     <option value="">Select a Country...</option>
     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
 </label>
-<!--end::Label-->
+
 <select name="country_id"  required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_targetEdit{{$row->id}}" class="form-select form-select-solid fw-bolder">
     <option value="" ></option>
     @foreach($countries as $country)
@@ -285,7 +285,7 @@
     @endif</option>
     @endforeach
 </select>
-</div>
+</div> --}}
 <!--end::Input group-->
 
                                                         <!--begin::Actions-->
@@ -405,13 +405,13 @@
 
 
 		<!--begin::Input group-->
-        <div class="fv-row mb-7">
-            <!--begin::Label-->
+        {{-- <div class="fv-row mb-7">
+
             <label class="fs-6 fw-bold form-label mt-3">
                 <option value="">Select Country..</option>
                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
             </label>
-            <!--end::Label-->
+
             <select name="country_id"  required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_target" class="form-select form-select-solid fw-bolder">
                 <option value="" ></option>
                 @foreach($countries as $country)
@@ -423,7 +423,7 @@
                 @endif</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
         <!--end::Input group-->
 
 

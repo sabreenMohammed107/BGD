@@ -58,7 +58,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $input = $request->except(['_token']);
-
+        $input['country_id']=2;
         City::create($input);
         return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');    }
 
@@ -94,7 +94,7 @@ class CityController extends Controller
     {
 
         $input = $request->except(['_token', 'city_id']);
-
+        $input['country_id']=2;
         City::findOrFail($request->get('city_id'))->update($input);
         // $specialzation->update($input);
 
