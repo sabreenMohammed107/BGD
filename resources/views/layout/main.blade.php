@@ -34,30 +34,30 @@ License: For each use you must have a valid license purchased only from above li
        <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
-         @if(Session::has('flash_success'))
+         {{-- @if(Session::has('flash_success'))
 
          <div class="position-fixed top-0 end-0 p-3 z-index-3">
         <div class="toast show bg-success"  role="alert" aria-live="assertive" aria-atomic="true">
          <div class="toast-header">
              <span class="svg-icon svg-icon-2 svg-icon-primary me-3"></span>
              <strong class="me-auto">Good job!</strong>
-             {{-- <small>11 mins ago</small> --}}
+
              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
          </div>
          <div class="toast-body">
-             {{-- Hello, world! This is a toast message. --}}
+
              {{Session::get('flash_success')}}
          </div>
       </div>
          </div>
-       @endif
+       @endif --}}
        @if(Session::has('flash_danger'))
 
        <div class="position-fixed top-0 end-0 p-3 z-index-3">
        <div class="toast show bg-danger"  role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <span class="svg-icon svg-icon-2 svg-icon-primary me-3"></span>
-            <strong class="me-auto">Ohh !</strong>
+            <strong class="me-auto">Error Deleting data !</strong>
             {{-- <small>11 mins ago</small> --}}
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>

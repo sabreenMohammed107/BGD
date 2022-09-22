@@ -793,7 +793,7 @@
                 <!--begin::Toolbar wrapper-->
                 <div class="d-flex align-items-stretch flex-shrink-0">
 
-                    <div class="d-flex align-items-center ms-2 ms-lg-3" >
+                    {{-- <div class="d-flex align-items-center ms-2 ms-lg-3" >
 
 
                         @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -813,11 +813,9 @@
                                     {{ __('links.en') }}
                                 </a>
                             @endif
-                            <!--|-->
                         @endforeach
-                        {{-- <a class="nav-link" href="#contact-sec">English</a> --}}
 
-                </div>
+                </div> --}}
                     <!--begin::User-->
                     <div class="d-flex align-items-center ms-2 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->

@@ -21,7 +21,7 @@ class Medical_sub_field extends Model
 
     public function field()
     {
-        return $this->belongsTo(Medical_field::class);
+        return $this->belongsTo(Medical_field::class,'medical_field_id');
     }
 
 }

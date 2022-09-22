@@ -85,6 +85,7 @@
                                 <th class="min-w-150px">image</th>
                                 <th class="min-w-250px">En Name</th>
                                 <th class="min-w-250px">De Name</th>
+                                <th class="min-w-250px">Medical Field</th>
                                 {{-- <th class="min-w-150px">En Overview</th>
                                 <th class="min-w-150px">De Overview</th> --}}
                                 <th class="text-end min-w-70px">Actions</th>
@@ -135,6 +136,18 @@
                                                 data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
                                             <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1">
                                                 {{ $row->field_dtname }}</a>
+
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="d-flex">
+
+
+
+                                                {{ $row->field->field_enname ?? '' }}</a>
 
 
                                         </div>

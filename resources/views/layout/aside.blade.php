@@ -5,8 +5,8 @@
             <div class="aside-logo flex-column-auto pt-9 pb-5" id="kt_aside_logo">
                 <!--begin::Logo-->
                 <a href="#">
-                    <img alt="Logo" src="{{asset('img/coatlogo.png')}}" class="max-h-50px logo-default" />
-                    <img alt="Logo" src="{{asset('img/coatlogo.png')}}" class="max-h-50px logo-minimize" />
+                    <img alt="Logo" src="{{asset('img/logo2.jpg')}}" class="max-h-50px logo-default " style="height: 120px" />
+                    <img alt="Logo" src="{{asset('img/logo2.jpg')}}" class="max-h-50px logo-minimize " style="height: 120px"/>
                 </a>
                 <!--end::Logo-->
             </div>
@@ -142,7 +142,7 @@
                         </div>
   <!-- End basics -->
                       <!-- organizers -->
-                      <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                      {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <span class="menu-link">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
@@ -171,10 +171,10 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
                       <!-- end organizers -->
                        <!-- start Event -->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <span class="menu-link">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -203,39 +203,10 @@
 
 
                                 </div>
-                            </div>
+                            </div> --}}
                              <!-- end Event -->
                               <!-- start Doctors -->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Doctors</span>
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                <div class="menu-sub menu-sub-accordion">
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Doctors list</span>
-                                        </a>
-                                    </div>
 
-                                    {{-- <div class="menu-item">
-                                        <a class="menu-link" href="{{ route('events.create') }}">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Add Event</span>
-                                        </a>
-                                    </div> --}}
-
-
-                                </div>
-                            </div>
                              <!-- end Doctors -->
 
 
