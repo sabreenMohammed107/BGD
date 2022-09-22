@@ -5,8 +5,8 @@
             <div class="aside-logo flex-column-auto pt-9 pb-5" id="kt_aside_logo">
                 <!--begin::Logo-->
                 <a href="#">
-                    <img alt="Logo" src="{{asset('img/logo2.jpg')}}" class="max-h-50px logo-default " style="height: 120px" />
-                    <img alt="Logo" src="{{asset('img/logo2.jpg')}}" class="max-h-50px logo-minimize " style="height: 120px"/>
+                    <img alt="Logo" src="{{asset('img/logo2.JPG')}}" class="max-h-50px logo-default " style="height: 120px" />
+                    <img alt="Logo" src="{{asset('img/logo2.JPG')}}" class="max-h-50px logo-minimize " style="height: 120px"/>
                 </a>
                 <!--end::Logo-->
             </div>
@@ -112,14 +112,14 @@
                                     </a>
                                 </div>
 
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a class="menu-link" href="{{ route('countries.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
                                         <span class="menu-title">Countries</span>
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="menu-item">
                                     <a class="menu-link" href="{{ route('cities.index') }}">
                                         <span class="menu-bullet">

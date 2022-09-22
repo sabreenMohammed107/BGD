@@ -275,10 +275,10 @@
     <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
 </label>
 <!--end::Label-->
-<select name="country_id" required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_targetEdit{{$row->id}}" class="form-select form-select-solid fw-bolder">
+<select name="country_id"  required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_targetEdit{{$row->id}}" class="form-select form-select-solid fw-bolder">
     <option value="" ></option>
     @foreach($countries as $country)
-    <option value="{{$country->id}}" {{$row->country_id == $country->id ? 'selected': ''}}> @if (LaravelLocalization::getCurrentLocale() === 'en')
+    <option value="{{$country->id}}" {{2 == $country->id ? 'selected': ''}}> @if (LaravelLocalization::getCurrentLocale() === 'en')
         {{ $country->en_country }}
     @else
         {{ $country->dt_country }}
@@ -412,10 +412,10 @@
                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
             </label>
             <!--end::Label-->
-            <select name="country_id" required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_target" class="form-select form-select-solid fw-bolder">
+            <select name="country_id"  required aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country..." data-dropdown-parent="#kt_modal_new_target" class="form-select form-select-solid fw-bolder">
                 <option value="" ></option>
                 @foreach($countries as $country)
-                <option value="{{$country->id}}">
+                <option value="{{$country->id}}"  >
                     @if (LaravelLocalization::getCurrentLocale() === 'en')
                     {{ $country->en_country }}
                 @else
