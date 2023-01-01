@@ -109,12 +109,12 @@
         <td>
             <div class="d-flex align-items-center">
                 <!--begin::Thumbnail-->
-                {{-- <a href="#"
+                <a href="#"
                     class="symbol symbol-50px">
                     <span class="symbol-label"
 
                         style="background-image:url({{ asset('uploads/doctors') }}/{{ $row->img }});"></span>
-                </a> --}}
+                </a>
                 <!--end::Thumbnail-->
                 <div class="ms-5">
                     <!--begin::Title-->
@@ -128,12 +128,12 @@
         <!--begin::SKU=-->
         <td class="text-end pe-0">
             <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->phone }}</span>
+            <span class="fw-bolder">{{ $row->mobile }}</span>
         </td>
         <!--end::SKU=-->
         <!--begin::Qty=-->
         <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->user->email ?? 0 }}</span>
+            <span class="fw-bolder ms-3">{{ $row->email }}</span>
         </td>
         <!--end::Qty=-->
 
@@ -157,14 +157,14 @@
                 data-kt-menu="true">
                 <!--begin::Menu item-->
                 <div class="menu-item px-3">
-                    <a href="{{ route('doctors.show', $row->id) }}"
-                        class="menu-link px-3">Show</a>
+                    <a href="{{ route('doctors.edit', $row->id) }}"
+                        class="menu-link px-3">Edit</a>
                 </div>
                 <!--end::Menu item-->
                  <!--begin::Menu item-->
                  <div class="menu-item px-3">
-                    {{-- <a href="#" class="menu-link px-3"
-                        data-kt-ecommerce-category-filter="delete_row">Delete</a> --}}
+                    <a href="#" class="menu-link px-3"
+                        data-kt-ecommerce-category-filter="delete_row">Delete</a>
 
 
         <form id="delete_{{$row->id}}" action="{{ route('doctors.destroy', $row->id) }}"  method="POST" style="display: none;">

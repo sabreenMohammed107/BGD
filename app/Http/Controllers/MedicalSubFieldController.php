@@ -20,7 +20,7 @@ class MedicalSubFieldController extends Controller
      */
     public function __construct(Medical_sub_field $object)
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
 
         $this->object = $object;
         $this->viewName = 'admin.medicine-sub-fields.';

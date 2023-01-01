@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
+use App\Models\Clinic_review;
+use App\Models\Favourite_doctor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+    protected $object;
+    protected $viewName;
+    protected $routeName ;
+    public function __construct(User $object)
+    {
+        $this->middleware('auth:admin');
+
+        $this->object = $object;
+        $this->viewName = 'admin.patients.';
+    $this->routeName = 'patients.';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +27,25 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $rows=User::orderBy("created_at", "Desc")->get();
+
+
+        return view($this->viewName.'index', compact('rows'));
     }
 
+public function favorite(){
+    $rows=Favourite_doctor::orderBy("created_at", "Desc")->get();
+
+
+    return view($this->viewName.'favourite', compact('rows'));
+}
+
+public function review(){
+    $rows=Clinic_review::orderBy("created_at", "Desc")->get();
+
+
+    return view($this->viewName.'review', compact('rows'));
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -41,10 +70,10 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show($id)
     {
         //
     }
@@ -52,10 +81,10 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +93,10 @@ class PatientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Patient  $patient
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +104,10 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
         //
     }

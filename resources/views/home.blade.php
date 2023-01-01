@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are a User.
+                    Hello User!
                 </div>
             </div>
         </div>
