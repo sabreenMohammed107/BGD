@@ -309,7 +309,7 @@
                              <!-- end Event -->
                               <!-- start Doctors -->
                               <div class="menu-item">
-                                <a class="menu-link" href="{{ route('all-reservations') }}">
+                                <a class="menu-link" href="{{ route('admin.all-reservations') }}">
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                         <span class="svg-icon svg-icon-2">
@@ -327,7 +327,7 @@
 
                               <!-- start Doctors -->
                               <div class="menu-item">
-                                <a class="menu-link" href="{{ route('complete-reservations') }}">
+                                <a class="menu-link" href="{{ route('admin.complete-reservations') }}">
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                         <span class="svg-icon svg-icon-2">
@@ -345,7 +345,7 @@
 
                               <!-- start Doctors -->
                               <div class="menu-item">
-                                <a class="menu-link" href="{{ route('cancelled-reservations') }}">
+                                <a class="menu-link" href="{{ route('admin.cancelled-reservations') }}">
                                     <span class="menu-icon">
                                         <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                         <span class="svg-icon svg-icon-2">
@@ -405,7 +405,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('complete-reservations') }}">
+                            <a class="menu-link" href="{{ route('admin.complete-reservations') }}">
                                 <span class="menu-icon">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen009.svg-->
                                     <span class="svg-icon svg-icon-2">

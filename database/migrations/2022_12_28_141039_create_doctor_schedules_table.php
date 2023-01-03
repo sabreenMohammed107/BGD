@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('clinic_id')->nullable();
             $table->unsignedBigInteger('days_id')->nullable();
-            $table->time('time_from', $precision = 0);
-            $table->time('time_to', $precision = 0);
+            $table->time('time_from', $precision = 0)->nullable();
+            $table->time('time_to', $precision = 0)->nullable();
             $table->integer('active')->default(1);
             $table->timestamps();
         });

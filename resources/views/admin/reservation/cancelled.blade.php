@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends (Auth::guard('admin')->check() ? 'layout.main' : 'layout.doctor.main')
 
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
@@ -133,10 +133,17 @@
             <span class="fw-bolder ms-3">{{ $row->time_from }} - {{$row->time_to}}</span>
         </td>
         <td>
+            @if (Auth::guard('admin')->check())
             <div class="menu-item px-3">
-                <a href="{{ route('show-cancelled-reservation', $row->id) }}"
+                <a href="{{ route('admin.show-cancelled-reservation', $row->id) }}"
                     class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
             </div>
+            @else
+            <div class="menu-item px-3">
+                <a href="{{ route('doctor.show-cancelled-reservation', $row->id) }}"
+                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            </div>
+            @endif
         </td>
     </tr>
     <!--end::Table row-->

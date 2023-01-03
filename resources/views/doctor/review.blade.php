@@ -1,4 +1,4 @@
-@extends (Auth::guard('admin')->check() ? 'layout.main' : 'layout.doctor.main')
+@extends('layout.doctor.main')
 
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
@@ -6,14 +6,14 @@
             <!--begin::Info-->
             <div class="d-flex flex-column align-items-start justify-content-center flex-wrap me-2">
                 <!--begin::Title-->
-                <h1 class="text-dark fw-bolder my-1 fs-2">Complete Reservations</h1>
+                <h1 class="text-dark fw-bolder my-1 fs-2">Review on {{$doctor->name}}</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb fw-bold fs-base my-1">
                     <li class="breadcrumb-item text-muted">
                         <a href="../dist/index.html" class="text-muted text-hover-primary">Home</a>
                     </li>
-                    <li class="breadcrumb-item text-muted">Complete Reservations</li>
+                    <li class="breadcrumb-item text-muted">Patients - Review</li>
 
                     <li class="breadcrumb-item text-dark">All</li>
                 </ul>
@@ -84,11 +84,13 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th class="min-w-200px">patient_name</th>
-                                <th class="text-end min-w-100px">Clinic</th>
-                                <th class="text-end min-w-70px">Reservation Date</th>
-                                <th class="text-end min-w-70px">Time </th>
-                                <th class="text-end min-w-70px">Action </th>
+                                <th class="min-w-200px">Patient Name</th>
+
+                                <th class="text-end min-w-70px">City</th>
+                                <th class="text-end min-w-70px">Stars</th>
+                                <th class="text-end min-w-100px">Comment</th>
+                                <th class="text-end min-w-70px">Date</th>
+
                             </tr>
                             <!--end::Table row-->
                         </thead>
@@ -108,43 +110,45 @@
         <!--begin::Category=-->
         <td>
             <div class="d-flex align-items-center">
+                <!--begin::Thumbnail-->
+                <a href="#"
+                    class="symbol symbol-50px">
+                    <span class="symbol-label"
 
+                        style="background-image:url({{ asset('uploads/users') }}/{{ $row->image }});"></span>
+                </a>
+                <!--end::Thumbnail-->
                 <div class="ms-5">
                     <!--begin::Title-->
                     <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                    data-kt-ecommerce-category-filter="category_name" >{{ $row->patient_name }}</a>
+                    data-kt-ecommerce-category-filter="category_name" >{{ $row->patient->name  ?? ''}}</a>
                     <!--end::Title-->
                 </div>
             </div>
         </td>
         <!--end::Category=-->
-        <!--begin::SKU=-->
-        <td class="text-end pe-0">
-            <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->clinic->doctor->name ?? '' }}</span>
-        </td>
-        <!--end::SKU=-->
+
         <!--begin::Qty=-->
         <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->reservation_date }}</span>
+            <span class="fw-bolder ms-3">{{$row->clinic->city->en_city  ?? ''}}</span>
         </td>
         <!--end::Qty=-->
-        <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->time_from }} - {{$row->time_to}}</span>
-        </td>
-        <td>
-            @if (Auth::guard('admin')->check())
-            <div class="menu-item px-3">
-                <a href="{{ route('admin.show-complete-reservation', $row->id) }}"
-                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
-            </div>
-            @else
-            <div class="menu-item px-3">
-                <a href="{{ route('doctor.show-complete-reservation', $row->id) }}"
-                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
-            </div>
-            @endif
-        </td>
+
+ <!--begin::Qty=-->
+ <td class="text-end pe-0" data-order="15">
+    <span class="fw-bolder ms-3">{{$row->stars}}</span>
+</td>
+<!--end::Qty=-->
+ <!--begin::Qty=-->
+ <td class="text-end pe-0" data-order="15">
+    <span class="fw-bolder ms-3">{{$row->comment}}</span>
+</td>
+<!--end::Qty=-->
+ <!--begin::Qty=-->
+ <td class="text-end pe-0" data-order="15">
+    <span class="fw-bolder ms-3">{{$row->comment_date}}</span>
+</td>
+<!--end::Qty=-->
     </tr>
     <!--end::Table row-->
 @endforeach

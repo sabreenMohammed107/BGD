@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends (Auth::guard('admin')->check() ? 'layout.main' : 'layout.doctor.main')
 
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
@@ -31,10 +31,11 @@
         <!--begin::Container-->
         <div class="container-xxl">
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
-            action="{{ route('doctors.update', $row->id) }}" method="post" enctype="multipart/form-data">
+            action="{{ route('doctors.update-reservation') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+
  <!--begin::Aside column-->
+ <input type="hidden" name="reservId" value="{{$row->id}}" id="">
  <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
        <!--begin::Thumbnail settings-->
                     <div class="card card-flush py-4">
@@ -62,7 +63,7 @@
                                     data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" name="img" accept=".png, .jpg, .jpeg" />
+                                    <input type="file" disabled name="img" accept=".png, .jpg, .jpeg" />
                                     <input type="hidden" name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
@@ -97,7 +98,7 @@
                                 <label class=" form-label"> Patient Name</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input id="name" type="text" class="form-control " name="name" value="{{$row->patient_name}}"  autocomplete="name" autofocus>
+                                <input id="name" disabled type="text" class="form-control " name="name" value="{{$row->patient_name}}"  autocomplete="name" autofocus>
 
 
                             </div>
@@ -109,7 +110,7 @@
                                 <label class=" form-label"> Patient Mobile</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input id="email" type="text" class="form-control " name="email" value="{{$row->patient_mobile}}"  autocomplete="email">
+                                <input id="email" disabled type="text" class="form-control " name="email" value="{{$row->patient_mobile}}"  autocomplete="email">
 
 
 
@@ -123,7 +124,7 @@
     <label class=" form-label">address</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="mobile"
+    <input type="text" disabled name="mobile" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="mobile"
         value="" />
 
 
@@ -134,19 +135,35 @@
     <label class=" form-label">User</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->patient->name ?? ''}}" class="form-control mb-2" placeholder="mobile"
+    <input type="text" disabled name="mobile" value="{{$row->patient->name ?? ''}}" class="form-control mb-2" placeholder="mobile"
         value="" />
 
 
 </div>
+     <!--begin::checkbox-->
 
+     <div class="d-flex flex-wrap gap-5 mt-4">
+        <!--begin::Input group-->
+        <div class="fv-row w-100 flex-md-root">
+            <div class="form-check form-switch form-check-custom form-check-solid">
+                <input class="form-check-input" disabled type="checkbox" name="verified[]" value="1"
+                    id="flexSwitchDefault" {{ $row->other_flag == 1 ? ' checked' : '' }} />
+                <label class="form-check-label" for="flexSwitchDefault">
+                    User Book inbehalf of another
+                </label>
+            </div>
+        </div>
+        <!--end::Input group-->
+
+    </div>
+    <!--end:checkbox-->
      <!--end::Input-->
 <div class="mb-10 fv-row">
     <!--begin::Label-->
-    <label class=" form-label">Date</label>
+    <label class=" form-label">Reservation Date</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->reservation_date}}" class="form-control mb-2" placeholder="mobile"
+    <input type="text" disabled name="mobile" value="{{$row->reservation_date}}" class="form-control mb-2" placeholder="mobile"
         value="" />
 
 
@@ -158,7 +175,7 @@
         <label class=" form-label">Time</label>
         <!--end::Label-->
         <!--begin::Input-->
-        <input type="text" name="mobile" value="{{$row->time_from}} - {{$row->time_to}}" class="form-control mb-2" placeholder="mobile"
+        <input type="text" disabled name="mobile" value="{{$row->time_from}} - {{$row->time_to}}" class="form-control mb-2" placeholder="mobile"
             value="" />
 
 
@@ -167,29 +184,16 @@
 <!--begin::Input group-->
 <div>
     <!--begin::Label-->
-    <label class="form-label">Notes</label>
+    <label class="form-label">Doctor Notes</label>
     <!--end::Label-->
     <!--begin::Editor-->
-    <textarea class="form-control form-control-solid" rows="3" name="en_overview"
+    <textarea class="form-control form-control-solid" rows="3" name="notes"
         placeholder="Type  En Overview">{{$row->notes}}</textarea>
     <!--end::Editor-->
 
 </div>
 <!--end::Input group-->
 
- <!--end::Input-->
- <div class="mb-10 fv-row">
-    <!--begin::Label-->
-    <label class=" form-label">Status</label>
-    <!--end::Label-->
-    <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->status->en_status ?? '' }}" class="form-control mb-2" placeholder="mobile"
-        value="" />
-
-
-</div>
-
-<!--begin::Input group-->
 
 
 
@@ -200,39 +204,40 @@
 
 
 
-                            <!--begin::checkbox-->
 
-                            <div class="d-flex flex-wrap gap-5 mt-4">
-                                <!--begin::Input group-->
-                                <div class="fv-row w-100 flex-md-root">
-                                    <div class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" name="verified[]" value="1"
-                                            id="flexSwitchDefault" {{ $row->other_flag == 1 ? ' checked' : '' }} />
-                                        <label class="form-check-label" for="flexSwitchDefault">
-                                            Another Person
-                                        </label>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-
-                            </div>
-                            <!--end:checkbox-->
 
                         </div>
                         <!--end::Card header-->
                     </div>
                     <!--end::General options-->
 
-
+                    @if(Auth::guard('admin')->check())
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="{{ route('all-reservations') }}" id="kt_ecommerce_add_product_cancel"
+                        <a href="{{ route('admin.all-reservations') }}" id="kt_ecommerce_add_product_cancel"
                             class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
 
                         <!--end::Button-->
                     </div>
+                    @else
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{{ route('doctor.all-reservations') }}" id="kt_ecommerce_add_product_cancel"
+                            class="btn btn-light me-5">Cancel</a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+ <!--begin::Button-->
+ <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+    <span class="indicator-label">Save Changes</span>
+    <span class="indicator-progress">Please wait...
+    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+</button>
+<!--end::Button-->
+                        <!--end::Button-->
+                    </div>
+                    @endif
                 </div>
                 <!--end::Main column-->
             </form>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.doctor.main')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Hi there, awesome doctor
+                    Hi doctor
                 </div>
             </div>
         </div>

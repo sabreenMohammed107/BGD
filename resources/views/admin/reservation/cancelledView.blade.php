@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends (Auth::guard('admin')->check() ? 'layout.main' : 'layout.doctor.main')
 
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
@@ -211,16 +211,27 @@
                     </div>
                     <!--end::General options-->
 
-
+                    @if(Auth::guard('admin')->check())
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="{{ route('cancelled-reservations') }}" id="kt_ecommerce_add_product_cancel"
+                        <a href="{{ route('admin.cancelled-reservations') }}" id="kt_ecommerce_add_product_cancel"
                             class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
 
                         <!--end::Button-->
                     </div>
+                    @else
+                    <div class="d-flex justify-content-end">
+                        <!--begin::Button-->
+                        <a href="{{ route('doctor.cancelled-reservations') }}" id="kt_ecommerce_add_product_cancel"
+                            class="btn btn-light me-5">Cancel</a>
+                        <!--end::Button-->
+                        <!--begin::Button-->
+
+                        <!--end::Button-->
+                    </div>
+                    @endif
                 </div>
                 <!--end::Main column-->
             </form>

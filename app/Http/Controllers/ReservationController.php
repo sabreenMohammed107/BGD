@@ -12,15 +12,15 @@ class ReservationController extends Controller
     protected $viewName;
     public function __construct(Reservation $object)
     {
-        $this->middleware('auth:admin');
-
+        // $this->middleware('auth:admin');
+        // $this->middleware('auth:doctor');
         $this->object = $object;
         $this->viewName = 'admin.reservation.';
 
     }
       //
     public function allReservation(){
-        $rows=Reservation::orderBy("created_at", "Desc")->get();
+        $rows=Reservation::orderBy("reservation_date", "Desc")->get();
 
 
         return view($this->viewName.'all', compact('rows'));
@@ -33,8 +33,23 @@ class ReservationController extends Controller
         return view($this->viewName.'allView', compact('row'));
     }
 
+    public function comReservation($id){
+        $row=Reservation::where("id", $id)->first();
+        $row->update(['reservation_status_id'=>2]);
+
+        return redirect()->back();
+    }
+
+    public function delReservation($id){
+        $row=Reservation::where("id", $id)->first();
+
+        $row->update(['reservation_status_id'=>3]);
+
+        return redirect()->back();
+    }
+
     public function completeReservation(){
-        $rows=Reservation::where('reservation_status_id',2)->orderBy("created_at", "Desc")->get();
+        $rows=Reservation::where('reservation_status_id',2)->orderBy("reservation_date", "Desc")->get();
 
 
         return view($this->viewName.'complete', compact('rows'));
@@ -48,7 +63,7 @@ class ReservationController extends Controller
         return view($this->viewName.'completeView', compact('row'));
     }
     public function cancelledReservation(){
-        $rows=Reservation::where('reservation_status_id',3)->orderBy("created_at", "Desc")->get();
+        $rows=Reservation::where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
 
 
         return view($this->viewName.'cancelled', compact('rows'));
@@ -60,5 +75,13 @@ class ReservationController extends Controller
 
 
         return view($this->viewName.'cancelledView', compact('row'));
+    }
+
+    public function updateReservation(Request $request){
+        $row=Reservation::where("id", $request->reservId)->first();
+
+        $row->update(['notes'=>$request->notes]);
+
+        return redirect()->back();
     }
 }

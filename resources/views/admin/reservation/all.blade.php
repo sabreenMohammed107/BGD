@@ -1,5 +1,4 @@
-@extends('layout.main')
-
+@extends (Auth::guard('admin')->check() ? 'layout.main' : 'layout.doctor.main')
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
         <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
@@ -59,9 +58,9 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar">
                         <!--begin::Add customer-->
-                      	<!--begin::Add product-->
-											{{-- <a href="{{ route('Doctors.create') }}" class="btn btn-primary">Add Doctors</a> --}}
-											<!--end::Add product-->
+                        <!--begin::Add product-->
+                        {{-- <a href="{{ route('Doctors.create') }}" class="btn btn-primary">Add Doctors</a> --}}
+                        <!--end::Add product-->
 
                         <!--end::Add customer-->
                     </div>
@@ -71,8 +70,8 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
 
-                       <!--begin::Table-->
-                       <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
+                    <!--begin::Table-->
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
                         <!--begin::Table head-->
                         <thead>
                             <!--begin::Table row-->
@@ -98,54 +97,235 @@
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
                             @foreach ($rows as $index => $row)
-     <!--begin::Table row-->
-     <tr>
-        <!--begin::Checkbox-->
-        <td>
-            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                <input class="form-check-input" type="checkbox" value="1" />
-            </div>
-        </td>
-        <!--end::Checkbox-->
-        <!--begin::Category=-->
-        <td>
-            <div class="d-flex align-items-center">
+                                <!--begin::Table row-->
+                                <tr>
+                                    <!--begin::Checkbox-->
+                                    <td>
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" />
+                                        </div>
+                                    </td>
+                                    <!--end::Checkbox-->
+                                    <!--begin::Category=-->
+                                    <td>
+                                        <div class="d-flex align-items-center">
 
-                <div class="ms-5">
-                    <!--begin::Title-->
-                    <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                    data-kt-ecommerce-category-filter="category_name" >{{ $row->patient_name }}</a>
-                    <!--end::Title-->
-                </div>
-            </div>
-        </td>
-        <!--end::Category=-->
-        <!--begin::SKU=-->
-        <td class="text-end pe-0">
-            <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-            <span class="fw-bolder">{{ $row->clinic->doctor->name ?? '' }}</span>
-        </td>
-        <!--end::SKU=-->
-        <!--begin::Qty=-->
-        <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->reservation_date }}</span>
-        </td>
-        <!--end::Qty=-->
-        <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->time_from }} - {{$row->time_to}}</span>
-        </td>
-        <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->status->en_status ?? '' }}</span>
-        </td>
-        <td>
-            <div class="menu-item px-3">
-                <a href="{{ route('show-all-reservation', $row->id) }}"
-                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
-            </div>
-        </td>
-    </tr>
-    <!--end::Table row-->
-@endforeach
+                                            <div class="ms-5">
+                                                <!--begin::Title-->
+                                                <a href="#"
+                                                    class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
+                                                    data-kt-ecommerce-category-filter="category_name">{{ $row->patient_name }}</a>
+                                                <!--end::Title-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!--end::Category=-->
+                                    <!--begin::SKU=-->
+                                    <td class="text-end pe-0">
+                                        <input type="hidden" name="" id=""
+                                            data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
+                                        <span class="fw-bolder">{{ $row->clinic->doctor->name ?? '' }}</span>
+                                    </td>
+                                    <!--end::SKU=-->
+                                    <!--begin::Qty=-->
+                                    <td class="text-end pe-0" data-order="15">
+                                        <span class="fw-bolder ms-3">{{ $row->reservation_date }}</span>
+                                    </td>
+                                    <!--end::Qty=-->
+                                    <td class="text-end pe-0" data-order="15">
+                                        <span class="fw-bolder ms-3">{{ $row->time_from }} - {{ $row->time_to }}</span>
+                                    </td>
+                                    <td class="text-end pe-0" data-order="15">
+                                        <span class="fw-bolder ms-3" @if($row->reservation_status_id ==3)  style="color: red;" @elseif($row->reservation_status_id ==2)  style="color: green;" @endif>{{ $row->status->en_status ?? '' }}</span>
+                                    </td>
+                                    <td>
+                                        @if (Auth::guard('admin')->check())
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('admin.show-all-reservation', $row->id) }}"
+                                                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                            </div>
+                                        @endif
+                                        @if (Auth::guard('doctor')->check())
+                                            <div class="menu-item px-3">
+                                                <a href="{{ route('doctor.show-all-reservation', $row->id) }}"
+                                                    class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                                            </div>
+                                            <div class="menu-item px-3">
+@if($row->reservation_status_id == 1)
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#comReservation{{ $row->id }}"
+                                                    class="menu-link px-3"><i class="fa fa-check"
+                                                        aria-hidden="true"></i></a>
+
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#delReservation{{ $row->id }}"
+                                                    class="menu-link px-3"><span style="color: gray;font-weight: bold">x</span></a>
+
+@endif
+                                            </div>
+
+                                        @endif
+                                    </td>
+                                </tr>
+                                <!--end::Table row-->
+
+                                <!--begin::Modal - New Target-->
+                                <div class="modal fade" id="comReservation{{ $row->id }}" tabindex="-1"
+                                    aria-hidden="true">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content rounded">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                                <!--begin::Close-->
+                                                <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                    data-bs-dismiss="modal">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.5" x="6" y="17.3137"
+                                                                width="16" height="2" rx="1"
+                                                                transform="rotate(-45 6 17.3137)" fill="black" />
+                                                            <rect x="7.41422" y="6" width="16"
+                                                                height="2" rx="1"
+                                                                transform="rotate(45 7.41422 6)" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Close-->
+                                            </div>
+                                            <!--begin::Modal header-->
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                                <!--begin:Form-->
+                                                <form id="kt_modal_update_target_updateForm" class="form"
+                                                    action="{{ route('doctor.com-action-reservation', $row->id) }}" method="get">
+
+                                                    <!--begin::Heading-->
+
+                                                    <div class="mb-13 text-center">
+                                                        <!--begin::Title-->
+                                                        <h1 class="mb-3">Complete Reservation</h1>
+                                                        <!--end::Title-->
+
+                                                    </div>
+                                                    <!--end::Heading-->
+                                                    <div class="d-flex flex-column mb-8 fv-row">
+                                                        <div class="text-center" style="color:rgb(179, 6, 6) ">
+                                                            <p>Complete Booking - Are you sure ?</p>
+                                                            <span>note: This action cannot be changed</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center">
+                                                        <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                            style="margin-right: 25px" data-bs-dismiss="modal">
+                                                            <button type="reset" id="kt_modal_update_target_cancel"
+                                                                class="btn btn-light me-3"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                        <button type="submit" id="kt_modal_update_target_submit"
+                                                            class="btn btn-danger">
+                                                            <span class="indicator-label">Submit</span>
+                                                            <span class="indicator-progress">Please wait...
+                                                                <span
+                                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </form>
+                                                <!--end:Form-->
+                                            </div>
+                                            <!--end::Modal body-->
+                                        </div>
+                                        <!--end::Modal content-->
+                                    </div>
+                                    <!--end::Modal dialog-->
+                                </div>
+                                <!--end::Modal - New Target-->
+                                 <!--begin::Modal - New Target-->
+                                 <div class="modal fade" id="delReservation{{ $row->id }}" tabindex="-1"
+                                    aria-hidden="true">
+                                    <!--begin::Modal dialog-->
+                                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                                        <!--begin::Modal content-->
+                                        <div class="modal-content rounded">
+                                            <!--begin::Modal header-->
+                                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                                <!--begin::Close-->
+                                                <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                    data-bs-dismiss="modal">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.5" x="6" y="17.3137"
+                                                                width="16" height="2" rx="1"
+                                                                transform="rotate(-45 6 17.3137)" fill="black" />
+                                                            <rect x="7.41422" y="6" width="16"
+                                                                height="2" rx="1"
+                                                                transform="rotate(45 7.41422 6)" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </div>
+                                                <!--end::Close-->
+                                            </div>
+                                            <!--begin::Modal header-->
+                                            <!--begin::Modal body-->
+                                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                                <!--begin:Form-->
+                                                <form id="kt_modal_update_target_updateForm" class="form"
+                                                    action="{{ route('doctor.del-action-reservation', $row->id) }}" method="get">
+
+                                                    <!--begin::Heading-->
+
+                                                    <div class="mb-13 text-center">
+                                                        <!--begin::Title-->
+                                                        <h1 class="mb-3">Cancel Reservation</h1>
+                                                        <!--end::Title-->
+
+                                                    </div>
+                                                    <!--end::Heading-->
+                                                    <div class="d-flex flex-column mb-8 fv-row">
+                                                        <div class="text-center" style="color:rgb(179, 6, 6) ">
+                                                            <p>Cancel Booking - Are you sure ?</p>
+                                                            <span>note: This action cannot be changed</span>
+                                                        </div>
+                                                    </div>
+                                                    <!--begin::Actions-->
+                                                    <div class="text-center">
+                                                        <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                            style="margin-right: 25px" data-bs-dismiss="modal">
+                                                            <button type="reset" id="kt_modal_update_target_cancel"
+                                                                class="btn btn-light me-3"
+                                                                data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                        <button type="submit" id="kt_modal_update_target_submit"
+                                                            class="btn btn-danger">
+                                                            <span class="indicator-label">Submit</span>
+                                                            <span class="indicator-progress">Please wait...
+                                                                <span
+                                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Actions-->
+                                                </form>
+                                                <!--end:Form-->
+                                            </div>
+                                            <!--end::Modal body-->
+                                        </div>
+                                        <!--end::Modal content-->
+                                    </div>
+                                    <!--end::Modal dialog-->
+                                </div>
+                                <!--end::Modal - New Target-->
+                            @endforeach
 
 
                         </tbody>
