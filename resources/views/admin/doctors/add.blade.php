@@ -159,7 +159,7 @@
                                     data-placeholder="Select an option">
                                     <option value=""></option>
                                      @foreach ($medicals as $medical)
-                                        <option value="{{ $medical->id }}">{{ $city->field_enname }}</option>
+                                        <option value="{{ $medical->id }}">{{ $medical->field_enname }}</option>
                                     @endforeach
                                 </select>
                             </div>
