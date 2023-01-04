@@ -351,11 +351,11 @@
                                                             @foreach ($fields as $field)
                                                                 <option value="{{ $field->id }}"
                                                                     {{ $row->medical_field_id == $field->id ? 'selected' : '' }}>
-                                                                    @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                                                    {{-- @if (LaravelLocalization::getCurrentLocale() === 'en') --}}
                                                                         {{ $field->field_enname }}
-                                                                    @else
+                                                                    {{-- @else
                                                                         {{ $field->field_dtname }}
-                                                                    @endif
+                                                                    @endif --}}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -567,11 +567,11 @@
                                 class="form-select form-select-solid fw-bolder">
                                 @foreach ($fields as $field)
                                     <option value="{{ $field->id }}">
-                                        @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                        {{-- @if (LaravelLocalization::getCurrentLocale() === 'en') --}}
                                             {{ $field->field_enname }}
-                                        @else
+                                        {{-- @else
                                             {{ $field->field_dtname }}
-                                        @endif
+                                        @endif --}}
                                     </option>
                                 @endforeach
                             </select>
