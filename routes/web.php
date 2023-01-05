@@ -52,20 +52,8 @@ Route::view('/home', 'home')->middleware('auth');
 Route::view('/admin', 'admin');
 Route::view('/doctor', 'doctor');
 
-//admin route
-//$this->middleware(['auth:admin','auth']);
-// Route::group(['perfix'=>'user','middleware'=>'doctor','auth'],function(){
-//     route::get('dashboard',[UserController::class,'index'])->name('doctor.dashboard');
-//     route::get('profile',[UserController::class,'profile'])->name('doctor.profile');
-//     route::get('setting',[UserController::class,'setting'])->name('user.setting');
-// });
-// Route::group(['perfix'=>'admin','middleware'=>'admin','auth'],function(){
-//     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-//     route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
-//     route::get('setting',[AdminController::class,'setting'])->name('admin.setting');
-// });
-// Route::prefix('admin')->name('admin.')->middleware(['admin', 'auth'])->group(function () {
-Route::prefix('/admin')->middleware('auth:admin')->group(function () {
+
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::get('/all-reservations', [ReservationController::class, 'allReservation'])->name('admin.all-reservations');
     Route::get('/complete-reservations', [ReservationController::class, 'completeReservation'])->name('admin.complete-reservations');
@@ -76,7 +64,7 @@ Route::prefix('/admin')->middleware('auth:admin')->group(function () {
 
 });
 // Route::prefix('doctor')->name('doctor.')->middleware(['doctor', 'auth'])->group(function () {
- Route::prefix('/doctor')->middleware('auth:doctor')->group(function () {
+ Route::prefix('doctor')->middleware('auth:doctor')->group(function () {
 
     Route::get('/all-reservations', [ReservationController::class, 'allReservation'])->name('doctor.all-reservations');
     Route::get('/complete-reservations', [ReservationController::class, 'completeReservation'])->name('doctor.complete-reservations');

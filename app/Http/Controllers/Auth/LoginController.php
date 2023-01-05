@@ -80,4 +80,30 @@ class LoginController extends Controller
         }
         return back()->withInput($request->only('email', 'remember'));
     }
+
+    public function logout(Request $request)
+    {
+        if (Auth::guard('admin')->check()) {
+          $guard = 'admin';
+          $this->guard()->logout();
+          $request->session()->flush();
+
+          $request->session()->regenerate();
+          return redirect()->guest('/login/admin');
+        }
+        if (Auth::guard('doctor')->check()) {
+            $guard = 'doctor';
+            $this->guard()->logout();
+            $request->session()->flush();
+
+            $request->session()->regenerate();
+            return redirect()->guest('/login/doctor');
+          }
+
+          $this->guard()->logout();
+          $request->session()->flush();
+
+          $request->session()->regenerate();
+          return redirect()->guest('/login');
+    }
 }
