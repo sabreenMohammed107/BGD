@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Support\Facades\Auth;
+use Closure;
+use Auth;
 
 class Authenticate extends Middleware
 {
@@ -14,34 +14,35 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    public function handle($request, Closure $next, $guard = null)
+    protected function redirectTo($request)
     {
-        // if (! $request->expectsJson()) {
-        //     return route('login');
-        // }
+        if (! $request->expectsJson()) {
+            return route('login');
+        }
 
-        switch ($guard)
-    {
-        case 'admin':
-            if (Auth::guard($guard)->check())
-            {
-                return redirect()->guest('/login/admin');
-            }
-            break;
 
-            case 'doctor':
-                if (Auth::guard($guard)->check())
-                {
-                    return redirect()->guest('/login/doctor');
-                }
-                break;
+    //     switch ($guard)
+    // {
+    //     case 'admin':
+    //         if (Auth::guard($guard)->check())
+    //         {
+    //             return redirect()->guest('/login/admin');
+    //         }
+    //         break;
 
-        default:
-            if (Auth::guard($guard)->check()) {
-                return redirect()->guest(route('login'));
-            }
-            break;
-    }
-    return $next($request);
+    //         case 'doctor':
+    //             if (Auth::guard($guard)->check())
+    //             {
+    //                 return redirect()->guest('/login/doctor');
+    //             }
+    //             break;
+
+    //     default:
+    //         if (Auth::guard($guard)->check()) {
+    //             return redirect()->guest(route('login'));
+    //         }
+    //         break;
+    // }
+    // return $next($request);
     }
 }
