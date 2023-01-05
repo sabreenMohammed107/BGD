@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Http\Request;
@@ -30,4 +31,9 @@ Route::middleware('auth:api')->group( function () {
     //reservation
     Route::post('reservation', [PatientController::class, 'reservation']);
 
+});
+
+Route::middleware("localization")->group(function () {
+
+    Route::get('faq', [ContactController::class, 'getFaq']);
 });
