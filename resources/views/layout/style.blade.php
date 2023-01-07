@@ -16,3 +16,12 @@
 		<link href="{{asset('dist/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 
+        <style>
+            .menu-item .menu-link{
+                padding: 0.5rem 1rem;
+
+            }
+            .menu-item .menu-content{
+                padding: 0;
+            }
+            </style>

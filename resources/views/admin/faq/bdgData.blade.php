@@ -95,7 +95,7 @@
                             <!--begin::Input group-->
                             <div class="mb-10 fv-row">
                                 <!--begin::Label-->
-                                <label class="required form-label">  Home Vedio</label>
+                                <label class="required form-label">  En Home Vedio</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input id="home_video" value="{{$data->home_video}}" type="url" class="form-control" name="home_video"  autofocus>
@@ -107,7 +107,19 @@
                             <!--end::Input-->
 
 
+ <!--begin::Input group-->
+ <div class="mb-10 fv-row">
+    <!--begin::Label-->
+    <label class="required form-label">  Dt Home Vedio</label>
+    <!--end::Label-->
+    <!--begin::Input-->
+    <input id="home_dt_video" value="{{$data->home_dt_video}}" type="url" class="form-control" name="home_video"  autofocus>
 
+
+
+
+</div>
+<!--end::Input-->
 
 
 
@@ -116,18 +128,31 @@
 <!--begin::Input group-->
 <div>
     <!--begin::Label-->
-    <label class="form-label">Home tutorial</label>
+    <label class="form-label">En Home tutorial</label>
     <!--end::Label-->
     <!--begin::Editor-->
-    <textarea class="form-control form-control-solid" rows="3" name="home_tutorial"
-        placeholder="Type  En tutorial">{{$data->home_tutorial}}</textarea>
+    <input id="home_tutorial" value="{{$data->home_tutorial}}" type="url" class="form-control" name="home_tutorial"  autofocus>
+
+
     <!--end::Editor-->
 
 </div>
 <!--end::Input group-->
 
 
+<!--begin::Input group-->
+<div>
+    <!--begin::Label-->
+    <label class="form-label">Dt Home tutorial</label>
+    <!--end::Label-->
+    <!--begin::Editor-->
+    <input id="home_dt_tutorial" value="{{$data->home_dt_tutorial}}" type="url" class="form-control" name="home_dt_tutorial"  autofocus>
 
+
+    <!--end::Editor-->
+
+</div>
+<!--end::Input group-->
 
 
 

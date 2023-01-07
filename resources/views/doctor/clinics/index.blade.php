@@ -85,6 +85,7 @@
                                     </div>
                                 </th>
                                 <th class="min-w-200px">Doctor</th>
+                                <th class="text-end min-w-100px">name</th>
                                 <th class="text-end min-w-100px">phone</th>
                                 <th class="text-end min-w-70px">city</th>
                                 <th class="text-end min-w-70px">Fees</th>
@@ -117,6 +118,11 @@
                 </div>
             </div>
         </td>
+         <!--begin::Qty=-->
+         <td class="text-end pe-0" data-order="15">
+            <span class="fw-bolder ms-3">{{ $row->name}}</span>
+        </td>
+        <!--end::Qty=-->
         <!--end::Category=-->
         <!--begin::SKU=-->
         <td class="text-end pe-0">

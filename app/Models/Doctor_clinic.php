@@ -9,6 +9,7 @@ class Doctor_clinic extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name',
         'doctor_id',
         'city_id',
         'phone',

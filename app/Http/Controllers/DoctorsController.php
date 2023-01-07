@@ -9,6 +9,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use File;
 class DoctorsController extends Controller
 {
     protected $object;
@@ -189,5 +190,10 @@ class DoctorsController extends Controller
         $file->move($uploadPath, $imageName);
 
         return $imageName;
+    }
+
+
+    public function selectSubMideical(Request $request){
+
     }
 }

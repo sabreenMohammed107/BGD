@@ -78,6 +78,7 @@ class PatientController extends BaseController
         $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
+            'reservation_date' => 'required',
             'time_from' => 'required',
             'time_to' => 'required',
         ]);
@@ -89,7 +90,7 @@ class PatientController extends BaseController
             $data = [
                 'clinic_id' => $request->clinic_id,
                 'patient_id' => $userid,
-                'reservation_date' => now(),
+                'reservation_date' => $request->reservation_date,
                 'time_from' => $request->time_from,
                 'time_to' => $request->time_to,
                 'other_flag' => $request->other_flag,

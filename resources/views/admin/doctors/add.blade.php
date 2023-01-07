@@ -155,7 +155,7 @@
                                     {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
                                 </label>
                                 <!--end::Label-->
-                                <select  class="form-select form-select-solid" name="medical_field_id" data-control="select2"
+                                <select  class="form-select form-select-solid" id="medical_field_id" name="medical_field_id" data-control="select2"
                                     data-placeholder="Select an option">
                                     <option value=""></option>
                                      @foreach ($medicals as $medical)
@@ -263,13 +263,13 @@
                                 <!--end::Input group-->
 
 	<!--begin::Input group-->
-    <div class="fv-row mb-7">
-        <!--begin::Label-->
+    {{-- <div class="fv-row mb-7">
+
         <label class="fs-6 fw-bold form-label mt-3">
             <span class="required">Add Status</span>
             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
         </label>
-        <!--end::Label-->
+
         <select  class="form-select form-select-solid" name="doctor_status_id" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" >
             <option></option>
             @foreach ($status as $st)
@@ -278,7 +278,7 @@
 
         </select>
     </div>
-    <!--end::Input group-->
+    <!--end::Input group--> --}}
 
 
 
@@ -293,10 +293,10 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row w-100 flex-md-root">
                                     <div class="form-check form-switch form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" name="verified[]" value="1"
+                                        <input class="form-check-input" checked type="checkbox" name="verified[]" value="1"
                                             id="flexSwitchDefault" />
                                         <label class="form-check-label" for="flexSwitchDefault">
-                                            Verfied
+                                            Active
                                         </label>
                                     </div>
                                 </div>
@@ -331,5 +331,46 @@
         <!--end::Container-->
     </div>
     <!--end::Post-->
+
+@endsection
+@section('scripts')
+<script>
+$(document).ready(function() {
+    // $('#medical_field_id').on('change', function() {
+
+    //     var select_value = $('#medical_field_id option:selected').val();
+
+
+    //     $.ajax({
+    //         type: 'GET',
+    //         data: {
+
+    //             select_value: select_value,
+
+
+    //         },
+    //         url: "{{ route('selectSubMideical.fetch') }}",
+
+    //         success: function(data) {
+    //             var result = $.parseJSON(data);
+
+    //             $("#selectSub").html(result[0]);
+
+
+
+    //         },
+    //         error: function(request, status, error) {
+    //             // $("#email").val(' ');
+
+
+
+    //         }
+    //     });
+
+
+    // });
+
+});
+</script>
 
 @endsection

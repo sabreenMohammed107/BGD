@@ -15,4 +15,14 @@
 		<link href="{{asset('dist/assets/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('dist/assets/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
+        <style>
+            .menu-item .menu-link{
+                padding: 0.3rem 1rem;
+
+            }
+            .menu-item .menu-content{
+                padding: 0;
+            }
+            </style>
+
 

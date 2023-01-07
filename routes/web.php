@@ -66,19 +66,19 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 // Route::prefix('doctor')->name('doctor.')->middleware(['doctor', 'auth'])->group(function () {
  Route::prefix('doctor')->middleware('auth:doctor')->group(function () {
 
-    Route::get('/all-reservations', [ReservationController::class, 'allReservation'])->name('doctor.all-reservations');
-    Route::get('/complete-reservations', [ReservationController::class, 'completeReservation'])->name('doctor.complete-reservations');
-    Route::get('/cancelled-reservations', [ReservationController::class, 'cancelledReservation'])->name('doctor.cancelled-reservations');
-    Route::get('/show-all-reservation/{id}', [ReservationController::class, 'showAllReservation'])->name('doctor.show-all-reservation');
-    Route::get('/show-complete-reservation/{id}', [ReservationController::class, 'showCompleteReservation'])->name('doctor.show-complete-reservation');
-    Route::get('/show-cancelled-reservation/{id}', [ReservationController::class, 'showCancelledReservation'])->name('doctor.show-cancelled-reservation');
+    Route::get('/all-reservations', [DoctorDataController::class, 'allReservation'])->name('doctor.all-reservations');
+    Route::get('/complete-reservations', [DoctorDataController::class, 'completeReservation'])->name('doctor.complete-reservations');
+    Route::get('/cancelled-reservations', [DoctorDataController::class, 'cancelledReservation'])->name('doctor.cancelled-reservations');
+    Route::get('/show-all-reservation/{id}', [DoctorDataController::class, 'showAllReservation'])->name('doctor.show-all-reservation');
+    Route::get('/show-complete-reservation/{id}', [DoctorDataController::class, 'showCompleteReservation'])->name('doctor.show-complete-reservation');
+    Route::get('/show-cancelled-reservation/{id}', [DoctorDataController::class, 'showCancelledReservation'])->name('doctor.show-cancelled-reservation');
     //com-action-reservation
-    Route::get('/com-action-reservation/{id}', [ReservationController::class, 'comReservation'])->name('doctor.com-action-reservation');
+    Route::get('/com-action-reservation/{id}', [DoctorDataController::class, 'comReservation'])->name('doctor.com-action-reservation');
 
     //del-action-reservation
-    Route::get('/del-action-reservation/{id}', [ReservationController::class, 'delReservation'])->name('doctor.del-action-reservation');
+    Route::get('/del-action-reservation/{id}', [DoctorDataController::class, 'delReservation'])->name('doctor.del-action-reservation');
 
-    Route::post('/update-reservation', [ReservationController::class, 'updateReservation'])->name('doctors.update-reservation');
+    Route::post('/update-reservation', [DoctorDataController::class, 'updateReservation'])->name('doctors.update-reservation');
 
     Route::get('/doctor-profile/{id}', [DoctorDataController::class, 'doctorProfile'])->name('doctor-profile');
     Route::post('/update-doctor-profile', [DoctorDataController::class, 'updateDoctorProfile'])->name('update-doctor-profile');
@@ -98,6 +98,9 @@ Route::group([ 'prefix' => 'admin'], function () {
  Route::resource('cities', CityController::class);
 
  Route::resource('doctors', DoctorsController::class);
+ //selectSubMideical.fetch
+ Route::get('/selectSubMideical/fetch',[DoctorsController::class, 'selectSubMideical'])->name('selectSubMideical.fetch');
+
 
  Route::resource('clinics', ClinicController::class);
  Route::resource('patients', PatientController::class);

@@ -12,6 +12,8 @@ class bdg_data extends Model
         'logo',
         'home_video',
         'home_tutorial',
+        'home_dt_video',
+        'home_dt_tutorial',
 
     ];
 }

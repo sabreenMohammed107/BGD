@@ -69,7 +69,18 @@
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
 
+  <!--begin::Input group-->
+  <div class="mb-10 fv-row">
+    <!--begin::Label-->
+    <label class="required form-label">Name</label>
+    <!--end::Label-->
+    <!--begin::Input-->
+    <input type="text" name="name" class="form-control mb-2" placeholder="name"
+        value="{{ $row->name }}" />
 
+
+</div>
+<!--end::Input-->
                                     <!--begin::Input group-->
                                     <div class="mb-10 fv-row">
                                         <!--begin::Label-->
@@ -175,14 +186,14 @@
 
 
                                     <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
+                                    {{-- <div class="fv-row mb-7">
+
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <span class="required">Add Status</span>
                                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
                                                 title="Interviewer who conducts the meeting with the interviewee"></i>
                                         </label>
-                                        <!--end::Label-->
+
                                         <select class="form-select form-select-solid" name="clinic_status_id"
                                             data-control="select2" data-placeholder="Select an option"
                                             data-allow-clear="true">
@@ -194,7 +205,7 @@
                                             @endforeach
 
                                         </select>
-                                    </div>
+                                    </div> --}}
                                     <!--end::Input group-->
 
                                     <!--begin::Input group-->
@@ -206,10 +217,10 @@
                                                 title="Interviewer who conducts the meeting with the interviewee"></i>
                                         </label>
                                         <!--end::Label-->
-                                        <select class="form-select form-select-solid" name="insurance_type_id"
+                                        <select class="form-select form-select-solid" onchange="showDiv(this)" name="insurance_type_id"
                                             data-control="select2" data-placeholder="Select an option"
-                                            data-allow-clear="true">
-                                            <option></option>
+                                           >
+
                                             @foreach ($insurances as $insurance)
                                                 <option value="{{ $insurance->id }}"
                                                     {{ $row->insurance_type_id == $insurance->id ? 'selected' : '' }}>
@@ -223,7 +234,7 @@
 
 
                                     <!--begin::Input group-->
-                                    <div>
+                                    <div id="hidden_div"  @if($row->insurance_type_id == 1) style="display:block;"  @else style="display:none;" @endif >
                                         <!--begin::Label-->
                                         <label class="form-label">Visit Fees</label>
                                         <!--end::Label-->
@@ -475,5 +486,15 @@
             noCalendar: true,
             dateFormat: "H:i",
         });
-    </script>
+
+        function showDiv(select){
+
+           if(select.value==1){
+            document.getElementById('hidden_div').style.display = "block";
+           } else{
+            document.getElementById('hidden_div').style.display = "none";
+           }
+        }
+        </script>
+
 @endsection

@@ -256,13 +256,13 @@
                                 <!--end::Input group-->
 
 	<!--begin::Input group-->
-    <div class="fv-row mb-7">
-        <!--begin::Label-->
+    {{-- <div class="fv-row mb-7">
+
         <label class="fs-6 fw-bold form-label mt-3">
             <span class="required">Add Status</span>
             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i>
         </label>
-        <!--end::Label-->
+
         <select  class="form-select form-select-solid" name="doctor_status_id" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" >
             <option></option>
             @foreach ($status as $st)
@@ -270,7 +270,7 @@
             @endforeach
 
         </select>
-    </div>
+    </div> --}}
     <!--end::Input group-->
 
 
@@ -289,7 +289,7 @@
                                         <input class="form-check-input" type="checkbox" name="verified[]" value="1"
                                             id="flexSwitchDefault" {{ $row->verified == 1 ? ' checked' : '' }} />
                                         <label class="form-check-label" for="flexSwitchDefault">
-                                            Verfied
+                                            Active
                                         </label>
                                     </div>
                                 </div>

@@ -6,6 +6,7 @@ use App\Models\Clinic_review;
 use App\Models\Doctor;
 use App\Models\Doctors_pasition;
 use App\Models\Medical_field;
+use App\Models\Reservation;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Auth;
 class DoctorDataController extends Controller
 {
     //
+    protected $object;
+    protected $viewName;
+    public function __construct(Reservation $object)
+    {
+        // $this->middleware('auth:admin');
+        // $this->middleware('auth:doctor');
+        $this->object = $object;
+        $this->viewName = 'admin.reservation.';
+
+    }
     public function doctorProfile($id){
         $row = Doctor::find($id);
         $medicals = Medical_field::all();
@@ -78,5 +89,80 @@ class DoctorDataController extends Controller
 
 
         return view('doctor.review', compact('rows','doctor'));
+    }
+
+
+    public function allReservation(){
+        $docId= Auth::guard('doctor')->user()->id;
+        $rows=Reservation::join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->orderBy("reservation_date", "Desc")->get();
+
+
+        return view($this->viewName.'all', compact('rows'));
+
+    }
+    public function showAllReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where("id", $id)->first();
+
+
+        return view($this->viewName.'allView', compact('row'));
+    }
+
+    public function comReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where("id", $id)->first();
+        $row->update(['reservation_status_id'=>2]);
+
+        return redirect()->back();
+    }
+
+    public function delReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where("id", $id)->first();
+
+        $row->update(['reservation_status_id'=>3]);
+
+        return redirect()->back();
+    }
+
+    public function completeReservation(){
+        $docId= Auth::guard('doctor')->user()->id;
+        $rows=Reservation::join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->where('reservation_status_id',2)->orderBy("reservation_date", "Desc")->get();
+
+
+        return view($this->viewName.'complete', compact('rows'));
+    }
+
+
+    public function showCompleteReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where('reservation_status_id',2)->where("id", $id)->first();
+
+
+        return view($this->viewName.'completeView', compact('row'));
+    }
+    public function cancelledReservation(){
+        $docId= Auth::guard('doctor')->user()->id;
+        $rows=Reservation::join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
+
+
+        return view($this->viewName.'cancelled', compact('rows'));
+    }
+
+
+    public function showCancelledReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where('reservation_status_id',3)->where("id", $id)->first();
+
+
+        return view($this->viewName.'cancelledView', compact('row'));
+    }
+
+    public function updateReservation(Request $request){
+        $row=Reservation::where("id", $request->reservId)->first();
+
+        $row->update(['notes'=>$request->notes]);
+
+        return redirect()->back();
     }
 }
