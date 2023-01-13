@@ -102,7 +102,7 @@ class PatientController extends BaseController
             ];
             $reserve = Reservation::create($data);
 
-            return $this->sendResponse($reserve, 'U make reservation successfully.');
+            return $this->sendResponse(FavouriteResource::make($reserve), 'U make reservation successfully.');
 
         } catch (\Exception$ex) {
             return $this->sendError($ex->getMessage(), 'Error happens!!');

@@ -23,7 +23,7 @@ class ReservationResource extends JsonResource
             'reservation_date' => $this->reservation_date ?? '',
             'time_from' => $this->time_to ?? '',
             'time_to' => $this->time_to ?? '',
-            'me / other' => $this->other_flag =1 ?'other' : 'me',
+            'me / other' => ($this->other_flag ==1) ? 'other' : 'me',
             'patient_name' => $this->patient_name ?? '',
             'patient_mobile' => $this->patient_mobile ?? '',
             'patient_address' => $this->patient_address ?? '',
