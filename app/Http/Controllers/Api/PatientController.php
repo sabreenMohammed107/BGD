@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\FavouriteResource;
+use App\Http\Resources\ReservationResource;
 use App\Http\Resources\ReviewResource;
 use App\Models\Clinic_review;
 use App\Models\Favourite_doctor;
@@ -102,7 +103,7 @@ class PatientController extends BaseController
             ];
             $reserve = Reservation::create($data);
 
-            return $this->sendResponse(FavouriteResource::make($reserve), 'U make reservation successfully.');
+            return $this->sendResponse(ReservationResource::make($reserve), 'U make reservation successfully.');
 
         } catch (\Exception$ex) {
             return $this->sendError($ex->getMessage(), 'Error happens!!');
