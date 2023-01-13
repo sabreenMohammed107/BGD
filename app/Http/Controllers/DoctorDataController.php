@@ -10,7 +10,8 @@ use App\Models\Reservation;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use BD;
+use Illuminate\Support\Facades\DB;
+
 class DoctorDataController extends Controller
 {
     //
