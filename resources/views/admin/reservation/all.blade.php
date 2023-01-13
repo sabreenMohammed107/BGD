@@ -97,7 +97,7 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach ($rows as $index => $row)
+                            @foreach ($rows as $index => $newrow)
                                 <!--begin::Table row-->
                                 <tr>
                                     <!--begin::Checkbox-->
@@ -109,7 +109,7 @@
                                     <!--end::Checkbox-->
                                     <!--begin::Category=-->
                                     <td class="text-start pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3">{{ $row->id }}</span>
+                                        <span class="fw-bolder ms-3">{{ $newrow->id }}</span>
                                     </td>
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -118,7 +118,7 @@
                                                 <!--begin::Title-->
                                                 <a href="#"
                                                     class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                                                    data-kt-ecommerce-category-filter="category_name">{{ $row->patient_name }}</a>
+                                                    data-kt-ecommerce-category-filter="category_name">{{ $newrow->patient_name }}</a>
                                                 <!--end::Title-->
                                             </div>
                                         </div>
@@ -129,43 +129,43 @@
                                     <td class="text-end pe-0">
                                         <input type="hidden" name="" id=""
                                             data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
-                                        <span class="fw-bolder">{{ $row->clinic->doctor->name ?? '' }}</span>
+                                        <span class="fw-bolder">{{ $newrow->clinic->doctor->name ?? '' }}</span>
                                     </td>
                                     <!--end::SKU=-->
                                     <!--begin::Qty=-->
                                     <td class="text-end pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3">{{ $row->reservation_date }}</span>
+                                        <span class="fw-bolder ms-3">{{ $newrow->reservation_date }}</span>
                                     </td>
                                     <!--end::Qty=-->
                                     <td class="text-end pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3">{{ $row->time_from }} - {{ $row->time_to }}</span>
+                                        <span class="fw-bolder ms-3">{{ $newrow->time_from }} - {{ $newrow->time_to }}</span>
                                     </td>
                                     <td class="text-end pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3" @if($row->reservation_status_id ==3)  style="color: red;" @elseif($row->reservation_status_id ==2)  style="color: green;" @endif>{{ $row->status->en_status ?? '' }}</span>
+                                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id ==3)  style="color: red;" @elseif($row->reservation_status_id ==2)  style="color: green;" @endif>{{ $row->status->en_status ?? '' }}</span>
                                     </td>
                                     <td>
                                         @if (Auth::guard('admin')->check())
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('admin.show-all-reservation', $row->id) }}"
+                                                <a href="{{ route('admin.show-all-reservation', $newrow->id) }}"
                                                     class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                             </div>
                                         @endif
                                         @if (Auth::guard('doctor')->check())
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('doctor.show-all-reservation',$row->id) }}"
+                                                <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}"
                                                     class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                             </div>
                                             <div class="menu-item px-3">
 @if($row->reservation_status_id == 1)
                                                 <a data-bs-toggle="modal"
-                                                    data-bs-target="#comReservation{{$row->id }}"
+                                                    data-bs-target="#comReservation{{$newrow->id }}"
                                                     class="menu-link px-3"><i class="fa fa-check"
                                                         aria-hidden="true"></i></a>
 
                                                 <a data-bs-toggle="modal"
-                                                    data-bs-target="#delReservation{{$row->id }}"
+                                                    data-bs-target="#delReservation{{$newrow->id }}"
                                                     class="menu-link px-3"><span style="color: gray;font-weight: bold">x</span></a>
 
 @endif
@@ -177,7 +177,7 @@
                                 <!--end::Table row-->
 
                                 <!--begin::Modal - New Target-->
-                                <div class="modal fade" id="comReservation{{ $row->id }}" tabindex="-1"
+                                <div class="modal fade" id="comReservation{{ $newrow->id }}" tabindex="-1"
                                     aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -209,7 +209,7 @@
                                             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                                 <!--begin:Form-->
                                                 <form id="kt_modal_update_target_updateForm" class="form"
-                                                    action="{{ route('doctor.com-action-reservation', $row->id) }}" method="get">
+                                                    action="{{ route('doctor.com-action-reservation', $newrow->id) }}" method="get">
 
                                                     <!--begin::Heading-->
 
@@ -254,7 +254,7 @@
                                 </div>
                                 <!--end::Modal - New Target-->
                                  <!--begin::Modal - New Target-->
-                                 <div class="modal fade" id="delReservation{{ $row->id }}" tabindex="-1"
+                                 <div class="modal fade" id="delReservation{{ $newrow->id }}" tabindex="-1"
                                     aria-hidden="true">
                                     <!--begin::Modal dialog-->
                                     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -286,7 +286,7 @@
                                             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                                 <!--begin:Form-->
                                                 <form id="kt_modal_update_target_updateForm" class="form"
-                                                    action="{{ route('doctor.del-action-reservation', $row->id) }}" method="get">
+                                                    action="{{ route('doctor.del-action-reservation', $newrow->id) }}" method="get">
 
                                                     <!--begin::Heading-->
 
