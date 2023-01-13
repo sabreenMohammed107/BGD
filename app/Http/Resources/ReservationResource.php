@@ -18,7 +18,7 @@ class ReservationResource extends JsonResource
 
             'patient' => $this->patient->name ?? '',
             'clinic' => $this->clinic->name ?? '',
-            'reservation_status' => $this->status->status ?? '',
+            'reservation_status' => $this->status->en_status ?? '',
 
             'reservation_date' => $this->reservation_date ?? '',
             'time_from' => $this->time_to ?? '',

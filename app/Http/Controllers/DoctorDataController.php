@@ -86,7 +86,8 @@ class DoctorDataController extends Controller
     public function review(){
         $docId= Auth::guard('doctor')->user()->id;
         $doctor = Doctor::where('id',$docId)->first();
-        $rows=Clinic_review::join('doctor_clinics', 'clinic_reviews.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->get();
+
+        $rows=DB::table('clinic_reviews as rev')->join('doctor_clinics', 'rev.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('rev.*')->get();
 
 
         return view('doctor.review', compact('rows','doctor'));
