@@ -97,7 +97,6 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @dd($rows)
                             @foreach ($rows as $index => $newrow)
                                 <!--begin::Table row-->
 
