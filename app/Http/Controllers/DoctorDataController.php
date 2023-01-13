@@ -87,7 +87,7 @@ class DoctorDataController extends Controller
         $docId= Auth::guard('doctor')->user()->id;
         $doctor = Doctor::where('id',$docId)->first();
 
-        $rows=DB::table('clinic_reviews as rev')->join('doctor_clinics', 'rev.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('rev.*')->get();
+        $rows=Clinic_review::join('doctor_clinics', 'clinic_reviews.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('clinic_reviews.*')->get();
 
 
         return view('doctor.review', compact('rows','doctor'));
@@ -137,7 +137,7 @@ $row->save();
 
     public function completeReservation(){
         $docId= Auth::guard('doctor')->user()->id;
-        $rows=DB::table('reservations as res')->join('doctor_clinics', 'res.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('res.*')->where('reservation_status_id',2)->orderBy("reservation_date", "Desc")->get();
+        $rows=Reservation::with('status')->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('reservations.*')->where('reservation_status_id',2)->orderBy("reservation_date", "Desc")->get();
 
 
         return view($this->viewName.'complete', compact('rows'));
@@ -153,7 +153,7 @@ $row->save();
     }
     public function cancelledReservation(){
         $docId= Auth::guard('doctor')->user()->id;
-        $rows=DB::table('reservations as res')->join('doctor_clinics', 'res.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('res.*')->where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
+        $rows=Reservation::with('status')->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('reservations.*')->where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
 
 
         return view($this->viewName.'cancelled', compact('rows'));
