@@ -111,4 +111,41 @@ class PatientController extends BaseController
 
     }
 
+    public function showRreservation()
+    {
+        $userid = auth('api')->user()->id;
+        $rows = Reservation::with('status')->where('patient_id', $userid)->orderBy("reservation_date", "Desc")->get();
+        return $this->sendResponse(ReservationResource::collection($rows), 'All your reservations');
+    }
+
+
+    public function cancelReservation(Request $request)
+    {
+        // $userid = Auth::user()->id;
+        $userid = auth('api')->user()->id;
+        $validator = Validator::make($request->all(), [
+            'reservation_id' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return $this->convertErrorsToString($validator->messages());
+        }
+        try {
+
+            $reserve = Reservation::where('id',$request->reservation_id)->first();
+            if($reserve){
+                $reserve->reservation_status_id=2;
+                $reserve->save();
+                return $this->sendResponse(ReservationResource::make($reserve), 'U  reservation Cancelles successfully.');
+
+                        }else{
+                            return $this->sendError(null, 'Error happens!!');
+                        }
+
+        } catch (\Exception $ex) {
+            return $this->sendError($ex->getMessage(), 'Error happens!!');
+        }
+
+    }
 }

@@ -30,6 +30,8 @@ Route::middleware('auth:api')->group( function () {
     Route::post('favourite-doctors', [PatientController::class, 'favourite']);
     //reservation
     Route::post('reservation', [PatientController::class, 'reservation']);
+    Route::get('show-reservation', [PatientController::class, 'showRreservation']);
+    Route::post('cancel-reservation', [PatientController::class, 'cancelReservation']);
 
 });
 
