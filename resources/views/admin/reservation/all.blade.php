@@ -142,7 +142,7 @@
                                         <span class="fw-bolder ms-3">{{ $newrow->time_from }} - {{ $newrow->time_to }}</span>
                                     </td>
                                     <td class="text-end pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id === 3)  style="color: red;" @elseif($newrow->reservation_status_id === 2)  style="color: green;" @endif>{{ $newrow->status->en_status ?? '' }}</span>
+                                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id == 3)  style="color: red;" @elseif($newrow->reservation_status_id == 2)  style="color: green;" @endif>{{ $newrow->status->en_status ?? '' }}</span>
                                     </td>
                                     <td>
                                         @if (Auth::guard('admin')->check())
