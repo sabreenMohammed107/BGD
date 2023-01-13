@@ -128,7 +128,7 @@
 
                                     <td class="text-end pe-0">
                                         <input type="hidden" name="" id=""
-                                            data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
+                                            data-kt-ecommerce-category-filter="category_id" value="{{ $newrow->id }}">
                                         <span class="fw-bolder">{{ $newrow->clinic->doctor->name ?? '' }}</span>
                                     </td>
                                     <!--end::SKU=-->
@@ -141,7 +141,7 @@
                                         <span class="fw-bolder ms-3">{{ $newrow->time_from }} - {{ $newrow->time_to }}</span>
                                     </td>
                                     <td class="text-end pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id ==3)  style="color: red;" @elseif($row->reservation_status_id ==2)  style="color: green;" @endif>{{ $row->status->en_status ?? '' }}</span>
+                                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id ==3)  style="color: red;" @elseif($newrow->reservation_status_id ==2)  style="color: green;" @endif>{{ $newrow->status->en_status ?? '' }}</span>
                                     </td>
                                     <td>
                                         @if (Auth::guard('admin')->check())
@@ -158,7 +158,7 @@
 
                                             </div>
                                             <div class="menu-item px-3">
-@if($row->reservation_status_id == 1)
+@if($newrow->reservation_status_id == 1)
                                                 <a data-bs-toggle="modal"
                                                     data-bs-target="#comReservation{{$newrow->id }}"
                                                     class="menu-link px-3"><i class="fa fa-check"
