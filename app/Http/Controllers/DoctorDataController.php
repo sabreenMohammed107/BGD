@@ -111,7 +111,11 @@ class DoctorDataController extends Controller
     public function comReservation($id){
         $docId= Auth::guard('doctor')->user()->id;
         $row=Reservation::where("id", $id)->first();
-        $row->update(['reservation_status_id'=>2]);
+        if($row){
+$row->reservation_status_id=2;
+$row->save();
+        }
+        // $row->update(['reservation_status_id'=>2]);
 
         return redirect()->back();
     }
@@ -120,7 +124,11 @@ class DoctorDataController extends Controller
         $docId= Auth::guard('doctor')->user()->id;
         $row=Reservation::where("id", $id)->first();
 
-        $row->update(['reservation_status_id'=>3]);
+        if($row){
+            $row->reservation_status_id=3;
+            $row->save();
+                    }
+                    // $row->update(['reservation_status_id'=>3]);
 
         return redirect()->back();
     }

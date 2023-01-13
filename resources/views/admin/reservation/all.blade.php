@@ -83,6 +83,7 @@
                                             value="1" />
                                     </div>
                                 </th>
+                                <th class="text-start min-w-70px">ID </th>
                                 <th class="min-w-200px">patient_name</th>
                                 <th class="text-end min-w-100px">Clinic</th>
                                 <th class="text-end min-w-70px">Reservation Date</th>
@@ -121,6 +122,9 @@
                                     </td>
                                     <!--end::Category=-->
                                     <!--begin::SKU=-->
+                                    <td class="text-start pe-0" data-order="15">
+                                        <span class="fw-bolder ms-3">{{ $row->id }}</span>
+                                    </td>
                                     <td class="text-end pe-0">
                                         <input type="hidden" name="" id=""
                                             data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
