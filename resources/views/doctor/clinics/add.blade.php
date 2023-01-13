@@ -186,7 +186,7 @@
 
 
  <!--begin::Input group-->
- <div id="hidden_div" style="display:block;" >
+ <div id="hidden_div" style="display:none;" >
     <!--begin::Label-->
     <label class="form-label">Visit Fees</label>
     <!--end::Label-->
@@ -269,6 +269,7 @@
        if(select.value==1){
         document.getElementById('hidden_div').style.display = "block";
        } else{
+        document.getElementById('visit_fees').value = "";
         document.getElementById('hidden_div').style.display = "none";
        }
     }
