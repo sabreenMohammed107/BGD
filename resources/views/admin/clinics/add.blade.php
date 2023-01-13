@@ -203,12 +203,12 @@
 
 
  <!--begin::Input group-->
- <div id="hidden_div" style="display:block;" >
+ <div id="hidden_div" style="display:none;" >
     <!--begin::Label-->
     <label class="form-label">Visit Fees</label>
     <!--end::Label-->
     <!--begin::Editor-->
-    <input type="text"  name="visit_fees" class="form-control mb-2" placeholder="visit_fees"
+    <input type="text" id="visit_fees"  name="visit_fees" class="form-control mb-2" placeholder="visit_fees"
     value="" />
                                     <!--end::Editor-->
 
@@ -286,6 +286,7 @@
        if(select.value==1){
         document.getElementById('hidden_div').style.display = "block";
        } else{
+        document.getElementById('visit_fees').value = "";
         document.getElementById('hidden_div').style.display = "none";
        }
     }
