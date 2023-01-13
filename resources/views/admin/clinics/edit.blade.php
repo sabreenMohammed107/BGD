@@ -59,134 +59,135 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                    <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
+                        <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+                            <div class="d-flex flex-column gap-7 gap-lg-10">
 
-                            <div class="card card-flush py-4">
-                                <!--begin::Card header-->
+                                <div class="card card-flush py-4">
+                                    <!--begin::Card header-->
 
-                                <!--end::Card header-->
-                                <!--begin::Card body-->
-                                <div class="card-body pt-0">
+                                    <!--end::Card header-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
 
-  <!--begin::Input group-->
-  <div class="mb-10 fv-row">
-    <!--begin::Label-->
-    <label class="required form-label">Name</label>
-    <!--end::Label-->
-    <!--begin::Input-->
-    <input type="text" name="name" class="form-control mb-2" placeholder="name"
-        value="{{ $row->name }}" />
-
-
-</div>
-<!--end::Input-->
-                                    <!--begin::Input group-->
-                                    <div class="mb-10 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required form-label">Phone</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" name="phone" class="form-control mb-2" placeholder="phone"
-                                            value="{{ $row->phone }}" />
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Name</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="name" class="form-control mb-2"
+                                                placeholder="name" value="{{ $row->name }}" />
 
 
-                                    </div>
-                                    <!--end::Input-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <option value="">Select Doctor..</option>
-                                            {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
-                                        </label>
-                                        <!--end::Label-->
-                                        <select class="form-select form-select-solid" name="doctor_id"
-                                            data-control="select2" data-placeholder="Select an option">
-                                            <option value=""></option>
-                                            @foreach ($doctors as $doctor)
-                                                <option value="{{ $doctor->id }}"
-                                                    {{ $row->doctor_id == $doctor->id ? 'selected' : '' }}>
-                                                    {{ $doctor->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
+                                        </div>
+                                        <!--end::Input-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Phone</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <input type="text" name="phone" class="form-control mb-2"
+                                                placeholder="phone" value="{{ $row->phone }}" />
 
 
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <option value="">Select city..</option>
-                                            {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
-                                        </label>
-                                        <!--end::Label-->
-                                        <select class="form-select form-select-solid" name="city_id" data-control="select2"
-                                            data-placeholder="Select an option">
-                                            <option value=""></option>
-                                            @foreach ($cities as $city)
-                                                <option value="{{ $city->id }}"
-                                                    {{ $row->city_id == $city->id ? 'selected' : '' }}>{{ $city->en_city }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">En street</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <textarea class="form-control form-control-solid" rows="3" name="en_street" placeholder="Type  En Street">{{ $row->en_street }}</textarea>
-                                        <!--end::Editor-->
+                                        </div>
+                                        <!--end::Input-->
 
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">Dt Street</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <textarea class="form-control form-control-solid" rows="3" name="dt_street" placeholder="Type  dt Street">{{ $row->dt_street }}</textarea>
-                                        <!--end::Editor-->
-
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">Postal Code</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-
-                                        <input type="text" name="postal_code" class="form-control mb-2"
-                                            placeholder="postal_code" value="{{ $row->postal_code }}" />
-                                        <!--end::Editor-->
-
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">google map</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <input type="text" name="google_map" class="form-control mb-2"
-                                            placeholder="google_map" value="{{ $row->google_map }}" />
-                                        <!--end::Editor-->
-
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <option value="">Select Doctor..</option>
+                                                {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                            </label>
+                                            <!--end::Label-->
+                                            <select class="form-select form-select-solid" name="doctor_id"
+                                                data-control="select2" data-placeholder="Select an option">
+                                                <option value=""></option>
+                                                @foreach ($doctors as $doctor)
+                                                    <option value="{{ $doctor->id }}"
+                                                        {{ $row->doctor_id == $doctor->id ? 'selected' : '' }}>
+                                                        {{ $doctor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!--end::Input group-->
 
 
-                                    <!--begin::Input group-->
-                                    {{-- <div class="fv-row mb-7">
+                                        <!--begin::Input group-->
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <option value="">Select city..</option>
+                                                {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                            </label>
+                                            <!--end::Label-->
+                                            <select class="form-select form-select-solid" name="city_id"
+                                                data-control="select2" data-placeholder="Select an option">
+                                                <option value=""></option>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{ $city->id }}"
+                                                        {{ $row->city_id == $city->id ? 'selected' : '' }}>
+                                                        {{ $city->en_city }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">En street</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <textarea class="form-control form-control-solid" rows="3" name="en_street" placeholder="Type  En Street">{{ $row->en_street }}</textarea>
+                                            <!--end::Editor-->
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">Dt Street</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <textarea class="form-control form-control-solid" rows="3" name="dt_street" placeholder="Type  dt Street">{{ $row->dt_street }}</textarea>
+                                            <!--end::Editor-->
+
+                                        </div>
+                                        <!--end::Input group-->
+
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">Postal Code</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+
+                                            <input type="text" name="postal_code" class="form-control mb-2"
+                                                placeholder="postal_code" value="{{ $row->postal_code }}" />
+                                            <!--end::Editor-->
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">google map</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <input type="text" name="google_map" class="form-control mb-2"
+                                                placeholder="google_map" value="{{ $row->google_map }}" />
+                                            <!--end::Editor-->
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+
+
+                                        <!--begin::Input group-->
+                                        {{-- <div class="fv-row mb-7">
 
                                         <label class="fs-6 fw-bold form-label mt-3">
                                             <span class="required">Add Status</span>
@@ -206,92 +207,93 @@
 
                                         </select>
                                     </div> --}}
-                                    <!--end::Input group-->
+                                        <!--end::Input group-->
 
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-7">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-bold form-label mt-3">
-                                            <span class="required">Add insurance</span>
-                                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                                title="Interviewer who conducts the meeting with the interviewee"></i>
-                                        </label>
-                                        <!--end::Label-->
-                                        <select class="form-select form-select-solid" onchange="showDiv(this)" name="insurance_type_id"
-                                            data-control="select2" data-placeholder="Select an option"
-                                           >
-
-                                            @foreach ($insurances as $insurance)
-                                                <option value="{{ $insurance->id }}"
-                                                    {{ $row->insurance_type_id == $insurance->id ? 'selected' : '' }}>
-                                                    {{ $insurance->en_type }}</option>
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                    <!--end::Input group-->
-
-
-
-                                    <!--begin::Input group-->
-                                    <div id="hidden_div"  @if($row->insurance_type_id == 1) style="display:block;"  @else style="display:none;" @endif >
-                                        <!--begin::Label-->
-                                        <label class="form-label">Visit Fees</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <input type="text" name="visit_fees" class="form-control mb-2"
-                                            placeholder="visit_fees" value="{{ $row->visit_fees }}" />
-                                        <!--end::Editor-->
-
-                                    </div>
-                                    <!--end::Input group-->
-
-
-                                    <!--begin::checkbox-->
-
-                                    <div class="d-flex flex-wrap gap-5 mt-4">
                                         <!--begin::Input group-->
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <div class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" name="parking_allowed[]"
-                                                    value="1" id="flexSwitchDefault"
-                                                    {{ $row->parking_allowed == 1 ? ' checked' : '' }} />
-                                                <label class="form-check-label" for="flexSwitchDefault">
-                                                    parking_allowed
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <div class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox"
-                                                    name="home_visit_allowed[]" value="1" id="flexSwitchDefault"
-                                                    {{ $row->home_visit_allowed == 1 ? ' checked' : '' }} />
-                                                <label class="form-check-label" for="flexSwitchDefault">
-                                                    home_visit_allowed
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="fv-row w-100 flex-md-root">
-                                            <div class="form-check form-switch form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox"
-                                                    name="disability_allowed[]" value="1" id="flexSwitchDefault"
-                                                    {{ $row->disability_allowed == 1 ? ' checked' : '' }} />
-                                                <label class="form-check-label" for="flexSwitchDefault">
-                                                    disability_allowed
-                                                </label>
-                                            </div>
+                                        <div class="fv-row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-bold form-label mt-3">
+                                                <span class="required">Add insurance</span>
+                                                <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                                                    title="Interviewer who conducts the meeting with the interviewee"></i>
+                                            </label>
+                                            <!--end::Label-->
+                                            <select class="form-select form-select-solid" onchange="showDiv(this)"
+                                                name="insurance_type_id" data-control="select2"
+                                                data-placeholder="Select an option">
+
+                                                @foreach ($insurances as $insurance)
+                                                    <option value="{{ $insurance->id }}"
+                                                        {{ $row->insurance_type_id == $insurance->id ? 'selected' : '' }}>
+                                                        {{ $insurance->en_type }}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                         <!--end::Input group-->
 
-                                    </div>
-                                    <!--end:checkbox-->
 
+
+                                        <!--begin::Input group-->
+                                        <div id="hidden_div"
+                                            @if ($row->insurance_type_id == 1) style="display:block;"  @else style="display:none;" @endif>
+                                            <!--begin::Label-->
+                                            <label class="form-label">Visit Fees</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <input type="text" name="visit_fees" class="form-control mb-2"
+                                                placeholder="visit_fees" value="{{ $row->visit_fees }}" />
+                                            <!--end::Editor-->
+
+                                        </div>
+                                        <!--end::Input group-->
+
+
+                                        <!--begin::checkbox-->
+
+                                        <div class="d-flex flex-wrap gap-5 mt-4">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <div class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="parking_allowed[]" value="1" id="flexSwitchDefault"
+                                                        {{ $row->parking_allowed == 1 ? ' checked' : '' }} />
+                                                    <label class="form-check-label" for="flexSwitchDefault">
+                                                        parking_allowed
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <div class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="home_visit_allowed[]" value="1" id="flexSwitchDefault"
+                                                        {{ $row->home_visit_allowed == 1 ? ' checked' : '' }} />
+                                                    <label class="form-check-label" for="flexSwitchDefault">
+                                                        home_visit_allowed
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="fv-row w-100 flex-md-root">
+                                                <div class="form-check form-switch form-check-custom form-check-solid">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="disability_allowed[]" value="1" id="flexSwitchDefault"
+                                                        {{ $row->disability_allowed == 1 ? ' checked' : '' }} />
+                                                    <label class="form-check-label" for="flexSwitchDefault">
+                                                        disability_allowed
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+
+                                        </div>
+                                        <!--end:checkbox-->
+
+                                    </div>
+                                    <!--end::Card header-->
                                 </div>
-                                <!--end::Card header-->
+                                <!--end::General options-->
                             </div>
-                            <!--end::General options-->
                         </div>
-                    </div>
                         <!--begin::Tab pane-->
                         <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
                             <div class="d-flex flex-column gap-7 gap-lg-10">
@@ -322,28 +324,29 @@
                                                 <div class="form-group">
                                                     <div data-repeater-list="kt_docs_repeater_basic"
                                                         class="d-flex flex-column gap-3">
-                                                          @if ($doctorDays->count() > 0)
+                                                        @if ($doctorDays->count() > 0)
                                                             @foreach ($doctorDays as $index => $doctorDay)
                                                                 <div data-repeater-item>
                                                                     <div class="form-group row">
-                                                                           <div class="col-md-3">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-bold form-label ">
-                                                                        <option value="">Select Day..</option>
+                                                                        <div class="col-md-3">
+                                                                            <!--begin::Label-->
+                                                                            <label class="fs-6 fw-bold form-label ">
+                                                                                <option value="">Select Day..
+                                                                                </option>
 
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <select class="form-select" name="days_id"
-                                                                        data-placeholder="Select a variation"
-                                                                        data-kt-ecommerce-catalog-add-product="product_option">
-                                                                        <option></option>
-                                                                        @foreach ($days as $day)
-                                                                            <option value="{{ $day->id }}"
-                                                                                {{ $doctorDay->days_id == $day->id ? 'selected' : '' }}  >
-                                                                                {{ $day->en_day }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
+                                                                            </label>
+                                                                            <!--end::Label-->
+                                                                            <select class="form-select" name="days_id"
+                                                                                data-placeholder="Select a variation"
+                                                                                data-kt-ecommerce-catalog-add-product="product_option">
+                                                                                <option></option>
+                                                                                @foreach ($days as $day)
+                                                                                    <option value="{{ $day->id }}"
+                                                                                        {{ $doctorDay->days_id == $day->id ? 'selected' : '' }}>
+                                                                                        {{ $day->en_day }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
                                                                         <div class="col-md-3">
                                                                             <label class="form-label">Time To:</label>
                                                                             <input
@@ -374,50 +377,49 @@
                                                                 </div>
                                                             @endforeach
                                                         @else
-                                                        <div data-repeater-item>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-3">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-bold form-label ">
-                                                                        <option value="">Select Day..</option>
-                                                                        {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <select class="form-select" name="days_id"
-                                                                    data-placeholder="Select a variation"
-                                                                    data-kt-ecommerce-catalog-add-product="product_option">
-                                                                    <option></option>
-                                                                        @foreach ($days as $day)
-                                                                            <option value="{{ $day->id }}"
-                                                                                >
-                                                                                {{ $day->en_day }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <label class="form-label">Time From:</label>
-                                                                    <input
-                                                                        class="form-control  form-control-solid tPick"
-                                                                        name="time_from" placeholder="Pick date"
-                                                                        id="kt_datepicker_3" />
-                                                                </div>
+                                                            <div data-repeater-item>
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-3">
+                                                                        <!--begin::Label-->
+                                                                        <label class="fs-6 fw-bold form-label ">
+                                                                            <option value="">Select Day..</option>
+                                                                            {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
+                                                                        </label>
+                                                                        <!--end::Label-->
+                                                                        <select class="form-select" name="days_id"
+                                                                            data-placeholder="Select a variation"
+                                                                            data-kt-ecommerce-catalog-add-product="product_option">
+                                                                            <option></option>
+                                                                            @foreach ($days as $day)
+                                                                                <option value="{{ $day->id }}">
+                                                                                    {{ $day->en_day }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <label class="form-label">Time From:</label>
+                                                                        <input
+                                                                            class="form-control  form-control-solid tPick"
+                                                                            name="time_from" placeholder="Pick date"
+                                                                            id="kt_datepicker_3" />
+                                                                    </div>
 
-                                                                <div class="col-md-3">
-                                                                    <label class="form-label">Time To:</label>
-                                                                    <input
-                                                                        class="form-control  form-control-solid tPick"
-                                                                        name="time_to" placeholder="Pick date"
-                                                                        id="kt_datepicker_3" />
-                                                                </div>
+                                                                    <div class="col-md-3">
+                                                                        <label class="form-label">Time To:</label>
+                                                                        <input
+                                                                            class="form-control  form-control-solid tPick"
+                                                                            name="time_to" placeholder="Pick date"
+                                                                            id="kt_datepicker_3" />
+                                                                    </div>
 
-                                                                <div class="col-md-4">
-                                                                    <a href="javascript:;" data-repeater-delete
-                                                                        class="btn btn-sm btn-light-danger mt-3 mt-md-8">
-                                                                        <i class="la la-trash-o"></i>Delete
-                                                                    </a>
+                                                                    <div class="col-md-4">
+                                                                        <a href="javascript:;" data-repeater-delete
+                                                                            class="btn btn-sm btn-light-danger mt-3 mt-md-8">
+                                                                            <i class="la la-trash-o"></i>Delete
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
                                                         @endif
 
                                                     </div>
@@ -471,7 +473,7 @@
                         </div>
                     </div>
                 </div>
-                    <!--end::Main column-->
+                <!--end::Main column-->
             </form>
         </div>
         <!--end::Container-->
@@ -487,14 +489,13 @@
             dateFormat: "H:i",
         });
 
-        function showDiv(select){
+        function showDiv(select) {
 
-           if(select.value==1){
-            document.getElementById('hidden_div').style.display = "block";
-           } else{
-            document.getElementById('hidden_div').style.display = "none";
-           }
+            if (select.value == 1) {
+                document.getElementById('hidden_div').style.display = "block";
+            } else {
+                document.getElementById('hidden_div').style.display = "none";
+            }
         }
-        </script>
-
+    </script>
 @endsection

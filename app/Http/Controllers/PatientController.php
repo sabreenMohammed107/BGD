@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic_review;
 use App\Models\Favourite_doctor;
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,10 @@ public function review(){
     public function show($id)
     {
         //
+        $row = User::find($id);
+
+        $rows = Reservation::where('patient_id',$id)->get();
+        return view($this->viewName.'edit', compact('row','rows'));
     }
 
     /**
