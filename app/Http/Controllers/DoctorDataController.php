@@ -97,7 +97,6 @@ class DoctorDataController extends Controller
         $docId= Auth::guard('doctor')->user()->id;
 
         $rows= DB::table('reservations as res')->join('doctor_clinics', 'res.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('res.*')->orderBy("reservation_date", "Desc")->get();
-        return($rows);
 
         // return view($this->viewName.'all', compact('rows'));
 
