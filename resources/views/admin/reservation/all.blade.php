@@ -148,19 +148,19 @@
                                         @endif
                                         @if (Auth::guard('doctor')->check())
                                             <div class="menu-item px-3">
-                                                <a href="{{ route('doctor.show-all-reservation', $row->id) }}"
+                                                <a href="{{ route('doctor.show-all-reservation',$row->id) }}"
                                                     class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
                                             </div>
                                             <div class="menu-item px-3">
 @if($row->reservation_status_id == 1)
                                                 <a data-bs-toggle="modal"
-                                                    data-bs-target="#comReservation{{ $row->id }}"
+                                                    data-bs-target="#comReservation{{$row->id }}"
                                                     class="menu-link px-3"><i class="fa fa-check"
                                                         aria-hidden="true"></i></a>
 
                                                 <a data-bs-toggle="modal"
-                                                    data-bs-target="#delReservation{{ $row->id }}"
+                                                    data-bs-target="#delReservation{{$row->id }}"
                                                     class="menu-link px-3"><span style="color: gray;font-weight: bold">x</span></a>
 
 @endif
@@ -168,7 +168,7 @@
 
                                         @endif
                                     </td>
-                                </tr>
+
                                 <!--end::Table row-->
 
                                 <!--begin::Modal - New Target-->
@@ -325,6 +325,8 @@
                                     <!--end::Modal dialog-->
                                 </div>
                                 <!--end::Modal - New Target-->
+
+                            </tr>
                             @endforeach
 
 
