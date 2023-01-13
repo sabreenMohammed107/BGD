@@ -108,6 +108,9 @@
                                     </td>
                                     <!--end::Checkbox-->
                                     <!--begin::Category=-->
+                                    <td class="text-start pe-0" data-order="15">
+                                        <span class="fw-bolder ms-3">{{ $row->id }}</span>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center">
 
@@ -122,9 +125,7 @@
                                     </td>
                                     <!--end::Category=-->
                                     <!--begin::SKU=-->
-                                    <td class="text-start pe-0" data-order="15">
-                                        <span class="fw-bolder ms-3">{{ $row->id }}</span>
-                                    </td>
+
                                     <td class="text-end pe-0">
                                         <input type="hidden" name="" id=""
                                             data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
