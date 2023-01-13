@@ -191,7 +191,7 @@
     <label class="form-label">Visit Fees</label>
     <!--end::Label-->
     <!--begin::Editor-->
-    <input type="text" name="visit_fees" class="form-control mb-2" placeholder="visit_fees"
+    <input type="text" id="visit_fees" name="visit_fees" class="form-control mb-2" placeholder="visit_fees"
     value="" />
                                     <!--end::Editor-->
 
