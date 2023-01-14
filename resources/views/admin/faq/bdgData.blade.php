@@ -113,7 +113,7 @@
     <label class="required form-label">  Dt Home Vedio</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input id="home_dt_video" value="{{$data->home_dt_video}}" type="url" class="form-control" name="home_video"  autofocus>
+    <input id="home_dt_video" value="{{$data->home_dt_video}}" type="url" class="form-control" name="home_dt_video"  autofocus>
 
 
 
