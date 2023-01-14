@@ -285,15 +285,15 @@
         placeholder="Type  dt Text">{{$row->dt_answer}}</textarea>
                                                         </div>
                                                         <!--end::Input group-->
-                                                        <div class="fv-row w-100 flex-md-root">
+                                                        {{-- <div class="fv-row w-100 flex-md-root">
                                                             <div class="form-check form-switch form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" name="parking_allowed[]" value="1"
+                                                                <input class="form-check-input" type="checkbox" name="active[]" value="1"
                                                                     id="flexSwitchDefault" {{ $row->active == 1 ? ' checked' : '' }} />
                                                                 <label class="form-check-label" for="flexSwitchDefault">
                                                                     active
                                                                 </label>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
 
 
                                                         <!--begin::Actions-->
@@ -441,8 +441,8 @@ placeholder="Type  dt Text"></textarea>
 <!--end::Input group-->
 
 
-<div class="d-flex flex-wrap gap-5 mt-4">
-    <!--begin::Input group-->
+{{-- <div class="d-flex flex-wrap gap-5 mt-4">
+
     <div class="fv-row w-100 flex-md-root">
         <div class="form-check form-switch form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" name="active[]" value="1"
@@ -452,9 +452,9 @@ placeholder="Type  dt Text"></textarea>
             </label>
         </div>
     </div>
-    <!--end::Input group-->
 
-</div>
+
+</div> --}}
                         <!--begin::Actions-->
                         <div class="text-center">
                             <button type="reset" id="kt_modal_new_target_cancel"

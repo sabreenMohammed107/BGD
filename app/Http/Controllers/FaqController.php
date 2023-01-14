@@ -138,8 +138,12 @@ class FaqController extends Controller
 
             $input['logo'] = $this->UplaodImage($attach_image);
         }
+        $row = bdg_data::findOrFail($request->get('dataId'));
+        if($row){
+            $row->update($input);
 
-        bdg_data::findOrFail($request->get('dataId'))->update($input);
+        }
+        // bdg_data::findOrFail($request->get('dataId'))->update($input);
         return redirect()->back()->with('flash_success', 'Successfully Saved!');
     }
 
