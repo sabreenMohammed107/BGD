@@ -122,6 +122,17 @@ $row->save();
         return redirect()->back();
     }
 
+    public function confReservation($id){
+        $docId= Auth::guard('doctor')->user()->id;
+        $row=Reservation::where("id", $id)->first();
+        if($row){
+$row->reservation_status_id=5;
+$row->save();
+        }
+        // $row->update(['reservation_status_id'=>2]);
+
+        return redirect()->back();
+    }
     public function delReservation($id){
         $docId= Auth::guard('doctor')->user()->id;
         $row=Reservation::where("id", $id)->first();

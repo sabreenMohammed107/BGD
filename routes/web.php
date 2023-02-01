@@ -74,7 +74,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/show-cancelled-reservation/{id}', [DoctorDataController::class, 'showCancelledReservation'])->name('doctor.show-cancelled-reservation');
     //com-action-reservation
     Route::get('/com-action-reservation/{id}', [DoctorDataController::class, 'comReservation'])->name('doctor.com-action-reservation');
-
+    Route::get('/conf-action-reservation/{id}', [DoctorDataController::class, 'confReservation'])->name('doctor.conf-action-reservation');
     //del-action-reservation
     Route::get('/del-action-reservation/{id}', [DoctorDataController::class, 'delReservation'])->name('doctor.del-action-reservation');
 

@@ -135,7 +135,7 @@ class PatientController extends BaseController
 
             $reserve = Reservation::where('id',$request->reservation_id)->first();
             if($reserve){
-                $reserve->reservation_status_id=3;
+                $reserve->reservation_status_id=4;
                 $reserve->save();
                 return $this->sendResponse(ReservationResource::make($reserve), 'U  reservation Cancelles successfully.');
 

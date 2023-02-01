@@ -23,15 +23,24 @@ class ReservationStatus extends Seeder
             ],
             [
                'en_status'=>'Completed',
-               'dt_status'=>'Pending',
+               'dt_status'=>'Completed',
 
             ],
             [
-               'en_status'=>'Cancelled',
-               'dt_status'=>'Pending',
+               'en_status'=>'Cancelled by Doc ',
+               'dt_status'=>'Cancelled by Doc ',
 
             ],
-
+            [
+                'en_status'=>'Cancelled by Patient',
+                'dt_status'=>'Cancelled by Patient',
+ 
+             ],
+             [
+                'en_status'=>'Confirmed by Doc ',
+                'dt_status'=>'Confirmed by Doc ',
+ 
+             ]
 
         ];
 
