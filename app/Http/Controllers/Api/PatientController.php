@@ -181,20 +181,15 @@ class PatientController extends BaseController
             $doctors =Doctor_clinic::select('doctor_clinics.*')->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-            ->join('medical_fields', 'doctors.medical_field_id', '=', 'medical_fields.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
 
 
         if ($str) {
 
-            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->orWhere('doctors.name', 'LIKE', "%$str%")
-            ->orWhere('medical_fields.field_enname', 'LIKE', "%$str%")
-            ->orWhere('medical_fields.field_dtname', 'LIKE', "%$str%");
-         }
-         if ($speciality) {
+            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->orWhere('doctors.name', 'LIKE', "%$str%");
 
-           $doctors=$doctors->whereIn("medical_fields.id", explode(',', $speciality));
-        }
+         }
+
         if ($selectdays) {
 
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
@@ -205,7 +200,7 @@ class PatientController extends BaseController
          }
          if ($min_price && $max_price) {
 
-            $query->whereBetween('visit_fees', [$min_price, $max_price]);
+            $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
          }
          if ($homeVisit) {
 
@@ -225,6 +220,6 @@ class PatientController extends BaseController
 
     }
 
-   
+
 
 }
