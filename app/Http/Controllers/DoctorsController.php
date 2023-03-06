@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use File;
+use Illuminate\Support\Facades\DB;
 class DoctorsController extends Controller
 {
     protected $object;
@@ -66,6 +67,10 @@ class DoctorsController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
+        try {
+            // Disable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->validator($request->all())->validate();
         $input = $request->except(['_token','img','password']);
         if ($request->hasFile('img')) {
@@ -80,8 +85,25 @@ class DoctorsController extends Controller
             $input['verified'] = '0';
         }
         $input['password'] = Hash::make($request['password']);
-        Doctor::create($input);
-        return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');    }
+
+        $doctor=Doctor::create($input);
+        if (!empty($request->get('medicines'))) {
+
+            $doctor->medicines()->attach($request->medicines);
+
+        }
+        DB::commit();
+        // Enable foreign key checks!
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'Successfully Save  ');
+
+    } catch (\Throwable$e) {
+        // throw $th;
+        DB::rollback();
+        return redirect()->back()->withInput()->withErrors($e->getMessage());
+
+    }  }
 
     /**
      * Display the specified resource.
@@ -107,7 +129,8 @@ class DoctorsController extends Controller
         $positions = Doctors_pasition::all();
         $status = Status::all();
         //
-        return view($this->viewName.'edit', compact('row','medicals','positions','status'));
+        $doctormedicals = $row->medicines->all();
+        return view($this->viewName.'edit', compact('row','medicals','positions','status','doctormedicals'));
     }
 
     /**
@@ -124,7 +147,10 @@ class DoctorsController extends Controller
             'name' => 'required',
             'password' =>'required_with:confirmed|nullable',
         ]);
-
+        DB::beginTransaction();
+        try {
+            // Disable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $row = Doctor::find($id);
         $input = $request->except(['_token','img','password']);
         if ($request->hasFile('img')) {
@@ -143,7 +169,21 @@ class DoctorsController extends Controller
         }
         // $input['password'] = Hash::make($request['password']);
         $row->update($input);
-        return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');
+        if ($request->medicines) {
+            $row->medicines()->sync($request->medicines);
+        }
+        DB::commit();
+        // Enable foreign key checks!
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'Successfully Save');
+
+    } catch (\Throwable$e) {
+        // throw $th;
+        DB::rollback();
+        return redirect()->back()->withInput()->withErrors($e->getMessage());
+
+    }
     }
 
     /**

@@ -22,7 +22,6 @@ return new class extends Migration
 
         });
         Schema::table('doctors', function (Blueprint $table) {
-            $table->foreign('medical_field_id')->references('id')->on('medical_fields');
             $table->foreign('doctor_position_id')->references('id')->on('doctors_pasitions');
             $table->foreign('doctor_status_id')->references('id')->on('statuses');
 

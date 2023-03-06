@@ -37,5 +37,12 @@ class Reservation extends Model
     {
         return $this->belongsTo(Reservation_status::class,'reservation_status_id');
     }
+    protected $appends = ['reserv_day'];
+    public function getReservDayAttribute()
+    {
 
+      
+$d= new \DateTime($this->reservation_date);
+return $d->format('l');
+    }
 }

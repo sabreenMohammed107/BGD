@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Http\Resources\DoctorClinicResource;
+use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\ReviewResource;
 use App\Models\Clinic_review;
+use App\Models\Doctor;
+use App\Models\Doctor_clinic;
 use App\Models\Favourite_doctor;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends BaseController
 {
@@ -148,4 +154,77 @@ class PatientController extends BaseController
         }
 
     }
+
+
+    public function search(Request $request){
+        $search = '';
+      $str=$request->get('str');
+      $lower=$request->get('lower');
+      $speciality=$request->get('speciality');
+      $selectdays=$request->get('selectdays');
+      $insurance=$request->get('insurance');
+      $min_price=$request->get('min_price');
+      $max_price=$request->get('max_price');
+      $homeVisit=$request->get('homeVisit');
+      $parkingSpace=$request->get('parkingSpace');
+      $disableAccess=$request->get('disableAccess');
+
+
+            $search = $str;
+
+            // $doctors =DB::table("doctor_clinics")
+            // ->select('doctor_clinics.*')
+            // ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+            // ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+            // ->join('medical_fields', 'doctors.medical_field_id', '=', 'medical_fields.id')
+            // ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
+            $doctors =Doctor_clinic::select('doctor_clinics.*')->
+            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+            ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+            ->join('medical_fields', 'doctors.medical_field_id', '=', 'medical_fields.id')
+            ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
+
+
+        if ($str) {
+
+            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->orWhere('doctors.name', 'LIKE', "%$str%")
+            ->orWhere('medical_fields.field_enname', 'LIKE', "%$str%")
+            ->orWhere('medical_fields.field_dtname', 'LIKE', "%$str%");
+         }
+         if ($speciality) {
+
+           $doctors=$doctors->whereIn("medical_fields.id", explode(',', $speciality));
+        }
+        if ($selectdays) {
+
+            $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
+         }
+         if ($insurance) {
+
+            $doctors=$doctors->where("insurance_types.id", $insurance);
+         }
+         if ($min_price && $max_price) {
+
+            $query->whereBetween('visit_fees', [$min_price, $max_price]);
+         }
+         if ($homeVisit) {
+
+            $doctors=$doctors->where("home_visit_allowed", $homeVisit);
+         }
+         if ($parkingSpace) {
+
+            $doctors=$doctors->where("parking_allowed", $parkingSpace);
+         }
+         if ($disableAccess) {
+
+            $doctors=$doctors->where("disability_allowed", $disableAccess);
+         }
+        $doctors=$doctors->get();
+            // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
+            return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+
+    }
+
+   
+
 }

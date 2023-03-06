@@ -155,8 +155,9 @@
                                     {{-- <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Interviewer who conducts the meeting with the interviewee"></i> --}}
                                 </label>
                                 <!--end::Label-->
-                                <select  class="form-select form-select-solid" id="medical_field_id" name="medical_field_id" data-control="select2"
-                                    data-placeholder="Select an option">
+                                <select class="form-select form-select-solid" name="medicines[]"
+                                data-control="select2" data-placeholder="Select an option"
+                                data-allow-clear="true" multiple="multiple">
                                     <option value=""></option>
                                      @foreach ($medicals as $medical)
                                         <option value="{{ $medical->id }}">{{ $medical->field_enname }}</option>

@@ -28,10 +28,9 @@ return new class extends Migration
             $table->text('dt_brief')->nullable();
             $table->string('licence_file',255)->nullable();
             $table->enum('verified', [0,1])->default(0);
-            $table->unsignedBigInteger('medical_field_id')->nullable();
             $table->unsignedBigInteger('doctor_position_id')->nullable();
             $table->unsignedBigInteger('doctor_status_id')->nullable();
-          
+
             $table->timestamps();
         });
     }

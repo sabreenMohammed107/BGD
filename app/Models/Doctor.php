@@ -21,7 +21,7 @@ namespace App\Models;
         'dt_brief',
         'licence_file',
         'verified',
-        'medical_field_id',
+
         'doctor_position_id',
         'doctor_status_id',
     ];
@@ -29,4 +29,11 @@ namespace App\Models;
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function medicines()
+    {
+        return $this->belongsToMany(Medical_field::class, 'doctor_feilds');
+    }
+
 }

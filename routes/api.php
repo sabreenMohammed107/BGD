@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\DoctorsInfController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,9 @@ Route::middleware('auth:api')->group( function () {
 Route::middleware("localization")->group(function () {
 
     Route::get('faq', [ContactController::class, 'getFaq']);
+
+    Route::get('search-doc-category', [PatientController::class, 'search']);
+
+    Route::get('home', [DoctorsInfController::class, 'doctorsInf']);
+
 });
