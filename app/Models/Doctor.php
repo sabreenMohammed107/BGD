@@ -33,7 +33,15 @@ namespace App\Models;
 
     public function medicines()
     {
-        return $this->belongsToMany(Medical_field::class, 'doctor_feilds');
+        return $this->belongsToMany(Medical_field::class, 'doctor_feilds')
+        ->withTimestamps();
+    }
+
+
+    public function medicField()
+    {
+        return $this->hasMany(Doctor_feild::class);
+
     }
 
 }

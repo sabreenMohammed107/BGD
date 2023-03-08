@@ -26,7 +26,9 @@ class RegisterController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->convertErrorsToString($validator->messages());
+            // return $this->convertErrorsToString($validator->messages());
+            return $this->sendError($validator->messages());
+
         }
 
         try {
@@ -64,7 +66,9 @@ class RegisterController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->convertErrorsToString($validator->messages());
+            // return $this->convertErrorsToString($validator->messages());
+            return $this->sendError($validator->messages());
+
         }
 
         try {

@@ -16,17 +16,20 @@ class scadualInfoResource extends JsonResource
     {
         $rr=[];
         if (App::getLocale() == "en") {
-           
+
                 $rr= [
                     'name' => $this->clinic->doctor->name ?? '',
-                    'medical field' => $this->clinic->doctor->medical->field_enname ?? '',
+
+
+                    'medical field'=>docFieldsResource::collection($this->clinic->doctor->medicField()->get()),
+
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
                     'reservation_date' => $this->reservation_date ?? '',
                     'av_day' => $this->reserv_day ?? '',
                     'av_time' => $this->time_from ?? '',
 
                 ];
-           
+
 
 
         }

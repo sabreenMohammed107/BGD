@@ -89,10 +89,10 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=',
 return $timeAv;
     }
 
-    public function fields()
-    {
-        return $this->belongsToMany(Medical_field::class, 'doctor_feilds');
-    }
+    // public function fields()
+    // {
+    //     return $this->belongsToMany(Medical_field::class, 'doctor_feilds');
+    // }
 
 
 }

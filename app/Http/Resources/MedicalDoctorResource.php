@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class MedicalResource extends JsonResource
+class MedicalDoctorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,15 @@ class MedicalResource extends JsonResource
 if(App::getLocale()=="en"){
     return [
 
-        'field_enname'=>$this->field_enname ?? '',
-        'field_dtname'=>$this->field_dtname ?? '',
-        'field_img'=>asset('uploads/doctors/' . $this->field_img) ?? '',
-        'doctor_count'=>$this->doctors()->count(),
+        'field_name'=>$this->field_enname ?? '',
+
+    ];
+}else{
+    return [
+
+        'field_name'=>$this->field_dtname ?? '',
+
+
     ];
 }
 

@@ -25,7 +25,7 @@ class DoctorsInfController extends BaseController
         $specialistsIds = Doctor_feild::pluck('medical_field_id');
         $specialists = Medical_field::whereIn('id',$specialistsIds)->get();
         $page['specialists']=MedicalResource::collection($specialists);
-        $doctors=Doctor::take(5)->orderBy("id", "Desc")->get();
+        $doctors=Doctor::with(['medicines'])->take(5)->orderBy("id", "Desc")->get();
         $page['latest_doctors']=DoctorResource::collection($doctors);
         //patient - reservation
         $userid = auth('api')->user()->id;
@@ -33,8 +33,8 @@ class DoctorsInfController extends BaseController
         $date = Carbon::parse($current_date)->format('Y-m-d');
         $reservations=Reservation::where('patient_id',$userid)->where('reservation_date','>=',$date)->whereIn('reservation_status_id',[1,5])->orderBy("reservation_date", "asc")->get();
         $page['schedule']=scadualInfoResource::collection($reservations) ;
-$bdgData =bdg_data::where('id',1)->first();
-      $page['vedio']=$bdgData->home_video;
+         $bdgData =bdg_data::where('id',1)->first();
+         $page['vedio']=$bdgData->home_video;
         $page['bdgTutoril']= $bdgData->home_tutorial;
         return $this->sendResponse( $page, "get all home data ");
     }

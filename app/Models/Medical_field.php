@@ -46,7 +46,9 @@ class Medical_field extends Model
 
     public function doctors()
     {
-        return $this->belongsToMany(Doctor::class, 'doctor_feilds');
+
+        return $this->belongsToMany(Doctor::class, 'doctor_feilds')
+        ->withTimestamps();
     }
 
 }

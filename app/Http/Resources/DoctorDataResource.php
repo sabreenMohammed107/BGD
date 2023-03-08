@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Resources;
 
+use App\Models\Medical_field;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
-class FaqResource extends JsonResource
+class DoctorDataResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,21 +15,17 @@ class FaqResource extends JsonResource
      */
     public function toArray($request)
     {
-if(App::getLocale()=="en"){
-    return [
-        "question"=>$this->en_question ?? '',
+        $medicines = $this->whenLoaded('medicines');
 
-        'answer'=>$this->en_answer ?? '',
+            return [
 
-    ];
-}else{
-    return [
+                'name' => $this->name ?? '',
 
-        'question'=>$this->dt_question ?? '',
+                'medical field' => MedicalDoctorResource::collection($this->whenLoaded('medicines')),
 
-        'answer'=>$this->dt_answer ?? '',
-    ];
-}
+
+
+            ];
 
 
     }
