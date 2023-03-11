@@ -16,4 +16,9 @@ class Doctor_schedule extends Model
         'active',
 
     ];
+
+    public function daName(){
+        return $this->belongsTo(DayNew::class,'days_id');
+
+    }
 }

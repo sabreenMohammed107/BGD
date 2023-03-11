@@ -25,6 +25,8 @@ class Doctor_clinic extends Model
         'clinic_status_id',
         'insurance_type_id',
         'visit_fees',
+        'en_reservation_notes',
+        'dt_reservation_notes'
     ];
     public function insurance()
     {
@@ -78,8 +80,25 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=',
    }
 
     }
+    public function getSchdualAttribute()
+    {
+        $start_date=Carbon::now();
+        $end_date=Carbon::now()->addDays(15);
+        $day = Carbon::now()->dayOfWeek;
+        $schadDys = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->pluck('days_id');
 
 
+    for($i=$start_date;$i<$end_date;$i++ ){
+
+        foreach($schadDys as $schad) {
+if($i->dayOfWeek == $schad){
+
+}
+        }
+
+    }
+
+}
     public function getNextTimeAttribute()
     {
 
