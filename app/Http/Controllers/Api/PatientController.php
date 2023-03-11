@@ -7,6 +7,7 @@ use App\Http\Resources\DoctorClinicResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
 use App\Http\Resources\ReservationResource;
+use App\Http\Resources\reservClinic;
 use App\Http\Resources\ReviewResource;
 use App\Models\Clinic_review;
 use App\Models\Doctor;
@@ -78,7 +79,31 @@ class PatientController extends BaseController
         }
 
     }
+public function getReservation(Request $request){
+    $page=[];
+    $userid = auth('api')->user()->id;
 
+    // $validator = Validator::make($request->all(), [
+    //     'clinic_id' => 'required',
+    //     'reservation_date' => 'required',
+    //     'time_from' => 'required',
+    //     'time_to' => 'required',
+    // ]);
+
+    // if ($validator->fails()) {
+    //     // return $this->convertErrorsToString($validator->messages());
+    //     return $this->sendError($validator->messages());
+    // }
+
+    $clinic = Doctor_clinic::where('id', $request->get('clinic_id'))->first();
+    $page['clinic_data'] = reservClinic::make($clinic);
+    $page['appointment'] =[
+        'reservation_date'=>$request->get('reservation_date'),
+        'time_from'=>$request->get('time_from'),
+        'time_to'=>$request->get('time_to'),
+    ];
+    return $this->sendResponse($page, "get all reserve data ");
+}
     public function reservation(Request $request)
     {
         // $userid = Auth::user()->id;
@@ -91,7 +116,8 @@ class PatientController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->convertErrorsToString($validator->messages());
+            // return $this->convertErrorsToString($validator->messages());
+            return $this->sendError($validator->messages());
         }
         try {
             $data = [
@@ -172,12 +198,7 @@ class PatientController extends BaseController
 
             $search = $str;
 
-            // $doctors =DB::table("doctor_clinics")
-            // ->select('doctor_clinics.*')
-            // ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-            // ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-            // ->join('medical_fields', 'doctors.medical_field_id', '=', 'medical_fields.id')
-            // ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
+
             $doctors =Doctor_clinic::select('doctor_clinics.*')->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')

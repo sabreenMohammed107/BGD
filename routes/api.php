@@ -30,7 +30,7 @@ Route::middleware('auth:api')->group( function () {
     //favourite
     Route::post('favourite-doctors', [PatientController::class, 'favourite']);
     //reservation
-    Route::post('reservation', [PatientController::class, 'reservation']);
+    // Route::post('reservation', [PatientController::class, 'reservation']);
     Route::get('show-reservation', [PatientController::class, 'showRreservation']);
     Route::post('cancel-reservation', [PatientController::class, 'cancelReservation']);
 
@@ -46,5 +46,11 @@ Route::middleware("localization")->group(function () {
       //doc profile
       Route::get('/show-doc-profile/{id}', [DoctorsInfController::class, 'docProfile'])->name('show-doc-profile');
 
+
+});
+
+Route::group(['middleware' => ['localization', 'auth:api']], function() {
+    Route::get('get-reservation', [PatientController::class, 'getReservation']);
+    Route::post('reservation', [PatientController::class, 'reservation']);
 
 });

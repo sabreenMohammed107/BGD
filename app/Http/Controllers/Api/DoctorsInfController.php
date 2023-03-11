@@ -15,7 +15,7 @@ use App\Models\Doctor_schedule;
 use App\Models\Medical_field;
 use App\Models\Reservation;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\App;
 class DoctorsInfController extends BaseController
 {
 
@@ -57,14 +57,21 @@ $rr=[];
 
                 if ($day == $schad->days_id) {
                     // echo  $start_date;
-
+                    if(App::getLocale()=="en"){
                     $doctor_schedule[$i] = (object)  [
                         'date' => $start_date->format('Y-m-d') ,
                     'day' => $schad->daName->en_day ?? '',
                     'from' => $schad->time_from,
                     'to' => $schad->time_to,
                    ];
-
+                }else{
+    $doctor_schedule[$i] = (object)  [
+        'date' => $start_date->format('Y-m-d') ,
+    'day' => $schad->daName->dt_day ?? '',
+    'from' => $schad->time_from,
+    'to' => $schad->time_to,
+   ];
+}
 
                 }
                 // $doctor_schedule['schedule'] = $doctor_schedule;
