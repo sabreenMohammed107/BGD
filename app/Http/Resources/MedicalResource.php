@@ -19,7 +19,7 @@ if(App::getLocale()=="en"){
 
         'field_enname'=>$this->field_enname ?? '',
         'field_dtname'=>$this->field_dtname ?? '',
-        'field_img'=>asset('uploads/doctors/' . $this->field_img) ?? '',
+        'field_img'=>asset('uploads/medical_fields/' . $this->field_img) ?? '',
         'doctor_count'=>$this->doctors()->count(),
     ];
 }

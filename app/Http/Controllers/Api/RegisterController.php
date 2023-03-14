@@ -96,5 +96,85 @@ class RegisterController extends BaseController
             return $this->sendError($e->getMessage(), 'Error happens!!');
         }
     }
+    public function updateUser(Request $request)
+    {
+        try
+        {
 
+            $user = $request->user();
+            $input = [
+                'name' => $request->n_id,
+                'mobile' => $request->mobile,
+                'gender' => $request->gender,
+                'birth_date' => $request->birth_date,
+                'details_address' => $request->details_address,
+
+            ];
+
+            if ($user) {
+                $input['password'] = bcrypt($input['password']);
+                $user->update($input);
+                $user->accessToken = $user->createToken('MyApp')->accessToken;
+
+
+                return $this->sendResponse($user, 'User has been updated');
+            }
+            } catch (\Exception $e) {
+                return $this->sendError($e->getMessage(), 'Error happens!!');
+            }
+
+
+    }
+
+
+    public function updateUserImage(Request $request)
+    {
+        try
+        {
+            $validator = Validator::make($request->all(), [
+                'image' => 'required',
+
+            ]);
+
+            if ($validator->fails()) {
+                return $this->convertErrorsToString($validator->messages());
+            }
+            $user = $request->user();
+
+            if ($user) {
+                if ($request->hasFile('image')) {
+                    $attach_image = $request->file('image');
+
+                    $input['image'] = $this->UplaodImage($attach_image);
+                }
+                $user->update($input);
+
+                return $this->sendResponse($user, 'Image User has been updated');
+            }
+            } catch (\Exception $e) {
+                return $this->sendError($e->getMessage(), 'Error happens!!');
+            }
+    }
+
+    /* uplaud image
+     */
+    public function UplaodImage($file_request)
+    {
+        //  This is Image Info..
+        $file = $file_request;
+        $name = $file->getClientOriginalName();
+        $ext = $file->getClientOriginalExtension();
+        $size = $file->getSize();
+        $path = $file->getRealPath();
+        $mime = $file->getMimeType();
+
+        // Rename The Image ..
+        $imageName = $name;
+        $uploadPath = public_path('uploads/users');
+
+        // Move The image..
+        $file->move($uploadPath, $imageName);
+
+        return $imageName;
+    }
 }

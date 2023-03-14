@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\App;
 class PatientController extends BaseController
 {
     public function review(Request $request)
@@ -240,6 +240,17 @@ public function getReservation(Request $request){
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
     }
+
+public function favoriteDoctors(){
+    $userid = auth('api')->user()->id;
+$ids=Favourite_doctor::where('user_id',$userid)->pluck('clinic_id');
+$doctors =Doctor_clinic::select('doctor_clinics.*')->
+join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')->whereIn('doctor_clinics.id',$ids)->get();
+return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+
+}
 
 
 
