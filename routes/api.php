@@ -28,7 +28,7 @@ Route::middleware('auth:api')->group( function () {
     // Route::resource('products', ProductController::class);
     Route::post('make-review', [PatientController::class, 'review']);
     //favourite
-    Route::post('favourite-doctors', [PatientController::class, 'favourite']);
+    Route::post('mke-favourite-doctors', [PatientController::class, 'favourite']);
     //reservation
     // Route::post('reservation', [PatientController::class, 'reservation']);
     Route::get('show-reservation', [PatientController::class, 'showRreservation']);
