@@ -54,7 +54,7 @@ Route::group(['middleware' => ['localization', 'auth:api']], function() {
     Route::post('reservation', [PatientController::class, 'reservation']);
     Route::post('update-patient', [RegisterController::class, 'updateUser']);
     Route::post('update-patient-image', [RegisterController::class, 'updateUserImage']);
-    Route::post('favorite-doctors', [PatientController::class, 'favoriteDoctors']);
+    Route::get('favorite-doctors', [PatientController::class, 'favoriteDoctors']);
 
 
 
