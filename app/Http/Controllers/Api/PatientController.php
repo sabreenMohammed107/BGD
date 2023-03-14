@@ -244,11 +244,7 @@ public function getReservation(Request $request){
 public function favoriteDoctors(){
     $userid = auth('api')->user()->id;
 $ids=Favourite_doctor::where('user_id',$userid)->pluck('clinic_id');
-dd($ids);
-$doctors =Doctor_clinic::select('doctor_clinics.*')->
-join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')->whereIn('doctor_clinics.id',$ids)->get();
+$doctors =Doctor_clinic::whereIn('id',$ids)->get();
 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All vafourite doctors result Retrieved  Successfully');
 
 }
