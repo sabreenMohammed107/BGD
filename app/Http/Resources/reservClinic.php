@@ -36,8 +36,19 @@ class reservClinic extends JsonResource
         }else{
     return [
 
+        'id'=>$this->id,
+        'name' =>  $this->doctor->name ?? '',
+        'image' => asset('uploads/doctors/' . $this->doctor->img) ?? '',
+        'medical field'=>docFieldsResource::collection($this->doctor->medicField()->get()),
+
+
+
 
         'visit_fees' => $this->insurance_type_id==1 ?  $this->insurance->dt_type : $this->visit_fees  ,
+
+        'avgRating' => round($this->review->avg('stars'),1) ?? '',
+        'reviewCount' => $this->review->count(),
+
 
     ];
 }
