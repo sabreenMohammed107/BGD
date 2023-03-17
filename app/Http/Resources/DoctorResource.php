@@ -17,6 +17,18 @@ class DoctorResource extends JsonResource
     {
         if (App::getLocale() == "en") {
             return [
+                'id'=>$this->id,
+                'name' => $this->name ?? '',
+                'email' => $this->email ?? '',
+                'mobile' => $this->mobile ?? '',
+                'img' =>asset('uploads/doctors/' . $this->img) ?? '',
+                'overview' => $this->en_overview ?? '',
+                'brief' => $this->en_brief ?? '',
+                'licence_file' => $this->licence_file ?? '',
+                'medical field' => MedicalDoctorResource::collection($this->whenLoaded('medicines')),
+
+                'doctor position' => $this->doctor_position_id ?? '',
+                'doctor status' => $this->doctor_status_id ?? '',
 
 
             ];
