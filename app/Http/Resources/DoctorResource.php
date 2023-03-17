@@ -17,7 +17,7 @@ class DoctorResource extends JsonResource
     {
         if (App::getLocale() == "en") {
             return [
-
+'id'=>$this->id,
                 'name' => $this->name ?? '',
                 'email' => $this->email ?? '',
                 'mobile' => $this->mobile ?? '',
