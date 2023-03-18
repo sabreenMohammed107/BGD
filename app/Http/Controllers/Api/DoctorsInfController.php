@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\DocorProfileResource;
 use App\Http\Resources\DoctorResource;
+use App\Http\Resources\HomeDoctorResource;
 use App\Http\Resources\MedicalResource;
 use App\Http\Resources\scadualInfoResource;
 use App\Models\bdg_data;
@@ -27,7 +28,9 @@ class DoctorsInfController extends BaseController
         $specialists = Medical_field::whereIn('id', $specialistsIds)->get();
         $page['specialists'] = MedicalResource::collection($specialists);
         $doctors = Doctor::with(['medicines'])->take(5)->orderBy("id", "Desc")->get();
-        $page['latest_doctors'] = DoctorResource::collection($doctors);
+        $newDocotorClinic=Doctor_clinic::take(5)->orderBy("id", "Desc")->get();
+        $page['latest_doctors'] = HomeDoctorResource::collection($newDocotorClinic);
+        // $page['latest_doctors'] = DoctorResource::collection($doctors);
         //patient - reservation
         $userid = auth('api')->user()->id;
         $current_date = Carbon::now();
