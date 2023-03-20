@@ -62,7 +62,8 @@ class PatientController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->convertErrorsToString($validator->messages());
+            // return $this->convertErrorsToString($validator->messages());
+            return $this->sendError($validator->messages());
         }
         try {
             $data = [
@@ -78,6 +79,35 @@ class PatientController extends BaseController
             return $this->sendError($ex->getMessage(), 'Error happens!!');
         }
 
+    }
+    public function removeFavourite(Request $request){
+       // $userid = Auth::user()->id;
+       $userid = auth('api')->user()->id;
+       $validator = Validator::make($request->all(), [
+           'clinic_id' => 'required',
+
+       ]);
+
+       if ($validator->fails()) {
+        //    return $this->convertErrorsToString($validator->messages());
+           return $this->sendError($validator->messages());
+       }
+       try {
+           $data = [
+               'clinic_id' => $request->clinic_id,
+               'user_id' => $userid,
+
+           ];
+           $favourite = Favourite_doctor::where('clinic_id',$request->clinic_id)->where('user_id', $userid)->first();
+if($favourite){
+    $$favourite->delete();
+    return $this->sendResponse(null, 'U remove favourite successfully.');
+
+}
+
+       } catch (\Exception$ex) {
+           return $this->sendError($ex->getMessage(), 'Error happens!!');
+       }
     }
 public function getReservation(Request $request){
     $page=[];
