@@ -15,7 +15,7 @@ class scadualInfoResource extends JsonResource
     public function toArray($request)
     {
         $rr=[];
-        if (App::getLocale() == "en") {
+        // if (App::getLocale() == "en") {
 
                 $rr= [
                     'name' => $this->clinic->doctor->name ?? '',
@@ -32,7 +32,7 @@ class scadualInfoResource extends JsonResource
 
 
 
-        }
+        // }
 return $rr;
     }
 }
