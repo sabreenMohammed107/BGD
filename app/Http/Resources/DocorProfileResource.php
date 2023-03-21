@@ -27,7 +27,7 @@ class DocorProfileResource extends JsonResource
                 'parking_allowed' => $this->parking_allowed ?? '',
                 'home_visit_allowed' => $this->home_visit_allowed ?? '',
                 'disability_allowed' => $this->disability_allowed ?? '',
-                'overview' => $this->en_overview ?? '',
+                'overview' => $this->doctor->en_overview ?? '',
 
                 'phone' => $this->phone ?? '',
                 'postal_code' => $this->postal_code ?? '',
@@ -64,7 +64,7 @@ class DocorProfileResource extends JsonResource
         'parking_allowed' => $this->parking_allowed ?? '',
         'home_visit_allowed' => $this->home_visit_allowed ?? '',
         'disability_allowed' => $this->disability_allowed ?? '',
-        'overview' => $this->dt_overview ?? '',
+        'overview' => $this->doctor->dt_overview ?? '',
 
         'phone' => $this->phone ?? '',
         'postal_code' => $this->postal_code ?? '',
