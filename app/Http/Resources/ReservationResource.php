@@ -19,7 +19,7 @@ class ReservationResource extends JsonResource
             'patient' => $this->patient->name ?? '',
             // 'clinic' => $this->clinic->name ?? '',
             'reservation_status' => $this->status->en_status ?? '',
-            'doctor' => DoctorResource::make( $this->clinic->doctor),
+            'doctor' => DocorProfileResource::make( $this->clinic->doctor),
             'reservation_date' => $this->reservation_date ?? '',
             'time_from' => $this->time_to ?? '',
             'time_to' => $this->time_to ?? '',
