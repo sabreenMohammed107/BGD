@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Http\Resources\userResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -45,7 +46,7 @@ class RegisterController extends BaseController
             // $sms = Helper::send_sms($data);
 // $user->smsResponse=$sms;
 
-            return $this->sendResponse($user, 'User has been registed');
+            return $this->sendResponse(userResource::make($user), 'User has been registed');
 
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 'Error happens!!');
@@ -88,7 +89,7 @@ class RegisterController extends BaseController
                 // } else {
 //     Device::create($data);
 // }
-                return $this->sendResponse($user, 'User login successfully.');
+                return $this->sendResponse(userResource::make($user), 'User login successfully.');
             } else {
                 return $this->sendError('Invalid Useremail or Password!');
             }
@@ -117,7 +118,7 @@ class RegisterController extends BaseController
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
 
 
-                return $this->sendResponse($user, 'User has been updated');
+                return $this->sendResponse(userResource::make($user), 'User has been updated');
             }
             } catch (\Exception $e) {
                 return $this->sendError($e->getMessage(), 'Error happens!!');
@@ -149,7 +150,7 @@ class RegisterController extends BaseController
                 }
                 $user->update($input);
 
-                return $this->sendResponse($user, 'Image User has been updated');
+                return $this->sendResponse(userResource::make($user), 'Image User has been updated');
             }
             } catch (\Exception $e) {
                 return $this->sendError($e->getMessage(), 'Error happens!!');
