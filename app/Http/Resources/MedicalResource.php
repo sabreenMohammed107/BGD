@@ -17,8 +17,14 @@ class MedicalResource extends JsonResource
 if(App::getLocale()=="en"){
     return [
 
-        'field_enname'=>$this->field_enname ?? '',
-        'field_dtname'=>$this->field_dtname ?? '',
+        'field_name'=>$this->field_enname ?? '',
+        'field_img'=>asset('uploads/medical_fields/' . $this->field_img) ?? '',
+        'doctor_count'=>$this->doctors()->count(),
+    ];
+}else{
+    return [
+
+        'field_name'=>$this->field_dtname ?? '',
         'field_img'=>asset('uploads/medical_fields/' . $this->field_img) ?? '',
         'doctor_count'=>$this->doctors()->count(),
     ];
