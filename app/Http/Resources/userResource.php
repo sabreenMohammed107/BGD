@@ -23,7 +23,7 @@ class userResource extends JsonResource
                 'name' => $this->name ?? '',
                 'email' => $this->email ?? '',
                 'mobile' => $this->mobile ?? '',
-                'image' =>asset('uploads/users/' . $this->image) ?? asset('img/default.png'),
+                "image" => $this->image ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
                 'gender'=> $this->gender ?? '',
 
                 'birth_date'=> $this->birth_date ?? '',
@@ -44,7 +44,7 @@ class userResource extends JsonResource
                 'name' => $this->name ?? '',
                 'email' => $this->email ?? '',
                 'mobile' => $this->mobile ?? '',
-                'image' =>asset('uploads/users/' . $this->image) ?? asset('img/default.png'),
+                "image" => $this->image ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
                 'gender'=> $this->gender ?? '',
 
                 'birth_date'=> $this->birth_date ?? '',
