@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use App\Models\Day;
+use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Doctor_schedule;
@@ -112,7 +112,7 @@ class ClinicController extends Controller
         $cities = City::all();
         $status = Status::all();
         $insurances = Insurance_type::all();
-        $days = Day::all();
+        $days = DayNew::all();
         $doctorDays = Doctor_schedule::where('clinic_id',$id)->get();
         //
         return view($this->viewName.'edit', compact('row','doctors','cities','status','insurances','days','doctorDays'));
