@@ -19,6 +19,8 @@ class ReviewResource extends JsonResource
             "rate_no" =>(integer)$this->stars,
             'comment' => $this->comment ?? '',
             "patient" => $this->patient->name ?? '',
+            "image" => $this->patient->name ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
+
 
         ];
     }
