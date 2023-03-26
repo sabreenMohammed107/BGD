@@ -176,13 +176,13 @@ public function getReservation(Request $request){
     public function showOldRreservation()
     {
         $userid = auth('api')->user()->id;
-        $rows = Reservation::with('status')->where('patient_id', $userid)->whereDate('reservation_date', '<', now())->orderBy("reservation_date", "Desc")->get();
+        $rows = Reservation::with('status')->where('patient_id', $userid)->whereDate('reservation_date', '<', now())->orWhereIn('reservation_status_id',[3,4])->orderBy("reservation_date", "Desc")->get();
         return $this->sendResponse(ReservationResource::collection($rows), 'All your reservations');
     }
     public function showNewRreservation()
     {
         $userid = auth('api')->user()->id;
-        $rows = Reservation::with('status')->where('patient_id', $userid)->whereDate('reservation_date', '>', now())->orderBy("reservation_date", "Desc")->get();
+        $rows = Reservation::with('status')->where('patient_id', $userid)->whereDate('reservation_date', '>=', now())->orderBy("reservation_date", "Desc")->get();
         return $this->sendResponse(ReservationResource::collection($rows), 'All your reservations');
     }
 
