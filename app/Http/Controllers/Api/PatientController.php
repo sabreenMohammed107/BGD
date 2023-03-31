@@ -235,7 +235,8 @@ public function getReservation(Request $request){
 
 
             $doctors =Doctor_clinic::select('doctor_clinics.*')->
-            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')->
+            join('doctor_feilds', 'doctors.id', '=', 'doctor_feilds.doctor_id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
 
@@ -245,7 +246,10 @@ public function getReservation(Request $request){
             $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->orWhere('doctors.name', 'LIKE', "%$str%");
 
          }
+         if ($speciality) {
 
+            $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
+         }
         if ($selectdays) {
 
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
