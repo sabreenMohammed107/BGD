@@ -18,6 +18,8 @@ class DoctorClinicResource extends JsonResource
             return [
                 'id'=>$this->id,
                 'doctor' => DoctorResource::make($this->doctor),
+                'medical field'=>docFieldsResource::collection($this->doctor->medicField()->get()),
+
                 'phone' => $this->phone ?? '',
                 'street' => $this->en_street ?? '',
                 'postal_code' => $this->postal_code ?? '',
