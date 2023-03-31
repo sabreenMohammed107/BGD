@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\docFieldsResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -108,10 +109,7 @@ if($i->dayOfWeek == $schad){
 return $timeAv;
     }
 
-    // public function fields()
-    // {
-    //     return $this->belongsToMany(Medical_field::class, 'doctor_feilds');
-    // }
+
 
 
 }

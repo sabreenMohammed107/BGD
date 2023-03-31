@@ -222,6 +222,7 @@ public function getReservation(Request $request){
       $str=$request->get('str');
       $lower=$request->get('lower');
       $speciality=$request->get('speciality');
+      $city=$request->get('city');
       $selectdays=$request->get('selectdays');
       $insurance=$request->get('insurance');
       $min_price=$request->get('min_price');
@@ -234,11 +235,11 @@ public function getReservation(Request $request){
             $search = $str;
 
 
-            $doctors =Doctor_clinic::select('doctor_clinics.*')->
+            $doctors =Doctor_clinic::select(['*'])->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-            ->join('doctor_feilds', 'doctor_clinics.doctor_id', '=', 'doctor_feilds.doctor_id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-            ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id');
+            ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+            ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id');
 
 
         if ($str) {
@@ -258,6 +259,12 @@ public function getReservation(Request $request){
 
             $doctors=$doctors->where("insurance_types.id", $insurance);
          }
+
+         if ($city) {
+
+            $doctors=$doctors->whereIn("city_id", explode(',', $city));
+         }
+
          if ($min_price && $max_price) {
 
             $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
@@ -274,7 +281,16 @@ public function getReservation(Request $request){
 
             $doctors=$doctors->where("disability_allowed", $disableAccess);
          }
+         if ($lower) {
+if($lower == 1){
+    $doctors=$doctors->orderby("visit_fees",'Desc');
+}else{
+    $doctors=$doctors->orderby("visit_fees",'asc');
+}
+
+         }
         $doctors=$doctors->get();
+        // return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 

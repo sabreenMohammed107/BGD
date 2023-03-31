@@ -57,6 +57,7 @@ class DocorProfileResource extends JsonResource
         'name' =>  $this->doctor->name ?? '',
         'image' => asset('uploads/doctors/' . $this->doctor->img) ?? '',
         'medical field'=>docFieldsResource::collection($this->doctor->medicField()->get()),
+
         'insurance_type' =>$this->insurance->dt_type ?? '',
         'street' => $this->dt_street ?? '',
         'google_map' => $this->google_map ?? '',
