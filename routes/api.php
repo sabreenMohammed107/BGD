@@ -42,7 +42,7 @@ Route::middleware("localization")->group(function () {
     Route::get('faq', [ContactController::class, 'getFaq']);
 
     Route::get('search-doc-category', [PatientController::class, 'search']);
-
+    Route::get('search-inputs', [PatientController::class, 'searchInputs']);
     Route::get('home', [DoctorsInfController::class, 'doctorsInf']);
       //doc profile
       Route::get('/show-doc-profile/{id}', [DoctorsInfController::class, 'docProfile'])->name('show-doc-profile');

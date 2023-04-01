@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Http\Resources\CityResource;
 use App\Http\Resources\DoctorClinicResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
+use App\Http\Resources\MedicalResource;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\reservClinic;
 use App\Http\Resources\ReviewResource;
+use App\Models\City;
 use App\Models\Clinic_review;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Favourite_doctor;
+use App\Models\Medical_field;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Validator;
@@ -304,6 +308,17 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All vafo
 
 }
 
-
+public function searchInputs(){
+    $page = [];
+    $cities=City::all();
+    $page['cities']=CityResource::collection($cities);
+    $specialists = Medical_field::get();
+    $sort=[
+        '0'=>'lower',
+        '1'=>'upper',
+    ];
+    $page['specialists'] = $sort;
+    $page['specialists'] =MedicalResource::collection($specialists);
+}
 
 }
