@@ -319,6 +319,7 @@ public function searchInputs(){
     ];
     $page['specialists'] = $sort;
     $page['specialists'] =MedicalResource::collection($specialists);
+    return $this->sendResponse($page, "get all  data ");
 }
 
 }
