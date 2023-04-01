@@ -8,6 +8,7 @@ use App\Http\Resources\docFieldsResource;
 use App\Http\Resources\DoctorClinicResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
+use App\Http\Resources\MedicalDoctorResource;
 use App\Http\Resources\MedicalResource;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\reservClinic;
@@ -319,7 +320,7 @@ public function searchInputs(){
         '1'=>'upper',
     ];
     $page['sort'] = $sort;
-    $page['specialists'] =MedicalResource::collection($specialists);
+    $page['specialists'] =MedicalDoctorResource::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
 }
 
