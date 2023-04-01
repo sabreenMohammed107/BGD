@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\docFieldsResource;
 use App\Http\Resources\DoctorClinicResource;
 use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
@@ -317,8 +318,8 @@ public function searchInputs(){
         '0'=>'lower',
         '1'=>'upper',
     ];
-    $page['specialists'] = $sort;
-    $page['specialists'] =MedicalResource::collection($specialists);
+    $page['sort'] = $sort;
+    $page['specialists'] =docFieldsResource::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
 }
 
