@@ -16,13 +16,13 @@ class CityResource extends JsonResource
     {
 if(App::getLocale()=="en"){
     return [
-
+'id'=>$this->id,
         'city'=>$this->en_city ?? '',
 
     ];
 }else{
     return [
-
+        'id'=>$this->id,
         'city'=>$this->dt_city ?? '',
     ];
 

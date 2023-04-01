@@ -16,13 +16,13 @@ class MedicalDoctorResource extends JsonResource
     {
 if(App::getLocale()=="en"){
     return [
-
+'id'=>$this->id,
         'field_name'=>$this->field_enname ?? '',
 
     ];
 }else{
     return [
-
+'id'=>$this->id,
         'field_name'=>$this->field_dtname ?? '',
 
 

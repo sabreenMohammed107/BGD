@@ -6,27 +6,32 @@ use Illuminate\Support\Facades\App;
 
 class SortResouce extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *'doctor_count'=>$this->repliesCount
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request)
-    {
-if(App::getLocale()=="en"){
-    return [
+    if (App::getLocale() == "en") {
+        return [
 
-        'city'=>$this->en_city ?? '',
 
-    ];
-}else{
-    return [
+            'id'=>$this->id,
 
-        'city'=>$this->dt_city ?? '',
-    ];
+            "image" => $this->image ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
+
+
+
+
+        ];
+    } else {
+        return [
+
+
+
+            'id'=>$this->id,
+
+            "image" => $this->image ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
+
+
+
+
+        ];
+    }
 
 }
-
-    }
 }

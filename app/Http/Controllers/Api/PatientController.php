@@ -315,10 +315,17 @@ public function searchInputs(){
     $cities=City::all();
     $page['cities']=CityResource::collection($cities);
     $specialists = Medical_field::get();
+    if (App::getLocale() == "en") {
     $sort=[
-        '0'=>'lower',
-        '1'=>'upper',
-    ];
+        0 => ["id" =>0 ,"name" => "lower cost"],
+        1 => ["id" => 1, "name" => "upper"]
+      ];
+    }else{
+        $sort=[
+            0 => ["id" =>0 ,"name" => "Niedrigere Kosten"],
+            1 => ["id" => 1, "name" => "obere Kosten"]
+          ];
+    }
     $page['sort'] = $sort;
     $page['specialists'] =MedicalDoctorResource::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
