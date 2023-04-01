@@ -319,7 +319,7 @@ public function searchInputs(){
         '1'=>'upper',
     ];
     $page['sort'] = $sort;
-    $page['specialists'] =docFieldsResource::collection($specialists);
+    $page['specialists'] =MedicalResource::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
 }
 
