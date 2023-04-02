@@ -41,13 +41,6 @@ Route::middleware("localization")->group(function () {
 
     Route::get('faq', [ContactController::class, 'getFaq']);
 
-    Route::get('search-doc-category', [PatientController::class, 'search']);
-    Route::get('search-inputs', [PatientController::class, 'searchInputs']);
-    Route::get('home', [DoctorsInfController::class, 'doctorsInf']);
-      //doc profile
-      Route::get('/show-doc-profile/{id}', [DoctorsInfController::class, 'docProfile'])->name('show-doc-profile');
-
-
 });
 
 Route::group(['middleware' => ['localization', 'auth:api']], function() {
@@ -58,6 +51,13 @@ Route::group(['middleware' => ['localization', 'auth:api']], function() {
     Route::post('update-patient-image', [RegisterController::class, 'updateUserImage']);
     Route::get('favorite-doctors', [PatientController::class, 'favoriteDoctors']);
     Route::post('remove-favourite-doctors', [PatientController::class, 'removeFavourite']);
+
+    Route::get('search-doc-category', [PatientController::class, 'search']);
+    Route::get('search-inputs', [PatientController::class, 'searchInputs']);
+    Route::get('home', [DoctorsInfController::class, 'doctorsInf']);
+      //doc profile
+      Route::get('/show-doc-profile/{id}', [DoctorsInfController::class, 'docProfile'])->name('show-doc-profile');
+
 
 
 
