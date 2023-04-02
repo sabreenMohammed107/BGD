@@ -17,6 +17,8 @@ use App\Models\Medical_field;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
 class DoctorsInfController extends BaseController
 {
 
@@ -32,7 +34,8 @@ class DoctorsInfController extends BaseController
         $page['latest_doctors'] = HomeDoctorResource::collection($newDocotorClinic);
         // $page['latest_doctors'] = DoctorResource::collection($doctors);
         //patient - reservation
-        $userid = auth('api')->user()->id;
+        // $userid = auth('api')->user()->id;
+        $userid =Auth::user()->id;
         $current_date = Carbon::now();
         $date = Carbon::parse($current_date)->format('Y-m-d');
         $reservations = Reservation::where('patient_id', $userid)->where('reservation_date', '>=', $date)->whereIn('reservation_status_id', [1, 5])->orderBy("reservation_date", "asc")->get();
