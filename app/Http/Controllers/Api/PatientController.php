@@ -10,6 +10,7 @@ use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
 use App\Http\Resources\MedicalDoctorResource;
 use App\Http\Resources\MedicalResource;
+use App\Http\Resources\MedSearch;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\reservClinic;
 use App\Http\Resources\ReviewResource;
@@ -268,7 +269,7 @@ public function getReservation(Request $request){
 
          if ($city) {
 
-            $doctors=$doctors->whereIn("city_id", explode(',', $city));
+            $doctors=$doctors->whereIn("city_id",$city);
          }
 
          if ($min_price && $max_price) {
@@ -327,7 +328,7 @@ public function searchInputs(){
           ];
     }
     $page['sort'] = $sort;
-    $page['specialists'] =MedicalDoctorResource::collection($specialists);
+    $page['specialists'] =MedSearch::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
 }
 
