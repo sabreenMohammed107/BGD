@@ -10,7 +10,6 @@ use App\Http\Resources\DoctorResource;
 use App\Http\Resources\FavouriteResource;
 use App\Http\Resources\MedicalDoctorResource;
 use App\Http\Resources\MedicalResource;
-use App\Http\Resources\MedSearch;
 use App\Http\Resources\ReservationResource;
 use App\Http\Resources\reservClinic;
 use App\Http\Resources\ReviewResource;
@@ -328,7 +327,7 @@ public function searchInputs(){
           ];
     }
     $page['sort'] = $sort;
-    $page['specialists'] =MedSearch::collection($specialists);
+    $page['specialists'] =MedicalDoctorResource::collection($specialists);
     return $this->sendResponse($page, "get all  data ");
 }
 
