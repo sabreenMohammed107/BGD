@@ -301,7 +301,7 @@ if($lower == 1){
 
         // if ($str) {
 
-            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
+            // $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
             // ->whereHas('doctor', function ($query) use ($str) {
             //     $query->Where('doctors.name', 'LIKE', "%$str%");
             // });
