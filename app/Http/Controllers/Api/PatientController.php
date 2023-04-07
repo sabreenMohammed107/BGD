@@ -232,8 +232,8 @@ public function getReservation(Request $request){
       $city=$request->get('city');
       $selectdays=$request->get('selectdays');
       $insurance=$request->get('insurance');
-      $min_price=$request->get('min_price');
-      $max_price=$request->get('max_price');
+      $min_price=floatval($request->get('min_price'));
+      $max_price=floatval($request->get('max_price'));
       $homeVisit=$request->get('homeVisit');
       $parkingSpace=$request->get('parkingSpace');
       $disableAccess=$request->get('disableAccess');
@@ -241,7 +241,6 @@ public function getReservation(Request $request){
 
             $search = $str;
 
-dd($request->all());
             $doctors =Doctor_clinic::select(['*'])->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
