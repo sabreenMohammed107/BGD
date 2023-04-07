@@ -281,7 +281,7 @@ public function getReservation(Request $request){
         //  }
          if ($max_price) {
 
-            $doctors->where('doctor_clinics.visit_fees','<=', $max_price);
+            $doctors->where('doctor_clinics.visit_fees','<=',400);
          }
          if ($homeVisit) {
 
