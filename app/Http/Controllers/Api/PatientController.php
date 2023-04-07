@@ -276,7 +276,7 @@ public function getReservation(Request $request){
         //  }
          if ($max_price) {
 
-            $doctors->where('visit_fees','<=',400);
+            $doctors->where('visit_fees','<=', $max_price);
          }
          if ($homeVisit) {
 
@@ -301,7 +301,7 @@ if($lower == 1){
 
         if ($str) {
 
-            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
+            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->Where('doctors.name', 'LIKE', "%$str%");
 
          }
         $doctors=$doctors->get();
