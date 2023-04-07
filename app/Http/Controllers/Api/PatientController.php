@@ -276,12 +276,12 @@ public function getReservation(Request $request){
         //     $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
         //  }
          if ($min_price) {
-// dd($min_price);
-            $doctors->where('visit_fees','>=', $min_price);
+
+            $doctors->where('doctor_clinics.visit_fees','>=', $min_price);
          }
          if ($max_price) {
-            dd($max_price);
-            $doctors->where('visit_fees','<=', $max_price);
+
+            $doctors->where('doctor_clinics.visit_fees','<=', $max_price);
          }
          if ($homeVisit) {
 
