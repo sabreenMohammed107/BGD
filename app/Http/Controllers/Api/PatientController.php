@@ -248,11 +248,6 @@ public function getReservation(Request $request){
             ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id');
 
 
-        if ($str) {
-
-            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%")->orWhere('doctors.name', 'LIKE', "%$str%");
-
-         }
          if ($speciality) {
 
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
@@ -295,14 +290,20 @@ public function getReservation(Request $request){
 
             $doctors=$doctors->where("disability_allowed", $disableAccess);
          }
-//          if ($lower) {
-// if($lower == 1){
-//     $doctors=$doctors->orderby("visit_fees",'Desc');
-// }else{
-//     $doctors=$doctors->orderby("visit_fees",'asc');
-// }
+         if ($lower) {
+if($lower == 1){
+    $doctors=$doctors->orderby("visit_fees",'Desc');
+}else{
+    $doctors=$doctors->orderby("visit_fees",'asc');
+}
 
-        // }
+        }
+
+        if ($str) {
+
+            $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
+
+         }
         $doctors=$doctors->get();
          return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
