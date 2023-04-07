@@ -299,7 +299,7 @@ if($lower == 1){
 
         }
 
-        if ($str) {
+        // if ($str) {
 
             $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
             // ->whereHas('doctor', function ($query) use ($str) {
@@ -310,7 +310,16 @@ if($lower == 1){
 
             // ->Where('doctors.name', 'LIKE', "%$str%");
 
-         }
+        //  }
+
+         if (!empty($str)) {
+            $doctors->where(function ($q) use ($str) {
+                $q->where('name', 'like', '%'.$str.'%')
+                  ->orWhereHas('doctor', function ($q) use ($str) {
+                      $q->where('name', 'like', '%'.$str.'%');
+                  });
+            });
+        }
         $doctors=$doctors->get();
          return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
