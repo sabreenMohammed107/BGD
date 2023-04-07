@@ -314,9 +314,9 @@ if($lower == 1){
 
          if (!empty($str)) {
             $doctors->where(function ($q) use ($str) {
-                $q->where('name', 'like', '%'.$str.'%')
+                $q->where('doctor_clinics.name', 'like', '%'.$str.'%')
                   ->orWhereHas('doctor', function ($q) use ($str) {
-                      $q->where('name', 'like', '%'.$str.'%');
+                      $q->where('doctors.name', 'like', '%'.$str.'%');
                   });
             });
         }
