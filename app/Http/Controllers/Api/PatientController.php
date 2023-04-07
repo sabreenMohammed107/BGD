@@ -280,7 +280,7 @@ public function getReservation(Request $request){
             $doctors->where('visit_fees','>=', $min_price);
          }
          if ($max_price) {
-            dd($min_price);
+            dd($max_price);
             $doctors->where('visit_fees','<=', $max_price);
          }
          if ($homeVisit) {
