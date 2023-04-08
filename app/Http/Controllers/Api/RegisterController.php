@@ -113,7 +113,7 @@ class RegisterController extends BaseController
             ];
 
             if ($user) {
-                $input['password'] = bcrypt($input['password']);
+                $input['password'] = bcrypt($request->password);
                 $user->update($input);
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
 

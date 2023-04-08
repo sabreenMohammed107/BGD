@@ -34,6 +34,8 @@ Route::middleware('auth:api')->group( function () {
     Route::get('show-new-reservation', [PatientController::class, 'showNewRreservation']);
     Route::get('show-old-reservation', [PatientController::class, 'showOldRreservation']);
     Route::post('cancel-reservation', [PatientController::class, 'cancelReservation']);
+    // Route::post('update-user', [AuthController::class, 'updateUser']);
+    // Route::post('update-user-image', [AuthController::class, 'updateUserImage']);
 
 });
 
