@@ -31,9 +31,7 @@ Route::middleware('auth:api')->group( function () {
     Route::post('mke-favourite-doctors', [PatientController::class, 'favourite']);
     //reservation
     // Route::post('reservation', [PatientController::class, 'reservation']);
-    Route::get('show-new-reservation', [PatientController::class, 'showNewRreservation']);
-    Route::get('show-old-reservation', [PatientController::class, 'showOldRreservation']);
-    Route::post('cancel-reservation', [PatientController::class, 'cancelReservation']);
+
     // Route::post('update-user', [AuthController::class, 'updateUser']);
     // Route::post('update-user-image', [AuthController::class, 'updateUserImage']);
 
@@ -57,6 +55,9 @@ Route::group(['middleware' => ['localization', 'auth:api']], function() {
     Route::get('search-doc-category', [PatientController::class, 'search']);
     Route::get('search-inputs', [PatientController::class, 'searchInputs']);
     Route::get('home', [DoctorsInfController::class, 'doctorsInf']);
+    Route::get('show-new-reservation', [PatientController::class, 'showNewRreservation']);
+    Route::get('show-old-reservation', [PatientController::class, 'showOldRreservation']);
+    Route::post('cancel-reservation', [PatientController::class, 'cancelReservation']);
       //doc profile
       Route::get('/show-doc-profile/{id}', [DoctorsInfController::class, 'docProfile'])->name('show-doc-profile');
 
