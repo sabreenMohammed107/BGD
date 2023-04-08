@@ -326,7 +326,7 @@ if($lower == 1){
             });
         }
         $doctors=$doctors->get();
-         return $doctors;
+        //  return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
