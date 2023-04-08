@@ -185,8 +185,8 @@ public function getReservation(Request $request){
     public function showOldRreservation()
     {
         $userid = Auth::user()->id;
-        return $userid ;
-        $rows = Reservation::where('patient_id',$userid)->whereDate('reservation_date', '<', now())->orWhereIn('reservation_status_id',[3,4])->orderBy("reservation_date", "Desc")->get();
+
+        $rows = Reservation::where('patient_id','=',$userid)->whereDate('reservation_date', '<', now())->orWhereIn('reservation_status_id',[3,4])->orderBy("reservation_date", "Desc")->get();
         // return $this->sendResponse(ReservationResource::collection($rows), 'Old your reservations');
     return  $rows;
     }
