@@ -104,7 +104,7 @@ class RegisterController extends BaseController
 
             $user = $request->user();
             $input = [
-                'name' => $request->n_id,
+                'name' => $request->name,
                 'mobile' => $request->mobile,
                 'gender' => $request->gender,
                 'birth_date' => $request->birth_date,
