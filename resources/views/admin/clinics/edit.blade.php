@@ -225,7 +225,7 @@
                                                 @foreach ($insurances as $insurance)
                                                     <option value="{{ $insurance->id }}"
                                                         {{ $row->insurance_type_id == $insurance->id ? 'selected' : '' }}>
-                                                        {{ $insurance->id }}   {{ $insurance->en_type }}</option>
+                                                          {{ $insurance->en_type }}</option>
                                                 @endforeach
 
                                             </select>
@@ -236,7 +236,7 @@
 
                                         <!--begin::Input group-->
                                         <div id="hidden_div"
-                                            @if ($row->insurance_type_id == 1) style="display:block;"  @else style="display:none;" @endif>
+                                            @if ($row->insurance_type_id == 2) style="display:block;"  @else style="display:none;" @endif>
                                             <!--begin::Label-->
                                             <label class="form-label">Visit Fees</label>
                                             <!--end::Label-->
