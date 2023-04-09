@@ -246,25 +246,7 @@ public function getReservation(Request $request){
 
             $search = $str;
 
-            $doctors =Doctor_clinic::select(['doctor_clinics.id as clinic_id',
-            'doctor_clinics.name as clinic_name',
-
-            'city_id',
-            'phone',
-            'en_street',
-            'dt_street',
-            'postal_code',
-            'google_map',
-            'parking_allowed',
-            'home_visit_allowed',
-            'disability_allowed',
-            'clinic_status_id',
-            'insurance_type_id',
-            'visit_fees',
-            'en_reservation_notes',
-            'dt_reservation_notes',
-
-            'next_day','next_time'])->
+            $doctors =Doctor_clinic::
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
