@@ -250,7 +250,7 @@ public function getReservation(Request $request){
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-            ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id')->groupBy('doctor_clinics.id');
+            ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id');
 
 
          if ($speciality) {
@@ -314,7 +314,7 @@ if($lower == 1){
                   });
             });
         }
-        $doctors=$doctors->get();
+        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
         //  return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
