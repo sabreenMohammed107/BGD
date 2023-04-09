@@ -53,11 +53,16 @@ class Doctor_clinic extends Model
         return $this->hasMany(Doctor_schedule::class,'clinic_id','id');
       }
 
-      protected $appends = ['next_day','next_time','clinic_name'];
+      protected $appends = ['next_day','next_time','clinic_name','clinic_id'];
 
       public function getClinicNameAttribute()
 {
     return $this->name;
+}
+
+public function getClinicIdAttribute()
+{
+    return $this->id;
 }
       public function getNextDayAttribute()
     {
