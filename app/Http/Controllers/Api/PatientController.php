@@ -262,8 +262,12 @@ public function getReservation(Request $request){
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
          }
          if ($insurance) {
+if($insurance == 1){
+    $doctors=$doctors->where("insurance_types.id", 1);
+}else{
+    $doctors=$doctors->where("insurance_types.id", 2);
+}
 
-            $doctors=$doctors->where("insurance_types.id", $insurance);
          }
 
          if ($city) {
