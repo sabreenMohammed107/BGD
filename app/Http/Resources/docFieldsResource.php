@@ -16,10 +16,12 @@ class docFieldsResource extends JsonResource
     {
 if(App::getLocale()=="en"){
     return [
+        'id'=>$this->medical->id,
         'field_name'=>$this->medical->field_enname,
     ];
 }else{
     return [
+        'id'=>$this->medical->id,
         'field_name'=>$this->medical->field_dtname,
 
     ];
