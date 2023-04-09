@@ -304,18 +304,7 @@ if($lower == 1){
 
         }
 
-        // if ($str) {
 
-            // $doctors=$doctors->where('doctor_clinics.name', 'LIKE', "%$str%");
-            // ->whereHas('doctor', function ($query) use ($str) {
-            //     $query->Where('doctors.name', 'LIKE', "%$str%");
-            // });
-
-
-
-            // ->Where('doctors.name', 'LIKE', "%$str%");
-
-        //  }
 
          if (!empty($str)) {
             $doctors->where(function ($q) use ($str) {
@@ -325,7 +314,7 @@ if($lower == 1){
                   });
             });
         }
-        $doctors=$doctors->get();
+        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
         //  return $doctors;
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
