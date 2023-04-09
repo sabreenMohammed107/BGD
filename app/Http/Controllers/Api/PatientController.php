@@ -248,7 +248,7 @@ public function getReservation(Request $request){
 
             $doctors =Doctor_clinic::select(['doctor_clinics.id as clinic_id',
             'doctor_clinics.name as clinic_name',
-            'doctor',
+
             'city_id',
             'phone',
             'en_street',
