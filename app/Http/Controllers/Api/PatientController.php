@@ -318,8 +318,8 @@ if($lower == 1){
                   });
             });
         }
-        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
-        //  return $doctors;
+        // $doctors=$doctors->groupBy('doctor_clinics.id')->get();
+          return $doctors;
         //
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
