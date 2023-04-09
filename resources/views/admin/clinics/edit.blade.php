@@ -225,7 +225,7 @@
                                                 @foreach ($insurances as $insurance)
                                                     <option value="{{ $insurance->id }}"
                                                         {{ $row->insurance_type_id == $insurance->id ? 'selected' : '' }}>
-                                                        {{ $insurance->en_type }}</option>
+                                                        {{ $insurance->id }}   {{ $insurance->en_type }}</option>
                                                 @endforeach
 
                                             </select>
