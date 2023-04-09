@@ -17,7 +17,7 @@ class DoctorClinicResource extends JsonResource
         if (App::getLocale() == "en") {
             return [
                 'id'=>$this->id,
-                'clinic_name'=>$this->name,
+                'clinic_name'=>$this->clinic_name,
                 'doctor' => DoctorResource::make($this->doctor),
                 'medical field'=>docFieldsResource::collection($this->doctor->medicField()->get()),
 
