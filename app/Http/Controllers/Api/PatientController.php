@@ -246,7 +246,7 @@ public function getReservation(Request $request){
 
             $search = $str;
 
-            $doctors =Doctor_clinic::select(['*'])->
+            $doctors =Doctor_clinic::
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
@@ -318,7 +318,7 @@ if($lower == 1){
                   });
             });
         }
-        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
+        $doctors=$doctors->attributesToArray()->groupBy('doctor_clinics.id')->get();
         //  return $doctors;
         //
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
