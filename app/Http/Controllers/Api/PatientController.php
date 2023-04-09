@@ -246,11 +246,11 @@ public function getReservation(Request $request){
 
             $search = $str;
 
-            $doctors =Doctor_clinic::
-            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-            ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+            $doctors =Doctor_clinic::select(['*'])->
+            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id as docId')
+            ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id as insuranceId')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-            ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id');
+            ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctors.id as docId');
 
 
          if ($speciality) {
@@ -318,8 +318,8 @@ if($lower == 1){
                   });
             });
         }
-         $doctors=$doctors->get();
-          return $doctors;
+        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
+        //  return $doctors;
         //
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
             return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
