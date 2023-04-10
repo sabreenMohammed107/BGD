@@ -255,11 +255,11 @@ public function getReservation(Request $request){
 
 
 
-         if ($speciality && count($speciality)>0 ) {
+         if ($speciality && !empty($speciality) ) {
 
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
-        if ($selectdays && count($speciality)>0) {
+        if ($selectdays && !empty($speciality)) {
 
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
          }
