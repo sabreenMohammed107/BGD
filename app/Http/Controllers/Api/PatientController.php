@@ -246,6 +246,7 @@ public function getReservation(Request $request){
       $disableAccess=$request->get('disableAccess');
 
 
+
             $search = $str;
 
             $doctors =Doctor_clinic::select('doctor_clinics.*')->
