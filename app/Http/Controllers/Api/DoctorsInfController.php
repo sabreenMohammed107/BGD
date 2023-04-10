@@ -90,6 +90,17 @@ $rr=[];
         }
 
         $page['schedule'] = $doctor_schedule;
+
+        //favorite
+        $user=Auth::user();
+        if($user){
+            if($user->favorite){
+                $page['favorite'] = true;
+            }else{
+                $page['favorite'] = false;
+            }
+
+        }
         return $this->sendResponse($page, "get all home data ");
 
     }

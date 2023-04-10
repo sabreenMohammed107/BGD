@@ -42,6 +42,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function favorite()
+    {
+        return $this->belongsToMany(Doctor_clinic::class, 'favourite_doctors')
+        ->withTimestamps();
+    }
     /**
      * The attributes that should be cast.
      *

@@ -114,6 +114,11 @@ if($i->dayOfWeek == $schad){
 return $timeAv;
     }
 
+    public function favorite()
+    {
+        return $this->belongsToMany(User::class, 'favourite_doctors')
+        ->withTimestamps();
+    }
 
 
 
