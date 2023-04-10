@@ -258,7 +258,7 @@ public function getReservation(Request $request){
 
 
 
-         if ($speciality   && count(explode(',',$speciality))> 0) {
+         if ($speciality   && count(explode(',',trim($speciality)))> 0) {
             dd(count(explode(',',$speciality)));
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
