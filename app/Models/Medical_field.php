@@ -41,7 +41,10 @@ class Medical_field extends Model
                         ->groupBy('medical_field_id');
     }
 
-
+    public function repliesCounting() {
+        $rows=$this->doctors();
+        return $this->doctors();
+    }
 
 
     public function doctors()
