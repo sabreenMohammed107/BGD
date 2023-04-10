@@ -265,8 +265,17 @@ public function getReservation(Request $request){
          if ($insurance) {
 if($insurance == 1){
     $doctors=$doctors->where("insurance_types.id", 1);
+
 }else{
     $doctors=$doctors->where("insurance_types.id", 2);
+      if ($min_price) {
+
+            $doctors->where('doctor_clinics.visit_fees','>=', $min_price);
+         }
+         if ($max_price) {
+
+            $doctors->where('visit_fees','<=', $max_price);
+         }
 }
 
          }
@@ -280,14 +289,7 @@ if($insurance == 1){
 
         //     $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
         //  }
-         if ($min_price) {
 
-            $doctors->where('doctor_clinics.visit_fees','>=', $min_price);
-         }
-         if ($max_price) {
-
-            $doctors->where('visit_fees','<=', $max_price);
-         }
          if ($homeVisit) {
 
             $doctors=$doctors->where("home_visit_allowed", $homeVisit);
