@@ -255,7 +255,7 @@ public function getReservation(Request $request){
 
 
 
-         if ($speciality && !empty($speciality) ) {
+         if ($speciality && !empty($speciality)  && sizeof($speciality) >0) {
             dd($speciality);
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
