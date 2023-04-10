@@ -264,7 +264,7 @@ public function getReservation(Request $request){
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
          $s = explode(',', $selectdays);
-         if(!empty($s[1])) {
+         if(array_key_exists(1, $s)){
             dd('selectdays');
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
          }
