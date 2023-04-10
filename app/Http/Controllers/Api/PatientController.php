@@ -256,20 +256,26 @@ public function getReservation(Request $request){
             ->join('doctor_feilds',  'doctor_feilds.doctor_id','=','doctor_clinics.doctor_id');
 
 
-
+            if($speciality){
             $r = json_decode($speciality, TRUE);
             if(count($r)>0){
 
 
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
+        }
+if($selectdays){
+    $s = json_decode($selectdays, TRUE);
+    if(count($s)>0){
+       $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
+    }
+}
 
-      $s = json_decode($selectdays, TRUE);
 
-         if(count($s)>0){
 
-            $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
-         }
+
+
+
          if ($insurance) {
 if($insurance == 1){
     $doctors=$doctors->where("insurance_types.id", 1);
