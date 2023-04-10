@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\DayResource;
 use App\Http\Resources\docFieldsResource;
 use App\Http\Resources\DoctorClinicResource;
 use App\Http\Resources\DoctorResource;
@@ -16,6 +17,7 @@ use App\Http\Resources\reservClinic;
 use App\Http\Resources\ReviewResource;
 use App\Models\City;
 use App\Models\Clinic_review;
+use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Favourite_doctor;
@@ -258,7 +260,7 @@ public function getReservation(Request $request){
          if ($speciality && !empty($speciality->toArray) && count($speciality->toArray)>0) {
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
-        if ($selectdays && !empty($speciality)) {
+        if ($selectdays && !empty($selectdays->toArray) && count($selectdays->toArray)>0) {
 
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
          }
@@ -355,6 +357,8 @@ public function searchInputs(){
     }
     $page['sort'] = $sort;
     $page['specialists'] =MedSearch::collection($specialists);
+    $daysList=DayNew::all();
+    $page['days'] =DayResource::collection($daysList);
 
     return $this->sendResponse($page, "get all  data ");
 }
