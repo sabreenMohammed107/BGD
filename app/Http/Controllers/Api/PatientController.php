@@ -258,12 +258,12 @@ public function getReservation(Request $request){
 
 
 
-         if ($speciality   && $speciality.length >= 1) {
+         if ($speciality   && count(explode(',',$speciality))> 0) {
             dd($speciality);
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
 
-        if ($selectdays && !selectdays.length >= 1) {
+        if ($selectdays  && count(explode(',',$selectdays))> 0) {
             dd($selectdays);
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
          }
