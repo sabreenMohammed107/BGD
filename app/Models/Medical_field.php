@@ -44,7 +44,7 @@ class Medical_field extends Model
     public function repliesCounting() {
         $docs=$this->doctors()->allRelatedIds()->toArray();
         $rows=Doctor_clinic::whereIn('doctor_id',$docs)->get();
-        return $rows;
+        return $rows->count();
     }
 
 
