@@ -261,14 +261,14 @@ public function getReservation(Request $request){
             if(count($r)>0){
 
 
-            $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
+            $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", $r);
          }
 
         }
 if($selectdays){
     $s = json_decode($selectdays, TRUE);
     if(count($s)>0){
-       $doctors=$doctors->whereIn("doctor_schedules.days_id", [4]);
+       $doctors=$doctors->whereIn("doctor_schedules.days_id", $s);
     }
 }
 
