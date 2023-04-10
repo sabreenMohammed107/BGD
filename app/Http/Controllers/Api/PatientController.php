@@ -263,6 +263,7 @@ public function getReservation(Request $request){
 
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
+
         }
 if($selectdays){
     $s = json_decode($selectdays, TRUE);
