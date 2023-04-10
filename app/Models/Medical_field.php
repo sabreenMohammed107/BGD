@@ -43,7 +43,7 @@ class Medical_field extends Model
 
     public function repliesCounting() {
         $rows=$this->doctors();
-        return $this->doctors();
+        return $this->doctors()->allRelatedIds()->toArray();
     }
 
 
