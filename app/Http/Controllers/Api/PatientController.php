@@ -267,7 +267,7 @@ public function getReservation(Request $request){
       $s = json_decode($selectdays, TRUE);
     //   print_r($var);
         //  if($s && count($s) !== 0 && !empty($s[0])){
-            dd($s[0]);
+            dd(count($s));
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
         //  }
          if ($insurance) {
