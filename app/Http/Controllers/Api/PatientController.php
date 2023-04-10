@@ -257,19 +257,19 @@ public function getReservation(Request $request){
 
 
 
-            $r = explode(',', $speciality);
-            if(!empty($r[1])) {
+            $r = json_decode($speciality, TRUE);
+            if(count($r)>0){
 
-            dd('speciality');
+
             $doctors=$doctors->whereIn("doctor_feilds.medical_field_id", explode(',', $speciality));
          }
-    //   $s=$selectdays->toArray;
+
       $s = json_decode($selectdays, TRUE);
-    //   print_r($var);
-        //  if($s && count($s) !== 0 && !empty($s[0])){
-            dd(count($s));
+
+         if(count($s)>0){
+
             $doctors=$doctors->whereIn("doctor_schedules.days_id", explode(',', $selectdays));
-        //  }
+         }
          if ($insurance) {
 if($insurance == 1){
     $doctors=$doctors->where("insurance_types.id", 1);
