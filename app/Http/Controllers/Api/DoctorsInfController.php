@@ -13,6 +13,7 @@ use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Doctor_feild;
 use App\Models\Doctor_schedule;
+use App\Models\Favourite_doctor;
 use App\Models\Medical_field;
 use App\Models\Reservation;
 use Carbon\Carbon;
@@ -93,9 +94,10 @@ $rr=[];
 
         //favorite
         $user=Auth::user();
+
         if($user){
-            dd($user->favorite);
-            if($user->favorite && !empty($user->favorite)){
+            $ff=Favourite_doctor::where('clinic_id',$id)->where('user_id',$user->id)->first();
+            if($ff){
                 $page['favorite'] = true;
             }else{
                 $page['favorite'] = false;
