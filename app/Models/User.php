@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function favorite()
     {
-        return $this->belongsToMany(Doctor_clinic::class, 'favourite_doctors')
+        return $this->belongsToMany(Doctor_clinic::class, 'favourite_doctors','user_id','clinic_id')
         ->withTimestamps();
     }
     /**
