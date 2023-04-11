@@ -113,7 +113,7 @@ class PatientController extends BaseController
 if($favourite){
 
     $favourite->delete();
-    return $this->sendResponse(null, 'U remove favourite successfully.');
+    return $this->sendResponse([], 'U remove favourite successfully.');
 
 }
 
