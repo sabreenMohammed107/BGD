@@ -94,6 +94,7 @@ $rr=[];
         //favorite
         $user=Auth::user();
         if($user){
+            dd($user->favorite);
             if($user->favorite && !empty($user->favorite)){
                 $page['favorite'] = true;
             }else{
