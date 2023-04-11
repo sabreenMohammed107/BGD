@@ -92,8 +92,8 @@ class PatientController extends BaseController
 
     }
     public function removeFavourite(Request $request){
-       // $userid = Auth::user()->id;
-       $userid = auth('api')->user()->id;
+        $userid = Auth::user()->id;
+    //    $userid = auth('api')->user()->id;
        $validator = Validator::make($request->all(), [
            'clinic_id' => 'required',
 
@@ -111,7 +111,8 @@ class PatientController extends BaseController
            ];
            $favourite = Favourite_doctor::where('clinic_id',$request->clinic_id)->where('user_id', $userid)->first();
 if($favourite){
-    $$favourite->delete();
+
+    $favourite->delete();
     return $this->sendResponse(null, 'U remove favourite successfully.');
 
 }
