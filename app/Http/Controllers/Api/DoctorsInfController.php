@@ -29,6 +29,8 @@ class DoctorsInfController extends BaseController
         // $specialists = Medical_field::all();
         $specialistsIds = Doctor_feild::pluck('medical_field_id');
         $specialists = Medical_field::whereIn('id', $specialistsIds)->get();
+        $specialists = Medical_field::get();
+
         $page['specialists'] = MedicalResource::collection($specialists);
         $doctors = Doctor::with(['medicines'])->take(5)->orderBy("id", "Desc")->get();
         $newDocotorClinic=Doctor_clinic::take(5)->orderBy("id", "Desc")->get();
