@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
@@ -26,7 +27,7 @@ class scadualInfoResource extends JsonResource
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
                     'reservation_date' => $this->reservation_date ?? '',
                     'av_day' => $this->reserv_day ?? '',
-                    'av_time' => $this->time_from->format('H:i') ?? '',
+                    'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
 
                 ];
 
