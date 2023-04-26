@@ -34,7 +34,7 @@ class DoctorClinicResource extends JsonResource
                 'avgRating' => round($this->review->avg('stars'),1) ?? '',
                 'reviewCount' => $this->review->count(),
                 'av_day' => $this->next_day ?? '',
-                'av_time' => $this->next_time->time_from ?? '',
+                'av_time' => $this->next_time->time_from->format('H:i') ?? '',
 
             ];
         }else{
@@ -56,7 +56,7 @@ class DoctorClinicResource extends JsonResource
                 'avgRating' => round($this->review->avg('stars'),1) ?? '',
                 'reviewCount' => $this->review->count(),
                 'av_day' => $this->next_day ?? '',
-                'av_time' => $this->next_time->time_from ?? '',
+                'av_time' => $this->next_time->time_from->format('H:i') ?? '',
                 'street' => $this->dt_street ?? '',
                 'insurance_type' =>$this->insurance->dt_type ?? '',
                 'visit_fees' => $this->insurance_type_id==1 ?  $this->insurance->dt_type : $this->visit_fees  ,

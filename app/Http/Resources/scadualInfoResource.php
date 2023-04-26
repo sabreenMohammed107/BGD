@@ -26,7 +26,7 @@ class scadualInfoResource extends JsonResource
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
                     'reservation_date' => $this->reservation_date ?? '',
                     'av_day' => $this->reserv_day ?? '',
-                    'av_time' => $this->time_from ?? '',
+                    'av_time' => $this->time_from->format('H:i') ?? '',
 
                 ];
 
