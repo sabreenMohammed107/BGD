@@ -27,7 +27,7 @@ class reservClinic extends JsonResource
                 'visit_fees' => $this->insurance_type_id==1 ?  $this->insurance->en_type : $this->visit_fees  ,
 
                 'avgRating' => round($this->review->avg('stars'),1) ?? '',
-                'reviewCount' => $this->review->count(),
+                'reviewCount' => $this->review->count()==0 ? 'no patients ratings or reviews yet' : $this->review->count(),
 
 
 
@@ -47,7 +47,7 @@ class reservClinic extends JsonResource
         'visit_fees' => $this->insurance_type_id==1 ?  $this->insurance->dt_type : $this->visit_fees  ,
 
         'avgRating' => round($this->review->avg('stars'),1) ?? '',
-        'reviewCount' => $this->review->count(),
+        'reviewCount' => $this->review->count()==0 ? 'noch keine Patientenbewertungen oder Rezensionen' : $this->review->count(),
 
 
     ];
