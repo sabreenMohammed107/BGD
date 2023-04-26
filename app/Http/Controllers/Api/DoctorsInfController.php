@@ -76,15 +76,15 @@ class DoctorsInfController extends BaseController
                         $doctor_schedule[$i] = (object) [
                             'date' => $start_date->format('Y-m-d'),
                             'day' => $schad->daName->en_day ?? '',
-                            'from' => $schad->time_from,
-                            'to' => $schad->time_to,
+                            'from' => $schad->time_from->format('H:i')?? '',
+                            'to' => $schad->time_to->format('H:i') ?? '',
                         ];
                     } else {
                         $doctor_schedule[$i] = (object) [
                             'date' => $start_date->format('Y-m-d'),
                             'day' => $schad->daName->dt_day ?? '',
-                            'from' => $schad->time_from,
-                            'to' => $schad->time_to,
+                            'from' => $schad->time_from->format('H:i') ?? '',
+                            'to' => $schad->time_to->format('H:i') ?? '',
                         ];
                     }
 
