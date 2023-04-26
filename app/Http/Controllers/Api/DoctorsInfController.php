@@ -76,15 +76,15 @@ class DoctorsInfController extends BaseController
                         $doctor_schedule[$i] = (object) [
                             'date' => $start_date->format('Y-m-d'),
                             'day' => $schad->daName->en_day ?? '',
-                            'from' =>Carbon\Carbon::parse($schad->time_from)->format('H:i') ?? '',
-                            'to' =>Carbon\Carbon::parse($schad->time_to)->format('H:i') ?? '',
+                            'from' =>Carbon::parse($schad->time_from)->format('H:i') ?? '',
+                            'to' =>Carbon::parse($schad->time_to)->format('H:i') ?? '',
                         ];
                     } else {
                         $doctor_schedule[$i] = (object) [
                             'date' => $start_date->format('Y-m-d'),
                             'day' => $schad->daName->dt_day ?? '',
-                            'from' =>Carbon\Carbon::parse($schad->time_from-)->format('H:i')  ?? '',
-                            'to' =>Carbon\Carbon::parse($schad->time_to)->format('H:i') ?? '',
+                            'from' =>Carbon::parse($schad->time_from)->format('H:i')  ?? '',
+                            'to' =>Carbon::parse($schad->time_to)->format('H:i') ?? '',
                         ];
                     }
 
