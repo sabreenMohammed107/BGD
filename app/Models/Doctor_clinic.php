@@ -111,7 +111,7 @@ if($i->dayOfWeek == $schad){
     {
 
         $day = Carbon::now()->dayOfWeek;
-        $timeAv=Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->orderBy('days_id', 'asc')->first();
+        // $timeAv=Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->orderBy('days_id', 'asc')->first();
         $timeAv=Doctor_schedule::where('clinic_id',  $this->id)->orderBy('days_id', 'asc')->first();
 
 return $timeAv;

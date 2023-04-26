@@ -63,7 +63,7 @@ $rr=[];
 
             foreach ($schadDys as $schad) {
                 $day =$start_date->dayOfWeek;
-
+dd($start_date->dayOfWeek);
                 if ($day == $schad->days_id) {
                     // echo  $start_date;
                     if(App::getLocale()=="en"){
