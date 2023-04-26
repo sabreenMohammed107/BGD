@@ -11,7 +11,9 @@ use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
+use File;
+use Illuminate\Database\QueryException;
 class DoctorDataController extends Controller
 {
     //
@@ -30,8 +32,9 @@ class DoctorDataController extends Controller
         $medicals = Medical_field::all();
         $positions = Doctors_pasition::all();
         $status = Status::all();
+        $doctormedicals = $row->medicines->all();
         //
-        return view('doctor.doctor-profile', compact('row','medicals','positions','status'));
+        return view('doctor.doctor-profile', compact('row','medicals','positions','status','doctormedicals'));
     }
 
 
@@ -41,7 +44,10 @@ class DoctorDataController extends Controller
             'name' => 'required',
             'password' =>'required_with:confirmed|nullable',
         ]);
-
+        DB::beginTransaction();
+        try {
+            // Disable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $row = Doctor::find($request->get('id'));
         $input = $request->except(['_token','img','password']);
         if ($request->hasFile('img')) {
@@ -60,7 +66,21 @@ class DoctorDataController extends Controller
         }
         // $input['password'] = Hash::make($request['password']);
         $row->update($input);
+        if ($request->medicines) {
+            $row->medicines()->sync($request->medicines);
+        }
+        DB::commit();
+        // Enable foreign key checks!
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         return redirect()->back();
+    } catch (\Throwable$e) {
+        // throw $th;
+        DB::rollback();
+        return redirect()->back()->withInput()->withErrors($e->getMessage());
+
+    }
+
     }
 
     public function UplaodImage($file_request)
