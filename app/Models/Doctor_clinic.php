@@ -68,7 +68,8 @@ public function getClinicIdAttribute()
     {
 
         $day = Carbon::now()->dayOfWeek;
-$schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->min('days_id');
+// $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->min('days_id');
+$schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
 
 
          $avDay=DayNew::where('id',$schad)->first();
@@ -91,7 +92,8 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=',
         $start_date=Carbon::now();
         $end_date=Carbon::now()->addDays(15);
         $day = Carbon::now()->dayOfWeek;
-        $schadDys = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->pluck('days_id');
+        $schadDys = Doctor_schedule::where('clinic_id',  $this->id)->pluck('days_id');
+        //$schadDys = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->pluck('days_id');
 
 
     for($i=$start_date;$i<$end_date;$i++ ){
@@ -110,6 +112,7 @@ if($i->dayOfWeek == $schad){
 
         $day = Carbon::now()->dayOfWeek;
         $timeAv=Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->orderBy('days_id', 'asc')->first();
+        $timeAv=Doctor_schedule::where('clinic_id',  $this->id)->orderBy('days_id', 'asc')->first();
 
 return $timeAv;
     }
