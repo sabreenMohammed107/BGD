@@ -282,7 +282,7 @@ if($selectdays){
 if($insurance == 1){ //public
     $doctors=$doctors->where("insurance_types.id", 1);
 
-}else if($insurance == 0){ //private
+}else if($insurance != 1){ //private
     $doctors=$doctors->where("insurance_types.id", 2);
       if ($min_price) {
 
