@@ -318,9 +318,9 @@ if($insurance == 1){ //public
 
             $doctors=$doctors->where("disability_allowed", $disableAccess);
          }
-         if ($lower && $insurance == 0) {
-            dd($lower);
-if($lower == 1){
+         if ( $insurance == 0) {
+
+if($lower == 1 ){
 
 
 
