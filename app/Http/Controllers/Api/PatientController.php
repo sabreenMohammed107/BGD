@@ -365,7 +365,7 @@ public function searchInputs(){
     if (App::getLocale() == "en") {
     $sort=[
         0 => ["id" =>0 ,"name" => "lower cost"],
-        1 => ["id" => 1, "name" => "upper"]
+        1 => ["id" => 1, "name" => "Higher Cost"]
       ];
     }else{
         $sort=[
