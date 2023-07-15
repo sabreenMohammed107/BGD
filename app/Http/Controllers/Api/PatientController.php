@@ -279,10 +279,10 @@ if($selectdays){
 
 
          if ($insurance) {
-if($insurance == 1){
+if($insurance == 1){ //public
     $doctors=$doctors->where("insurance_types.id", 1);
 
-}else{
+}else if($insurance == 0){ //private
     $doctors=$doctors->where("insurance_types.id", 2);
       if ($min_price) {
 
@@ -290,7 +290,7 @@ if($insurance == 1){
          }
          if ($max_price) {
 
-            $doctors->where('visit_fees','<=', $max_price);
+            $doctors->where('doctor_clinics.visit_fees','<=', $max_price);
          }
 }
 
@@ -320,9 +320,9 @@ if($insurance == 1){
          }
          if ($lower) {
 if($lower == 1){
-    $doctors=$doctors->orderby("visit_fees",'Desc');
+    $doctors=$doctors->orderby("doctor_clinics.visit_fees",'Desc');
 }else{
-    $doctors=$doctors->orderby("visit_fees",'asc');
+    $doctors=$doctors->orderby("doctor_clinics.visit_fees",'asc');
 }
 
         }
