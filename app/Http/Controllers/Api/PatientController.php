@@ -318,8 +318,11 @@ if($insurance == 1){ //public
 
             $doctors=$doctors->where("disability_allowed", $disableAccess);
          }
-         if ($lower) {
+         if ($lower && $insurance == 0) {
 if($lower == 1){
+
+
+
     $doctors=$doctors->orderby("doctor_clinics.visit_fees",'Desc');
 }else{
     $doctors=$doctors->orderby("doctor_clinics.visit_fees",'asc');
