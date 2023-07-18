@@ -350,7 +350,7 @@ if($insurance == 1){ //public
 
             $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
         }
-        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
+        $doctors=$doctors->unique('doctor_clinics.id')->get();
 
 
         //  return $doctors;
