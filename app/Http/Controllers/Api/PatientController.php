@@ -351,7 +351,7 @@ if($insurance == 1){ //public
         }else{
 
             $doctors=$doctors->sortByDesc("doctor_clinics.name");
-            dd('sesc');
+            dd($doctors);
         }
 
         //  return $doctors;
