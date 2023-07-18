@@ -339,19 +339,17 @@ if($insurance == 1){ //public
 
 
 
-            $doctors=$doctors->sortByDesc("doctor_clinics.visit_fees");
+            $doctors=collect($doctors)->sortBy("doctor_clinics.visit_fees",'Desc');
         }else{
-            $doctors=$doctors->sortBy("doctor_clinics.visit_fees");
+            $doctors=collect($doctors)->sortBy("doctor_clinics.visit_fees",'asc');
         }
 
         if($sort_name == 0){
 
-         $doctors=$doctors->sortBy("doctor_clinics.name");
-         dd('asc');
+         $doctors=collect($doctors)->sortBy("doctor_clinics.name",'asc');
         }else{
 
-            $doctors=$doctors->sortByDesc("doctor_clinics.name");
-            dd($doctors);
+            $doctors=collect($doctors)->sortBy("doctor_clinics.name",'desc');
         }
 
         //  return $doctors;
