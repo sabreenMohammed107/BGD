@@ -329,9 +329,9 @@ if($lower == 1 ){
     $doctors=$doctors->orderby("doctor_clinics.visit_fees",'asc');
 }
 if($sort_name == 1){
- $doctors=$doctors->orderby("doctor_clinics.name",'asc');
+ $doctors=$doctors->orderby("doctor_clinics.name",'Desc');
 }else{
-    $doctors=$doctors->orderby("doctor_clinics.name",'Desc');
+    $doctors=$doctors->orderby("doctor_clinics.name",'asc');
 }
 
         // }
