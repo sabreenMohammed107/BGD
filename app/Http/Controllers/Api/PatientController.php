@@ -370,12 +370,16 @@ public function searchInputs(){
     if (App::getLocale() == "en") {
     $sort=[
         0 => ["id" =>0 ,"name" => "lower cost"],
-        1 => ["id" => 1, "name" => "Higher Cost"]
+        1 => ["id" => 1, "name" => "Higher Cost"],
+         2 => ["id" =>2 ,"name" => "Name A to Z"],
+        3 => ["id" => 3, "name" => "Name Z to A"]
       ];
     }else{
         $sort=[
             0 => ["id" =>0 ,"name" => "Niedrigere Kosten"],
-            1 => ["id" => 1, "name" => "obere Kosten"]
+            1 => ["id" => 1, "name" => "obere Kosten"],
+              2 => ["id" =>2 ,"name" => "Nennen Sie A bis Z"],
+        3 => ["id" => 3, "name" => "Nennen Sie Z bis A"]
           ];
     }
     $page['sort'] = $sort;
