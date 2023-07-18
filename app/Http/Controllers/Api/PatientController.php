@@ -347,9 +347,11 @@ if($insurance == 1){ //public
         if($sort_name == 0){
 
          $doctors=$doctors->sortBy("doctor_clinics.name");
+         dd('asc');
         }else{
 
             $doctors=$doctors->sortByDesc("doctor_clinics.name");
+            dd('sesc');
         }
 
         //  return $doctors;
