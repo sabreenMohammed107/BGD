@@ -334,15 +334,18 @@ if($insurance == 1){ //public
                   });
             });
         }
-        if($lower == 1 ){
+        if($request->has('lower')){
+            if($lower == 1 ){
 
 
 
-            $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'Desc');
-        }else{
-            $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'asc');
+                $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'Desc');
+            }else{
+                $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'asc');
+            }
         }
 
+        if($request->has('sort_name')){
         if($sort_name == 0){
 
          $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
@@ -350,8 +353,8 @@ if($insurance == 1){ //public
 
             $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
         }
-       // $doctors=$doctors->groupBy('doctor_clinics.id')->get();
-        $doctors=$doctors->get();
+    }
+        $doctors=$doctors->groupBy('doctor_clinics.id')->get();
 
 
         //  return $doctors;
