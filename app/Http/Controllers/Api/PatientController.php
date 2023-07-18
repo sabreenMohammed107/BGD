@@ -332,9 +332,11 @@ if($lower == 1 ){
 if($sort_name == 0){
 
  $doctors=$doctors->orderby("doctor_clinics.name",'asc');
+ dd('desc');
 }else{
 
     $doctors=$doctors->orderby("doctor_clinics.name",'desc');
+    dd('asc');
 }
 
 
