@@ -329,8 +329,10 @@ if($lower == 1 ){
     $doctors=$doctors->orderby("doctor_clinics.visit_fees",'asc');
 }
 if(request()->has('sort_name')){
+    dd('desc');
  $doctors=$doctors->orderby("doctor_clinics.name",'Desc');
 }else{
+    dd('asc');
     $doctors=$doctors->orderby("doctor_clinics.name",'asc');
 }
 
