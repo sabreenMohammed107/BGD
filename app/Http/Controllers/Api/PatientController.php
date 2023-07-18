@@ -345,10 +345,10 @@ if($insurance == 1){ //public
 
         if($sort_name == 0){
 
-         $doctors=$doctors->orderByRaw("doctor_clinics.name",'asc');
+         $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
         }else{
 
-            $doctors=$doctors->orderByRaw("doctor_clinics.name",'desc');
+            $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
         }
         $doctors=$doctors->groupBy('doctor_clinics.id')->get();
 
