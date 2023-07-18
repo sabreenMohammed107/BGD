@@ -320,24 +320,6 @@ if($insurance == 1){ //public
          }
         //  if ( $insurance == 0) {
 
-if($lower == 1 ){
-
-
-
-    $doctors=$doctors->orderby("doctor_clinics.visit_fees",'Desc');
-}else{
-    $doctors=$doctors->orderby("doctor_clinics.visit_fees",'asc');
-}
-
-if($sort_name == 0){
-
- $doctors=$doctors->orderby("doctor_clinics.name",'asc');
- dd('desc');
-}else{
-
-    $doctors=$doctors->orderby("doctor_clinics.name",'desc');
-    dd('asc');
-}
 
 
         // }
@@ -353,6 +335,23 @@ if($sort_name == 0){
             });
         }
         $doctors=$doctors->groupBy('doctor_clinics.id')->get();
+        if($lower == 1 ){
+
+
+
+            $doctors=$doctors->sortBy("doctor_clinics.visit_fees",'Desc');
+        }else{
+            $doctors=$doctors->sortBy("doctor_clinics.visit_fees",'asc');
+        }
+
+        if($sort_name == 0){
+
+         $doctors=$doctors->sortBy("doctor_clinics.name",'asc');
+        }else{
+
+            $doctors=$doctors->sortBy("doctor_clinics.name",'desc');
+        }
+
         //  return $doctors;
         //
             // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
