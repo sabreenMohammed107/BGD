@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 Route::post('forgot', [ForgotController::class, 'forgot']);
+Route::post('reset', [ForgotController::class, 'reset']);
+
 Route::middleware('auth:api')->group( function () {
     // Route::resource('products', ProductController::class);
     Route::post('make-review', [PatientController::class, 'review']);
