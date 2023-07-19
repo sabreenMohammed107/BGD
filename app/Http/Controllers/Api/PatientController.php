@@ -245,7 +245,7 @@ public function getReservation(Request $request){
       $homeVisit=$request->get('homeVisit');
       $parkingSpace=$request->get('parkingSpace');
       $disableAccess=$request->get('disableAccess');
-$sort_name=$request->get('sort_name');
+// $sort_name=$request->get('sort_name');
 
 
             $search = $str;
@@ -340,20 +340,24 @@ if($insurance == 1){ //public
 
 
                 $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'Desc');
+            }else if($lower == 2 ){
+                $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
+            }else if($lower == 3 ){
+                $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
             }else{
                 $doctors=$doctors->orderBy("doctor_clinics.visit_fees",'asc');
             }
         }
 
-        if($request->has('sort_name')){
-        if($sort_name == 0){
+    //     if($request->has('sort_name')){
+    //     if($sort_name == 0){
 
-         $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
-        }else{
+    //      $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
+    //     }else{
 
-            $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
-        }
-    }
+    //         $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
+    //     }
+    // }
         $doctors=$doctors->groupBy('doctor_clinics.id')->get();
 
 
