@@ -33,7 +33,7 @@ class DoctorClinicResource extends JsonResource
                 'insurance_type' =>$this->insurance->en_type ?? '',
                 'visit_fees' => $this->insurance_type_id==1 ?  $this->insurance->en_type : $this->visit_fees  ,
                 'avgRating' => round($this->review->avg('stars'),1) ==0 ? 'no patients ratings or reviews yet' : round($this->review->avg('stars'),1),
-                'reviewCount' => $this->review->count()==0 ? 'no patients ratings or reviews yet' : $this->review->count(),
+                'reviewCount' => $this->review->count()==0 ? '0' : $this->review->count(),
 
                 'av_day' => $this->next_day ?? '',
                 'av_time' =>Carbon::parse($this->next_time->time_from)->format('H:i')?? '',
@@ -56,7 +56,7 @@ class DoctorClinicResource extends JsonResource
                 'clinic_status_id' => $this->clinic_status_id ?? '',
 
                 'avgRating' =>  round($this->review->avg('stars'),1) ==0 ? 'noch keine Patientenbewertungen oder Rezensionen' :  round($this->review->avg('stars'),1),
-                'reviewCount' => $this->review->count()==0 ? 'noch keine Patientenbewertungen oder Rezensionen' : $this->review->count(),
+                'reviewCount' => $this->review->count()==0 ? '0' : $this->review->count(),
                 'av_day' => $this->next_day ?? '',
 
                 'av_time' =>Carbon::parse($this->next_time->time_from)->format('H:i')?? '',

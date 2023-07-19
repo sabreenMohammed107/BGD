@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\DoctorsInfController;
+use App\Http\Controllers\Api\ForgotController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
-
+Route::post('forgot', [ForgotController::class, 'forgot']);
 Route::middleware('auth:api')->group( function () {
     // Route::resource('products', ProductController::class);
     Route::post('make-review', [PatientController::class, 'review']);
