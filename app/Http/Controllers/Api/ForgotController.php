@@ -24,7 +24,7 @@ if(User::where('email',$email)->doesntExist()){
 
     ],status:404);
 }
-$token=Str::random(length:10);
+$token=Str::random(length:5);
 try{
     DB::table('password_resets')->insert([
         'email'=>$email,
