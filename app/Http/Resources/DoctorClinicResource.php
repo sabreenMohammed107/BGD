@@ -45,7 +45,7 @@ class DoctorClinicResource extends JsonResource
                 'clinic_name'=>$this->clinic_name,
                 'doctor' => DoctorResource::make($this->doctor),
                 'medical field'=>docFieldsResource::collection($this->doctor->medicField()->get()),
-
+                'gallery'=>GalleryResource::collection($this->gallery),
                 'phone' => $this->phone ?? '',
 
                 'postal_code' => $this->postal_code ?? '',

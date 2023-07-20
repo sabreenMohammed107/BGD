@@ -11,7 +11,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BoardingController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\ClinicGalleryController;
 use App\Http\Controllers\DoctorClinicController;
+use App\Http\Controllers\DoctorClinicGalleryController;
 use App\Http\Controllers\DoctorDataController;
 use App\Http\Controllers\DoctorsPositionController;
 use App\Http\Controllers\FaqController;
@@ -61,7 +63,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/show-all-reservation/{id}', [ReservationController::class, 'showAllReservation'])->name('admin.show-all-reservation');
     Route::get('/show-complete-reservation/{id}', [ReservationController::class, 'showCompleteReservation'])->name('admin.show-complete-reservation');
     Route::get('/show-cancelled-reservation/{id}', [ReservationController::class, 'showCancelledReservation'])->name('admin.show-cancelled-reservation');
-
+    Route::resource('admin-clinic-gallery', ClinicGalleryController::class);
 });
 // Route::prefix('doctor')->name('doctor.')->middleware(['doctor', 'auth'])->group(function () {
  Route::prefix('doctor')->middleware('auth:doctor')->group(function () {
@@ -85,6 +87,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/doctor-patients-review', [DoctorDataController::class, 'review'])->name('doctor-patients-review');
 
     Route::resource('doctor-clinics', DoctorClinicController::class);
+    Route::resource('doctor-clinic-gallery', DoctorClinicGalleryController::class);
 
 });
 Route::group([ 'prefix' => 'admin'], function () {
