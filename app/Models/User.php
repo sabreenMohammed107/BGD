@@ -29,7 +29,8 @@ class User extends Authenticatable
     'postal_code',
     'google_map',
     'city_id',
-    'patient_status_id'
+    'patient_status_id',
+    'fcm_token'
     ];
 
     /**
