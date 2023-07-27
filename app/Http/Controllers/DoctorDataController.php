@@ -9,6 +9,7 @@ use App\Models\FCMNotification;
 use App\Models\Medical_field;
 use App\Models\Reservation;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -159,7 +160,7 @@ FCMNotification::create([
     'title_en' => 'A new payment has been added',
     'body_en' => '$details->net_salary',
     'status' => 'not_seen',
-    'user_id' => 1,
+    'user_id' => 25,
 ]);
 
 
