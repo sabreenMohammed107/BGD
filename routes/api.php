@@ -38,6 +38,8 @@ Route::middleware('auth:api')->group( function () {
     // Route::post('update-user', [AuthController::class, 'updateUser']);
     // Route::post('update-user-image', [AuthController::class, 'updateUserImage']);
 
+    Route::post('token-update', [RegisterController::class, 'tokenUpdate']);
+    Route::get('list-notifications', [RegisterController::class, 'allNofications']);
 });
 
 Route::middleware("localization")->group(function () {

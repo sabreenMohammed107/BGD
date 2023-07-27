@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\userResource;
+use App\Models\FCMNotification;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -63,7 +64,7 @@ class RegisterController extends BaseController
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
-            // 'device_token' =>'required',
+            'device_token' =>'required',
         ]);
 
         if ($validator->fails()) {
@@ -76,19 +77,10 @@ class RegisterController extends BaseController
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
-                //devices
-// $device = Device::where('token','=', $request->device_token)->first(); //laravel returns an integer
-// $data=[
-//     'token'=> $request->device_token,
-//     'user_id'=>$user->id,
-//     'status'=>1,
-// ];
-// if($device) {
-//     $device->update($data);
+                $user_id = auth()->user()->id;
+                    $token = $request->device_token;
 
-                // } else {
-//     Device::create($data);
-// }
+                    User::find($user_id)->update(['fcm_token'=>$token]);
                 return $this->sendResponse(userResource::make($user), 'User login successfully.');
             } else {
                 return $this->sendError('Invalid Useremail or Password!');
@@ -177,5 +169,43 @@ class RegisterController extends BaseController
         $file->move($uploadPath, $imageName);
 
         return $imageName;
+    }
+
+    public function tokenUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'token' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return $this->convertErrorsToString($validator->messages());
+        }
+
+        try
+        {
+
+            $user_id = auth()->user()->id;
+            $token = $request->token;
+            User::find($user_id)->update(['fcm_token', $token]);
+            return $this->sendResponse(null, __("links.editMsg"));
+
+            // }
+
+        } catch (\Exception$e) {
+            return $this->convertErrorsToString($validator->messages());
+        }
+    }
+    public function allNofications(Request $request)
+    {
+        $user = Auth::user();
+        $notifications = FCMNotification::where('user_id', '=', $user->id)->orderBy('id', 'DESC');
+        // dd($notifications);
+
+        if ($notifications->count() > 0) {
+            return $this->sendResponse($notifications,  __("allNotifications"));
+        } else {
+            return $this->successResponse( __("noNotifications"));
+        }
     }
 }
