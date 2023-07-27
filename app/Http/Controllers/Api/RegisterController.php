@@ -192,7 +192,7 @@ class RegisterController extends BaseController
             ];
             $xx=User::where('id',$user_id)->first();
            $xx->save($data);
-             dd(auth()->user()->id);
+
             return $this->sendResponse(null, __("links.editMsg"));
 
             // }
