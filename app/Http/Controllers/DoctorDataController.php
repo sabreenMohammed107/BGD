@@ -160,7 +160,7 @@ FCMNotification::create([
     'title_en' => 'Your reservation status',
     'body_en' =>'your reservation approved' ,
     'status' => 'not_seen',
-    'user_id' => auth('api')->user()->id,
+    'user_id' => $row->patient_id ,
 ]);
 
 
