@@ -142,10 +142,10 @@ $row->save();
         // $row->update(['reservation_status_id'=>2]);
   //send notification api for confirm reservation
   $data = [
-    'title_dt' => 'تم إضافه دفعة ماليه جديده',
-    'body_dt' => '$details->net_salary' ,
-    'title_en' => 'A new payment has been added',
-    'body_en' =>'$details->net_salary' ,
+    'title_dt' => 'Your reservation status',
+    'body_dt' => 'your reservation approved' ,
+    'title_en' => 'Your reservation status',
+    'body_en' =>'your reservation approved' ,
     'status' => 'not_seen',
 ];
 
@@ -155,17 +155,17 @@ $row->save();
 
 //save f_c_m notification table
 FCMNotification::create([
-    'title_ar' => 'تم إضافه دفعة ماليه جديده',
-    'body_ar' => '$details->net_salary',
-    'title_en' => 'A new payment has been added',
-    'body_en' => '$details->net_salary',
+    'title_dt' => 'Your reservation status',
+    'body_dt' => 'your reservation approved' ,
+    'title_en' => 'Your reservation status',
+    'body_en' =>'your reservation approved' ,
     'status' => 'not_seen',
-    'user_id' => 25,
+    'user_id' => auth('api')->user()->id,
 ]);
 
 
 //fcm notify
-$tokens = User::whereNotNull('fcm_token')->where('register_approved', 1)->pluck('fcm_token')->toArray();
+$tokens = User::whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
 try
 {
 //test sabreen
@@ -175,8 +175,8 @@ $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP
 $data = [
    "registration_ids" => $tokens,
    "notification" => [
-       "title" => 'مرحبا',
-       "body" => 'تم اضافة دفعة ماليه جديده ',
+       "title" => 'Hello',
+       "body" => 'Your reservation approved',
    ]
 ];
 $dataString = json_encode($data);
