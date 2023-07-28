@@ -187,8 +187,9 @@ class RegisterController extends BaseController
 
             $user_id = auth()->user()->id;
             $token = $request->token;
-            User::find($user_id)->update(['fcm_token', $token]);
-            return $this->sendResponse(null, __("links.editMsg"));
+            $xx=User::find($user_id)->update(['fcm_token', $token]);
+
+            return $this->sendResponse($xx, __("links.editMsg"));
 
             // }
 
