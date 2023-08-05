@@ -27,7 +27,7 @@ class DoctorResource extends JsonResource
                 'licence_file' => $this->licence_file ?? '',
                 'medical field' => MedicalDoctorResource::collection($this->whenLoaded('medicines')),
 
-                'doctor position' => $this->doctor_position_id ?? '',
+                'doctor position' => (string)$this->doctor_position_id ?? '',
                 'doctor status' => $this->doctor_status_id ?? '',
 
 
@@ -45,7 +45,7 @@ class DoctorResource extends JsonResource
                 'licence_file' => $this->licence_file ?? '',
                 'medical field' => MedicalDoctorResource::collection($this->whenLoaded('medicines')),
 
-                'doctor position' => $this->doctor_position_id ?? '',
+                'doctor position' => (string)$this->doctor_position_id ?? '',
                 'doctor status' => $this->doctor_status_id ?? '',
 
 
