@@ -29,6 +29,7 @@ class Doctor_clinic extends Model
         'en_reservation_notes',
         'dt_reservation_notes'
     ];
+
     public function insurance()
     {
         return $this->belongsTo(Insurance_type::class, 'insurance_type_id');

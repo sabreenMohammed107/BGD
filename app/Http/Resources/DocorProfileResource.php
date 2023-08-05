@@ -14,6 +14,10 @@ class DocorProfileResource extends JsonResource
      */
     public function toArray($request)
     {
+        protected $casts = 
+        [
+            'visit_fees' => 'string',
+        ];
         if (App::getLocale() == "en") {
             return [
                 'id'=>$this->id,
