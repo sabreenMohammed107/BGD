@@ -29,7 +29,10 @@ class Doctor_clinic extends Model
         'en_reservation_notes',
         'dt_reservation_notes'
     ];
-
+    protected $casts =
+    [
+        'visit_fees' => 'string',
+    ];
     public function insurance()
     {
         return $this->belongsTo(Insurance_type::class, 'insurance_type_id');
