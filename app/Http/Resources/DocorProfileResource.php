@@ -25,9 +25,9 @@ class DocorProfileResource extends JsonResource
                 'street' => $this->en_street ?? '',
                 'google_map' => $this->google_map ?? '',
 
-                'parking_allowed' => $this->parking_allowed ?? '',
-                'home_visit_allowed' => $this->home_visit_allowed ?? '',
-                'disability_allowed' => $this->disability_allowed ?? '',
+                'parking_allowed' => (string)$this->parking_allowed ?? '',
+                'home_visit_allowed' => (string)$this->home_visit_allowed ?? '',
+                'disability_allowed' => (string)$this->disability_allowed ?? '',
                 'overview' => $this->doctor->en_overview ?? '',
 
                 'phone' => $this->phone ?? '',
@@ -64,9 +64,9 @@ class DocorProfileResource extends JsonResource
         'street' => $this->dt_street ?? '',
         'google_map' => $this->google_map ?? '',
 
-        'parking_allowed' => $this->parking_allowed ?? '',
-        'home_visit_allowed' => $this->home_visit_allowed ?? '',
-        'disability_allowed' => $this->disability_allowed ?? '',
+        'parking_allowed' => (string)$this->parking_allowed ?? '',
+        'home_visit_allowed' => (string)$this->home_visit_allowed ?? '',
+        'disability_allowed' => (string)$this->disability_allowed ?? '',
         'overview' => $this->doctor->dt_overview ?? '',
 
         'phone' => $this->phone ?? '',
