@@ -209,7 +209,7 @@ class RegisterController extends BaseController
 
 
         } else {
-            return $this->sendError( __("noNotifications"));
+            return $this->sendResponse(null , __("noNotifications"));
         }
     }
 }
