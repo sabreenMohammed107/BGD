@@ -206,7 +206,7 @@ class RegisterController extends BaseController
 
         if ($notifications->count() > 0) {
             // return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
-            dd($notifications);
+            return $notifications;
 
         } else {
             return $this->successResponse( __("noNotifications"));
