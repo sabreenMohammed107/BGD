@@ -18,7 +18,7 @@ class NotificationsResource extends JsonResource
 
 
 
-                'title'=>$this->title_en,
+                'title'=>$this->title_en ?? '',
 
 
                 'notifiy_date' =>$this->created_at,
@@ -29,7 +29,7 @@ class NotificationsResource extends JsonResource
             return [
 
 
-                'title' => $this->title_dt,
+                'title' => $this->title_dt ?? '',
 
 
                 'notifiy_date' =>$this->created_at,

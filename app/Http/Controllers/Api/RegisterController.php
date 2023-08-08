@@ -201,12 +201,12 @@ class RegisterController extends BaseController
     public function allNofications(Request $request)
     {
         $user = Auth::user();
-        $notifications = FCMNotification::where('user_id', '=', $user->id)->orderBy('id', 'DESC');
-         dd($user->id);
+        $notifications = FCMNotification::where('user_id', '=', $user->id)->orderBy('id', 'DESC')->get();
+
 
         if ($notifications->count() > 0) {
-            // return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
-            return $notifications;
+             return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
+
 
         } else {
             return $this->successResponse( __("noNotifications"));
