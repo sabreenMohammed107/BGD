@@ -202,7 +202,7 @@ class RegisterController extends BaseController
     {
         $user = Auth::user();
         $notifications = FCMNotification::where('user_id', '=', $user->id)->orderBy('id', 'DESC');
-         dd(FCMNotification::all());
+         dd($user->id);
 
         if ($notifications->count() > 0) {
             // return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
