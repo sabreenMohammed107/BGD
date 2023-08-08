@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
+use App\Http\Resources\NotificationsResource;
 use App\Http\Resources\userResource;
 use App\Models\FCMNotification;
 use App\Models\User;
@@ -204,7 +205,9 @@ class RegisterController extends BaseController
         // dd($notifications);
 
         if ($notifications->count() > 0) {
-            return $this->sendResponse($notifications,  __("allNotifications"));
+            return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
+
+
         } else {
             return $this->successResponse( __("noNotifications"));
         }
