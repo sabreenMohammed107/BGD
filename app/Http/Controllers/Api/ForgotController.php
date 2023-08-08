@@ -23,7 +23,7 @@ if(User::where('email',$email)->doesntExist()){
         'status'=>false,
         'message'=>'user doen\'t exsists !',
 
-    ],status:404);
+    ]);
 }
 $token=Str::random(length:5);
 try{
@@ -46,7 +46,7 @@ try{
 return response([
     'status'=>false,
     'message'=>$ex->getMessage()
-],status:400);
+]);
 }
 
 
@@ -56,17 +56,20 @@ public function reset(ResetRequest $request){
 $token=$request->input(key:'token');
 if(!$passwordResets=DB::table(table:'password_resets')->where('token',$token)->first()){
 return response([
+    'status'=>false,
     'message'=>'invalid token'
-],status:400);
+]);
 }
 if(!$user=User::where('email',$passwordResets->email)->first()){
     return response([
+        'status'=>false,
         'message'=>'user not exist '
-    ],status:404);
+    ]);
 }
 $user->password=Hash::make($request->input(key:'password'));
 $user->save();
 return response([
+    'status'=>true,
     'message'=>'success'
 ]);
 }
