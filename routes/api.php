@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\DoctorsInfController;
 use App\Http\Controllers\Api\ForgotController;
+use App\Http\Controllers\Api\GoogleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,11 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 Route::post('forgot', [ForgotController::class, 'forgot']);
 Route::post('reset', [ForgotController::class, 'reset']);
+//google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+//googleLogin
+Route::get('googleLogin', [GoogleController::class, 'googleLogin']);
 
 Route::middleware('auth:api')->group( function () {
     // Route::resource('products', ProductController::class);

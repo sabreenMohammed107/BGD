@@ -30,7 +30,8 @@ class User extends Authenticatable
     'google_map',
     'city_id',
     'patient_status_id',
-    'fcm_token'
+    'fcm_token',
+    'google_id'
     ];
 
     /**
