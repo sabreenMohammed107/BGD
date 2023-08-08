@@ -20,6 +20,7 @@ public function forgot(ForgotRequest $request){
 $email=$request->input(key:'email');
 if(User::where('email',$email)->doesntExist()){
     return response([
+        'status'=>false,
         'message'=>'user doen\'t exsists !',
 
     ],status:404);
@@ -37,11 +38,13 @@ try{
     });
 
     return response([
+        'status'=>true,
         'message'=>'check your email'
     ]);
 
 }catch(\Exception $ex){
 return response([
+    'status'=>false,
     'message'=>$ex->getMessage()
 ],status:400);
 }
