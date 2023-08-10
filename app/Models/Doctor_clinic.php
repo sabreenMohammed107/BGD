@@ -57,7 +57,7 @@ class Doctor_clinic extends Model
         return $this->hasMany(Doctor_schedule::class,'clinic_id','id');
       }
 
-      protected $appends = ['next_day','next_time','clinic_name','clinic_id'];
+      protected $appends = ['next_day','next_time','clinic_name','clinic_id','active_gallery'];
 
       public function getClinicNameAttribute()
 {
@@ -129,7 +129,20 @@ return $timeAv;
 
 
 public function gallery(){
-    return $this->hasMany(Clinic_gallery::class,'clinic_id')->where('active',"=",'1');
+    return $this->hasMany(Clinic_gallery::class,'clinic_id');
 
+}
+
+/**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    // protected $appends = ['active_gallery'];
+
+
+protected function getActiveGalleryAttribute()
+{
+    return $this->gallery()->where('active','=',1)->get();
 }
 }
