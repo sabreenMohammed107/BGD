@@ -113,6 +113,7 @@ class GoogleController extends BaseController
             }else{
 
 
+
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
