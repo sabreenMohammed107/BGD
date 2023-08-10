@@ -80,16 +80,16 @@ class GoogleController extends BaseController
     }
 
     public function googleLogin(Request $request){
-        // $validator = Validator::make($request->all(), [
-        //     'id' => 'required',
-        //     'device_token' =>'required',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'device_token' =>'required',
+        ]);
 
-        // if ($validator->fails()) {
-        //     // return $this->convertErrorsToString($validator->messages());
-        //     return $this->sendError($validator->messages());
+        if ($validator->fails()) {
+            // return $this->convertErrorsToString($validator->messages());
+            return $this->sendError($validator->messages());
 
-        // }
+        }
 
 
         try {
