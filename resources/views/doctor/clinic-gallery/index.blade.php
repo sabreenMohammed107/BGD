@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.doctor.main')
 
 @section('breadcrumb')
     <div class="toolbar" id="kt_toolbar">
@@ -175,7 +175,7 @@
 
 
                                                 <form id="delete_{{ $row->id }}"
-                                                    action="{{ route('admin-clinic-gallery.destroy', $row->id) }}" method="POST"
+                                                    action="{{ route('doctor-clinic-gallery.destroy', $row->id) }}" method="POST"
                                                     style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
@@ -224,7 +224,7 @@
                                                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                                     <!--begin:Form-->
                                                     <form id="kt_modal_update_target_updateForm" class="form"
-                                                        action="{{ route('admin-clinic-gallery.update', $row->id) }}" method="post"
+                                                        action="{{ route('doctor-clinic-gallery.update', $row->id) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
@@ -396,7 +396,7 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                     <!--begin:Form-->
-                    <form id="kt_modal_new_target_form" class="form" action="{{ route('admin-clinic-gallery.store') }}"
+                    <form id="kt_modal_new_target_form" class="form" action="{{ route('doctor-clinic-gallery.store') }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Heading-->

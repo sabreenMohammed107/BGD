@@ -6,7 +6,7 @@ use App\Models\Clinic_gallery;
 use App\Models\Doctor_clinic;
 use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Http\Request;
-
+use File;
 class ClinicGalleryController extends Controller
 {
 

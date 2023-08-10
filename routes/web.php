@@ -88,7 +88,6 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::resource('doctor-clinics', DoctorClinicController::class);
     Route::resource('doctor-clinic-gallery', DoctorClinicGalleryController::class);
-
 });
 Route::group([ 'prefix' => 'admin'], function () {
  //medicine-fields

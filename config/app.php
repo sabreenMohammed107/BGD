@@ -194,7 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        PulkitJalan\Google\GoogleServiceProvider::class,
     ],
 
     /*
@@ -210,6 +210,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Google' => PulkitJalan\Google\Facades\Google::class,
     ])->toArray(),
 
 ];

@@ -94,9 +94,12 @@ class GoogleController extends BaseController
 
         try {
 
+
+
             // $user = Socialite::driver('google')->user();
             $user =Socialite::driver('google')->userFromToken($request->id);
             dd($user);
+
             $finduser = User::where('google_id', $request->id)->first();
 
             if($finduser){

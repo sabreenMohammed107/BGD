@@ -1,19 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Clinic_gallery;
+use App\Models\Doctor_clinic;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use File;
 class DoctorClinicGalleryController extends Controller
 {
+    protected $object;
+    protected $viewName;
+    protected $routeName;
+    protected $doctorId ;
     /**
+     * UserController Constructor.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct(Clinic_gallery $object)
+    {
+        $this->middleware('auth:doctor');
+        $this->middleware(function ($request, $next) {
+            $this->doctorId = Auth::guard('doctor')->user()->id;
+
+
+            return $next($request);
+        });
+
+        $this->object = $object;
+        $this->viewName = 'doctor.clinic-gallery.';
+        $this->routeName = 'doctor-clinic-gallery.';
+    }/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $ids=Doctor_clinic::where('doctor_id',$this->doctorId)->pluck('id');
+        $rows = Clinic_gallery::whereIn('clinic_id',$ids)->orderBy("created_at", "Desc")->get();
+        // $clinics = Doctor_clinic::get();
+        $clinics=Doctor_clinic::where('doctor_id',$this->doctorId)->orderBy("created_at", "Desc")->get();
+
+        return view($this->viewName . 'index', compact(['rows', 'clinics']));
     }
 
     /**
@@ -29,21 +59,46 @@ class DoctorClinicGalleryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+              $input=[];
+                $name = $file->getClientOriginalName();
+
+
+                // Rename The Image ..
+                $imageName = $name;
+                $uploadPath = public_path('uploads/galleries');
+
+                // Move The image..
+                $file->move($uploadPath, $imageName);
+                //save in DB
+                if ($request->has('active')) {
+
+                    $input['active'] = '1';
+                } else {
+                    $input['active'] = '0';
+                }
+                $input['image'] = $imageName;
+                $input['clinic_id'] =$request->get('clinic_id');
+                Clinic_gallery::create($input);
+            }
+        }
+        return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');    }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show( $id)
     {
         //
     }
@@ -51,7 +106,7 @@ class DoctorClinicGalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,23 +117,70 @@ class DoctorClinicGalleryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $input = $request->except(['_token','gallery_id','img']);
+        if ($request->hasFile('img')) {
+            $attach_image = $request->file('img');
+
+            $input['image'] = $this->UplaodImage($attach_image);
+        }
+        if ($request->has('active')) {
+
+            $input['active'] = '1';
+        } else {
+            $input['active'] = '0';
+        }
+        $input['clinic_id'] =$request->get('clinic_id');
+        Clinic_gallery::findOrFail($id)->update($input);
+        return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');    }
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $gallery = Clinic_gallery::where('id', $id)->first();
+         // Delete File ..
+         $file = $gallery->image;
+         $file_name = public_path('uploads/galleries/' . $file);
+         try {
+             File::delete($file_name);
+
+            $gallery->delete();
+            return redirect()->back()->with('flash_del', 'Successfully Delete!');
+
+        } catch (QueryException $q) {
+            // return redirect()->back()->withInput()->with('flash_danger', $q->getMessage());
+            return redirect()->back()->withInput()->with('flash_danger', 'Can’t delete This Row
+            Because it related with another table');
+        }
     }
+
+    /* uplaud image
+       */
+      public function UplaodImage($file_request)
+      {
+          //  This is Image Info..
+          $file = $file_request;
+          $name = $file->getClientOriginalName();
+          $ext = $file->getClientOriginalExtension();
+          $size = $file->getSize();
+          $path = $file->getRealPath();
+          $mime = $file->getMimeType();
+
+          // Rename The Image ..
+          $imageName = $name;
+          $uploadPath = public_path('uploads/galleries');
+
+          // Move The image..
+          $file->move($uploadPath, $imageName);
+
+          return $imageName;
+      }
 }
