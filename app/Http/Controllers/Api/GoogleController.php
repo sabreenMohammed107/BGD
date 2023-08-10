@@ -82,7 +82,7 @@ class GoogleController extends BaseController
     public function googleLogin(Request $request){
         $validator = Validator::make($request->all(), [
             'id' => 'required',
-            'device_token' =>'required',
+            // 'device_token' =>'required',
         ]);
 
         if ($validator->fails()) {
