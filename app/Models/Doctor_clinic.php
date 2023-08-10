@@ -144,7 +144,11 @@ public function gallery(){
 protected function getActiveGalleryAttribute()
 {
     // return $this->gallery()->where('active','=',1);
-    $array = $this->gallery()->where('active','=',1)
+    // $array = $this->gallery()->where('active','=',1)
+    // ->get()->toArray();
+    $array = $this->gallery()
+    ->join('doctor_clinics','doctor_clinics.id','=','clinic_galleries.clinic_id')
+    ->where('clinic_galleries.active','=',1)
     ->get()->toArray();
 
 // return convertToAssoc($array,'name');
