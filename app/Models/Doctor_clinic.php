@@ -129,7 +129,7 @@ return $timeAv;
 
 
 public function gallery(){
-    return $this->hasMany(Clinic_gallery::class,'clinic_id','id')->where('active',1);
+    return $this->hasMany(Clinic_gallery::class)->where('active',1);
 
 }
 }

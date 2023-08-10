@@ -18,6 +18,6 @@ class Clinic_gallery extends Model
 
     public function clinic()
     {
-        return $this->belongsTo(Doctor_clinic::class,'clinic_id');
+        return $this->belongsTo(Doctor_clinic::class);
     }
 }
