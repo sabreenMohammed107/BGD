@@ -147,6 +147,7 @@ protected function getActiveGalleryAttribute()
     $array = $this->gallery()->where('active','=',1)
     ->get()->toArray();
 
-return convertToAssoc($array,'name');
+// return convertToAssoc($array,'name');
+return $array;
 }
 }
