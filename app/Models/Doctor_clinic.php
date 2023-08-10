@@ -143,6 +143,10 @@ public function gallery(){
 
 protected function getActiveGalleryAttribute()
 {
-    return $this->gallery()->where('active','=',1);
+    // return $this->gallery()->where('active','=',1);
+    $array = $this->gallery()->where('active','=',1)
+    ->get()->toArray();
+
+return convertToAssoc($array,'name');
 }
 }
