@@ -104,8 +104,8 @@ class GoogleController extends BaseController
             $finduser = User::where('google_id', $request->id)->first();
 
             if($finduser){
-
-                // Auth::login($finduser);
+dd('find');
+                 Auth::login($finduser);
 
                 // return redirect()->intended('dashboard');
                 $finduser->accessToken = $finduser->createToken('MyApp')->accessToken;
@@ -118,7 +118,7 @@ class GoogleController extends BaseController
 
             }else{
 
-
+                dd('not');
 
                 $newUser = User::create([
                     'name' =>$request->name,
