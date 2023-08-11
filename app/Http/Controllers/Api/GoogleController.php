@@ -102,7 +102,7 @@ class GoogleController extends BaseController
 
 
             $finduser = User::where('google_id', $request->id)->first();
-
+dd($finduser);
             if($finduser){
 dd('find');
                  Auth::login($finduser);
