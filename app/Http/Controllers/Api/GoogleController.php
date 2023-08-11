@@ -82,7 +82,8 @@ class GoogleController extends BaseController
     public function googleLogin(Request $request){
         $validator = Validator::make($request->all(), [
             'id' => 'required',
-            // 'device_token' =>'required',
+            'name' =>'required',
+            'email' =>'required',
         ]);
 
         if ($validator->fails()) {
@@ -97,7 +98,7 @@ class GoogleController extends BaseController
 
 
             // $user = Socialite::driver('google')->user();
-            $user =Socialite::driver('google')->userFromToken($request->id);
+            // $user =Socialite::driver('google')->userFromToken($request->id);
             dd($user);
 
             $finduser = User::where('google_id', $request->id)->first();
@@ -120,10 +121,10 @@ class GoogleController extends BaseController
 
 
                 $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'google_id'=> $user->id,
-                    'password' => encrypt('123456dummy')
+                    'name' =>$request->name,
+                    'email' => $request->email,
+                    'google_id'=>$request->id,
+                    'password' => encrypt('12345678')
                 ]);
                 $newUser->accessToken = $newUser->createToken('MyApp')->accessToken;
 
