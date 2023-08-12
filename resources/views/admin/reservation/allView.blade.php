@@ -367,7 +367,14 @@
                                 <label class=" form-label"> Patient Mobile</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input id="patient_mobile" disabled type="text" class="form-control " name="patient_mobile" value="{{$row->patient_mobile}}"  autocomplete="patient_mobile">
+                                <input id="patient_mobile" disabled type="text" class="form-control " name="patient_mobile"
+
+                                @if ( $row->other_flag == 1)
+                                value="{{$row->patient_mobile}}"
+                                 @else
+                                 value="{{$row->patient->mobile ?? ''}}"
+                                @endif
+                                autocomplete="patient_mobile">
 
 
 
