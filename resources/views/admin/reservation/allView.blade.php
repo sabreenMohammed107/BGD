@@ -388,7 +388,15 @@
     <label class=" form-label">address</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" disabled name="patient_address" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="patient_address"
+    <input type="text" disabled name="patient_address"
+
+
+    @if ( $row->other_flag == 1)
+    value="{{$row->patient_address}}"
+                                 @else
+                                 value="{{$row->patient->details_address ?? ''}}"
+                                @endif
+    class="form-control mb-2" placeholder="patient_address"
         value="" />
 
 

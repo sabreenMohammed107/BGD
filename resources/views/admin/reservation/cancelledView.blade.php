@@ -109,7 +109,11 @@
                                 <label class=" form-label"> Patient Mobile</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input id="mobile" type="text" class="form-control " name="patient_mobile" value="{{$row->patient_mobile}}"  autocomplete="mobile">
+                                <input id="mobile" type="text" class="form-control " name="patient_mobile"  @if ( $row->other_flag == 1)
+                                value="{{$row->patient_mobile}}"
+                                 @else
+                                 value="{{$row->patient->mobile ?? ''}}"
+                                @endif  autocomplete="mobile">
 
 
 
@@ -123,7 +127,11 @@
     <label class=" form-label">address</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="address" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="address"
+    <input type="text" name="address"  @if ( $row->other_flag == 1)
+    value="{{$row->patient_address}}"
+                                 @else
+                                 value="{{$row->patient->details_address ?? ''}}"
+                                @endif class="form-control mb-2" placeholder="address"
         value="" />
 
 
