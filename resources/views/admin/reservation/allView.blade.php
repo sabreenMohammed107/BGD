@@ -92,7 +92,11 @@
                         <!--end::Card header-->
 
                     @if (Auth::guard('doctor')->check())
+                        <div class="menu-item px-3">
+                            <a href="{{ route('doctor.show-all-reservation',$row->id) }}"
+                                class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
+                        </div>
                         <div class="menu-item px-3">
 
                         @if($row->reservation_status_id == 5 || $row->reservation_status_id == 1)
@@ -496,7 +500,7 @@
                     @endif
                 </div>
                 <!--end::Main column-->
-
+            </form>
         </div>
         <!--end::Container-->
     </div>
