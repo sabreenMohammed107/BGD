@@ -58,6 +58,8 @@ Route::view('/doctor', 'doctor');
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::get('/all-reservations', [ReservationController::class, 'allReservation'])->name('admin.all-reservations');
+   //
+   Route::get('/reservation-filter',[ReservationController::class, 'filter'])->name('admin.reservation-filter');
     Route::get('/complete-reservations', [ReservationController::class, 'completeReservation'])->name('admin.complete-reservations');
     Route::get('/cancelled-reservations', [ReservationController::class, 'cancelledReservation'])->name('admin.cancelled-reservations');
     Route::get('/show-all-reservation/{id}', [ReservationController::class, 'showAllReservation'])->name('admin.show-all-reservation');
@@ -69,6 +71,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
  Route::prefix('doctor')->middleware('auth:doctor')->group(function () {
 
     Route::get('/all-reservations', [DoctorDataController::class, 'allReservation'])->name('doctor.all-reservations');
+    Route::get('/reservation-filter',[DoctorDataController::class, 'filter'])->name('doctor.reservation-filter');
     Route::get('/complete-reservations', [DoctorDataController::class, 'completeReservation'])->name('doctor.complete-reservations');
     Route::get('/cancelled-reservations', [DoctorDataController::class, 'cancelledReservation'])->name('doctor.cancelled-reservations');
     Route::get('/show-all-reservation/{id}', [DoctorDataController::class, 'showAllReservation'])->name('doctor.show-all-reservation');
