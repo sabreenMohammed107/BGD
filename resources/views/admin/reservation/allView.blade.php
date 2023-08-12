@@ -311,7 +311,7 @@
                                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                     <!--begin:Form-->
                                     <form id="kt_modal_update_target_updateForm" class="form"
-                                        action="{{ route('doctor.del-action-reservation', $newrow->id) }}" method="get">
+                                        action="{{ route('doctor.del-action-reservation', $row->id) }}" method="get">
 
                                         <!--begin::Heading-->
 
