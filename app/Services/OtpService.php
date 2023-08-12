@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use App\Models\User;
 
 class OtpService
 {
     protected $apiUrl ="https://api.smsgatewayapi.com/v1/message/send";
-    
+
     public function sendOtp($phoneNumber, $otp)
     {
         $ch = curl_init();
@@ -29,7 +30,19 @@ class OtpService
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $response = curl_exec($ch);
-
+        $user=User::where('mobile',$phoneNumber)->first();
+        $user->update(['otp'=>$otp]);
         return $response;
+    }
+
+    public function checkOtp($email, $otp)
+    {
+        $user=User::where('email',$email)->first();
+        if($user->otp == $otp){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

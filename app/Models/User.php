@@ -31,7 +31,8 @@ class User extends Authenticatable
     'city_id',
     'patient_status_id',
     'fcm_token',
-    'google_id'
+    'google_id',
+    'otp'
     ];
 
     /**

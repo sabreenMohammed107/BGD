@@ -51,7 +51,7 @@ class RegisterController extends BaseController
 
             $phoneNumber = $user->mobile; // replace with the recipient's phone number
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
-
+            $user->update(['otp'=>$otp]);
             $otpService->sendOtp($phoneNumber, $otp);
 
             return $this->sendResponse(userResource::make($user), 'User has been registed');

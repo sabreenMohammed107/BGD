@@ -6,7 +6,8 @@ use App\Classes\MySms;
 use App\Http\Controllers\Controller;
 use App\Services\OtpService;
 use GuzzleHttp\Client;
-
+use App\Http\Requests\CheckOtpRequest;
+use App\Http\Requests\ResendOtpRequest;
 class OtpController extends Controller
 {
     public function sendOtp(OtpService $otpService)
@@ -24,7 +25,36 @@ class OtpController extends Controller
             return response()->json(['message' => 'Failed to send OTP'], 500);
         }
 
-       
-   
+
+
+    }
+    public function checkOtp(OtpService $otpService, CheckOtpRequest $request){
+        $result = $otpService->checkOtp($request->email,$request->otp);
+
+    if ($result) {
+        // OTP sent successfully
+        return response()->json(['message' => 'Exist OTP']);
+    } else {
+        // Failed to send OTP
+        return response()->json(['message' => 'Invalid OTP'], 500);
+    }
+  }
+
+  public function resendOtp(OtpService $otpService,ResendOtpRequest $request)
+    {
+
+
+        $result = $otpService->sendOtp($request->mobile, $request->otp);
+
+        if ($result) {
+            // OTP sent successfully
+            return response()->json(['message' => 'OTP Resent successfully']);
+        } else {
+            // Failed to send OTP
+            return response()->json(['message' => 'Failed to Resend OTP'], 500);
+        }
+
+
+
     }
 }

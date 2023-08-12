@@ -29,6 +29,8 @@ Route::post('login', [RegisterController::class, 'login']);
 Route::post('forgot', [ForgotController::class, 'forgot']);
 Route::post('reset', [ForgotController::class, 'reset']);
 Route::get('/otp/send', [OtpController::class, 'sendOtp']);
+Route::post('/otp/check', [OtpController::class, 'checkOtp']);
+Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
 //google
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
