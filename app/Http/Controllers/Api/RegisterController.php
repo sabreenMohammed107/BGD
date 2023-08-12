@@ -8,6 +8,7 @@ use App\Http\Resources\NotificationsResource;
 use App\Http\Resources\userResource;
 use App\Models\FCMNotification;
 use App\Models\User;
+use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -18,7 +19,7 @@ class RegisterController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(Request $request,OtpService $otpService)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -47,6 +48,11 @@ class RegisterController extends BaseController
             // $data['msg'] = 'تم التفعيل';
             // $sms = Helper::send_sms($data);
 // $user->smsResponse=$sms;
+
+            $phoneNumber = $user->mobile; // replace with the recipient's phone number
+            $otp = mt_rand(100000, 999999); // replace with the generated OTP
+
+            $otpService->sendOtp($phoneNumber, $otp);
 
             return $this->sendResponse(userResource::make($user), 'User has been registed');
 
