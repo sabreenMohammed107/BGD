@@ -93,7 +93,7 @@
 
                     @if (Auth::guard('doctor')->check())
 
-                        <div class="menu-item px-3">
+                        <div class="menu-item p-3" style="border: 1px solid #000">
 
                         @if($row->reservation_status_id == 5 || $row->reservation_status_id == 1)
                             <a data-bs-toggle="modal"
