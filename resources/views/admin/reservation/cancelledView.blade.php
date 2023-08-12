@@ -109,7 +109,7 @@
                                 <label class=" form-label"> Patient Mobile</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input id="email" type="text" class="form-control " name="email" value="{{$row->patient_mobile}}"  autocomplete="email">
+                                <input id="mobile" type="text" class="form-control " name="patient_mobile" value="{{$row->patient_mobile}}"  autocomplete="mobile">
 
 
 
@@ -123,7 +123,7 @@
     <label class=" form-label">address</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="mobile"
+    <input type="text" name="address" value="{{$row->patient_address}}" class="form-control mb-2" placeholder="address"
         value="" />
 
 
@@ -134,7 +134,7 @@
     <label class=" form-label">User</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" value="{{$row->patient->name ?? ''}}" class="form-control mb-2" placeholder="mobile"
+    <input type="text" name="User" value="{{$row->patient->name ?? ''}}" class="form-control mb-2" placeholder="User"
         value="" />
 
 

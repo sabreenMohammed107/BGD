@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="menu-item px-3">
 
-@if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
+                                @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
                                     <a data-bs-toggle="modal"
                                         data-bs-target="#comReservation{{$newrow->id }}" title="complete"
                                         class="menu-link px-3"><i class="fa fa-check" style="color: green;font-weight: bold"

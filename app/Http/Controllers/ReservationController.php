@@ -169,10 +169,11 @@ class ReservationController extends Controller
         return view($this->viewName.'completeView', compact('row'));
     }
     public function cancelledReservation(){
-        $rows=Reservation::where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
+        $status=Reservation_status::whereIn('id',[3,4])->get();
+        $rows=Reservation::whereIn('reservation_status_id',[3,4])->orderBy("reservation_date", "Desc")->get();
 
 
-        return view($this->viewName.'cancelled', compact('rows'));
+        return view($this->viewName.'cancelled', compact('rows','status'));
     }
 
 
@@ -189,5 +190,39 @@ class ReservationController extends Controller
         $row->update(['notes'=>$request->notes]);
 
         return redirect()->back();
+    }
+
+
+      /****
+     * filter form
+     */
+    public function cancelledFilter(Request $request)
+    {
+        \Log::info($request->all());
+
+        $name= $request->get('name');
+        //search func
+        $opo=Reservation::select('*')->whereIn('reservation_status_id',[3,4]);
+
+        if ($request->get("filter_date") && $request->get("filter_date") ==2) {
+
+            $opo->orderBy("reservation_date", "desc");
+
+
+            }else{
+
+                $opo->orderBy("reservation_date", "asc");
+            }
+
+
+        if ($request->get("status_id") && !empty($request->get("status_id"))) {
+            $opo->where('reservation_status_id', '=',$request->get("status_id") );
+
+        }
+
+
+
+        $rows =  $opo->get();
+        return view($this->viewName . 'subCancelled', compact('rows'))->render();
     }
 }

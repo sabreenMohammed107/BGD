@@ -29,17 +29,14 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
-               <!--begin::Search Form-->
+            <!--begin::Search Form-->
             <div class="card card-flush">
 
                 <form id="search-form" class="form d-flex flex-column flex-lg-row">
                     <input type="hidden" id="testCheck" name="testCheck"
-                    @if(Auth::guard('admin')->check())
-                    value="admin"
+                        @if (Auth::guard('admin')->check()) value="admin"
                       @else
-                      value="doctor"
-                    @endif
-                     >
+                      value="doctor" @endif>
                     <div class="card-body pt-0">
 
                         <!--begin::Input group-->
@@ -94,8 +91,8 @@
                     </div>
                 </form>
             </div>
-              <!--End::Search Form-->
-               <!--begin::Category-->
+            <!--End::Search Form-->
+            <!--begin::Category-->
             <div id="preIndex" class="card card-flush">
                 <!--begin::Card header-->
                 @include('admin.reservation.subAll')
@@ -111,15 +108,15 @@
     <!--end::Post-->
 @endsection
 @section('scripts')
-<script>
-     $('#search-form').on('submit', function(e) {
-        var name = $('#testCheck').val();
-        if(name=="admin"){
-            var url = "{{ route('admin.reservation-filter') }}";
+    <script>
+        $('#search-form').on('submit', function(e) {
+            var name = $('#testCheck').val();
+            if (name == "admin") {
+                var url = "{{ route('admin.reservation-filter') }}";
 
-                }else{
-                    var url =  "{{ route('doctor.reservation-filter') }}";
-                }
+            } else {
+                var url = "{{ route('doctor.reservation-filter') }}";
+            }
             e.preventDefault();
             $.ajax({
                 type: 'GET',
@@ -134,7 +131,7 @@
 
                 },
 
-                url:url,
+                url: url,
                 success: function(result) {
                     console.log(result)
 
@@ -142,13 +139,25 @@
 
                     $('#name').val(name);
 
-                    $('#kt_ecommerce_category_table').DataTable({
-
-                        "paging": true,
-
+                    datatable = $('#kt_ecommerce_category_table').DataTable({
+                        "info": false,
+                        'order': [],
+                        'pageLength': 10,
+                        'columnDefs': [{
+                                orderable: false,
+                                targets: 0
+                            }, // Disable ordering on column 0 (checkbox)
+                            {
+                                orderable: false,
+                                targets: 3
+                            }, // Disable ordering on column 3 (actions)
+                        ]
                     });
-
-
+                    const filterSearch = document.querySelector(
+                        '[data-kt-ecommerce-category-filter="search"]');
+                    filterSearch.addEventListener('keyup', function(e) {
+                        datatable.search(e.target.value).draw();
+                    });
 
 
 
@@ -162,5 +171,5 @@
                 }
             });
         });
-</script>
+    </script>
 @endsection
