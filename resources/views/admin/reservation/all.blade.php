@@ -54,7 +54,7 @@
                                 <!--end::Label-->
                                 <select class="form-select form-select-solid" id="status_id" name="status_id"
                                     data-control="select2" data-placeholder="Select an option">
-                                    <option value=""></option>
+                                    <option value="0">show all</option>
                                     @foreach ($status as $obj)
                                         <option value="{{ $obj->id }}">{{ $obj->en_status }}</option>
                                     @endforeach
