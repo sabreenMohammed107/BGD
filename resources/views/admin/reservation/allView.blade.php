@@ -30,9 +30,9 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
-            {{-- <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
             action="{{ route('doctors.update-reservation') }}" method="post" enctype="multipart/form-data">
-            @csrf --}}
+            @csrf
 
  <!--begin::Aside column-->
  <input type="hidden" name="reservId" value="{{$row->id}}" id="">
@@ -92,11 +92,7 @@
                         <!--end::Card header-->
 
                     @if (Auth::guard('doctor')->check())
-                        <div class="menu-item px-3">
-                            <a href="{{ route('doctor.show-all-reservation',$row->id) }}"
-                                class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                        </div>
                         <div class="menu-item px-3">
 
                         @if($row->reservation_status_id == 5 || $row->reservation_status_id == 1)
