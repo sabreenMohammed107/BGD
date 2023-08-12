@@ -62,6 +62,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
    Route::get('/reservation-filter',[ReservationController::class, 'filter'])->name('admin.reservation-filter');
     Route::get('/complete-reservations', [ReservationController::class, 'completeReservation'])->name('admin.complete-reservations');
     Route::get('/cancelled-reservations', [ReservationController::class, 'cancelledReservation'])->name('admin.cancelled-reservations');
+    Route::get('/cancelled-reservation-filter',[ReservationController::class, 'cancelledFilter'])->name('admin.cancelled-reservation-filter');
+
     Route::get('/show-all-reservation/{id}', [ReservationController::class, 'showAllReservation'])->name('admin.show-all-reservation');
     Route::get('/show-complete-reservation/{id}', [ReservationController::class, 'showCompleteReservation'])->name('admin.show-complete-reservation');
     Route::get('/show-cancelled-reservation/{id}', [ReservationController::class, 'showCancelledReservation'])->name('admin.show-cancelled-reservation');
@@ -74,6 +76,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/reservation-filter',[DoctorDataController::class, 'filter'])->name('doctor.reservation-filter');
     Route::get('/complete-reservations', [DoctorDataController::class, 'completeReservation'])->name('doctor.complete-reservations');
     Route::get('/cancelled-reservations', [DoctorDataController::class, 'cancelledReservation'])->name('doctor.cancelled-reservations');
+    Route::get('/cancelled-reservation-filter',[DoctorDataController::class, 'cancelledFilter'])->name('doctor.cancelled-reservation-filter');
+
     Route::get('/show-all-reservation/{id}', [DoctorDataController::class, 'showAllReservation'])->name('doctor.show-all-reservation');
     Route::get('/show-complete-reservation/{id}', [DoctorDataController::class, 'showCompleteReservation'])->name('doctor.show-complete-reservation');
     Route::get('/show-cancelled-reservation/{id}', [DoctorDataController::class, 'showCancelledReservation'])->name('doctor.show-cancelled-reservation');

@@ -159,6 +159,40 @@ class DoctorDataController extends Controller
         return view($this->viewName . 'subAll', compact('rows'))->render();
     }
 
+
+     /****
+     * filter form
+     */
+    public function cancelledFilter(Request $request)
+    {
+        \Log::info($request->all());
+
+        $name= $request->get('name');
+        //search func
+        $opo=Reservation::select('*')->whereIn('reservation_status_id',[3,4]);
+
+        if ($request->get("filter_date") && $request->get("filter_date") ==2) {
+
+            $opo->orderBy("reservation_date", "desc");
+
+
+            }else{
+
+                $opo->orderBy("reservation_date", "asc");
+            }
+
+
+        if ($request->get("status_id") && !empty($request->get("status_id"))) {
+            $opo->where('reservation_status_id', '=',$request->get("status_id") );
+
+        }
+
+
+
+        $rows =  $opo->get();
+        return view($this->viewName . 'subCancelled', compact('rows'))->render();
+    }
+
     public function showAllReservation($id){
         $docId= Auth::guard('doctor')->user()->id;
         $row=Reservation::where("id", $id)->first();
@@ -348,11 +382,12 @@ return redirect()->back()->with($e->getMessage());
         return view($this->viewName.'completeView', compact('row'));
     }
     public function cancelledReservation(){
+        $status=Reservation_status::whereIn('id',[3,4])->get();
         $docId= Auth::guard('doctor')->user()->id;
-        $rows=Reservation::with('status')->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('reservations.*')->where('reservation_status_id',3)->orderBy("reservation_date", "Desc")->get();
+        $rows=Reservation::with('status')->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id',$docId)->select('reservations.*')->whereIn('reservation_status_id',[3,4])->orderBy("reservation_date", "Desc")->get();
 
 
-        return view($this->viewName.'cancelled', compact('rows'));
+        return view($this->viewName.'cancelled', compact('rows','status'));
     }
 
 
