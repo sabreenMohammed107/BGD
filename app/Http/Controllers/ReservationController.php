@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\FCMNotification;
 use App\Models\Reservation;
+use App\Models\Reservation_status;
 use App\Models\User;
+use Database\Seeders\ReservationStatus;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -22,12 +24,46 @@ class ReservationController extends Controller
     }
       //
     public function allReservation(){
-        $rows=Reservation::orderBy("reservation_date", "Desc")->get();
+        $status=Reservation_status::get();
+        $rows=Reservation::orderBy("reservation_status_id", "asc")->orderBy("reservation_date", "asc")->get();
 
 
-        return view($this->viewName.'all', compact('rows'));
+        return view($this->viewName.'all', compact('rows','status'));
 
     }
+    /****
+     * filter form
+     */
+    public function filter(Request $request)
+    {
+        \Log::info($request->all());
+
+        $name= $request->get('name');
+        //search func
+        $opo=Reservation::select('*');
+
+        if ($request->get("filter_date") && $request->get("filter_date") ==2) {
+
+            $opo->orderBy("reservation_date", "desc");
+
+
+            }else{
+
+                $opo->orderBy("reservation_date", "asc");
+            }
+
+
+        if ($request->get("status_id") && !empty($request->get("status_id"))) {
+            $opo->where('reservation_status_id', '=',$request->get("status_id") );
+
+        }
+
+
+
+        $rows =  $opo->get();
+        return view($this->viewName . 'subAll', compact('rows'))->render();
+    }
+
     public function showAllReservation($id){
         $row=Reservation::where("id", $id)->first();
 
