@@ -30,9 +30,9 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
-            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+            {{-- <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
             action="{{ route('doctors.update-reservation') }}" method="post" enctype="multipart/form-data">
-            @csrf
+            @csrf --}}
 
  <!--begin::Aside column-->
  <input type="hidden" name="reservId" value="{{$row->id}}" id="">
@@ -90,35 +90,25 @@
                             </div>
                         </div>
                         <!--end::Card header-->
-                        @if (Auth::guard('admin')->check())
-                        <div class="menu-item px-3">
-                            <a href="{{ route('admin.show-all-reservation', $row->id) }}"
-                                class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                        </div>
-                    @endif
                     @if (Auth::guard('doctor')->check())
-                        <div class="menu-item px-3">
-                            <a href="{{ route('doctor.show-all-reservation',$row->id) }}"
-                                class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                        </div>
                         <div class="menu-item px-3">
 
                         @if($row->reservation_status_id == 5 || $row->reservation_status_id == 1)
                             <a data-bs-toggle="modal"
                                 data-bs-target="#comReservation{{$row->id }}" title="complete"
-                                class="menu-link px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
+                                class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
                                     aria-hidden="true"></i></a>
                                     @endif
                                     @if($row->reservation_status_id == 1 || $row->reservation_status_id == 5 )
                             <a data-bs-toggle="modal"
                                 data-bs-target="#delReservation{{$row->id }}" title="cancelled"
-                                class="menu-link px-3"><span style="color: red;font-weight: bold">x</span></a>
+                                class=" px-3"><span style="color: red;font-weight: bold">x</span></a>
 <a data-bs-toggle="modal"  @endif
 @if($row->reservation_status_id == 1)
                                 data-bs-target="#confReservation{{$row->id }}"
-                                class="menu-link px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
+                                class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
 
 @endif </div>
 
@@ -506,7 +496,7 @@
                     @endif
                 </div>
                 <!--end::Main column-->
-            </form>
+
         </div>
         <!--end::Container-->
     </div>
