@@ -93,24 +93,25 @@
 
                     @if (Auth::guard('doctor')->check())
 
-                        <div class="menu-item p-3" style="border: 1px solid #000">
+                        <div class="menu-item px-3" >
 
                         @if($row->reservation_status_id == 5 || $row->reservation_status_id == 1)
                             <a data-bs-toggle="modal"
                                 data-bs-target="#comReservation{{$row->id }}" title="complete"
-                                class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
+                                class="btn px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
                                     aria-hidden="true"></i>complete</a>
                                     @endif
                                     @if($row->reservation_status_id == 1 || $row->reservation_status_id == 5 )
                             <a data-bs-toggle="modal"
                                 data-bs-target="#delReservation{{$row->id }}" title="cancelled"
-                                class=" px-3"><span style="color: red;font-weight: bold">x cancelled</span></a>
+                                class="btn px-3"><span style="color: red;font-weight: bold">x cancelled</span></a>
 <a data-bs-toggle="modal"  @endif
 @if($row->reservation_status_id == 1)
                                 data-bs-target="#confReservation{{$row->id }}"
-                                class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i>confirm</span></a>
+                                class="btn px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i>confirm</span></a>
 
-@endif </div>
+@endif
+</div>
 
                     @endif
 
