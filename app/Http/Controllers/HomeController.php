@@ -33,7 +33,8 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('adminHome');
+
+        return view('adminH5ome');
     }
 
     /**
@@ -44,5 +45,13 @@ class HomeController extends Controller
     public function managerHome()
     {
         return view('managerHome');
+    }
+
+    public function markAsNotification(Request $request)
+    {
+        auth()->user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
+            return $query->where('id', $request->input('id'));
+        })->markAsRead();
+        return response()->noContent();
     }
 }

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use File;
 use Illuminate\Database\QueryException;
+use App\Notifications\PatientReservationNotification;
 class DoctorDataController extends Controller
 {
     //
@@ -403,7 +404,16 @@ return redirect()->back()->with($e->getMessage());
         $row=Reservation::where("id", $request->reservId)->first();
 
         $row->update(['notes'=>$request->notes]);
+        $offerData = [
+            'name' => $row->patient->name ?? '',
+            'body' => 'has set an appointment',
+            'date'=>$row->reservation_date,
+            'time'=>$row->time_from,
 
+        ];
+
+        $doc= Auth::guard('doctor')->user();
+        $doc->notify(new PatientReservationNotification($offerData));
         return redirect()->back();
     }
 }

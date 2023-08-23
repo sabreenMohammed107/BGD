@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Classes\MySms;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Services\OtpService;
 use GuzzleHttp\Client;
 use App\Http\Requests\CheckOtpRequest;
 use App\Http\Requests\ResendOtpRequest;
-class OtpController extends Controller
+class OtpController extends BaseController
 {
     public function sendOtp(OtpService $otpService)
     {
@@ -33,10 +33,12 @@ class OtpController extends Controller
 
     if ($result) {
         // OTP sent successfully
-        return response()->json(['message' => 'Exist OTP']);
+        // return response()->json(['message' => 'Exist OTP']);
+        return $this->sendResponse(null, __("Exist OTP"));
     } else {
         // Failed to send OTP
-        return response()->json(['message' => 'Invalid OTP'], 500);
+        // return response()->json(['message' => 'Invalid OTP'], 500);
+        return $this->sendError('Invalid OTP!');
     }
   }
 
@@ -48,10 +50,12 @@ class OtpController extends Controller
 
         if ($result) {
             // OTP sent successfully
-            return response()->json(['message' => 'OTP Resent successfully']);
+            // return response()->json(['message' => 'OTP Resent successfully']);
+            return $this->sendResponse(null, __("OTP Resent successfully"));
         } else {
             // Failed to send OTP
-            return response()->json(['message' => 'Failed to Resend OTP'], 500);
+            // return response()->json(['message' => 'Failed to Resend OTP'], 500);
+            return $this->sendError('Failed to Resend OTP');
         }
 
 
