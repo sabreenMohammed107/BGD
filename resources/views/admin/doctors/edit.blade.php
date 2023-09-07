@@ -30,6 +30,16 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
+            @if($errors->any())
+            <div class="alert alert-danger">
+                <p><strong> Something went wrong</strong></p>
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{!! $error !!}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
             action="{{ route('doctors.update', $row->id) }}" method="post" enctype="multipart/form-data">
             @csrf

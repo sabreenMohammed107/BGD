@@ -68,6 +68,7 @@ License: For each use you must have a valid license purchased only from above li
      </div>
        </div>
       @endif
+
     <div class="page d-flex flex-row flex-column-fluid">
         @section('breadcrumb')
         <div class="toolbar" id="kt_toolbar">

@@ -30,6 +30,17 @@
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div class="container-xxl">
+            @if($errors->any())
+            <div class="alert alert-danger">
+                <p><strong> Something went wrong</strong></p>
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{!! $error !!}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
                 action="{{ route('doctors.store') }}" method="post" enctype="multipart/form-data" >
                 @csrf
@@ -140,7 +151,7 @@
     <label class="required form-label">mobile</label>
     <!--end::Label-->
     <!--begin::Input-->
-    <input type="text" name="mobile" class="form-control mb-2" placeholder="mobile"
+    <input type="text" name="mobile" value="{{ old('mobile') }}" class="form-control mb-2" placeholder="mobile"
         value="" />
 
 
@@ -159,8 +170,9 @@
                                 data-control="select2" data-placeholder="Select an option"
                                 data-allow-clear="true" multiple="multiple">
                                     <option value=""></option>
-                                     @foreach ($medicals as $medical)
-                                        <option value="{{ $medical->id }}">{{ $medical->field_enname }}</option>
+
+                                     @foreach ($medicals as $key =>$medical)
+                                        <option value="{{ $medical->id }}" {{ (collect(old('medicines'))->contains($medical->id)) ? 'selected':'' }} >{{ $medical->field_enname }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -179,7 +191,7 @@
                                     data-placeholder="Select an option">
                                     <option value=""></option>
                                     @foreach ($positions as $position)
-                                        <option value="{{ $position->id }}">{{ $position->en_pasition }}</option>
+                                        <option value="{{ $position->id }}" {{ old('doctor_position_id') == $position->id ? 'selected' : '' }} >{{ $position->en_pasition }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -191,7 +203,7 @@
     <!--end::Label-->
     <!--begin::Editor-->
     <textarea class="form-control form-control-solid" rows="3" name="en_overview"
-        placeholder="Type  En Overview"></textarea>
+        placeholder="Type  En Overview">{{ old("en_overview") }}</textarea>
     <!--end::Editor-->
 
 </div>
@@ -203,7 +215,7 @@
     <!--end::Label-->
     <!--begin::Editor-->
     <textarea class="form-control form-control-solid" rows="3" name="dt_overview"
-        placeholder="Type  dt Overview"></textarea>
+        placeholder="Type  dt Overview">{{ old("dt_overview") }}</textarea>
     <!--end::Editor-->
 
 </div>
@@ -216,7 +228,7 @@
     <!--end::Label-->
     <!--begin::Editor-->
     <textarea class="form-control form-control-solid" rows="3" name="en_brief"
-        placeholder="Type En Breif"></textarea>
+        placeholder="Type En Breif">{{ old("en_brief") }}</textarea>
     <!--end::Editor-->
 
 </div>
@@ -228,7 +240,7 @@
     <!--end::Label-->
     <!--begin::Editor-->
     <textarea class="form-control form-control-solid" rows="3" name="dt_brief"
-        placeholder="Type dt Breif"></textarea>
+        placeholder="Type dt Breif">{{ old("dt_brief") }}</textarea>
     <!--end::Editor-->
 
 </div>
@@ -295,7 +307,7 @@
                                 <div class="fv-row w-100 flex-md-root">
                                     <div class="form-check form-switch form-check-custom form-check-solid">
                                         <input class="form-check-input" checked type="checkbox" name="verified[]" value="1"
-                                            id="flexSwitchDefault" />
+                                            id="flexSwitchDefault" {{ old('verified') == 1 ? ' checked' : '' }} />
                                         <label class="form-check-label" for="flexSwitchDefault">
                                             Active
                                         </label>
