@@ -43,8 +43,8 @@ class OtpController extends BaseController
   public function resendOtp(OtpService $otpService,ResendOtpRequest $request)
     {
 
-
-        $result = $otpService->sendOtp($request->mobile, $request->otp);
+        $otp = mt_rand(100000, 999999);
+        $result = $otpService->sendOtp($request->mobile, $otp);
 
         if ($result) {
             // OTP sent successfully

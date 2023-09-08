@@ -25,7 +25,7 @@ class ResendOtpRequest extends FormRequest
     {
         return [
             'mobile'=>'required|min:11|numeric',
-            'otp'=>'required',
+            //'otp'=>'required',
 
         ];
     }
