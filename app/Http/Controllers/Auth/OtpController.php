@@ -33,10 +33,10 @@ class OtpController extends Controller
 
     if ($result) {
         // OTP sent successfully
-        return response()->json(['message' => 'Exist OTP']);
+        return response()->json(['message' => 'Exist OTP'],200);
     } else {
         // Failed to send OTP
-        return response()->json(['message' => 'Invalid OTP'], 500);
+        return response()->json(['message' => 'Invalid OTP'], 401);
     }
   }
 
