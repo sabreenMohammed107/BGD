@@ -95,6 +95,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     Route::resource('doctor-clinics', DoctorClinicController::class);
     Route::resource('doctor-clinic-gallery', DoctorClinicGalleryController::class);
+    Route::post('/mark-as-read', [HomeController::class, 'markAsNotification'])->name('markAsNotification');
 });
 Route::group([ 'prefix' => 'admin'], function () {
  //medicine-fields

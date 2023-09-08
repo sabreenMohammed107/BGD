@@ -40,6 +40,33 @@
      <script src="{{asset('dist/assets/js/custom/utilities/modals/create-project/main.js')}}"></script>
      <script src="{{asset('dist/assets/js/custom/utilities/modals/users-search.js')}}"></script>
      <script src="{{asset('dist/assets/js/custom/utilities/modals/new-target.js')}}"></script>
-@yield('scripts')
+
+     <script>
+        $(function() {
+            $('.mark-as-read').click(function() {
+                var request = sendRequest($(this).data('id'));
+                request.done(() => {
+                    $(this).parents('.main-cls').remove();
+                });
+                $('.count').text({{count(Auth::guard('doctor')->user()->unreadNotifications ) }}-1);
+            });
+            $('#mark-all').click(function() {
+                var request = sendRequest();
+                request.done(() => {
+                    $('.main-cls').remove();
+                })
+                $('.count').text(0);
+            });
+        });
+
+        function sendRequest(id = null) {
+            var _token = "{{ csrf_token() }}";
+            return $.ajax("{{ route('markAsNotification') }}", {
+                method: 'POST',
+                data: {_token, id}
+            });
+        }
+    </script>
+     @yield('scripts')
      <!--end::Page Custom Javascript-->
      <!--end::Javascript-->

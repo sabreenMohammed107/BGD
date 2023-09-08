@@ -67,11 +67,22 @@ class DoctorsController extends Controller
      */
     public function store(Request $request)
     {
+
         DB::beginTransaction();
         try {
             // Disable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        $this->validator($request->all())->validate();
+
+        $validator = Validator::make(request()->all(),[
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:doctors'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone'=> ['required','digits:14'],
+           ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()->back()->withErrors($errors);
+        }
         $input = $request->except(['_token','img','password']);
         if ($request->hasFile('img')) {
             $attach_image = $request->file('img');
@@ -98,7 +109,7 @@ class DoctorsController extends Controller
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'Successfully Save  ');
 
-    } catch (\Throwable$e) {
+    } catch (\Throwable $e) {
         // throw $th;
         DB::rollback();
         return redirect()->back()->withInput()->withErrors($e->getMessage());
@@ -142,11 +153,17 @@ class DoctorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+
+        $validator = Validator::make(request()->all(),[
             'email' => 'required|email|unique:doctors,email,'.$id,
             'name' => 'required',
             'password' =>'required_with:confirmed|nullable',
-        ]);
+            'phone'=> ['required','digits:14'],
+           ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect()->back()->withErrors($errors);
+        }
         DB::beginTransaction();
         try {
             // Disable foreign key checks!
