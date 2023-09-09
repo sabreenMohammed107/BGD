@@ -30,7 +30,9 @@ class OtpService
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $response = curl_exec($ch);
+
         $user=User::where('mobile',$phoneNumber)->first();
+        dd($user);
         $user->update(['otp'=>$otp]);
         return $response;
     }
