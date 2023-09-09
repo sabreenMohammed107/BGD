@@ -12,11 +12,11 @@ class OtpService
     public function sendOtp($phoneNumber, $otp)
     {
         $ch = curl_init();
-        // $client_id = env("OTP_Client_ID"); // Your API client ID (required)
-        // $client_secret = env("OTP_Client_SECRET"); // Your API client secret (required)
+        $client_id = env("OTP_Client_ID"); // Your API client ID (required)
+        $client_secret = env("OTP_Client_SECRET"); // Your API client secret (required)
 
-        $client_id = "983428922389235212547"; // Your API client ID (required)
-        $client_secret = "6GNr6kyfrQ5GpdNtjVgmD"; // Your API client secret (required)
+        // $client_id = "983428922389235212547"; // Your API client ID (required)
+        // $client_secret = "6GNr6kyfrQ5GpdNtjVgmD"; // Your API client secret (required)
 
         $data = [
             'message' => $otp, //Message (required)
