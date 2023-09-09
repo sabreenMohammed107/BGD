@@ -33,20 +33,18 @@ class OtpController extends BaseController
 
     if ($result) {
         // OTP sent successfully
-        // return response()->json(['message' => 'Exist OTP']);
-        return $this->sendResponse(null, __("Exist OTP"));
+        return response()->json(['message' => 'Exist OTP'],200);
     } else {
         // Failed to send OTP
-        // return response()->json(['message' => 'Invalid OTP'], 500);
-        return $this->sendError('Invalid OTP!');
+        return response()->json(['message' => 'Invalid OTP'], 401);
     }
   }
 
   public function resendOtp(OtpService $otpService,ResendOtpRequest $request)
     {
 
-
-        $result = $otpService->sendOtp($request->mobile, $request->otp);
+        $otp = mt_rand(100000, 999999);
+        $result = $otpService->sendOtp($request->mobile, $otp);
 
         if ($result) {
             // OTP sent successfully

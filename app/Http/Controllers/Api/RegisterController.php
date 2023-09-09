@@ -40,6 +40,11 @@ class RegisterController extends BaseController
             $input['password'] = bcrypt($input['password']);
             // $input['user_type'] = 1;
             $user = User::create($input);
+            $phoneNumber = $user->mobile; // replace with the recipient's phone number
+            $otp = mt_rand(100000, 999999); // replace with the generated OTP
+            $user->update(['otp'=>$otp]);
+            $otpService->sendOtp($phoneNumber, $otp);
+
             $user->accessToken = $user->createToken('MyApp')->accessToken;
 
             //send sms
@@ -49,13 +54,7 @@ class RegisterController extends BaseController
             // $sms = Helper::send_sms($data);
 // $user->smsResponse=$sms;
 
-$user1=User::where('email',$request->email)->first();
-            $phoneNumber = $user->mobile; // replace with the recipient's phone number
-            $otp = mt_rand(100000, 999999); // replace with the generated OTP
-
-            $user1->update(['otp'=>$otp]);
-            $otpService->sendOtp($phoneNumber, $otp);
-
+          
             return $this->sendResponse(userResource::make($user), 'User has been registed');
 
         } catch (\Exception $e) {
