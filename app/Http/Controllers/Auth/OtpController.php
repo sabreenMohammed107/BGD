@@ -19,10 +19,12 @@ class OtpController extends BaseController
 
         if ($result) {
             // OTP sent successfully
-            return response()->json(['message' => 'OTP sent successfully']);
+            // return response()->json(['message' => 'OTP sent successfully']);
+            return $this->sendResponse(null, __("OTP sent successfully"));
         } else {
             // Failed to send OTP
-            return response()->json(['message' => 'Failed to send OTP'], 500);
+            // return response()->json(['message' => 'Failed to send OTP'], 500);
+            return $this->sendError('Failed to send OTP');
         }
 
 
@@ -33,10 +35,12 @@ class OtpController extends BaseController
 
     if ($result) {
         // OTP sent successfully
-        return response()->json(['message' => 'Exist OTP'],200);
+        // return response()->json(['message' => 'Exist OTP'],200);
+        return $this->sendResponse(null, __("Exist OTP"));
     } else {
         // Failed to send OTP
-        return response()->json(['message' => 'Invalid OTP'], 401);
+        // return response()->json(['message' => 'Invalid OTP'], 401);
+        return $this->sendError('Invalid OTP');
     }
   }
 
