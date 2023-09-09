@@ -30,14 +30,14 @@ class OtpService
         ]);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         $response = curl_exec($ch);
-        $user=User::where('mobile',$phoneNumber)->first();
+        $user=User::where('mobile',$phoneNumber)->last();
         $user->update(['otp'=>$otp]);
         return $response;
     }
 
     public function checkOtp($email, $otp)
     {
-        $user=User::where('email',$email)->first();
+        $user=User::where('email',$email)->last();
         if($user->otp == $otp){
             return true;
         }
