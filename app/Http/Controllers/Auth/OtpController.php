@@ -12,7 +12,7 @@ class OtpController extends BaseController
 {
     public function sendOtp(OtpService $otpService)
     {
-        $phoneNumber = '201100650931'; // replace with the recipient's phone number
+        $phoneNumber = '201117615935'; // replace with the recipient's phone number
         $otp = mt_rand(100000, 999999); // replace with the generated OTP
 
         $result = $otpService->sendOtp($phoneNumber, $otp);
