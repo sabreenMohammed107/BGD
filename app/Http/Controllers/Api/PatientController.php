@@ -185,8 +185,8 @@ class PatientController extends BaseController
 
                 ];
 
-                $doc = Doctor::where('id', $clinic->dictor_id)->first();
-                dd($doc);
+                $doc = Doctor::where('id', $clinic->doctor_id)->first();
+
                 $doc->notify(new PatientReservationNotification($offerData));
             }
 
