@@ -939,13 +939,13 @@ Notifications                                        <span
             <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">Mark as read</a>
         </div>
         <div class="separator my-2"></div>
-    @if(count($notification) > 0)
+    {{-- @if(count($notification) > 0)
         @if($loop->last)
             <a href="#" id="mark-all">Mark all as read</a>
         @endif
         @else
         <p>There are no new notifications.</p>
-    @endif
+    @endif --}}
     @empty
         <p>There are no new notifications.</p>
     @endforelse
