@@ -24,6 +24,10 @@
             .menu-item .menu-content{
                 padding: 0;
             }
+            .image-input .image-input-wrapper{
+                background-size: contain;
+    background-position: center;
+            }
             </style>
 
 

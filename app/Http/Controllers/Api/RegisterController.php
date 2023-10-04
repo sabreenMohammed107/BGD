@@ -54,7 +54,7 @@ class RegisterController extends BaseController
             // $sms = Helper::send_sms($data);
 // $user->smsResponse=$sms;
 
-          
+
             return $this->sendResponse(userResource::make($user), 'User has been registed');
 
         } catch (\Exception $e) {
@@ -114,6 +114,7 @@ class RegisterController extends BaseController
 
             if ($user) {
                 $input['password'] = bcrypt($request->password);
+
                 $user->update($input);
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
 
