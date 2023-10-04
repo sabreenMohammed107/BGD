@@ -42917,7 +42917,8 @@ code:not([class*=language-]) {
   display: inline-block;
   border-radius: 0.475rem;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+    background-position: center;
 }
 .image-input:not(.image-input-empty) {
   background-image: none !important;
@@ -42927,7 +42928,8 @@ code:not([class*=language-]) {
   height: 120px;
   border-radius: 0.475rem;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+    background-position: center;
 }
 .image-input [data-kt-image-input-action] {
   cursor: pointer;
