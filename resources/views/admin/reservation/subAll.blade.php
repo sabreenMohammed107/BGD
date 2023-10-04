@@ -59,7 +59,7 @@
                     <th class="text-end min-w-70px">Reservation Date</th>
                     <th class="text-end min-w-70px">Time </th>
                     <th class="text-end min-w-70px">status </th>
-                    <th>Action</th>
+                    <th class="text-center min-w-150px">Action</th>
 
                 </tr>
                 <!--end::Table row-->
@@ -114,38 +114,38 @@
                         <td class="text-end pe-0" data-order="15">
                             <span class="fw-bolder ms-3" @if($newrow->reservation_status_id == 3)  style="color: red;" @elseif($newrow->reservation_status_id == 2)  style="color: green;" @endif>{{ $newrow->status->en_status ?? '' }}</span>
                         </td>
-                        <td>
+                        <td class="text-end pe-0" data-order="15">
                             @if (Auth::guard('admin')->check())
-                                <div class="menu-item px-3">
-                                    <a href="{{ route('admin.show-all-reservation', $newrow->id) }}"
-                                        class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                </div>
+                                    <a href="{{ route('admin.show-all-reservation', $newrow->id) }}"
+                                        class=" px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+
                             @endif
                             @if (Auth::guard('doctor')->check())
-                                <div class="menu-item px-3">
-                                    <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}"
-                                        class="menu-link px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
-                                </div>
-                                <div class="menu-item px-3">
+                                    <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}"
+                                        class=" px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+
+
 
                                 @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
                                     <a data-bs-toggle="modal"
                                         data-bs-target="#comReservation{{$newrow->id }}" title="complete"
-                                        class="menu-link px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
+                                        class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
                                             aria-hidden="true"></i></a>
                                             @endif
                                             @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
                                     <a data-bs-toggle="modal"
                                         data-bs-target="#delReservation{{$newrow->id }}" title="cancelled"
-                                        class="menu-link px-3"><span style="color: red;font-weight: bold">x</span></a>
+                                        class=" px-3"><span style="color: red;font-weight: bold">x</span></a>
 <a data-bs-toggle="modal"  @endif
 @if($newrow->reservation_status_id == 1)
                                         data-bs-target="#confReservation{{$newrow->id }}"
-                                        class="menu-link px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
+                                        class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
 
-@endif </div>
+@endif
 
                             @endif
                         </td>

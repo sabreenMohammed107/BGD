@@ -88,7 +88,7 @@
                                 <th class="text-end min-w-100px">Clinic</th>
                                 <th class="text-end min-w-70px">Reservation Date</th>
                                 <th class="text-end min-w-70px">Time </th>
-                                <th class="text-end min-w-70px">Action </th>
+                                <th class="text-end min-w-150px">Action </th>
                             </tr>
                             <!--end::Table row-->
                         </thead>

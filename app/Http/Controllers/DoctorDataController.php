@@ -212,10 +212,10 @@ $row->save();
         // $row->update(['reservation_status_id'=>2]);
   //send notification api for confirm reservation
   $data = [
-    'title_dt' => 'Your reservation status',
-    'body_dt' => 'your reservation approved' ,
-    'title_en' => 'Your reservation status',
-    'body_en' =>'your reservation approved' ,
+    'title_dt' => 'Ihre Reservierung ist vollständig',
+    'body_dt' => 'gute Besserung' ,
+    'title_en' => 'your reservation is complete ',
+    'body_en' =>'get well soon' ,
     'status' => 'not_seen',
 ];
 
@@ -225,10 +225,10 @@ $row->save();
 
 //save f_c_m notification table
 FCMNotification::create([
-    'title_dt' => 'Your reservation status',
-    'body_dt' => 'your reservation approved' ,
-    'title_en' => 'Your reservation status',
-    'body_en' =>'your reservation approved' ,
+    'title_dt' => 'Ihre Reservierung ist vollständig',
+    'body_dt' => 'gute Besserung' ,
+    'title_en' => 'your reservation is complete ',
+    'body_en' =>'get well soon' ,
     'status' => 'not_seen',
     'user_id' => $row->patient_id ,
 ]);
@@ -245,8 +245,8 @@ $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP
 $data = [
    "registration_ids" => $tokens,
    "notification" => [
-       "title" => 'Hello',
-       "body" => 'Your reservation approved',
+       "title" => 'Hallo',
+       "body" => 'Ihre Reservierung ist vollständig',
    ]
 ];
 $dataString = json_encode($data);
@@ -299,25 +299,22 @@ $row->save();
             $row->save();
                     }
                     // $row->update(['reservation_status_id'=>3]);
-  //send notification api for confirm reservation
+  //send notification api for cancelled reservation
   $data = [
-    'title_dt' => 'Your reservation status',
-    'body_dt' => 'your reservation Cancelled by doctor' ,
-    'title_en' => 'Your reservation status',
-    'body_en' =>'your reservation Cancelled by doctor' ,
+    'title_dt' => 'Ihre Reservierung wird storniert',
+    'body_dt' => 'Wir entschuldigen uns für die Stornierung Ihrer Reservierung' ,
+    'title_en' => 'your reservation is cancelled ',
+    'body_en' =>'We apologize for canceling your reservation' ,
     'status' => 'not_seen',
 ];
 
 
-
-
-
 //save f_c_m notification table
 FCMNotification::create([
-    'title_dt' => 'Your reservation status',
-    'body_dt' => 'your reservation Cancelled by doctor' ,
-    'title_en' => 'Your reservation status',
-    'body_en' =>'your reservation Cancelled by doctor' ,
+    'title_dt' => 'Ihre Reservierung wird storniert',
+    'body_dt' => 'Wir entschuldigen uns für die Stornierung Ihrer Reservierung' ,
+    'title_en' => 'your reservation is cancelled ',
+    'body_en' =>'We apologize for canceling your reservation' ,
     'status' => 'not_seen',
     'user_id' => $row->patient_id ,
 ]);
@@ -334,8 +331,8 @@ $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP
 $data = [
    "registration_ids" => $tokens,
    "notification" => [
-       "title" => 'Hello',
-       "body" => 'Your reservation Cancelled by doctor',
+       "title" => 'Hallo',
+       "body" => 'Ihre Reservierung wird storniert',
    ]
 ];
 $dataString = json_encode($data);
