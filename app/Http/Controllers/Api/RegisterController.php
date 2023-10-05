@@ -11,9 +11,20 @@ use App\Models\User;
 use App\Services\OtpService;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use App\Models\bdg_data;
 class RegisterController extends BaseController
 {
+    //logo
+    public function logo(){
+        $data=bdg_data::first();
+if($data){
+    $logo= asset('uploads/data/' . $data->logo);
+}else{
+    $logo=asset('img/default.png');
+}
+
+        return $this->sendResponse($logo, 'site logo');
+    }
     /**
      * Register api
      *
