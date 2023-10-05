@@ -247,8 +247,8 @@ if(App::getLocale()=="en"){
     $data = [
        "registration_ids" => $tokens,
        "notification" => [
-           "title" => 'Hallo',
-           "body" => 'Ihre Reservierung wird storniert',
+        "title" => 'hello',
+        "body" => 'your reservation complete',
        ]
     ];
     }
@@ -256,8 +256,9 @@ if(App::getLocale()=="en"){
         $data = [
             "registration_ids" => $tokens,
             "notification" => [
-                "title" => 'hello',
-                "body" => 'your reservation cancelled',
+                "title" => 'Hallo',
+       "body" => 'Ihre Reservierung wird storniert',
+
             ]
          ];
     }
@@ -343,8 +344,9 @@ if(App::getLocale()=="en"){
 $data = [
    "registration_ids" => $tokens,
    "notification" => [
-       "title" => 'Hallo',
-       "body" => 'Ihre Reservierung wird storniert',
+
+       "title" => 'hello',
+       "body" => 'your reservation cancelled',
    ]
 ];
 }
@@ -352,8 +354,8 @@ else{
     $data = [
         "registration_ids" => $tokens,
         "notification" => [
-            "title" => 'hello',
-            "body" => 'your reservation cancelled',
+            "title" => 'Hallo',
+            "body" => 'Ihre Reservierung wird storniert',
         ]
      ];
 }
