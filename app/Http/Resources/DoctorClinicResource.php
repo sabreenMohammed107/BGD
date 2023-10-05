@@ -25,6 +25,7 @@ class DoctorClinicResource extends JsonResource
                 'phone' => $this->phone ?? '',
                 'street' => $this->en_street ?? '',
                 'postal_code' => $this->postal_code ?? '',
+                'city'=>$this->city->en_city ?? '',
                 'google_map' => $this->google_map ?? '',
                 'parking_allowed' => (string)$this->parking_allowed ?? '',
                 'home_visit_allowed' => (string)$this->home_visit_allowed ?? '',
@@ -49,6 +50,7 @@ class DoctorClinicResource extends JsonResource
                 'phone' => $this->phone ?? '',
 
                 'postal_code' => $this->postal_code ?? '',
+                'city'=>$this->city->dt_city ?? '',
                 'google_map' => $this->google_map ?? '',
                 'parking_allowed' => (string)$this->parking_allowed ?? '',
                 'home_visit_allowed' => (string)$this->home_visit_allowed ?? '',

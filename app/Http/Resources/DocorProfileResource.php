@@ -33,7 +33,7 @@ class DocorProfileResource extends JsonResource
 
                 'phone' => $this->phone ?? '',
                 'postal_code' => $this->postal_code ?? '',
-
+'city'=>$this->city->en_city ?? '',
                 'reservation_notes' => $this->en_reservation_notes ?? '',
 
 
@@ -72,7 +72,7 @@ class DocorProfileResource extends JsonResource
 
         'phone' => $this->phone ?? '',
         'postal_code' => $this->postal_code ?? '',
-
+        'city'=>$this->city->dt_city ?? '',
         'reservation_notes' => $this->dt_reservation_notes ?? '',
 
 
