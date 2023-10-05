@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use File;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\QueryException;
 use App\Notifications\PatientReservationNotification;
 class DoctorDataController extends Controller
@@ -242,13 +243,24 @@ try
 
 $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP0yNUnND_r1EbnQtmz9Nt1QIB3ekVXRAUG-SqZf3OCxGFw2zn1WDsizxoOC9SSfC82YziE1SaQoGe4A4Luq_0kcK3po7';
 
-$data = [
-   "registration_ids" => $tokens,
-   "notification" => [
-       "title" => 'Hallo',
-       "body" => 'Ihre Reservierung ist vollständig',
-   ]
-];
+if(App::getLocale()=="en"){
+    $data = [
+       "registration_ids" => $tokens,
+       "notification" => [
+           "title" => 'Hallo',
+           "body" => 'Ihre Reservierung wird storniert',
+       ]
+    ];
+    }
+    else{
+        $data = [
+            "registration_ids" => $tokens,
+            "notification" => [
+                "title" => 'hello',
+                "body" => 'your reservation cancelled',
+            ]
+         ];
+    }
 $dataString = json_encode($data);
 
 $headers = [
@@ -327,7 +339,7 @@ try
 //test sabreen
 
 $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP0yNUnND_r1EbnQtmz9Nt1QIB3ekVXRAUG-SqZf3OCxGFw2zn1WDsizxoOC9SSfC82YziE1SaQoGe4A4Luq_0kcK3po7';
-
+if(App::getLocale()=="en"){
 $data = [
    "registration_ids" => $tokens,
    "notification" => [
@@ -335,6 +347,16 @@ $data = [
        "body" => 'Ihre Reservierung wird storniert',
    ]
 ];
+}
+else{
+    $data = [
+        "registration_ids" => $tokens,
+        "notification" => [
+            "title" => 'hello',
+            "body" => 'your reservation cancelled',
+        ]
+     ];
+}
 $dataString = json_encode($data);
 
 $headers = [
