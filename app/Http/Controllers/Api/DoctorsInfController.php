@@ -40,7 +40,7 @@ class DoctorsInfController extends BaseController
         $userid = Auth::user()->id;
         $current_date = Carbon::now();
         $date = Carbon::parse($current_date)->format('Y-m-d');
-        dd($userid);
+
         $reservations = Reservation::where('patient_id', $userid)->where('reservation_date', '>=', $date)->whereIn('reservation_status_id', [1, 5])->orderBy("reservation_date", "asc")->get();
         $page['schedule'] = scadualInfoResource::collection($reservations);
         $bdgData = bdg_data::where('id', 1)->first();
