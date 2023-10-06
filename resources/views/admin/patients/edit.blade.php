@@ -223,7 +223,7 @@
                             <!--begin::Input group-->
                             <div>
                                 <!--begin::Label-->
-                                <label class="form-label">Address</label>
+                                <label class="form-label">Zip Code</label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
                                 <textarea class="form-control form-control-solid" rows="3" name="details_address" placeholder="Type ">{{ $row->details_address }}</textarea>
