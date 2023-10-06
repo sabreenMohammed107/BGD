@@ -77,11 +77,11 @@ class DoctorsController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:doctors'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone'=> ['required','digits:14'],
+            'mobile'=> ['required','digits:14'],
            ]);
         if($validator->fails()) {
             $errors = $validator->errors();
-            return redirect()->back()->withErrors($errors);
+            return redirect()->back()->withInput()->withErrors($errors);
         }
         $input = $request->except(['_token','img','password']);
         if ($request->hasFile('img')) {
