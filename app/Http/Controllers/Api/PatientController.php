@@ -17,6 +17,7 @@ use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Favourite_doctor;
+use Carbon\Carbon;
 use App\Models\Medical_field;
 use App\Models\Reservation;
 use App\Notifications\PatientReservationNotification;
@@ -362,7 +363,10 @@ class PatientController extends BaseController
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'desc');
             }
         else if ($lower == 4) {
-            $doctors = $doctors->orderBy("doctor_clinics.next_day", 'asc');
+            $day = Carbon::now()->dayOfWeek;
+
+            $doctors = $doctors->where('doctor_schedules.days_id' ,'>=',$day)
+            ->orderBy("doctor_schedules.id", 'asc');
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
