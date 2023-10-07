@@ -163,7 +163,7 @@
                                 <label class="form-label">map latitude - longitude </label>
                                 <!--end::Label-->
                                 <!--begin::Editor-->
-                                <input type="text" name="map_tude" class="form-control mb-2" placeholder="google_map"
+                                <input type="text" name="map_tude" class="form-control mb-2" placeholder="map latitude - longitude"
                                 value="" />
                                                                 <!--end::Editor-->
 
