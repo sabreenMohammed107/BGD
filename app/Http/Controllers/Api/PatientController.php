@@ -364,13 +364,13 @@ class PatientController extends BaseController
             } else if ($lower == 4) {
 
                 $weekMap = [
-                    5 => 1,
-                    6 => 2,
-                    0 => 3,
-                    1 => 4,
-                    2 => 5,
-                    3 => 6,
-                    4 => 7,
+                    6 => 1,
+                    7 => 2,
+                    1 => 3,
+                    2 => 4,
+                    3 => 5,
+                    4 => 6,
+                    5 => 7,
                 ];
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $weekday = $weekMap[$dayOfTheWeek];
