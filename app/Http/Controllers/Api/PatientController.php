@@ -368,10 +368,10 @@ class PatientController extends BaseController
                 2 => 'SU',
                 3 => 'MO',
                 4 => 'TU',
-                5 => 'WE',
+                1 => 'WE',
                 6 => 'TH',
                 7 => 'FR',
-                1 => 'SA',
+                5 => 'SA',
             ];
             $dayOfTheWeek = Carbon::now()->dayOfWeek;
             $weekday = $weekMap[$dayOfTheWeek];
@@ -382,10 +382,10 @@ class PatientController extends BaseController
             $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'=<',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
 
-// foreach($doctorsMapBefor as $ob){
-//       $doctorsMapAfter->push($ob);
-//     // array_push($doctorsMapAfter, $ob);
-// }
+foreach($doctorsMapBefor as $ob){
+      $doctorsMapAfter->push($ob);
+    // array_push($doctorsMapAfter, $ob);
+}
 
 
 
