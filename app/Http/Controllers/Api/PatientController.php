@@ -365,18 +365,18 @@ class PatientController extends BaseController
         else if ($lower == 4) {
 
             $weekMap = [
-                2 => 4,
-                3 => 5,
-                4 => 6,
-                5 => 7,
-                6 => 1,
-                7 => 2,
-                1 => 3,
+                2 => 5,
+                3 => 6,
+                4 => 7,
+                5 => 1,
+                6 => 2,
+                7 => 3,
+                1 => 4,
             ];
             $dayOfTheWeek = Carbon::now()->dayOfWeek;
             $weekday = $weekMap[$dayOfTheWeek];
 
-dd($weekday);
+dd( $dayOfTheWeek);
             $doctorsMapAfter =$doctors
             ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id, $weekday )DESC"));
 
