@@ -378,18 +378,8 @@ class PatientController extends BaseController
 
 
             $doctorsMapAfter =$doctors
-            ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,'>=', $weekday)"));
-            $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<=',$weekday)
-            ->orderBy("doctor_schedules.days_id", 'asc');
+            ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,'>', $weekday)"));
 
-// foreach($doctorsMapBefor as $ob){
-//       $doctorsMapAfter->add($ob);
-//     // array_push($doctorsMapAfter, $ob);
-// }
-
-
-
-// dd();
 $doctors=$doctorsMapAfter;
 
         } else {
