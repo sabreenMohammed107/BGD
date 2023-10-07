@@ -380,7 +380,7 @@ class PatientController extends BaseController
             $doctorsMapAfter =  collect($doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc'));
             $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<',$weekday)
-            ->orderBy("doctor_schedules.days_id", 'asc')->get();
+            ->orderBy("doctor_schedules.days_id", 'asc');
 foreach($doctorsMapBefor as $ob){
      $doctorsMapAfter->push($ob);
     // array_push($doctorsMapAfter, $ob);
@@ -388,7 +388,7 @@ foreach($doctorsMapBefor as $ob){
 
 
 
-$doctors=$doctorsMapAfter;
+return $doctorsMapAfter;
 
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
