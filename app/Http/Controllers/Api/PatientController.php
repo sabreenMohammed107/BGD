@@ -382,7 +382,7 @@ class PatientController extends BaseController
             $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
 
-            $doctors =collect($doctorsMapAfter)->merge(collect($doctorsMapBefor));
+            $doctors =$doctorsMapAfter->toBase()->merge($doctorsMapBefor);
 
 
 
