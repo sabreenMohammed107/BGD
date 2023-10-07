@@ -377,7 +377,7 @@ class PatientController extends BaseController
 
                 $doctorsMapAfter = $doctors->
                 orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday)"))
-                ->orderBy("doctor_schedules.days_id", 'asc');
+                ->orderBy("doctor_schedules.days_id", 'desc');
 
 
                 $doctors = $doctorsMapAfter;
