@@ -360,7 +360,10 @@ class PatientController extends BaseController
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'asc');
             } else if ($lower == 3) {
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'desc');
-            } else {
+            }
+        } else if ($lower == 4) {
+            $doctors = $doctors->orderBy("doctor_clinics.next_day", 'asc');
+        } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
         }
@@ -404,6 +407,7 @@ class PatientController extends BaseController
                 1 => ["id" => 1, "name" => "Higher Cost"],
                 2 => ["id" => 2, "name" => "Name A to Z"],
                 3 => ["id" => 3, "name" => "Name Z to A"],
+                4 =>["id"=>4,"name"=>"Next appointment"],
             ];
         } else {
             $sort = [
@@ -411,6 +415,7 @@ class PatientController extends BaseController
                 1 => ["id" => 1, "name" => "obere Kosten"],
                 2 => ["id" => 2, "name" => "Nennen Sie A bis Z"],
                 3 => ["id" => 3, "name" => "Nennen Sie Z bis A"],
+                4 =>["id"=>4,"name"=>"Nächster Termin"],
             ];
         }
         $page['sort'] = $sort;
