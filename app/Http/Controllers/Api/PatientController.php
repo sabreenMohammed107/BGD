@@ -364,7 +364,7 @@ class PatientController extends BaseController
             }
         else if ($lower == 4) {
             $day = Carbon::now()->dayOfWeek;
-
+dd($day);
             $doctors = $doctors->where('doctor_schedules.days_id' ,'>=',$day)
             ->orderBy("doctor_schedules.days_id", 'asc');
         } else {
