@@ -365,17 +365,17 @@ class PatientController extends BaseController
         else if ($lower == 4) {
 
             $weekMap = [
-                2 => 'SU',
-                3 => 'MO',
-                4 => 'TU',
-                1 => 'WE',
-                6 => 'TH',
-                7 => 'FR',
-                5 => 'SA',
+                2 => 7,
+                3 => 1,
+                4 => 2,
+                5 => 3,
+                6 => 4,
+                7 => 5,
+                1 => 6,
             ];
             $dayOfTheWeek = Carbon::now()->dayOfWeek;
             $weekday = $weekMap[$dayOfTheWeek];
-dd($weekday);
+
 
             $doctorsMapAfter =$doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
@@ -390,7 +390,7 @@ foreach($doctorsMapBefor as $ob){
 
 
 // dd();
-$doctors=$doctorsMapBefor;
+$doctors=$doctorsMapAfter;
 
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
