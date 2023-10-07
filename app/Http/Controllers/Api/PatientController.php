@@ -383,7 +383,7 @@ class PatientController extends BaseController
             ->orderBy("doctor_schedules.days_id", 'asc');
 
 foreach($doctorsMapBefor as $ob){
-      $doctorsMapAfter->push($ob);
+      $doctorsMapAfter->add($ob);
     // array_push($doctorsMapAfter, $ob);
 }
 
