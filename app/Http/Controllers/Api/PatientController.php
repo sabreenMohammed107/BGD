@@ -387,6 +387,7 @@ foreach($doctorsMapBefor as $ob){
 }
 
 
+
 // dd($doctorsMapAfter);
 
         } else {
