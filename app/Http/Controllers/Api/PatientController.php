@@ -377,16 +377,17 @@ class PatientController extends BaseController
             $weekday = $weekMap[$dayOfTheWeek];
 
 
-            $doctorsMapAfter = $doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
-            ->orderBy("doctor_schedules.days_id", 'asc')->get();
-            $doctorsMapBefor =$doctors->where('doctor_schedules.days_id' ,'<',$weekday)
-            ->orderBy("doctor_schedules.days_id", 'asc')->get();
+            $doctorsMapAfter =  collect($doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
+            ->orderBy("doctor_schedules.days_id", 'asc'))->toArray();
+            $doctorsMapBefor = collect($doctors->where('doctor_schedules.days_id' ,'<',$weekday)
+            ->orderBy("doctor_schedules.days_id", 'asc'));
 foreach($doctorsMapBefor as $ob){
-    $doctorsMapAfter->push($ob);
+    // $doctorsMapAfter->marge($doctorsMapBefor);
+    array_push($doctorsMapAfter, $ob);
 }
 
 
-$doctors =$doctorsMapAfter;
+// dd($doctorsMapAfter);
 
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
