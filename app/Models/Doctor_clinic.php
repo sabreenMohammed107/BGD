@@ -27,7 +27,9 @@ class Doctor_clinic extends Model
         'insurance_type_id',
         'visit_fees',
         'en_reservation_notes',
-        'dt_reservation_notes'
+        'dt_reservation_notes',
+        'latitude',
+        'longitude'
     ];
     protected $casts =
     [

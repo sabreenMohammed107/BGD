@@ -183,6 +183,14 @@
 
                                         </div>
                                         <!--end::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label">map latitude - longitude </label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <input type="text" name="map_tude" class="form-control mb-2" placeholder="google_map"
+                                            value="{{ $row->latitude }} , {{ $row->longitude }}" />
+                                                                            <!--end::Editor-->
                                         <!--begin::Input group-->
 
 

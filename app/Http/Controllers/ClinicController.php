@@ -82,7 +82,12 @@ class ClinicController extends Controller
         } else {
             $input['disability_allowed'] = '0';
         }
-
+//save tude
+if ($request->get('map_tude')) {
+  $tude=explode(',', $request->get('map_tude'));
+    $input['latitude'] = $tude[0];
+    $input['longitude'] = $tude[1];
+}
 
         Doctor_clinic::create($input);
         return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');
@@ -153,7 +158,12 @@ class ClinicController extends Controller
         } else {
             $input['disability_allowed'] = '0';
         }
-
+//save tude
+if ($request->get('map_tude')) {
+    $tude=explode(',', $request->get('map_tude'));
+      $input['latitude'] = $tude[0];
+      $input['longitude'] = $tude[1];
+  }
         $row->update($input);
         //schadual
 
