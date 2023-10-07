@@ -361,7 +361,7 @@ class PatientController extends BaseController
             } else if ($lower == 3) {
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'desc');
             }
-        } else if ($lower == 4) {
+        else if ($lower == 4) {
             $doctors = $doctors->orderBy("doctor_clinics.next_day", 'asc');
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
