@@ -17,10 +17,10 @@ use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Favourite_doctor;
-use Carbon\Carbon;
 use App\Models\Medical_field;
 use App\Models\Reservation;
 use App\Notifications\PatientReservationNotification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -361,28 +361,26 @@ class PatientController extends BaseController
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'asc');
             } else if ($lower == 3) {
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'desc');
-            }
-        else if ($lower == 4) {
+            } else if ($lower == 4) {
 
-            $weekMap = [
-                2 => 5,
-                3 => 6,
-                4 => 7,
-                5 => 1,
-                6 => 2,
-                7 => 3,
-                1 => 4,
-            ];
-            $dayOfTheWeek = Carbon::now()->dayOfWeek;
-            $weekday = $weekMap[$dayOfTheWeek];
+                $weekMap = [
+                    5 => 1,
+                    6 => 2,
+                    7 => 3,
+                    1 => 4,
+                    2 => 5,
+                    3 => 6,
+                    4 => 7,
+                ];
+                $dayOfTheWeek = Carbon::now()->dayOfWeek;
+                $weekday = $weekMap[$dayOfTheWeek];
 
+                $doctorsMapAfter = $doctors
+                    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id, $weekday )"));
 
-            $doctorsMapAfter =$doctors
-            ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id, $weekday )Desc"));
+                $doctors = $doctorsMapAfter;
 
-$doctors=$doctorsMapAfter;
-
-        } else {
+            } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
         }
@@ -426,7 +424,7 @@ $doctors=$doctorsMapAfter;
                 1 => ["id" => 1, "name" => "Higher Cost"],
                 2 => ["id" => 2, "name" => "Name A to Z"],
                 3 => ["id" => 3, "name" => "Name Z to A"],
-                4 =>["id"=>4,"name"=>"Next appointment"],
+                4 => ["id" => 4, "name" => "Next appointment"],
             ];
         } else {
             $sort = [
@@ -434,7 +432,7 @@ $doctors=$doctorsMapAfter;
                 1 => ["id" => 1, "name" => "obere Kosten"],
                 2 => ["id" => 2, "name" => "Nennen Sie A bis Z"],
                 3 => ["id" => 3, "name" => "Nennen Sie Z bis A"],
-                4 =>["id"=>4,"name"=>"Nächster Termin"],
+                4 => ["id" => 4, "name" => "Nächster Termin"],
             ];
         }
         $page['sort'] = $sort;
