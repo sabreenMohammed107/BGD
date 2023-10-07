@@ -388,7 +388,7 @@ foreach($doctorsMapBefor as $ob){
 
 
 
-$doctors=$doctorsMapAfter;
+$doctors=collect($doctorsMapAfter);
 
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
