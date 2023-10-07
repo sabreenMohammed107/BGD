@@ -377,9 +377,9 @@ class PatientController extends BaseController
             $weekday = $weekMap[$dayOfTheWeek];
 
 
-            $doctorsMapAfter =$doctors->where('doctor_schedules.days_id' ,'>', int($weekday))
+            $doctorsMapAfter =$doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
-            $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<=',int($weekday))
+            $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<=',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
 
 // foreach($doctorsMapBefor as $ob){
