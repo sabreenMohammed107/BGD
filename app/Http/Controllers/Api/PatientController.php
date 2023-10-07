@@ -375,27 +375,17 @@ class PatientController extends BaseController
             ];
             $dayOfTheWeek = Carbon::now()->dayOfWeek;
             $weekday = $weekMap[$dayOfTheWeek];
-            $new_date_array = array();
-            $count = count($weekMap);
-            foreach($weekMap as $key=> $dat){
-               if(strpos($dat, $weekday) !== false){ // get the key where input day matched
-                    for ($i =$key; $i<$count;$i++){ // add next all records to the new array till the end of the original array
-                        if(isset($data[$i])){
-                            $new_date_array[] = $weekMap[$i];
-                        }
 
-                    }
-                    for ($j=0; $j<=$key-1;$j++){ // add previous one before the matched key to the new array
-                        if(isset($data[$j])){
-                            $new_date_array[] = $weekMap[$j];
-                        }
 
-                    }
-               }
-            }
-            dd($new_date_array);
-            $doctors = $doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
+            $doctorsMapAfter = $doctors->where('doctor_schedules.days_id' ,'>=',$weekday)
             ->orderBy("doctor_schedules.days_id", 'asc');
+            $doctorsMapBefor = $doctors->where('doctor_schedules.days_id' ,'<',$weekday)
+            ->orderBy("doctor_schedules.days_id", 'asc');
+
+            $doctors = array_merge($doctorsMapAfter,$doctorsMapBefor );
+
+
+
         } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
