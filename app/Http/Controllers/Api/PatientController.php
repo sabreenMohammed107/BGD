@@ -379,16 +379,23 @@ class PatientController extends BaseController
 //                 $day = Carbon::parse($nextdate)->dayOfWeek;
 
 // $weeknextday = $weekMap[$day];
-                $doctorsMapAfter = $doctors
+                // $doctorsMapAfter = $doctors
                 //  ->orderBy("doctor_schedules.id", 'asc')
                 // ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
-                ->orderBy(\DB::raw("FIELD(doctor_schedules.days_id,$weekday)"));
-               ;
-        //     $doctorsMapAfter = $doctors
-        //     ->whereBetween("doctor_schedules.days_id", [$weekday,$weeknextday])
-        //     ->orderBy('doctor_schedules.days_id','asc')
-        //   ;
+                            //   ;
 
+            $doctorsMapAfter = $doctors
+            ->where("doctor_schedules.days_id",'>=', $weekday)
+            ->orderBy('doctor_schedules.days_id','asc')
+          ;
+
+          $doctorsMapbefor = $doctors
+          ->where("doctor_schedules.days_id",'<=', $weekday)
+          ->orderBy('doctor_schedules.days_id','asc')
+        ;
+foreach($doctorsMapbefor as $ob){
+    $doctorsMapAfter->push($ob);
+}
                 $doctors = $doctorsMapAfter;
 
             } else {
