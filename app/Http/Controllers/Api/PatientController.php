@@ -365,7 +365,7 @@ class PatientController extends BaseController
 
                 $weekMap = [
                     6 => 1,
-                    7 => 2,
+                    0 => 2,
                     1 => 3,
                     2 => 4,
                     3 => 5,
