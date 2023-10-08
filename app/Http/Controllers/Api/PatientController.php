@@ -376,7 +376,7 @@ class PatientController extends BaseController
                 $weekday = $weekMap[$dayOfTheWeek];
 
                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
-                $day = Carbon::createFromFormat('d/m/Y', $nextdate)->dayOfWeek;
+                $day = Carbon::parse($nextdate)->dayOfWeek;
                 dd($day);
 // dd($nextdate);
 $weeknextday = $weekMap[$nextdate];
