@@ -374,10 +374,11 @@ class PatientController extends BaseController
                 ];
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $weekday = $weekMap[$dayOfTheWeek];
-dd([$dayOfTheWeek,$weekday]);
-                $doctorsMapAfter = $doctors->
-                orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday)"))
-                ->orderBy("doctor_schedules.days_id", 'asc');
+
+                $doctorsMapAfter = $doctors
+                ->orderBy("doctor_schedules.days_id", 'asc')
+                ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday)"))
+               ;
 
 
                 $doctors = $doctorsMapAfter;
