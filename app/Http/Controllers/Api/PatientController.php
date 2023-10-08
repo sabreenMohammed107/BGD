@@ -375,32 +375,19 @@ class PatientController extends BaseController
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $weekday = $weekMap[$dayOfTheWeek];
 
-//                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
-//                 $day = Carbon::parse($nextdate)->dayOfWeek;
+                $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
+                $weeknextday = $weekMap[$nextdate];
 
-// $weeknextday = $weekMap[$day];
-                // $doctorsMapAfter = $doctors
-                //  ->orderBy("doctor_schedules.id", 'asc')
-                // ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
-                            //   ;
+                $doctorsMapAfter = $doctors
+                 ->orderBy("doctor_schedules.days_id", 'asc')
+            //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
+               ;
+        //     $doctorsMapAfter = $doctors
+        //     ->whereBetween("doctor_schedules.days_id", [$weekday,$nextdate])
+        //     ->orderBy('doctor_schedules.days_id','asc')
+        //   ;
 
-            $doctorsMapAfter = $doctors
-            ->where("doctor_schedules.days_id",'>=', $weekday)
-            ->orderBy('doctor_schedules.days_id','asc')->get();
-
-          $doctorsMapbefor = $doctors
-          ->where("doctor_schedules.days_id",'<=', $weekday)
-          ->orderBy('doctor_schedules.days_id','asc')->get();
-
-
-          $sortedUsers = collect();
-          foreach($doctorsMapAfter as $ob){
-            $sortedUsers->push($ob);
-        }
-foreach($doctorsMapbefor as $ob){
-    $sortedUsers->push($ob);
-}
-                $doctors = $sortedUsers;
+                $doctors = $doctorsMapAfter;
 
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
