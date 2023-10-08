@@ -386,11 +386,11 @@ class PatientController extends BaseController
 
             $doctorsMapAfter = $doctors
             ->where("doctor_schedules.days_id",'>=', $weekday)
-            ->orderBy('doctor_schedules.days_id','asc');
+            ->orderBy('doctor_schedules.days_id','asc')->toArray();
 
           $doctorsMapbefor = $doctors
           ->where("doctor_schedules.days_id",'<=', $weekday)
-          ->orderBy('doctor_schedules.days_id','asc') ;
+          ->orderBy('doctor_schedules.days_id','asc')->toArray();
 
 
           $sortedUsers = collect();
