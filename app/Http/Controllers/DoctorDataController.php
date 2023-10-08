@@ -124,7 +124,10 @@ class DoctorDataController extends Controller
         $docId = Auth::guard('doctor')->user()->id;
         $status = Reservation_status::get();
 
-        $rows = Reservation::with('status')->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')->where('doctor_clinics.doctor_id', $docId)->select('reservations.*')->orderBy("reservation_date", "Desc")->get();
+        $rows = Reservation::with('status')
+        ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
+        ->where('doctor_clinics.doctor_id', $docId)
+        ->select('reservations.*')->orderBy("reservation_date", "Desc")->get();
 
         return view($this->viewName . 'all', compact('rows', 'status'));
 
@@ -135,10 +138,14 @@ class DoctorDataController extends Controller
     public function filter(Request $request)
     {
         \Log::info($request->all());
-
+        $docId = Auth::guard('doctor')->user()->id;
+        $status = Reservation_status::get();
         $name = $request->get('name');
         //search func
-        $opo = Reservation::select('*');
+        $opo =Reservation::with('status')
+        ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
+        ->where('doctor_clinics.doctor_id', $docId)
+        ->select('reservations.*');
 
         if ($request->get("filter_date") && $request->get("filter_date") == 2) {
 
