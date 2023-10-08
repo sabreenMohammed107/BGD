@@ -127,7 +127,7 @@ class DoctorDataController extends Controller
         $rows = Reservation::with('status')
         ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
         ->where('doctor_clinics.doctor_id', $docId)
-        ->select('reservations.*')->orderBy("reservation_date", "Desc")->get();
+        ->select('reservations.*')->orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'all', compact('rows', 'status'));
 

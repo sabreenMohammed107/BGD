@@ -68,6 +68,7 @@
                                 <!--end::Label-->
                                 <select class="form-select form-select-solid" id="filter_date" name="filter_date"
                                     data-control="select2" data-placeholder=" reservation date ">
+                                    <option value=""> reservation date</option>
                                     <option value="1">reservation date : asc </option>
                                     <option value="2">reservation date : desc</option>
 
