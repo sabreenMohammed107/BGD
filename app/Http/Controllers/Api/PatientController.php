@@ -375,18 +375,18 @@ class PatientController extends BaseController
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $weekday = $weekMap[$dayOfTheWeek];
 
-                $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
-                $day = Carbon::parse($nextdate)->dayOfWeek;
+//                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
+//                 $day = Carbon::parse($nextdate)->dayOfWeek;
 
-$weeknextday = $weekMap[$day];
-            //     $doctorsMapAfter = $doctors
-            //      ->orderBy("doctor_schedules.days_id", 'asc')
-            //     ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
-            //    ;
-            $doctorsMapAfter = $doctors
-            ->whereBetween("doctor_schedules.days_id", [$weekday,$weeknextday])
-            ->orderBy('doctor_schedules.days_id','asc')
-          ;
+// $weeknextday = $weekMap[$day];
+                $doctorsMapAfter = $doctors
+                 ->orderBy("doctor_schedules.days_id", 'asc')
+                ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
+               ;
+        //     $doctorsMapAfter = $doctors
+        //     ->whereBetween("doctor_schedules.days_id", [$weekday,$weeknextday])
+        //     ->orderBy('doctor_schedules.days_id','asc')
+        //   ;
 
                 $doctors = $doctorsMapAfter;
 
