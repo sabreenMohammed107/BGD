@@ -377,9 +377,8 @@ class PatientController extends BaseController
 
                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
                 $day = Carbon::parse($nextdate)->dayOfWeek;
-                dd($day);
-// dd($nextdate);
-$weeknextday = $weekMap[$nextdate];
+
+$weeknextday = $weekMap[$day];
             //     $doctorsMapAfter = $doctors
             //      ->orderBy("doctor_schedules.days_id", 'asc')
             //     ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
