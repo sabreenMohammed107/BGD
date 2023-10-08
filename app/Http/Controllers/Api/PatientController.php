@@ -381,7 +381,8 @@ class PatientController extends BaseController
 // $weeknextday = $weekMap[$day];
                 $doctorsMapAfter = $doctors
                 //  ->orderBy("doctor_schedules.id", 'asc')
-                ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
+                // ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
+                ->orderBy(\DB::raw("FIELD(doctor_schedules.days_id,$weekday)"));
                ;
         //     $doctorsMapAfter = $doctors
         //     ->whereBetween("doctor_schedules.days_id", [$weekday,$weeknextday])
