@@ -372,32 +372,36 @@ class PatientController extends BaseController
                     4 => 6,
                     5 => 7,
                 ];
+
+                $weekdd =  collect([
+                    Carbon::now()->dayOfWeek => Carbon::now(),
+                    Carbon::now()->addDays(1)->dayOfWeek => Carbon::now()->addDays(1),
+                    Carbon::now()->addDays(2)->dayOfWeek => Carbon::now()->addDays(2),
+                    Carbon::now()->addDays(3)->dayOfWeek => Carbon::now()->addDays(3),
+                    Carbon::now()->addDays(4)->dayOfWeek => Carbon::now()->addDays(4),
+                    Carbon::now()->addDays(5)->dayOfWeek => Carbon::now()->addDays(5),
+                    Carbon::now()->addDays(6)->dayOfWeek => Carbon::now()->addDays(6),
+                ]);
+
+                $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
+    return isset($weekMap[$key]) ? $weekMap[$key] : $key;
+});
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
-                $weekday = $weekMap[$dayOfTheWeek];
+                // $dayOfTheWeek = Carbon::now()->dayOfWeek;
+
+                $weekday = $resultCollection[$dayOfTheWeek];
 
                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
 
-
-                // $weeknextday = $weekMap[$nextdate];
-                dd(Carbon::now()->addDays(1)->dayOfWeek);
-// $keys = [ Carbon::now(), Carbon::now()->addDays(1), Carbon::now()->addDays(2),Carbon::now()->addDays(3),
-// Carbon::now()->addDays(4),Carbon::now()->addDays(5),Carbon::now()->addDays(6),Carbon::now()->addDays(7)];
-// $values = [1, 2, 3,4,5,6,7];
-
-// $collection = \Illuminate\Support\Collection::make($keys); // state: ['B', 'C', 'A']
-// $combined = $collection->combine($values); // state: ['B' => 1, 'C' => 2, 'A' => 3]
-// $sorted = $combined->sortKeys(); // state: ['A' => 3, 'B' => 1, 'C' => 2]
-
-// $sorted->toArray(); // to get the result back as array like shown above
                 $doctorsMapAfter = $doctors
-                 ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->sortBy($weekday);
+                //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
                 ;
-            //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
-               ;
-        //     $doctorsMapAfter = $doctors
-        //     ->whereBetween("doctor_schedules.days_id", [$weekday,$nextdate])
-        //     ->orderBy('doctor_schedules.days_id','asc')
-        //   ;
+                //     $doctorsMapAfter = $doctors
+                //     ->whereBetween("doctor_schedules.days_id", [$weekday,$nextdate])
+                //     ->orderBy('doctor_schedules.days_id','asc')
+                //   ;
 
                 $doctors = $doctorsMapAfter;
 
