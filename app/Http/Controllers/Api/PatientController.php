@@ -388,10 +388,10 @@ class PatientController extends BaseController
                 });
 
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
+                $dFake = $weekMap[$dayOfTheWeek];
+                $weekday = $resultCollection[$dFake];
 
-                $weekday = $resultCollection[$dayOfTheWeek];
 
-                dd($weekday);
 
                 $doctorsMapAfter = $doctors
                     ->orderBy("doctor_schedules.days_id", 'asc');
