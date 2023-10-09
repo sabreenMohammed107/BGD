@@ -379,12 +379,19 @@ class PatientController extends BaseController
 
 
                 $weeknextday = $weekMap[$nextdate];
+                dd(Carbon::now()->addDays(1)->dayOfWeek);
+// $keys = [ Carbon::now(), Carbon::now()->addDays(1), Carbon::now()->addDays(2),Carbon::now()->addDays(3),
+// Carbon::now()->addDays(4),Carbon::now()->addDays(5),Carbon::now()->addDays(6),Carbon::now()->addDays(7)];
+// $values = [1, 2, 3,4,5,6,7];
 
+// $collection = \Illuminate\Support\Collection::make($keys); // state: ['B', 'C', 'A']
+// $combined = $collection->combine($values); // state: ['B' => 1, 'C' => 2, 'A' => 3]
+// $sorted = $combined->sortKeys(); // state: ['A' => 3, 'B' => 1, 'C' => 2]
+
+// $sorted->toArray(); // to get the result back as array like shown above
                 $doctorsMapAfter = $doctors
                  ->orderBy("doctor_schedules.days_id", 'asc')
-                 ->map(function ($row) {
-   return $row->dayOfTheWeek;
-})->sortBy('dayOfTheWeek');
+                ;
             //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
                ;
         //     $doctorsMapAfter = $doctors
