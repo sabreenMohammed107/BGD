@@ -386,25 +386,19 @@ class PatientController extends BaseController
                 $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
     return isset($weekMap[$key]) ? $weekMap[$key] : $key;
 });
+return $resultCollection;
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
-                // $dayOfTheWeek = Carbon::now()->dayOfWeek;
+
 
                 $weekday = $resultCollection[$dayOfTheWeek];
 
-                $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
 
-                // $doctorsMapAfter = $doctors
-                //     ->orderBy("doctor_schedules.days_id", 'asc')
-                //     ->sortBy($weekday);
-                //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
-                ;
-                //     $doctorsMapAfter = $doctors
-                //     ->whereBetween("doctor_schedules.days_id", [$weekday,$nextdate])
-                //     ->orderBy('doctor_schedules.days_id','asc')
-                //   ;
 
-                $doctors = $doctors
-                ->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get()->sortBy($weekday);
+                $doctorsMapAfter = $doctors
+                    ->orderBy("doctor_schedules.days_id", 'asc');
+                $doctors = $doctorsMapAfter;
+                $doctors = $doctors->groupBy('doctor_clinics.id')->get()->sortBy($weekday);
+                return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
@@ -420,7 +414,7 @@ class PatientController extends BaseController
         //         $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
         //     }
         // }
-        // $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+        $doctors = $doctors->groupBy('doctor_clinics.id')->get();
 
         //  return $doctors;
         //
