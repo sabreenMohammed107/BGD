@@ -393,9 +393,9 @@ class PatientController extends BaseController
 
                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
 
-                $doctorsMapAfter = $doctors
-                    ->orderBy("doctor_schedules.days_id", 'asc')
-                    ->sortBy($weekday);
+                // $doctorsMapAfter = $doctors
+                //     ->orderBy("doctor_schedules.days_id", 'asc')
+                //     ->sortBy($weekday);
                 //    ->orderByRaw(\DB::raw("FIELD(doctor_schedules.days_id,$weekday) asc"))
                 ;
                 //     $doctorsMapAfter = $doctors
@@ -403,7 +403,8 @@ class PatientController extends BaseController
                 //     ->orderBy('doctor_schedules.days_id','asc')
                 //   ;
 
-                $doctors = $doctorsMapAfter;
+                $doctors = $doctors
+                ->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get()->sortBy($weekday);
 
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
@@ -419,7 +420,7 @@ class PatientController extends BaseController
         //         $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
         //     }
         // }
-        $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+        // $doctors = $doctors->groupBy('doctor_clinics.id')->get();
 
         //  return $doctors;
         //
