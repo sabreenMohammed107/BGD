@@ -373,7 +373,7 @@ class PatientController extends BaseController
                     5 => 7,
                 ];
 
-                $weekdd = collect([
+                $weekdd = [
                     Carbon::now()->dayOfWeek => Carbon::now(),
                     Carbon::now()->addDays(1)->dayOfWeek => Carbon::now()->addDays(1),
                     Carbon::now()->addDays(2)->dayOfWeek => Carbon::now()->addDays(2),
@@ -381,15 +381,15 @@ class PatientController extends BaseController
                     Carbon::now()->addDays(4)->dayOfWeek => Carbon::now()->addDays(4),
                     Carbon::now()->addDays(5)->dayOfWeek => Carbon::now()->addDays(5),
                     Carbon::now()->addDays(6)->dayOfWeek => Carbon::now()->addDays(6),
-                ]);
+                ];
 
-                $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
-                    return isset($weekMap[$key]) ? $weekMap[$key] : $key;
-                });
+                // $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
+                //     return isset($weekMap[$key]) ? $weekMap[$key] : $key;
+                // });
 
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $dFake = $weekMap[$dayOfTheWeek];
-                $weekday = $resultCollection[$dFake];
+                $weekday = $weekdd[$dFake];
 
 
 
