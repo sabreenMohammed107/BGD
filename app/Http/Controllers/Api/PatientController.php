@@ -378,7 +378,7 @@ class PatientController extends BaseController
                 $nextdate = Carbon::now()->addDays(6); //dynamic day(5days, 10days) //2019-08-01 00:00:00
 
 
-                $weeknextday = $weekMap[$nextdate];
+                // $weeknextday = $weekMap[$nextdate];
                 dd(Carbon::now()->addDays(1)->dayOfWeek);
 // $keys = [ Carbon::now(), Carbon::now()->addDays(1), Carbon::now()->addDays(2),Carbon::now()->addDays(3),
 // Carbon::now()->addDays(4),Carbon::now()->addDays(5),Carbon::now()->addDays(6),Carbon::now()->addDays(7)];
