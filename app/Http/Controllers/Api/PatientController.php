@@ -386,13 +386,13 @@ class PatientController extends BaseController
                 $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
     return isset($weekMap[$key]) ? $weekMap[$key] : $key;
 });
-return $resultCollection;
+
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
 
 
                 $weekday = $resultCollection[$dayOfTheWeek];
 
-
+dd($weekday);
 
                 $doctorsMapAfter = $doctors
                     ->orderBy("doctor_schedules.days_id", 'asc');
