@@ -94,7 +94,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
         return 'today';
     }else{
         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
-        $avDayn=DayNew::where('id',$schadn)->first();
+        $avDayn=DayNew::where('id',$schadn->days_id)->first();
         return $avDayn->en_day;
     }
 
