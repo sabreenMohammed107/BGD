@@ -383,20 +383,20 @@ class PatientController extends BaseController
                     Carbon::now()->addDays(6)->dayOfWeek => Carbon::now()->addDays(6),
                 ];
 
-                // $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
-                //     return isset($weekMap[$key]) ? $weekMap[$key] : $key;
-                // });
+                $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
+                    return isset($weekMap[$key]) ? $weekMap[$key] : $key;
+                });
 
-                $dayOfTheWeek = Carbon::now()->dayOfWeek;
-                $dFake = $weekMap[$dayOfTheWeek];
-                $weekday = $weekdd[$dFake];
+//                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
+//                 $dFake = $weekMap[$dayOfTheWeek];
+//                 $weekday = $weekdd[$dFake];
 
-
+// dd($weekday);
 
                 // $doctorsMapAfter = $doctors
                 //     ->orderBy("doctor_schedules.days_id", 'asc');
                 // $doctors = $doctorsMapAfter;
-                $doctors = $doctors->groupBy('doctor_clinics.id')->get()->sortBy($weekday);
+                $doctors = $doctors->groupBy('doctor_clinics.id')->orderBy("doctor_schedules.days_id", 'asc')->get()->sortBy($resultCollection);
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
             } else {
