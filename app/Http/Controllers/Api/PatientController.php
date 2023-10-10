@@ -376,15 +376,15 @@ class PatientController extends BaseController
 
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $dFake = $weekMap[$dayOfTheWeek];
-
+dd($dFake);
                 $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
-                    ->orderBy("doctor_schedules.days_id", 'asc')->get();
+                    ->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
                 $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
                     ->orderBy("doctor_schedules.days_id", 'desc')->groupBy('doctor_clinics.id')->get();
 
                    //get days
-                // $doctors = $doctorsMapAfter->toBase()->merge($doctorsMapBefore);
-                $doctors = $doctorsMapAfter;
+                $doctors = $doctorsMapAfter->toBase()->merge($doctorsMapBefore);
+
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
             } else {
