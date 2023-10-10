@@ -391,9 +391,9 @@ class PatientController extends BaseController
                 $dFake = $weekMap[$dayOfTheWeek];
                 $weekday = $resultCollection[$dFake];
 
-                $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
+                $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dayOfTheWeek)
                 ->orderBy('doctor_clinics.id','asc')->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
-                $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
+                $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dayOfTheWeek)
                 ->orderBy('doctor_clinics.id','asc')->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
 
                    //get days
