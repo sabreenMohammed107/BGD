@@ -72,7 +72,17 @@ public function getClinicIdAttribute()
 }
       public function getNextDayAttribute()
     {
-
+        $weekMap = [
+            6 => 1,
+            0 => 2,
+            1 => 3,
+            2 => 4,
+            3 => 5,
+            4 => 6,
+            5 => 7,
+        ];
+        $dayOfTheWeek = Carbon::now()->dayOfWeek;
+        $dFake = $weekMap[$dayOfTheWeek];
         $day = Carbon::now()->dayOfWeek;
 // $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->min('days_id');
 $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
@@ -80,7 +90,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
 
          $avDay=DayNew::where('id',$schad)->first();
    if($avDay){
-    if($day == $schad){
+    if($dFake == $schad){
         return 'today';
     }else{
         return $avDay->en_day;
