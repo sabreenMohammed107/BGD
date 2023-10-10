@@ -96,11 +96,21 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
        if($schadn){
         $avDayn=DayNew::where('id',$schadn->days_id)->first();
-        return $avDayn->en_day ?? '';
+        if($dFake == $schadn->days_id){
+            return 'today';
+        }else{
+            return $avDayn->en_day ?? '';
+        }
+
        }else{
         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->first();
         $avDayn=DayNew::where('id',$schadn->days_id)->first();
-        return $avDayn->en_day ?? '';
+
+        if($dFake == $schadn->days_id){
+            return 'today';
+        }else{
+            return $avDayn->en_day ?? '';
+        }
        }
 
     }
