@@ -373,19 +373,33 @@ class PatientController extends BaseController
                     5 => 7,
                 ];
 
+                $weekdd = collect([
+                    Carbon::now()->dayOfWeek => Carbon::now(),
+                    Carbon::now()->addDays(1)->dayOfWeek => Carbon::now()->addDays(1),
+                    Carbon::now()->addDays(2)->dayOfWeek => Carbon::now()->addDays(2),
+                    Carbon::now()->addDays(3)->dayOfWeek => Carbon::now()->addDays(3),
+                    Carbon::now()->addDays(4)->dayOfWeek => Carbon::now()->addDays(4),
+                    Carbon::now()->addDays(5)->dayOfWeek => Carbon::now()->addDays(5),
+                    Carbon::now()->addDays(6)->dayOfWeek => Carbon::now()->addDays(6),
+                ]);
+
+                $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
+                    return isset($weekMap[$key]) ? $weekMap[$key] : $key;
+                });
 
                 $dayOfTheWeek = Carbon::now()->dayOfWeek;
                 $dFake = $weekMap[$dayOfTheWeek];
+                $weekday = $resultCollection[$dFake];
 
                 $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
-                    ->orderBy("doctor_schedules.days_id", 'asc')->get();
+                ->orderBy('doctor_clinics.id','asc')->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
                 $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
-                    ->orderBy("doctor_schedules.days_id", 'desc')->get();
+                ->orderBy('doctor_clinics.id','asc')->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
 
                    //get days
                 $doctors = $doctorsMapAfter->toBase()->merge($doctorsMapBefore);
-
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+
 
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
