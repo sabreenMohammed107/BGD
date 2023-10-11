@@ -85,48 +85,11 @@ public function getClinicIdAttribute()
         $dFake = $weekMap[$dayOfTheWeek];
         $day = Carbon::now()->dayOfWeek;
 // $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->min('days_id');
-// $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
+$schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
 
 
-//          $avDay=DayNew::where('id',$schad)->first();
-//    if($avDay){
-//     if($dFake == $schad){
-//         return 'today';
-//     }else if($dFake < $schad){
-//         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
-//        if($schadn){
-//         $avDayn=DayNew::where('id',$schadn->days_id)->first();
-//         if($dFake == $schadn->days_id){
-//             return 'today';
-//         }else{
-//             return $avDayn->en_day ?? '';
-//         }
-
-//        }
-//     }else{
-//         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->first();
-//         $avDayn=DayNew::where('id',$schadn->days_id)->first();
-
-//         if($dFake == $schadn->days_id){
-//             return 'today';
-//         }else{
-//             return $avDayn->en_day ?? '';
-//         }
-//        }
-
-//     }
-
-
-
-
-//    else{
-//     return '';
-//    }
-
-$schads = Doctor_schedule::where('clinic_id',  $this->id)->pluck('days_id');
-foreach($schads as $schad){
-    $avDay=DayNew::where('id',$schad)->first();
-       if($avDay){
+         $avDay=DayNew::where('id',$schad)->first();
+   if($avDay){
     if($dFake == $schad){
         return 'today';
     }else if($dFake < $schad){
@@ -159,7 +122,7 @@ foreach($schads as $schad){
    else{
     return '';
    }
-}
+
     }
     public function getSchdualAttribute()
     {
