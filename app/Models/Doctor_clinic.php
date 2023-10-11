@@ -114,7 +114,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
         }
        }
 
-    }
+
 
    }
 
