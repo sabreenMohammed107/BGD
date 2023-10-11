@@ -402,7 +402,7 @@ class PatientController extends BaseController
 
                    //get days
 
-                 $doctorsMapAfter->merge($doctorsMapBefore);
+                   $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
 
