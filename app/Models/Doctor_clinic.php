@@ -96,7 +96,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
     }
     else if($dFake <= $schad){
 
-        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
+        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->first();
         $avDayn=DayNew::where('id',$schadn->days_id)->first();
 
         if($dFake == $schadn->days_id){
@@ -107,7 +107,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
     }
     else{
 
-        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->first();
+        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->first();
         $avDayn=DayNew::where('id',$schadn->days_id)->first();
 
         if($dFake == $schadn->days_id){
