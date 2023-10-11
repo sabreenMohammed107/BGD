@@ -92,7 +92,7 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
    if($avDay){
     if($dFake == $schad){
         return 'today';
-    }else if($dFake < $schad){
+    }else if($dFake <= $schad){
         $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
        if($schadn){
         $avDayn=DayNew::where('id',$schadn->days_id)->first();
