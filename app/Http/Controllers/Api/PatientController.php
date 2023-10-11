@@ -394,11 +394,16 @@ class PatientController extends BaseController
                 $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')
                 ->get();
+
+                $all=$doctors->orderBy("doctor_schedules.days_id", 'asc')
+                ->get();
+
                 $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')->get();
 
                    //get days
-                $doctors = $doctorsMapAfter->merge($doctorsMapBefore);
+                $doctors =$all;
+                // $doctorsMapAfter->merge($doctorsMapBefore);
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 
 
