@@ -93,28 +93,29 @@ $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
     if($dFake == $schad){
         dd($schad);
         return 'today';
-    }else if($dFake <= $schad){
-        dd($schad);
-        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
-        $avDayn=DayNew::where('id',$schadn->days_id)->first();
-
-        if($dFake == $schadn->days_id){
-            return 'today';
-        }else{
-            return $avDayn->en_day ?? '';
-        }
     }
-    else{
-        dd($schad);
-        $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->first();
-        $avDayn=DayNew::where('id',$schadn->days_id)->first();
+    // else if($dFake <= $schad){
+    //     dd($schad);
+    //     $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $dFake)->first();
+    //     $avDayn=DayNew::where('id',$schadn->days_id)->first();
 
-        if($dFake == $schadn->days_id){
-            return 'today';
-        }else{
-            return $avDayn->en_day ?? '';
-        }
-       }
+    //     if($dFake == $schadn->days_id){
+    //         return 'today';
+    //     }else{
+    //         return $avDayn->en_day ?? '';
+    //     }
+    // }
+    // else{
+    //     dd($schad);
+    //     $schadn = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '<', $dFake)->first();
+    //     $avDayn=DayNew::where('id',$schadn->days_id)->first();
+
+    //     if($dFake == $schadn->days_id){
+    //         return 'today';
+    //     }else{
+    //         return $avDayn->en_day ?? '';
+    //     }
+    //    }
 
 
 
