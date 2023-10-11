@@ -16,6 +16,7 @@ use App\Models\Clinic_review;
 use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
+use App\Models\Doctor_schedule;
 use App\Models\Favourite_doctor;
 use App\Models\Medical_field;
 use App\Models\Reservation;
@@ -397,8 +398,9 @@ class PatientController extends BaseController
                 $doctorsMapAfterIds = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')
                 ->pluck('doctor_clinics.id');
-                dd($doctorsMapAfterIds);
-                $doctorsMapBefore = $doctors->whereNotIn('doctor_schedules.days_id',[$doctorsMapAfterIds])
+                $scadIds=Doctor_schedule::whereIn('clinic_id',  $doctorsMapAfterIds)
+                ->where('Doctor_schedule', '>=', $dFake)->pluck('id');
+                $doctorsMapBefore = $doctors->whereNotIn('doctor_schedules.id',[$scadIds])
 
                 ->orderBy("doctor_schedules.days_id", 'asc')->get();
                    //get days
