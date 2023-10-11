@@ -16,7 +16,6 @@ use App\Models\Clinic_review;
 use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
-use App\Models\Doctor_schedule;
 use App\Models\Favourite_doctor;
 use App\Models\Medical_field;
 use App\Models\Reservation;
@@ -394,16 +393,10 @@ class PatientController extends BaseController
 
                 $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')
-                ->groupBy('doctor_clinics.id')->get();
-                $doctorsMapAfterIds = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
-                ->orderBy("doctor_schedules.days_id", 'asc')
-                ->pluck('doctor_clinics.id');
-                $scadIds=Doctor_schedule::whereIn('clinic_id',  $doctorsMapAfterIds)
-                ->where('days_id', '>=', $dFake)->pluck('id');
-                dd($scadIds);
-                $doctorsMapBefore = $doctors->whereNotIn('doctor_schedules.id',[$scadIds])
-
+                ->get();
+                $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')->get();
+
                    //get days
                 $doctors = $doctorsMapAfter->merge($doctorsMapBefore);
                 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
