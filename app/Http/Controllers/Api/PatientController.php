@@ -396,7 +396,7 @@ class PatientController extends BaseController
                 ->groupBy('doctor_clinics.id')->get();
                 $doctorsMapAfterIds = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
                 ->orderBy("doctor_schedules.days_id", 'asc')
-                ->pulck('doctor_schedules.id');
+                ->pluck('doctor_schedules.id');
                 $doctorsMapBefore = $doctors->whereNotIn('doctor_schedules.days_id',[$doctorsMapAfterIds])
 
                 ->orderBy("doctor_schedules.days_id", 'asc')->get();
