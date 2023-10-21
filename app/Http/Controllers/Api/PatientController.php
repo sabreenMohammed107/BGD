@@ -407,7 +407,7 @@ class PatientController extends BaseController
                 // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 // new testing
 $scadsaft=Doctor_schedule::where('days_id', '>=', $dFake) ->orderBy("days_id", 'asc')->pluck('id');
-$scadsbef=Doctor_schedule::where('days_id', '<', $dFake) ->orderBy("days_id", 'asc')->pluck('id');
+$scadsbef=Doctor_schedule::where('days_id', '<=', $dFake) ->orderBy("days_id", 'asc')->pluck('id');
 $doctorsTest= $scadsaft->merge($scadsbef);
 dd([$scadsaft,$scadsbef]);
 $doctors = $doctors->whereIn("doctor_schedules.id", $doctorsTest)->get();
