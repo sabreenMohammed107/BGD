@@ -16,6 +16,7 @@ use App\Models\Clinic_review;
 use App\Models\DayNew;
 use App\Models\Doctor;
 use App\Models\Doctor_clinic;
+use App\Models\Doctor_schedule;
 use App\Models\Favourite_doctor;
 use App\Models\Medical_field;
 use App\Models\Reservation;
@@ -403,9 +404,13 @@ class PatientController extends BaseController
                    //get days
 
                    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
-                return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
-
-
+                // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+// new testing
+$scadsaft=Doctor_schedule::where('days_id', '>=', $dFake) ->orderBy("days_id", 'asc')->get();
+$scadsbef=Doctor_schedule::where('days_id', '<', $dFake) ->orderBy("days_id", 'asc')->get();
+$doctorsTest= $scadsaft->merge($scadsbef)->pluck('id');
+$doctors = $doctors->whereIn("doctor_schedules.id", $doctorsTest);
+return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
