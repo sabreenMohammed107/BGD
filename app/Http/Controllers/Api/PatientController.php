@@ -403,7 +403,7 @@ class PatientController extends BaseController
 
                    //get days
 
-                   $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
+                //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
                 // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 // new testing
 $scadsaft=Doctor_schedule::where('days_id', '>=', $dFake) ->orderBy("days_id", 'asc')->get();
