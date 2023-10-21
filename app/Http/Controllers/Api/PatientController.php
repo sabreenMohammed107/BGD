@@ -409,7 +409,12 @@ class PatientController extends BaseController
 $scadsaft=Doctor_schedule::where('days_id', '>=', $dFake) ->orderBy("days_id", 'asc')->pluck('id');
 $scadsbef=Doctor_schedule::where('days_id', '<', $dFake) ->orderBy("days_id", 'asc')->pluck('id');
 $doctorsTest= $scadsaft->merge($scadsbef);
-$doctors = $doctors->whereIn("doctor_schedules.id", $doctorsTest)->get();
+$doctors = Doctor_clinic::select('doctor_clinics.*')->
+join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+->whereIn("doctor_schedules.id", $doctorsTest)->get();
 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
