@@ -414,7 +414,7 @@ join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
 ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
 ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
 ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->get();
+->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->orderBy("doctor_clinics.id", 'asc')->get();
 return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
