@@ -9,7 +9,39 @@ class OtpService
 {
     protected $apiUrl ="https://api.smsgatewayapi.com/v1/message/send";
 
-    public function sendOtp($phoneNumber, $otp)
+
+    public function sendopt($phoneNumber, $otp){
+
+        $ch = curl_init('https://gateway.seven.io/api/sms');
+        $data = [
+            'to' => $phoneNumber, //Receiver (required)
+            'text' => $otp, //Message (required)
+
+            'sender' => "BDG-App" //Sender (required)
+        ];
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+        //   'to' => '4917612121212,Peter,FriendsGroup',
+        //   'text' => 'Hello, this is a test SMS',
+        //   'from' => 'sender'
+        // ]));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+          'Accept: application/json',
+          'Content-type: application/json',
+          'X-Api-Key: kWcGOYaiUXk0g2BmnJgGVw1OXvCVgbCMDUJh1fzS0JMyoHsdx35eYfJaHRGtT6DD'
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $result = curl_exec($ch);
+        // curl_close($ch);
+        // var_dump($result);
+        $response = curl_exec($ch);
+        $user=User::where('mobile',$phoneNumber)->first();
+        $user->update(['otp'=>$otp]);
+        return $response;
+    }
+
+    public function sendOtpOld($phoneNumber, $otp)
     {
         $ch = curl_init();
         $client_id = env("OTP_Client_ID"); // Your API client ID (required)
