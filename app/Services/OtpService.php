@@ -10,7 +10,7 @@ class OtpService
     protected $apiUrl ="https://api.smsgatewayapi.com/v1/message/send";
 
 
-    public function sendOpt($phoneNumber, $otp){
+    public function sendOtp($phoneNumber, $otp){
 
         $ch = curl_init('https://gateway.seven.io/api/sms');
         $data = [
