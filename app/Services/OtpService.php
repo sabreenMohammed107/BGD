@@ -17,7 +17,7 @@ class OtpService
             'to' => $phoneNumber, //Receiver (required)
             'text' => $otp, //Message (required)
 
-            'from' => 'sender' //Sender (required)
+            'from' => 'BDG-App' //Sender (required)
         ];
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
@@ -36,9 +36,10 @@ class OtpService
         // curl_close($ch);
         // var_dump($result);
         $response = curl_exec($ch);
-        curl_close($ch);
+
         $user=User::where('mobile',$phoneNumber)->first();
         $user->update(['otp'=>$otp]);
+        curl_close($ch);
         return $response;
     }
 
