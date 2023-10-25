@@ -36,6 +36,7 @@ class OtpService
         // curl_close($ch);
         // var_dump($result);
         $response = curl_exec($ch);
+        curl_close($ch);
         $user=User::where('mobile',$phoneNumber)->first();
         $user->update(['otp'=>$otp]);
         return $response;
