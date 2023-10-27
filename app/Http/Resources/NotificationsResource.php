@@ -13,7 +13,6 @@ class NotificationsResource extends JsonResource
      */
     public function toArray($request)
     {
-        dd(App::getLocale());
         if(App::getLocale()=="en"){
             return [
 
