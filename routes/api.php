@@ -39,7 +39,7 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 //googleLogin
 Route::get('googleLogin', [GoogleController::class, 'googleLogin']);
 
-Route::middleware('auth:api')->group( function () {
+Route::group(['middleware' => ['localization', 'auth:api']], function() {
     // Route::resource('products', ProductController::class);
     Route::post('make-review', [PatientController::class, 'review']);
     //favourite
