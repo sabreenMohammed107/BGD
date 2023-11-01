@@ -69,7 +69,7 @@ if($data){
             return $this->sendResponse(userResource::make($user), 'User has been registed');
 
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), 'Error happens!!');
+            return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
         }
     }
 
@@ -105,7 +105,7 @@ if($data){
                 return $this->sendError('Invalid Useremail or Password!');
             }
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), 'Error happens!!');
+            return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
         }
     }
     public function updateUser(Request $request)
@@ -133,7 +133,7 @@ if($data){
                 return $this->sendResponse(userResource::make($user), 'User has been updated');
             }
             } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), 'Error happens!!');
+                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
             }
 
 
@@ -165,7 +165,7 @@ if($data){
                 return $this->sendResponse(userResource::make($user), 'Image User has been updated');
             }
             } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), 'Error happens!!');
+                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
             }
     }
 

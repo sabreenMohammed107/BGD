@@ -46,7 +46,7 @@ class DoctorsInfController extends BaseController
         $bdgData = bdg_data::where('id', 1)->first();
         $page['vedio'] = $bdgData->home_video;
         $page['bdgTutoril'] = $bdgData->home_tutorial;
-        return $this->sendResponse($page, "get all home data ");
+        return $this->sendResponse($page,   __("langMessage.home_data"));
     }
 
     public function docProfile($id)
@@ -113,7 +113,7 @@ class DoctorsInfController extends BaseController
             }
 
         }
-        return $this->sendResponse($page, "get all home data ");
+        return $this->sendResponse($page,  __("langMessage.home_data"));
 
     }
 }

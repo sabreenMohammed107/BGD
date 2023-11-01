@@ -52,10 +52,10 @@ class PatientController extends BaseController
             ];
             $review = Clinic_review::create($data);
 
-            return $this->sendResponse(ReviewResource::make($review), 'U make review successfully.');
+            return $this->sendResponse(ReviewResource::make($review),  __("langMessage.make_review"));
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(), 'Error happens!!');
+            return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
         }
 
     }
@@ -81,10 +81,10 @@ class PatientController extends BaseController
             ];
             $favourite = Favourite_doctor::create($data);
 
-            return $this->sendResponse(FavouriteResource::make($favourite), 'U make favourite successfully.');
+            return $this->sendResponse(FavouriteResource::make($favourite), __("langMessage.make_fav"));
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(), 'Error happens!!');
+            return $this->sendError($ex->getMessage(),__("langMessage.error_happens"));
         }
 
     }
@@ -111,12 +111,13 @@ class PatientController extends BaseController
             if ($favourite) {
 
                 $favourite->delete();
-                return $this->sendResponse([], 'U remove favourite successfully.');
+
+                return $this->sendResponse([], __("langMessage.remove_fav"));
 
             }
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(), 'Error happens!!');
+            return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
         }
     }
     public function getReservation(Request $request)
@@ -124,17 +125,6 @@ class PatientController extends BaseController
         $page = [];
         $userid = auth('api')->user()->id;
 
-        // $validator = Validator::make($request->all(), [
-        //     'clinic_id' => 'required',
-        //     'reservation_date' => 'required',
-        //     'time_from' => 'required',
-        //     'time_to' => 'required',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     // return $this->convertErrorsToString($validator->messages());
-        //     return $this->sendError($validator->messages());
-        // }
 
         $clinic = Doctor_clinic::where('id', $request->get('clinic_id'))->first();
         $page['clinic_data'] = reservClinic::make($clinic);
@@ -143,7 +133,8 @@ class PatientController extends BaseController
             'time_from' => $request->get('time_from'),
             'time_to' => $request->get('time_to'),
         ];
-        return $this->sendResponse($page, "get all reserve data ");
+
+        return $this->sendResponse($page, __("langMessage.reserve_data"));
     }
     public function reservation(Request $request)
     {
@@ -196,7 +187,7 @@ class PatientController extends BaseController
             return $this->sendResponse(ReservationResource::make($reserve), 'U make reservation successfully.');
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(), 'Error happens!!');
+            return $this->sendError($ex->getMessage(),__("langMessage.error_happens"));
         }
 
     }
@@ -254,11 +245,11 @@ class PatientController extends BaseController
                 return $this->sendResponse(ReservationResource::make($reserve), 'U  reservation Cancelles successfully.');
 
             } else {
-                return $this->sendError(null, 'Error happens!!');
+                return $this->sendError(null, __("langMessage.error_happens"));
             }
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(), 'Error happens!!');
+            return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
         }
 
     }

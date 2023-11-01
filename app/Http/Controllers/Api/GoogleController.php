@@ -45,7 +45,7 @@ class GoogleController extends BaseController
                     // $token = $request->device_token;
 
                     // User::find($user_id)->update(['fcm_token'=>$token]);
-                return $this->sendResponse(userResource::make($user), 'User login successfully.');
+                return $this->sendResponse(userResource::make($user), __("langMessage.User_login_successfully"));
 
 
             }else{
@@ -64,10 +64,10 @@ class GoogleController extends BaseController
                 // $sms = Helper::send_sms($data);
     // $user->smsResponse=$sms;
 
-                return $this->sendResponse(userResource::make($newUser), 'User has been registed');
+                return $this->sendResponse(userResource::make($newUser), __("langMessage.User_registed"));
             }
             } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), 'Error happens!!');
+                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
             }
         //         Auth::login($newUser);
 
@@ -113,7 +113,8 @@ class GoogleController extends BaseController
                     // $token = $request->device_token;
 
                     // User::find($user_id)->update(['fcm_token'=>$token]);
-                return $this->sendResponse(userResource::make($finduser), 'User login successfully.');
+
+                return $this->sendResponse(userResource::make($finduser),  __("langMessage.User_login_successfully"));
 
 
             }else{
@@ -129,10 +130,10 @@ class GoogleController extends BaseController
                 $newUser->accessToken = $newUser->createToken('MyApp')->accessToken;
 
 
-                return $this->sendResponse(userResource::make($newUser), 'User has been registed');
+                return $this->sendResponse(userResource::make($newUser), __("langMessage.User_registed"));
             }
             } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), 'Error happens!!');
+                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
             }
     }
 }

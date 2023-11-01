@@ -21,7 +21,7 @@ $email=$request->input(key:'email');
 if(User::where('email',$email)->doesntExist()){
     return response([
         'status'=>false,
-        'message'=>'user doen\'t exsists !',
+        'message'=> __("langMessage.user_not_exist"),
 
     ]);
 }
@@ -41,7 +41,7 @@ try{
 
     return response([
         'status'=>true,
-        'message'=>'check your email'
+        'message'=>__("langMessage.check_email")
     ]);
 
 }catch(\Exception $ex){
@@ -59,20 +59,20 @@ $token=$request->input(key:'token');
 if(!$passwordResets=DB::table(table:'password_resets')->where('token',$token)->first()){
 return response([
     'status'=>false,
-    'message'=>'invalid token'
+    'message'=> __("langMessage.invalid_token")
 ]);
 }
 if(!$user=User::where('email',$passwordResets->email)->first()){
     return response([
         'status'=>false,
-        'message'=>'user not exist '
+        'message'=> __("langMessage.user_not_exist")
     ]);
 }
 $user->password=Hash::make($request->input(key:'password'));
 $user->save();
 return response([
     'status'=>true,
-    'message'=>'success'
+    'message'=> __("langMessage.success")
 ]);
 }
 }
