@@ -242,7 +242,7 @@ class RegisterController extends BaseController
             'new_password' => 'required|confirmed|min:8|string'
         ]);
        // $auth = Auth::user();
-        $auth = Auth::user();
+        $user_id = Auth::user()->id;
  // The passwords matches
         if (!Hash::check($request->get('current_password'), $auth->password))
         {
@@ -257,9 +257,9 @@ class RegisterController extends BaseController
 
         }
 
-        // $user =  User::find($auth->id);
-        $auth->password =  Hash::make($request->new_password);
-        $auth->save();
+         $user =  User::find($user_id);
+        $user->password =  Hash::make($request->new_password);
+        $user->save();
         return $this->sendError(null, __("langMessage.change_pass_sucess"));
 
 
