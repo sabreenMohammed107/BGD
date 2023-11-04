@@ -243,9 +243,11 @@ class RegisterController extends BaseController
         ]);
        // $auth = Auth::user();
         $user_id = Auth::user()->id;
+        $user =  User::find($user_id);
  // The passwords matches
-        if (!Hash::check($request->get('current_password'), $auth->password))
+        if (!Hash::check($request->get('current_password'), $user->password))
         {
+            dd('first if');
 
             return $this->sendError(null, __("langMessage.current_pass"));
         }
@@ -253,10 +255,11 @@ class RegisterController extends BaseController
 // Current password and new password same
         if (strcmp($request->get('current_password'), $request->new_password) == 0)
         {
+            dd('second if');
             return $this->sendError(null, __("langMessage.same_pass"));
 
         }
-
+        dd('last');
          $user =  User::find($user_id);
         $user->password =  Hash::make($request->new_password);
         $user->save();
