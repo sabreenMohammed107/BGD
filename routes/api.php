@@ -52,7 +52,7 @@ Route::group(['middleware' => ['localization', 'auth:api']], function() {
 
     Route::post('token-update', [RegisterController::class, 'tokenUpdate']);
     Route::get('list-notifications', [RegisterController::class, 'allNofications']);
-
+    Route::post('change-password', [RegisterController::class, 'changePasswordSave']);
 
 });
 
@@ -64,7 +64,7 @@ Route::middleware("localization")->group(function () {
 
 Route::group(['middleware' => ['localization', 'auth:api']], function() {
 
-    Route::post('chnage-password', [RegisterController::class, 'changePasswordSave']);
+
 
     Route::get('get-reservation', [PatientController::class, 'getReservation']);
 
