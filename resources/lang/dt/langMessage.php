@@ -21,6 +21,13 @@ return [
       'make_fav' => 'Du machst den Favoriten erfolgreich.',
       'remove_fav' => 'Sie haben den Favoriten erfolgreich entfernt.',
       'reserve_data' => 'Holen Sie sich alle Reservedaten ',
+      'make_reserve'=>'Sie haben die Reservierung erfolgreich vorgenommen.',
+      'old_reserve'=>'Alte Reservierungen',
+      'new_reservations'=>'alle Neue Reservierungen',
+      'Cancelled_reservations'=>'Reservierung erfolgreich storniert',
+      'search_result'=>'Alle Suchergebnisse erfolgreich abgerufen',
+      'vafourite_result'=>'Das Ergebnis aller Vafourite-Ärzte wurde erfolgreich abgerufen',
+      'all_data'=>'Holen Sie sich alle Daten',
 
 
 ];

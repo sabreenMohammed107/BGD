@@ -184,7 +184,8 @@ class PatientController extends BaseController
             }
 
 //end notification
-            return $this->sendResponse(ReservationResource::make($reserve), 'U make reservation successfully.');
+
+            return $this->sendResponse(ReservationResource::make($reserve),__("langMessage.make_reserve"));
 
         } catch (\Exception $ex) {
             return $this->sendError($ex->getMessage(),__("langMessage.error_happens"));
@@ -197,14 +198,16 @@ class PatientController extends BaseController
         $userid = Auth::user()->id;
 
         $rows = Reservation::where('patient_id', '=', $userid)->whereDate('reservation_date', '<', now())->OrWhereIn('reservation_status_id', [3, 4])->orderBy("reservation_date", "Desc")->get();
-        return $this->sendResponse(ReservationResource::collection($rows), 'Old your reservations');
+
+        return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.old_reserve"));
 
     }
     public function showNewRreservation()
     {
         $userid = Auth::user()->id;
         $rows = Reservation::where('patient_id', $userid)->whereNotIn('reservation_status_id', [3, 4])->whereDate('reservation_date', '>=', now())->orderBy("reservation_date", "Desc")->get();
-        return $this->sendResponse(ReservationResource::collection($rows), 'New your reservations');
+
+        return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.new_reservations"));
     }
 
     public function cancelReservation(Request $request)
@@ -242,7 +245,8 @@ class PatientController extends BaseController
                 }
 
 //end notification
-                return $this->sendResponse(ReservationResource::make($reserve), 'U  reservation Cancelles successfully.');
+
+                return $this->sendResponse(ReservationResource::make($reserve), __("langMessage.Cancelled_reservations"));
 
             } else {
                 return $this->sendError(null, __("langMessage.error_happens"));
@@ -406,11 +410,12 @@ join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
 ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
 ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
 ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
-return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.search_result"));
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
         }
+
 
         //     if($request->has('sort_name')){
         //     if($sort_name == 0){
@@ -426,7 +431,7 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Sear
         //  return $doctors;
         //
         // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
-        return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+        return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.search_result"));
 
     }
 
@@ -435,7 +440,8 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Sear
         $userid = auth('api')->user()->id;
         $ids = Favourite_doctor::where('user_id', $userid)->pluck('clinic_id');
         $doctors = Doctor_clinic::whereIn('id', $ids)->get();
-        return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All vafourite doctors result Retrieved  Successfully');
+
+        return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.vafourite_result"));
 
     }
 
@@ -467,7 +473,7 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Sear
         $daysList = DayNew::all();
         $page['days'] = DayResource::collection($daysList);
 
-        return $this->sendResponse($page, "get all  data ");
+        return $this->sendResponse($page, __("langMessage.all_data"));
     }
 
 }

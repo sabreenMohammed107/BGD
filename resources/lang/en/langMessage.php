@@ -21,6 +21,12 @@ return [
       'make_fav' => 'U make favourite successfully.',
       'remove_fav' => 'U remove favourite successfully.',
       'reserve_data' => 'get all reserve data ',
-
+      'make_reserve'=>'U make reservation successfully.',
+      'old_reserve'=>'Old  reservations',
+      'new_reservations'=>'all New  reservations',
+      'Cancelled_reservations'=>'reservation Cancelled successfully.',
+      'search_result'=>'All Search result Retrieved  Successfully',
+      'vafourite_result'=>'All vafourite doctors result Retrieved  Successfully',
+'all_data'=>'get all  data',
 
 ];
