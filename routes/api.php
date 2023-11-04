@@ -52,16 +52,20 @@ Route::group(['middleware' => ['localization', 'auth:api']], function() {
 
     Route::post('token-update', [RegisterController::class, 'tokenUpdate']);
     Route::get('list-notifications', [RegisterController::class, 'allNofications']);
-    Route::post('change-password', [RegisterController::class, 'changePasswordSave']);
+
 
 });
 
+Route::middleware("auth:api")->group(function () {
+
+    Route::post('change-password', [RegisterController::class, 'changePasswordSave']);
+
+});
 Route::middleware("localization")->group(function () {
 
     Route::get('faq', [ContactController::class, 'getFaq']);
 
 });
-
 Route::group(['middleware' => ['localization', 'auth:api']], function() {
 
 
