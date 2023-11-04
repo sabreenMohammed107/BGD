@@ -237,7 +237,7 @@ class RegisterController extends BaseController
      */
     public function changePasswordSave(Request $request)
     {
-
+dd('hello');
         $this->validate($request, [
             'current_password' => 'required|string',
             'new_password' => 'required|confirmed|min:8|string'
@@ -258,9 +258,9 @@ class RegisterController extends BaseController
 
         }
 
-        $user =  User::find($auth->id);
-        $user->password =  Hash::make($request->new_password);
-        $user->save();
+        // $user =  User::find($auth->id);
+        $auth->password =  Hash::make($request->new_password);
+        $auth->save();
         return $this->sendError(null, __("langMessage.change_pass_sucess"));
 
 
