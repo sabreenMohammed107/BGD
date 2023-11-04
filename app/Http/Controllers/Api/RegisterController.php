@@ -238,8 +238,9 @@ class RegisterController extends BaseController
     public function changePasswordSave(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|string',
-            'new_password' => 'required|confirmed|min:8|string'
+            'current_password' => 'required',
+            'new_password' => 'required|min:8',
+            'c_password' => 'required|same:new_password',
 
         ]);
 
