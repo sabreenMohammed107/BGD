@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\OtpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class RegisterController extends BaseController
@@ -227,4 +228,41 @@ class RegisterController extends BaseController
             return $this->sendResponse(null, __("noNotifications"));
         }
     }
+
+
+   /**
+     * change current password
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changePasswordSave(Request $request)
+    {
+
+        $this->validate($request, [
+            'current_password' => 'required|string',
+            'new_password' => 'required|confirmed|min:8|string'
+        ]);
+       // $auth = Auth::user();
+        $auth = $request->user();
+ // The passwords matches
+        if (!Hash::check($request->get('current_password'), $auth->password))
+        {
+
+            return $this->sendError(null, __("langMessage.current_pass"));
+        }
+
+// Current password and new password same
+        if (strcmp($request->get('current_password'), $request->new_password) == 0)
+        {
+            return $this->sendError(null, __("langMessage.same_pass"));
+
+        }
+
+        $user =  User::find($auth->id);
+        $user->password =  Hash::make($request->new_password);
+        $user->save();
+        return $this->sendError(null, __("langMessage.change_pass_sucess"));
+
+
+}
 }
