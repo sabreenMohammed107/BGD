@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Http\Resources\NotificationsResource;
 use App\Http\Resources\userResource;
+use App\Models\bdg_data;
 use App\Models\FCMNotification;
 use App\Models\User;
 use App\Services\OtpService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use App\Models\bdg_data;
+
 class RegisterController extends BaseController
 {
     //logo
-    public function logo(){
-        $data=bdg_data::first();
-if($data){
-    $logo= asset('uploads/data/' . $data->logo);
-}else{
-    $logo=asset('img/default.png');
-}
+    public function logo()
+    {
+        $data = bdg_data::first();
+        if ($data) {
+            $logo = asset('uploads/data/' . $data->logo);
+        } else {
+            $logo = asset('img/default.png');
+        }
 
         return $this->sendResponse($logo, 'site logo');
     }
@@ -30,7 +32,7 @@ if($data){
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request,OtpService $otpService)
+    public function register(Request $request, OtpService $otpService)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -53,7 +55,7 @@ if($data){
             $user = User::create($input);
             $phoneNumber = $user->mobile; // replace with the recipient's phone number
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
-            $user->update(['otp'=>$otp]);
+            $user->update(['otp' => $otp]);
             $otpService->sendOtp($phoneNumber, $otp);
 
             $user->accessToken = $user->createToken('MyApp')->accessToken;
@@ -64,7 +66,6 @@ if($data){
             // $data['msg'] = 'تم التفعيل';
             // $sms = Helper::send_sms($data);
 // $user->smsResponse=$sms;
-
 
             return $this->sendResponse(userResource::make($user), 'User has been registed');
 
@@ -83,7 +84,7 @@ if($data){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
-            'device_token' =>'required',
+            'device_token' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -97,9 +98,9 @@ if($data){
                 $user = Auth::user();
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
                 $user_id = auth()->user()->id;
-                    $token = $request->device_token;
+                $token = $request->device_token;
 
-                    User::find($user_id)->update(['fcm_token'=>$token]);
+                User::find($user_id)->update(['fcm_token' => $token]);
                 return $this->sendResponse(userResource::make($user), 'User login successfully.');
             } else {
                 return $this->sendError('Invalid Useremail or Password!');
@@ -129,16 +130,13 @@ if($data){
                 $user->update($input);
                 $user->accessToken = $user->createToken('MyApp')->accessToken;
 
-
                 return $this->sendResponse(userResource::make($user), 'User has been updated');
             }
-            } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
-            }
-
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
+        }
 
     }
-
 
     public function updateUserImage(Request $request)
     {
@@ -164,9 +162,9 @@ if($data){
 
                 return $this->sendResponse(userResource::make($user), 'Image User has been updated');
             }
-            } catch (\Exception $e) {
-                return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
-            }
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
+        }
     }
 
     /* uplaud image
@@ -208,12 +206,12 @@ if($data){
             $user_id = auth()->user()->id;
             $token = $request->token;
 
-            $xx=User::find($user_id)->update(['fcm_token' => $token]);
+            $xx = User::find($user_id)->update(['fcm_token' => $token]);
             return $this->sendResponse(null, __("links.editMsg"));
 
             // }
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return $this->convertErrorsToString($validator->messages());
         }
     }
@@ -222,13 +220,11 @@ if($data){
         $user = Auth::user();
         $notifications = FCMNotification::where('user_id', '=', $user->id)->orderBy('id', 'DESC')->get();
 
-
         if ($notifications->count() > 0) {
-             return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
-
+            return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
 
         } else {
-            return $this->sendResponse(null , __("noNotifications"));
+            return $this->sendResponse(null, __("noNotifications"));
         }
     }
 }

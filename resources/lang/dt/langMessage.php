@@ -12,6 +12,10 @@ return [
      'User_login_successfully' => 'Benutzeranmeldung erfolgreich.',
      'User_registed' => 'Der Benutzer wurde registriert',
      'error_happens' => 'Fehler passiert!!',
+     /*---registerController --*/
+     'current_pass'=>'Das aktuelle Passwort ist ungültig',
+     'same_pass'=>'Das neue Passwort darf nicht mit Ihrem aktuellen Passwort identisch sein.',
+     'change_pass_sucess'=>'Das Passwort wurde erfolgreich geändert',
       /*----PatientController*/
       'make_review' => 'Sie haben die Bewertung erfolgreich abgegeben.',
       'make_fav' => 'Du machst den Favoriten erfolgreich.',
