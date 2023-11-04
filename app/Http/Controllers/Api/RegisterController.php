@@ -247,6 +247,7 @@ class RegisterController extends BaseController
        // $auth = Auth::user();
         $user_id = Auth::user()->id;
         $user =  User::find($user_id);
+        dd($user->password);
  // The passwords matches
         if (!Hash::check($request->get('current_password'), $user->password))
         {
