@@ -237,7 +237,6 @@ class RegisterController extends BaseController
      */
     public function changePasswordSave(Request $request)
     {
-dd('hello');
         $this->validate($request, [
             'current_password' => 'required|string',
             'new_password' => 'required|confirmed|min:8|string'
