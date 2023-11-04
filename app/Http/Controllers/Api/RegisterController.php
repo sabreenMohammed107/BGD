@@ -242,7 +242,7 @@ class RegisterController extends BaseController
             'new_password' => 'required|confirmed|min:8|string'
         ]);
        // $auth = Auth::user();
-        $auth = $request->user();
+        $auth = Auth::user();
  // The passwords matches
         if (!Hash::check($request->get('current_password'), $auth->password))
         {
