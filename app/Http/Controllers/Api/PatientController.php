@@ -202,9 +202,9 @@ class PatientController extends BaseController
         //     ->orderBy("reservation_date", "Desc")->get();
 
         $rows = Reservation::where('patient_id', '=', $userid)
-            ->orWhere(function ($query) {
-                $query->whereDate('reservation_date', '<', now())
-                      ->WhereIn('reservation_status_id', [3, 4]);
+        ->whereDate('reservation_date', '<', now())
+        ->orWhere(function ($query) {
+                $query->WhereIn('reservation_status_id', [3, 4]);
             })->orderBy("reservation_date", "Desc")->get();
         return $this->sendResponse(ReservationResource::collection($rows), __("langMessage.old_reserve"));
 
