@@ -52,7 +52,7 @@ class PatientController extends BaseController
             ];
             $review = Clinic_review::create($data);
 
-            return $this->sendResponse(ReviewResource::make($review),  __("langMessage.make_review"));
+            return $this->sendResponse(ReviewResource::make($review), __("langMessage.make_review"));
 
         } catch (\Exception $ex) {
             return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
@@ -84,7 +84,7 @@ class PatientController extends BaseController
             return $this->sendResponse(FavouriteResource::make($favourite), __("langMessage.make_fav"));
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(),__("langMessage.error_happens"));
+            return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
         }
 
     }
@@ -124,7 +124,6 @@ class PatientController extends BaseController
     {
         $page = [];
         $userid = auth('api')->user()->id;
-
 
         $clinic = Doctor_clinic::where('id', $request->get('clinic_id'))->first();
         $page['clinic_data'] = reservClinic::make($clinic);
@@ -185,10 +184,10 @@ class PatientController extends BaseController
 
 //end notification
 
-            return $this->sendResponse(ReservationResource::make($reserve),__("langMessage.make_reserve"));
+            return $this->sendResponse(ReservationResource::make($reserve), __("langMessage.make_reserve"));
 
         } catch (\Exception $ex) {
-            return $this->sendError($ex->getMessage(),__("langMessage.error_happens"));
+            return $this->sendError($ex->getMessage(), __("langMessage.error_happens"));
         }
 
     }
@@ -197,23 +196,28 @@ class PatientController extends BaseController
     {
         $userid = auth('api')->user()->id;
 
-        $rows = Reservation::where('patient_id', '=', $userid)
-        ->whereDate('reservation_date', '<', now())
-        ->WhereIn('reservation_status_id', [3, 4])
-        ->orderBy("reservation_date", "Desc")->get();
+        // $rows = Reservation::where('patient_id', '=', $userid)
+        //     ->whereDate('reservation_date', '<', now())
+        //     ->WhereIn('reservation_status_id', [3, 4])
+        //     ->orderBy("reservation_date", "Desc")->get();
 
-        return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.old_reserve"));
+        $rows = Reservation::where('patient_id', '=', $userid)
+            ->orWhere(function ($query) {
+                $query->whereDate('reservation_date', '<', now())
+                      ->WhereIn('reservation_status_id', [3, 4]);
+            })->orderBy("reservation_date", "Desc")->get();
+        return $this->sendResponse(ReservationResource::collection($rows), __("langMessage.old_reserve"));
 
     }
     public function showNewRreservation()
     {
         $userid = auth('api')->user()->id;
         $rows = Reservation::where('patient_id', $userid)
-        ->whereNotIn('reservation_status_id', [3, 4])
-        ->whereDate('reservation_date', '>=', now())
-        ->orderBy("reservation_date", "Desc")->get();
+            ->whereNotIn('reservation_status_id', [3, 4])
+            ->whereDate('reservation_date', '>=', now())
+            ->orderBy("reservation_date", "Desc")->get();
 
-        return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.new_reservations"));
+        return $this->sendResponse(ReservationResource::collection($rows), __("langMessage.new_reservations"));
     }
 
     public function cancelReservation(Request $request)
@@ -394,34 +398,32 @@ class PatientController extends BaseController
                 $weekday = $resultCollection[$dFake];
 
                 $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
-                ->orderBy("doctor_schedules.days_id", 'asc')
-                ->groupBy('doctor_clinics.id')->get();
-
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->groupBy('doctor_clinics.id')->get();
 
                 $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
-                ->orderBy("doctor_schedules.days_id", 'asc')
-                ->groupBy('doctor_clinics.id')->get();
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->groupBy('doctor_clinics.id')->get();
 
-                   //get days
+                //get days
 
                 //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
                 // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
 // new testing
-$scadsaft=Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
-$scadsbef=Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
-$doctorsTest= $scadsaft->merge($scadsbef);
-$doctors = Doctor_clinic::select('doctor_clinics.*')->
-join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
-return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.search_result"));
+                $scadsaft = Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
+                $scadsbef = Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
+                $doctorsTest = $scadsaft->merge($scadsbef);
+                $doctors = Doctor_clinic::select('doctor_clinics.*')->
+                    join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                    ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+                    ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+                    ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+                    ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
+                return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
         }
-
 
         //     if($request->has('sort_name')){
         //     if($sort_name == 0){
@@ -437,7 +439,7 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("lang
         //  return $doctors;
         //
         // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
-        return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.search_result"));
+        return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
 
     }
 
@@ -447,7 +449,7 @@ return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("lang
         $ids = Favourite_doctor::where('user_id', $userid)->pluck('clinic_id');
         $doctors = Doctor_clinic::whereIn('id', $ids)->get();
 
-        return $this->sendResponse(DoctorClinicResource::collection($doctors),  __("langMessage.vafourite_result"));
+        return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.vafourite_result"));
 
     }
 
