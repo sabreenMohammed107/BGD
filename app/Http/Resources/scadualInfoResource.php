@@ -25,12 +25,17 @@ class scadualInfoResource extends JsonResource
                     'medical field'=>docFieldsResource::collection($this->clinic->doctor->medicField()->get()),
 
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
-                    'address' =>  $this->clinic->en_street ?? '',
+
                     'status'=>$this->status->en_status ?? '',
                     'reservation_date' => $this->reservation_date ?? '',
                     'av_day' => $this->reserv_day ?? '',
                     'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
-
+                    'street' => $this->clinic->en_street ?? '',
+                    'google_map' => $this->clinic->google_map ?? '',
+                    'latitude'=> $this->clinic->latitude ?? '',
+                    'longitude'=> $this->clinic->longitude ?? '',
+                    'postal_code' => $this->clinic->postal_code ?? '',
+                    'city'=>$this->clinic->city->en_city ?? '',
                 ];
 
 
@@ -43,11 +48,17 @@ class scadualInfoResource extends JsonResource
                 'medical field'=>docFieldsResource::collection($this->clinic->doctor->medicField()->get()),
 
                 'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
-                'address' =>  $this->clinic->dt_street ?? '',
+
                 'status'=>$this->status->dt_status ?? '',
                 'reservation_date' => $this->reservation_date ?? '',
                 'av_day' => $this->reserv_day ?? '',
                 'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
+                'street' => $this->clinic->dt_street ?? '',
+                    'google_map' => $this->clinic->google_map ?? '',
+                    'latitude'=> $this->clinic->latitude ?? '',
+                    'longitude'=> $this->clinic->longitude ?? '',
+                    'postal_code' => $this->clinic->postal_code ?? '',
+                    'city'=>$this->clinic->city->dt_city ?? '',
 
             ];
         }
