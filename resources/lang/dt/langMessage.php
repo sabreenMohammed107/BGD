@@ -21,7 +21,7 @@ return [
       'make_fav' => 'Du machst den Favoriten erfolgreich.',
       'remove_fav' => 'Sie haben den Favoriten erfolgreich entfernt.',
       'reserve_data' => 'Holen Sie sich alle Reservedaten ',
-      'make_reserve'=>'Sie haben die Reservierung erfolgreich vorgenommen.',
+      'make_reserve'=>'Ihre Reservierung wurde erfolgreich bestätigt',
       'old_reserve'=>'Alte Reservierungen',
       'new_reservations'=>'alle Neue Reservierungen',
       'Cancelled_reservations'=>'Reservierung erfolgreich storniert',
