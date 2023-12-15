@@ -31,7 +31,7 @@ class PatientController extends BaseController
 {
     public function review(Request $request)
     {
-        // $userid = Auth::user()->id;
+        // $userid = auth('api')->user()->id;
         $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
@@ -62,7 +62,7 @@ class PatientController extends BaseController
 
     public function favourite(Request $request)
     {
-        // $userid = Auth::user()->id;
+        // $userid = auth('api')->user()->id;
         $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
@@ -90,7 +90,7 @@ class PatientController extends BaseController
     }
     public function removeFavourite(Request $request)
     {
-        $userid = Auth::user()->id;
+        $userid = auth('api')->user()->id;
         //    $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
@@ -138,7 +138,7 @@ class PatientController extends BaseController
     }
     public function reservation(Request $request)
     {
-        // $userid = Auth::user()->id;
+        // $userid = auth('api')->user()->id;
         $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'clinic_id' => 'required',
@@ -195,24 +195,30 @@ class PatientController extends BaseController
 
     public function showOldRreservation()
     {
-        $userid = Auth::user()->id;
+        $userid = auth('api')->user()->id;
 
-        $rows = Reservation::where('patient_id', '=', $userid)->whereDate('reservation_date', '<', now())->OrWhereIn('reservation_status_id', [3, 4])->orderBy("reservation_date", "Desc")->get();
+        $rows = Reservation::where('patient_id', '=', $userid)
+        ->whereDate('reservation_date', '<', now())
+        ->WhereIn('reservation_status_id', [3, 4])
+        ->orderBy("reservation_date", "Desc")->get();
 
         return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.old_reserve"));
 
     }
     public function showNewRreservation()
     {
-        $userid = Auth::user()->id;
-        $rows = Reservation::where('patient_id', $userid)->whereNotIn('reservation_status_id', [3, 4])->whereDate('reservation_date', '>=', now())->orderBy("reservation_date", "Desc")->get();
+        $userid = auth('api')->user()->id;
+        $rows = Reservation::where('patient_id', $userid)
+        ->whereNotIn('reservation_status_id', [3, 4])
+        ->whereDate('reservation_date', '>=', now())
+        ->orderBy("reservation_date", "Desc")->get();
 
         return $this->sendResponse(ReservationResource::collection($rows),  __("langMessage.new_reservations"));
     }
 
     public function cancelReservation(Request $request)
     {
-        // $userid = Auth::user()->id;
+        // $userid = auth('api')->user()->id;
         $userid = auth('api')->user()->id;
         $validator = Validator::make($request->all(), [
             'reservation_id' => 'required',
