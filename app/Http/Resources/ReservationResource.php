@@ -21,7 +21,7 @@ class ReservationResource extends JsonResource
             'reservation_status' => $this->status->en_status ?? '',
             'doctor' => DocorProfileResource::make( $this->clinic),
             'reservation_date' => $this->reservation_date ?? '',
-            'time_from' => $this->time_to ?? '',
+            'time_from' => $this->time_from ?? '',
             'time_to' => $this->time_to ?? '',
             'me / other' => ($this->other_flag ==1) ? 'other' : 'me',
             'patient_name' => $this->patient_name ?? '',
