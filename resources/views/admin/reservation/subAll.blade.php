@@ -9,10 +9,9 @@
             <div class="d-flex align-items-center position-relative my-1">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                 <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none">
-                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2"
-                            rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                            transform="rotate(45 17.0365 15.1223)" fill="black" />
                         <path
                             d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
                             fill="black" />
@@ -49,8 +48,7 @@
                     <th class="w-10px pe-2">
                         <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                             <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                data-kt-check-target="#kt_ecommerce_category_table .form-check-input"
-                                value="1" />
+                                data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" />
                         </div>
                     </th>
                     <th class="text-start min-w-70px">ID </th>
@@ -68,92 +66,127 @@
             <!--begin::Table body-->
             <tbody class="fw-bold text-gray-600">
                 @foreach ($rows as $index => $newrow)
-                    <!--begin::Table row-->
+                <!--begin::Table row-->
 
-                    <tr>
-                        <!--begin::Checkbox-->
-                        <td>
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="1" />
+                <tr>
+                    <!--begin::Checkbox-->
+                    <td>
+                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="1" />
+                        </div>
+                    </td>
+                    <!--end::Checkbox-->
+                    <!--begin::Category=-->
+                    <td class="text-start pe-0" data-order="15">
+                        <span class="fw-bolder ms-3">{{ $newrow->id }}</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-5">
+                                <!--begin::Title-->
+                                <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
+                                    data-kt-ecommerce-category-filter="category_name">{{ $newrow->patient_name }}</a>
+                                <!--end::Title-->
                             </div>
-                        </td>
-                        <!--end::Checkbox-->
-                        <!--begin::Category=-->
-                        <td class="text-start pe-0" data-order="15">
-                            <span class="fw-bolder ms-3">{{ $newrow->id }}</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
+                        </div>
+                    </td>
+                    <!--end::Category=-->
+                    <!--begin::SKU=-->
 
-                                <div class="ms-5">
-                                    <!--begin::Title-->
-                                    <a href="#"
-                                        class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                                        data-kt-ecommerce-category-filter="category_name">{{ $newrow->patient_name }}</a>
-                                    <!--end::Title-->
-                                </div>
-                            </div>
-                        </td>
-                        <!--end::Category=-->
-                        <!--begin::SKU=-->
+                    <td class="text-end pe-0">
+                        <input type="hidden" name="" id="" data-kt-ecommerce-category-filter="category_id"
+                            value="{{ $newrow->id }}">
+                        <span class="fw-bolder">{{ $newrow->clinic->doctor->name ?? '' }}</span>
+                    </td>
+                    <!--end::SKU=-->
+                    <!--begin::Qty=-->
+                    <td class="text-end pe-0" data-order="15">
+                        <span class="fw-bolder ms-3">{{ $newrow->reservation_date }}</span>
+                    </td>
+                    <!--end::Qty=-->
+                    <td class="text-end pe-0" data-order="15">
+                        <span class="fw-bolder ms-3">{{ $newrow->time_from }} - {{ $newrow->time_to }}</span>
+                    </td>
+                    <td class="text-end pe-0" data-order="15">
+                        <span class="fw-bolder ms-3" @if($newrow->reservation_status_id == 3) style="color: red;"
+                            @elseif($newrow->reservation_status_id == 2) style="color: green;" @endif>{{
+                            $newrow->status->en_status ?? '' }}</span>
+                    </td>
+                    <td class="text-end pe-0" data-order="15">
+                        @if (Auth::guard('admin')->check())
 
-                        <td class="text-end pe-0">
-                            <input type="hidden" name="" id=""
-                                data-kt-ecommerce-category-filter="category_id" value="{{ $newrow->id }}">
-                            <span class="fw-bolder">{{ $newrow->clinic->doctor->name ?? '' }}</span>
-                        </td>
-                        <!--end::SKU=-->
-                        <!--begin::Qty=-->
-                        <td class="text-end pe-0" data-order="15">
-                            <span class="fw-bolder ms-3">{{ $newrow->reservation_date }}</span>
-                        </td>
-                        <!--end::Qty=-->
-                        <td class="text-end pe-0" data-order="15">
-                            <span class="fw-bolder ms-3">{{ $newrow->time_from }} - {{ $newrow->time_to }}</span>
-                        </td>
-                        <td class="text-end pe-0" data-order="15">
-                            <span class="fw-bolder ms-3" @if($newrow->reservation_status_id == 3)  style="color: red;" @elseif($newrow->reservation_status_id == 2)  style="color: green;" @endif>{{ $newrow->status->en_status ?? '' }}</span>
-                        </td>
-                        <td class="text-end pe-0" data-order="15">
-                            @if (Auth::guard('admin')->check())
-
-                                    <a href="{{ route('admin.show-all-reservation', $newrow->id) }}"
-                                        class=" px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="{{ route('admin.show-all-reservation', $newrow->id) }}" class=" px-3"><i
+                                class="fa fa-eye" aria-hidden="true"></i></a>
 
 
-                            @endif
-                            @if (Auth::guard('doctor')->check())
+                        @endif
+                        @if (Auth::guard('doctor')->check())
 
-                                    <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}"
-                                        class=" px-3"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}" class=" px-3"><i
+                                class="fa fa-eye" aria-hidden="true"></i></a>
 
-
-
-
+                        {{-- new Action As Menu --}}
+                        <!--begin::Menu-->
+                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
+                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Status
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                        <span class="svg-icon svg-icon-5 m-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                    fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </a>
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                            data-kt-menu="true">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
                                 @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
-                                    <a data-bs-toggle="modal"
-                                        data-bs-target="#comReservation{{$newrow->id }}" title="complete"
-                                        class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
-                                            aria-hidden="true"></i></a>
-                                            @endif
-                                            @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
-                                    <a data-bs-toggle="modal"
-                                        data-bs-target="#delReservation{{$newrow->id }}" title="cancelled"
-                                        class=" px-3"><span style="color: red;font-weight: bold">x</span></a>
-<a data-bs-toggle="modal"  @endif
-@if($newrow->reservation_status_id == 1)
-                                        data-bs-target="#confReservation{{$newrow->id }}"
-                                        class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
+                                <a data-bs-toggle="modal" style="cursor: pointer" data-bs-target="#comReservation{{$newrow->id }}"
+                                    title="complete" class=" px-3">complete</a>
+                                @endif
+                                @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
+                                <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
+                                    title="cancelled" style="cursor: pointer" class=" px-3">cancelled</a>
+                                <a data-bs-toggle="modal" style="cursor: pointer" @endif @if($newrow->reservation_status_id == 1)
+                                    data-bs-target="#confReservation{{$newrow->id }}"
+                                    class=" px-3">confirm</a>
 
-@endif
+                                @endif
 
-                            @endif
-                        </td>
+                                @endif
+                            </div>
+                            <!--end::Menu item-->
+
+                        </div>
+                        <!--end::Menu-->
+
+                        {{-- end Action Menu --}}
+                        {{-- @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
+                        <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}" title="complete"
+                            class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
+                                aria-hidden="true"></i></a>
+                        @endif
+                        @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
+                        <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}" title="cancelled"
+                            class=" px-3"><span style="color: red;font-weight: bold">x</span></a>
+                        <a data-bs-toggle="modal" @endif @if($newrow->reservation_status_id == 1)
+                            data-bs-target="#confReservation{{$newrow->id }}"
+                            class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i
+                                    style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
+
+                        @endif
+
+                        @endif --}}
+                    </td>
 
                     <!--end::Table row-->
-<!--begin::Modal - New Target-->
-                    <div class="modal fade" id="confReservation{{ $newrow->id }}" tabindex="-1"
-                        aria-hidden="true">
+                    <!--begin::Modal - New Target-->
+                    <div class="modal fade" id="confReservation{{ $newrow->id }}" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <!--begin::Modal content-->
@@ -161,17 +194,14 @@
                                 <!--begin::Modal header-->
                                 <div class="modal-header pb-0 border-0 justify-content-end">
                                     <!--begin::Close-->
-                                    <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                        data-bs-dismiss="modal">
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="6" y="17.3137"
-                                                    width="16" height="2" rx="1"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
                                                     transform="rotate(-45 6 17.3137)" fill="black" />
-                                                <rect x="7.41422" y="6" width="16"
-                                                    height="2" rx="1"
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                                     transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
@@ -184,7 +214,8 @@
                                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                     <!--begin:Form-->
                                     <form id="kt_modal_update_target_updateForm" class="form"
-                                        action="{{ route('doctor.conf-action-reservation', $newrow->id) }}" method="get">
+                                        action="{{ route('doctor.conf-action-reservation', $newrow->id) }}"
+                                        method="get">
 
                                         <!--begin::Heading-->
 
@@ -206,8 +237,7 @@
                                             <div class="btn btn-sm btn-icon btn-active-color-primary"
                                                 style="margin-right: 25px" data-bs-dismiss="modal">
                                                 <button type="reset" id="kt_modal_update_target_cancel"
-                                                    class="btn btn-light me-3"
-                                                    data-dismiss="modal">Cancel</button>
+                                                    class="btn btn-light me-3" data-dismiss="modal">Cancel</button>
                                             </div>
                                             <button type="submit" id="kt_modal_update_target_submit"
                                                 class="btn btn-danger">
@@ -229,8 +259,7 @@
                     </div>
                     <!--end::Modal - New Target-->
                     <!--begin::Modal - New Target-->
-                    <div class="modal fade" id="comReservation{{ $newrow->id }}" tabindex="-1"
-                        aria-hidden="true">
+                    <div class="modal fade" id="comReservation{{ $newrow->id }}" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <!--begin::Modal content-->
@@ -238,17 +267,14 @@
                                 <!--begin::Modal header-->
                                 <div class="modal-header pb-0 border-0 justify-content-end">
                                     <!--begin::Close-->
-                                    <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                        data-bs-dismiss="modal">
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="6" y="17.3137"
-                                                    width="16" height="2" rx="1"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
                                                     transform="rotate(-45 6 17.3137)" fill="black" />
-                                                <rect x="7.41422" y="6" width="16"
-                                                    height="2" rx="1"
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                                     transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
@@ -283,8 +309,7 @@
                                             <div class="btn btn-sm btn-icon btn-active-color-primary"
                                                 style="margin-right: 25px" data-bs-dismiss="modal">
                                                 <button type="reset" id="kt_modal_update_target_cancel"
-                                                    class="btn btn-light me-3"
-                                                    data-dismiss="modal">Cancel</button>
+                                                    class="btn btn-light me-3" data-dismiss="modal">Cancel</button>
                                             </div>
                                             <button type="submit" id="kt_modal_update_target_submit"
                                                 class="btn btn-danger">
@@ -305,9 +330,8 @@
                         <!--end::Modal dialog-->
                     </div>
                     <!--end::Modal - New Target-->
-                     <!--begin::Modal - New Target-->
-                     <div class="modal fade" id="delReservation{{ $newrow->id }}" tabindex="-1"
-                        aria-hidden="true">
+                    <!--begin::Modal - New Target-->
+                    <div class="modal fade" id="delReservation{{ $newrow->id }}" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
                             <!--begin::Modal content-->
@@ -315,17 +339,14 @@
                                 <!--begin::Modal header-->
                                 <div class="modal-header pb-0 border-0 justify-content-end">
                                     <!--begin::Close-->
-                                    <div class="btn btn-sm btn-icon btn-active-color-primary"
-                                        data-bs-dismiss="modal">
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                         <span class="svg-icon svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.5" x="6" y="17.3137"
-                                                    width="16" height="2" rx="1"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
                                                     transform="rotate(-45 6 17.3137)" fill="black" />
-                                                <rect x="7.41422" y="6" width="16"
-                                                    height="2" rx="1"
+                                                <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                                     transform="rotate(45 7.41422 6)" fill="black" />
                                             </svg>
                                         </span>
@@ -360,8 +381,7 @@
                                             <div class="btn btn-sm btn-icon btn-active-color-primary"
                                                 style="margin-right: 25px" data-bs-dismiss="modal">
                                                 <button type="reset" id="kt_modal_update_target_cancel"
-                                                    class="btn btn-light me-3"
-                                                    data-dismiss="modal">Cancel</button>
+                                                    class="btn btn-light me-3" data-dismiss="modal">Cancel</button>
                                             </div>
                                             <button type="submit" id="kt_modal_update_target_submit"
                                                 class="btn btn-danger">

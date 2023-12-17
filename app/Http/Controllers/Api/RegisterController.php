@@ -54,7 +54,7 @@ class RegisterController extends BaseController
             $input['password'] = bcrypt($input['password']);
             //remove first 0 from mobile phone
 
-            $input['mobile'] =  (int)$input['mobile'];
+            //$input['mobile'] =  (int)$input['mobile'];
             // $input['user_type'] = 1;
             $user = User::create($input);
             $phoneNumber = $user->mobile; // replace with the recipient's phone number
