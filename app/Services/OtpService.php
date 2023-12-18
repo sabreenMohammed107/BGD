@@ -17,13 +17,15 @@ class OtpService
         $data = [
             'to' => $phoneNumber, //Receiver (required)
             'text' => "Please use OTP'. $otp .'  to complete your registeration", //Message (required)
-            'from' => 'BDG App' //Sender (required)
+            'from' => 'BDG App' ,//Sender (required)
+            'sender'=>'BDG App'
         ];
     }else{
         $data = [
             'to' => $phoneNumber, //Receiver (required)
             'text' => "Bitte verwenden Sie den '. $otp .', um Ihre Registrierung abzuschließen.", //Message (required)
-            'from' => 'BDG App' //Sender (required)
+            'from' => 'BDG App', //Sender (required)
+            'sender'=>'BDG App'
         ];
     }
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
