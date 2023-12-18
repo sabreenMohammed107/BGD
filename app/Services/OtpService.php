@@ -13,19 +13,19 @@ class OtpService
     public function sendOtp($phoneNumber, $otp){
 
         $ch = curl_init('https://gateway.seven.io/api/sms');
-        if(App::getLocale()=="en"){
-        $data = [
-            'to' => $phoneNumber, //Receiver (required)
-            'text' => "BDG App Verification OTP $otp", //Message (required)
-            'from' => 'BDG App' ,//Sender (required)
-        ];
-    }else{
+    //     if(App::getLocale()=="en"){
+    //     $data = [
+    //         'to' => $phoneNumber, //Receiver (required)
+    //         'text' => "BDG App Verification OTP $otp", //Message (required)
+    //         'from' => 'BDG App' ,//Sender (required)
+    //     ];
+    // }else{
         $data = [
             'to' => $phoneNumber, //Receiver (required)
             'text' => "BDG-App-Verifizierungs-OTP $otp", //Message (required)
             'from' => 'BDG App', //Sender (required)
         ];
-    }
+    // }
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
         //   'to' => '4917612121212,Peter,FriendsGroup',
