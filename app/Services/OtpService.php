@@ -4,7 +4,7 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use App\Models\User;
-
+use Illuminate\Support\Facades\App;
 class OtpService
 {
     protected $apiUrl ="https://api.smsgatewayapi.com/v1/message/send";
@@ -13,13 +13,19 @@ class OtpService
     public function sendOtp($phoneNumber, $otp){
 
         $ch = curl_init('https://gateway.seven.io/api/sms');
+        if(App::getLocale()=="en"){
         $data = [
             'to' => $phoneNumber, //Receiver (required)
-            'text' => $otp, //Message (required)
-
-            'from' => 'BDG OTP' //Sender (required)
+            'text' => "Please use OTP'. $otp .'  to complete your registeration", //Message (required)
+            'from' => 'BDG App' //Sender (required)
         ];
-
+    }else{
+        $data = [
+            'to' => $phoneNumber, //Receiver (required)
+            'text' => "Bitte verwenden Sie den '. $otp .', um Ihre Registrierung abzuschließen.", //Message (required)
+            'from' => 'BDG App' //Sender (required)
+        ];
+    }
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
         //   'to' => '4917612121212,Peter,FriendsGroup',
