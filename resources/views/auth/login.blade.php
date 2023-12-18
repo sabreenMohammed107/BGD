@@ -15,7 +15,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<title>BGD</title>
+		<title>BDG App</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="Craft admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="keywords" content="Craft, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard" />
@@ -49,16 +49,19 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Header-->
 						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
 							<!--begin::Logo-->
-							<a href="../dist/index.html" class="py-9 pt-lg-20">
+							<a href="#" class="py-9 pt-lg-20">
 								<img alt="Logo" src="{{ asset('uploads/data') }}/{{ $data->logo }}" class="h-150px" style="opacity: 1" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
-							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to BDG</h1>
+							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to BDG App</h1>
 							<!--end::Title-->
 							<!--begin::Description-->
-							<p class="fw-bold fs-2 text-white">Plan your blog post by choosing a topic creating
-							<br />an outline and checking facts</p>
+							<p class="fw-bold fs-2 text-white">Your commitment to healthcare excellence is matched by our
+                                commitment to delivering an efficient booking management
+                                system. Together, let's make healthcare accessible and
+                                convenient for your patients.
+							<br />Thank you for being part of our healthcare community!</p>
 							<!--end::Description-->
 						</div>
 						<!--end::Header-->
