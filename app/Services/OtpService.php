@@ -17,7 +17,7 @@ class OtpService
             'to' => $phoneNumber, //Receiver (required)
             'text' => $otp, //Message (required)
 
-            'from' => 'BDG-App' //Sender (required)
+            'from' => 'BDG OTP' //Sender (required)
         ];
 
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
