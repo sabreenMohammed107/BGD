@@ -16,13 +16,13 @@ class OtpService
         if(App::getLocale()=="en"){
         $data = [
             'to' => $phoneNumber, //Receiver (required)
-            'text' => "Please use OTP $otp to complete your registeration", //Message (required)
+            'text' => "BDG App Verification OTP $otp", //Message (required)
             'from' => 'BDG App' ,//Sender (required)
         ];
     }else{
         $data = [
             'to' => $phoneNumber, //Receiver (required)
-            'text' => "Bitte verwenden Sie den $otp um Ihre Registrierung abzuschließen.", //Message (required)
+            'text' => "BDG-App-Verifizierungs-OTP $otp", //Message (required)
             'from' => 'BDG App', //Sender (required)
         ];
     }

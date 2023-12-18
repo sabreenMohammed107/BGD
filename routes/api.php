@@ -24,13 +24,18 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [RegisterController::class, 'login']);
-Route::post('forgot', [ForgotController::class, 'forgot']);
-Route::post('reset', [ForgotController::class, 'reset']);
-Route::get('/otp/send', [OtpController::class, 'sendOtp']);
-Route::post('/otp/check', [OtpController::class, 'checkOtp']);
-Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
+Route::middleware("localization")->group(function () {
+
+    Route::get('faq', [ContactController::class, 'getFaq']);
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [RegisterController::class, 'login']);
+    Route::post('forgot', [ForgotController::class, 'forgot']);
+    Route::post('reset', [ForgotController::class, 'reset']);
+    Route::get('/otp/send', [OtpController::class, 'sendOtp']);
+    Route::post('/otp/check', [OtpController::class, 'checkOtp']);
+    Route::post('/otp/resend', [OtpController::class, 'resendOtp']);
+});
+
 //logo
 Route::get('/logo', [RegisterController::class, 'logo']);
 //google
@@ -61,11 +66,7 @@ Route::middleware("auth:api")->group(function () {
     Route::post('change-password', [RegisterController::class, 'changePasswordSave']);
 
 });
-Route::middleware("localization")->group(function () {
 
-    Route::get('faq', [ContactController::class, 'getFaq']);
-
-});
 Route::group(['middleware' => ['localization', 'auth:api']], function() {
 
 
