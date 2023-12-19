@@ -267,7 +267,7 @@ class PatientController extends BaseController
         }
 
     }
-    public function search(Request $request)
+    public function searchOld(Request $request)
     {
         $str = $request->get('str');
         $doctors = Doctor_clinic::select('doctor_clinics.*')->
@@ -334,7 +334,7 @@ class PatientController extends BaseController
     return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
 
     }
-    public function searchOld(Request $request)
+    public function search(Request $request)
     {
         $search = '';
         $str = $request->get('str');
@@ -373,7 +373,7 @@ class PatientController extends BaseController
             }
         }
 
-        if ($request->get('insurance')) {
+        if ($request->has('insurance')) {
             if ($request->get('insurance') == 1) { //public
                 $doctors = $doctors->where("insurance_types.id", 1);
 
@@ -381,11 +381,11 @@ class PatientController extends BaseController
                 $doctors = $doctors->where("insurance_types.id", 2);
                 if ($min_price) {
 
-                    $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '>=', $min_price);
+                    $doctors->where('doctor_clinics.visit_fees', '>=', $min_price);
                 }
                 if ($max_price) {
 
-                    $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '<=', $max_price);
+                    $doctors->where('doctor_clinics.visit_fees', '<=', $max_price);
                 }
             }else{
                 $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
