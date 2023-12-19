@@ -144,19 +144,19 @@
                         @else
                         <button onclick="myFunction()" class="dropbtn btn btn-sm btn-light btn-active-light-primary ">Select Status</button>
                         <div id="myDropdown" class="dropdown-content">
-                                <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
-                                    title="complete" style="cursor: pointer"
-                                    class="fw-bolder  fs-5 ">Reservation Done</a>
+
+                            <a data-bs-toggle="modal" style="cursor: pointer" {{-- @endif
+                                @if($newrow->reservation_status_id == 1) --}}
+                                data-bs-target="#confReservation{{$newrow->id }}"
+                                class="fw-bolder  fs-5" >Confirm Reservation</a>
 
                                 <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
                                     title="cancelled" style="cursor: pointer"
-                                    class="fw-bolder  fs-5">Cancel Reservation</a>
+                                    class="fw-bolder  fs-5">Cancel Visit</a>
 
-                                <a data-bs-toggle="modal" style="cursor: pointer" {{-- @endif
-                                    @if($newrow->reservation_status_id == 1) --}}
-                                    data-bs-target="#confReservation{{$newrow->id }}"
-                                    class="fw-bolder  fs-5" >Reservation Confirmed</a>
-
+                                    <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
+                                        title="complete" style="cursor: pointer"
+                                        class="fw-bolder  fs-5 ">Visit Done</a>
 
                             </div>
 
