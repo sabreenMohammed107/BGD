@@ -24,7 +24,7 @@ return [
       'make_reserve'=>'Your reservation has been successfully confirmed',
       'old_reserve'=>'Old  reservations',
       'new_reservations'=>'all New  reservations',
-      'Cancelled_reservations'=>'reservation Cancelled successfully.',
+      'Cancelled_reservations'=>'Reservation cancelled done.',
       'search_result'=>'All Search result Retrieved  Successfully',
       'vafourite_result'=>'All vafourite doctors result Retrieved  Successfully',
 'all_data'=>'get all  data',

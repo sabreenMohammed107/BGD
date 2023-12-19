@@ -374,10 +374,10 @@ class PatientController extends BaseController
         }
 
         if ($request->has('insurance')) {
-            if ($request->get('insurance') == 1) { //public
+            if ($request->get('insurance') == "public") { //public
                 $doctors = $doctors->where("insurance_types.id", 1);
 
-            } else if ($request->get('insurance') == 0) { //private
+            } else if ($request->get('insurance') == "private") { //private
                 $doctors = $doctors->where("insurance_types.id", 2);
                 if ($min_price) {
 

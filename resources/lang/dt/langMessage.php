@@ -24,7 +24,7 @@ return [
       'make_reserve'=>'Ihre Reservierung wurde erfolgreich bestätigt',
       'old_reserve'=>'Alte Reservierungen',
       'new_reservations'=>'alle Neue Reservierungen',
-      'Cancelled_reservations'=>'Reservierung erfolgreich storniert',
+      'Cancelled_reservations'=>'Reservierung storniert erledigt',
       'search_result'=>'Alle Suchergebnisse erfolgreich abgerufen',
       'vafourite_result'=>'Das Ergebnis aller Vafourite-Ärzte wurde erfolgreich abgerufen',
       'all_data'=>'Holen Sie sich alle Daten',
