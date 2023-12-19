@@ -291,9 +291,9 @@ class PatientController extends BaseController
             $doctors = $doctors->whereIn("doctor_schedules.days_id", $s);
         }
     }
-
+    dd($request->all());
     if ($request->get('insurance')) {
-        dd($request->get('insurance'));
+
         if ($request->get('insurance') == 1) { //public
             $doctors = $doctors->where("insurance_types.id", 1);
             dd("bublic");
