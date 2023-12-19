@@ -963,7 +963,8 @@ Notifications                                        <span
                          <!--begin::Menu wrapper-->
                          <div class="cursor-pointer symbol symbol-35px symbol-lg-35px" data-kt-menu-trigger="click"
                              data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                             <img alt="Pic" src="{{ asset('dist/assets/media/avatars/300-1.jpg') }}" />
+
+                             <img alt="Pic" src="{{ asset('uploads/doctors') }}/{{ Auth::guard('doctor')->user()->img }}" />
                          </div>
                          <!--begin::User account menu-->
                          <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
@@ -974,7 +975,7 @@ Notifications                                        <span
                                      <!--begin::Avatar-->
                                      <div class="symbol symbol-50px me-5">
                                          <img alt="Logo"
-                                             src="{{ asset('dist/assets/media/avatars/300-1.jpg') }}" />
+                                             src="{{ asset('uploads/doctors') }}/{{ Auth::guard('doctor')->user()->img }}" />
                                      </div>
                                      <!--end::Avatar-->
                                      <!--begin::Username-->

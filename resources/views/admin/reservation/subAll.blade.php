@@ -51,13 +51,13 @@
                                 data-kt-check-target="#kt_ecommerce_category_table .form-check-input" value="1" />
                         </div>
                     </th>
-                    <th class="text-start min-w-70px">ID </th>
-                    <th class="min-w-200px">patient_name</th>
+                    <th class="text-start min-w-100px">Reservation ID </th>
+                    <th class="min-w-150px">patient_name</th>
                     <th class="text-end min-w-100px">Clinic</th>
-                    <th class="text-end min-w-70px">Reservation Date</th>
+                    <th class="text-end min-w-100px">Reservation Date</th>
                     <th class="text-end min-w-70px">Time </th>
                     <th class="text-end min-w-70px">status </th>
-                    <th class="text-center min-w-150px">Action</th>
+                    <th class="text-center min-w-200px">Action</th>
 
                 </tr>
                 <!--end::Table row-->
@@ -78,15 +78,31 @@
                     <!--end::Checkbox-->
                     <!--begin::Category=-->
                     <td class="text-start pe-0" data-order="15">
-                        <span class="fw-bolder ms-3">{{ $newrow->id }}</span>
+                        @if (Auth::guard('admin')->check())
+
+                        <a href="{{ route('admin.show-all-reservation', $newrow->id) }}" class=" px-3">
+                            {{ $newrow->id }}</a>
+
+
+                        @endif
+                        @if (Auth::guard('doctor')->check())
+
+                        <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}" class=" px-3">
+                            {{ $newrow->id }} </a>
+                        @endif
+
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
 
                             <div class="ms-5">
                                 <!--begin::Title-->
-                                <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                                    data-kt-ecommerce-category-filter="category_name">{{ $newrow->patient_name }}</a>
+                                {{-- <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
+                                    data-kt-ecommerce-category-filter="category_name"> --}}
+                                    <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_name"
+                                    value="{{ $newrow->patient_name }}">
+                                    {{ $newrow->patient_name }}
+                                </a>
                                 <!--end::Title-->
                             </div>
                         </div>
@@ -113,75 +129,67 @@
                             @elseif($newrow->reservation_status_id == 2) style="color: green;" @endif>{{
                             $newrow->status->en_status ?? '' }}</span>
                     </td>
-                    <td class="text-end pe-0" data-order="15">
-                        @if (Auth::guard('admin')->check())
 
-                        <a href="{{ route('admin.show-all-reservation', $newrow->id) }}" class=" px-3"><i
-                                class="fa fa-eye" aria-hidden="true"></i></a>
+                    <td class="text-center pe-0" data-order="15">
 
-
-                        @endif
                         @if (Auth::guard('doctor')->check())
 
-                        <a href="{{ route('doctor.show-all-reservation',$newrow->id) }}" class=" px-3"><i
-                                class="fa fa-eye" aria-hidden="true"></i></a>
+
 
                         {{-- new Action As Menu --}}
                         <!--begin::Menu-->
-                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-                        data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Status
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                        <span class="svg-icon svg-icon-5 m-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                    fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </a>
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
+                        @if($newrow->reservation_status_id == 3 || $newrow->reservation_status_id == 4)
+                        <span class="fw-bolder ms-3">Cannot change status</span>
+
+                        @else
+                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click"
+                            data-kt-menu-placement="bottom-end">Select Status
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                            <span class="svg-icon svg-icon-5 m-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </a>
+                        @endif
+                        {{-- if cancel by patient or doctor --}}
+
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-200px py-4"
                             data-kt-menu="true">
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
-                                @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
-                                <a data-bs-toggle="modal" style="cursor: pointer" data-bs-target="#comReservation{{$newrow->id }}"
-                                    title="complete" class=" px-3">complete</a>
-                                @endif
-                                @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
+                                {{-- @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
+                                --}}
+                                <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
+                                    title="complete" style="cursor: pointer"
+                                    class="fw-bolder d-flex align-items-center fs-5 ">Reservation Done</a>
+                                <div class="separator my-2"></div>
+                                {{-- @endif --}}
+                                {{-- @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
+                                --}}
                                 <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
-                                    title="cancelled" style="cursor: pointer" class=" px-3">cancelled</a>
-                                <a data-bs-toggle="modal" style="cursor: pointer" @endif @if($newrow->reservation_status_id == 1)
+                                    title="cancelled" style="cursor: pointer"
+                                    class="fw-bolder d-flex align-items-center fs-5">Cancel Reservation</a>
+                                <div class="separator my-2"></div>
+                                <a data-bs-toggle="modal" style="cursor: pointer" {{-- @endif
+                                    @if($newrow->reservation_status_id == 1) --}}
                                     data-bs-target="#confReservation{{$newrow->id }}"
-                                    class=" px-3">confirm</a>
+                                    class="fw-bolder d-flex align-items-center fs-5" >Reservation Confirmed</a>
+                                <div class="separator my-2"></div>
+                                {{-- @endif --}}
 
-                                @endif
+                                {{-- @endif --}}
 
-                                @endif
                             </div>
                             <!--end::Menu item-->
 
                         </div>
                         <!--end::Menu-->
-
-                        {{-- end Action Menu --}}
-                        {{-- @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
-                        <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}" title="complete"
-                            class=" px-3"><i class="fa fa-check" style="color: green;font-weight: bold"
-                                aria-hidden="true"></i></a>
                         @endif
-                        @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
-                        <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}" title="cancelled"
-                            class=" px-3"><span style="color: red;font-weight: bold">x</span></a>
-                        <a data-bs-toggle="modal" @endif @if($newrow->reservation_status_id == 1)
-                            data-bs-target="#confReservation{{$newrow->id }}"
-                            class=" px-3"><span style="color: green;font-weight: bold" title="confirm"><i
-                                    style="color: green;font-weight: bold" class="fa fa-file"></i></span></a>
-
-                        @endif
-
-                        @endif --}}
                     </td>
 
                     <!--end::Table row-->
@@ -229,7 +237,7 @@
                                         <div class="d-flex flex-column mb-8 fv-row">
                                             <div class="text-center" style="color:rgb(179, 6, 6) ">
                                                 <p>Confirmed Booking - Are you sure ?</p>
-                                                <span>note: This action cannot be changed</span>
+                                                {{-- <span>note: This action cannot be changed</span> --}}
                                             </div>
                                         </div>
                                         <!--begin::Actions-->
@@ -301,7 +309,7 @@
                                         <div class="d-flex flex-column mb-8 fv-row">
                                             <div class="text-center" style="color:rgb(179, 6, 6) ">
                                                 <p>Complete Booking - Are you sure ?</p>
-                                                <span>note: This action cannot be changed</span>
+                                                {{-- <span>note: This action cannot be changed</span> --}}
                                             </div>
                                         </div>
                                         <!--begin::Actions-->

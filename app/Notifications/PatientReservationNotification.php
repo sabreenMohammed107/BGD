@@ -60,7 +60,7 @@ class PatientReservationNotification extends Notification
             'body' => $this->object['body'],
             'date' => 'At '.$this->object['date'],
             'time' => $this->object['time'],
-            'reservUrl'=>'http://127.0.0.1:8000/doctor/all-reservations',
+            'reservUrl'=>'https://bdg-med.com/doctor/all-reservations',
         ];
     }
 }

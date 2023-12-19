@@ -216,7 +216,7 @@
                     </a>
                 </div>
                 <!-- end Doctors -->
-                <!-- start Doctors -->
+                {{-- <!-- start Doctors -->
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('doctor-patients-review') }}">
                         <span class="menu-icon">
@@ -237,7 +237,7 @@
                         <span class="menu-title">Patient Reviews</span>
                     </a>
                 </div>
-                <!-- end Doctors -->
+                <!-- end Doctors --> --}}
                 <div class="menu-item">
                     <div class="menu-content">
                         <div class="separator mx-1 my-4"></div>
