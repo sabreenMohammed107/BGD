@@ -316,22 +316,121 @@ class PatientController extends BaseController
                 $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '<=', floatval($request->get('max_price')));
             }
 
+            if ($request->get('city')) {
 
+                $doctors = $doctors->where("city_id", $request->get('city'));
+            }
 
+            //  if ($min_price && $max_price) {
 
+            //     $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
+            //  }
 
-    // if (!empty($str)) {
-    //     $doctors->where(function ($q) use ($str) {
-    //         $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
-    //             ->orWhereHas('doctor', function ($q) use ($str) {
-    //                 $q->where('doctors.name', 'like', '%' . $str . '%');
-    //             });
-    //     });
-    // }
-    $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+            if ($homeVisit) {
 
+                $doctors = $doctors->where("home_visit_allowed", $homeVisit);
+            }
+            if ($parkingSpace) {
 
-    return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
+                $doctors = $doctors->where("parking_allowed", $parkingSpace);
+            }
+            if ($disableAccess) {
+
+                $doctors = $doctors->where("disability_allowed", $disableAccess);
+            }
+            //  if ( $insurance == 0) {
+
+            // }
+
+            if (!empty($str)) {
+                $doctors->where(function ($q) use ($str) {
+                    $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
+                        ->orWhereHas('doctor', function ($q) use ($str) {
+                            $q->where('doctors.name', 'like', '%' . $str . '%');
+                        });
+                });
+            }
+            if ($request->has('lower')) {
+                if ($lower == 1) {
+
+                    $doctors = $doctors->where("insurance_types.id", 2)->orderBy("doctor_clinics.visit_fees", 'Desc');
+                } else if ($lower == 2) {
+                    $doctors = $doctors->orderBy("doctor_clinics.name", 'asc');
+                } else if ($lower == 3) {
+                    $doctors = $doctors->orderBy("doctor_clinics.name", 'desc');
+                } else if ($lower == 4) {
+
+                    $weekMap = [
+                        6 => 1,
+                        0 => 2,
+                        1 => 3,
+                        2 => 4,
+                        3 => 5,
+                        4 => 6,
+                        5 => 7,
+                    ];
+
+                    $weekdd = collect([
+                        Carbon::now()->dayOfWeek => Carbon::now(),
+                        Carbon::now()->addDays(1)->dayOfWeek => Carbon::now()->addDays(1),
+                        Carbon::now()->addDays(2)->dayOfWeek => Carbon::now()->addDays(2),
+                        Carbon::now()->addDays(3)->dayOfWeek => Carbon::now()->addDays(3),
+                        Carbon::now()->addDays(4)->dayOfWeek => Carbon::now()->addDays(4),
+                        Carbon::now()->addDays(5)->dayOfWeek => Carbon::now()->addDays(5),
+                        Carbon::now()->addDays(6)->dayOfWeek => Carbon::now()->addDays(6),
+                    ]);
+
+                    $resultCollection = $weekdd->keyBy(function ($item, $key) use ($weekMap) {
+                        return isset($weekMap[$key]) ? $weekMap[$key] : $key;
+                    });
+
+                    $dayOfTheWeek = Carbon::now()->dayOfWeek;
+                    $dFake = $weekMap[$dayOfTheWeek];
+                    $weekday = $resultCollection[$dFake];
+
+                    $doctorsMapAfter = $doctors->where('doctor_schedules.days_id', '>=', $dFake)
+                        ->orderBy("doctor_schedules.days_id", 'asc')
+                        ->groupBy('doctor_clinics.id')->get();
+
+                    $doctorsMapBefore = $doctors->where('doctor_schedules.days_id', '<', $dFake)
+                        ->orderBy("doctor_schedules.days_id", 'asc')
+                        ->groupBy('doctor_clinics.id')->get();
+
+                    //get days
+
+                    //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
+                    // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
+    // new testing
+                    $scadsaft = Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
+                    $scadsbef = Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
+                    $doctorsTest = $scadsaft->merge($scadsbef);
+                    $doctors = Doctor_clinic::select('doctor_clinics.*')->
+                        join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                        ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+                        ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+                        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+                        ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
+                    return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
+                } else {
+                    $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
+                }
+            }
+
+            //     if($request->has('sort_name')){
+            //     if($sort_name == 0){
+
+            //      $doctors=$doctors->orderBy("doctor_clinics.name",'asc');
+            //     }else{
+
+            //         $doctors=$doctors->orderBy("doctor_clinics.name",'desc');
+            //     }
+            // }
+            $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+
+            //  return $doctors;
+            //
+            // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
+            return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
 
     }
     public function searchOld(Request $request)
