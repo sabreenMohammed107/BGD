@@ -285,7 +285,7 @@ class PatientController extends BaseController
 // $sort_name=$request->get('sort_name');
 
         $search = $str;
-dd($request->all());
+dd($request->get('insurance'));
         $doctors = Doctor_clinic::select('doctor_clinics.*')->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
