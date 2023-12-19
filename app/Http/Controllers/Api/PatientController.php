@@ -307,6 +307,7 @@ class PatientController extends BaseController
             dd("both");
         }
     }
+
             if (floatval($request->get('min_price'))) {
 
                 $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '>=',floatval($request->get('min_price')));
