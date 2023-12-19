@@ -293,6 +293,7 @@ class PatientController extends BaseController
     }
     dd($request['insurance']);
 
+
     if ($request['insurance']) {
 
         if ($request->get('insurance') == 1) { //public
