@@ -297,8 +297,11 @@ class PatientController extends BaseController
             $doctors = $doctors->where("insurance_types.id", 1);
 
         } else if ($request->get('insurance') == 0) { //private
+
             $doctors = $doctors->where("insurance_types.id", 2);
-        }else{
+           dd($doctors->groupBy('doctor_clinics.id')->get());
+        }
+        else{
             $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
         }
             if (floatval($request->get('min_price'))) {
