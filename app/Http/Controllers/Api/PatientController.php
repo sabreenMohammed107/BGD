@@ -295,15 +295,17 @@ class PatientController extends BaseController
     if ($request->get('insurance')) {
         if ($request->get('insurance') == 1) { //public
             $doctors = $doctors->where("insurance_types.id", 1);
-
+            dd("bublic");
         } else if ($request->get('insurance') == 0) { //private
 
             $doctors = $doctors->where("insurance_types.id", 2);
-           dd($doctors->groupBy('doctor_clinics.id')->get());
+            dd("privet");
         }
         else{
             $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
+            dd("both");
         }
+    }
             if (floatval($request->get('min_price'))) {
 
                 $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '>=',floatval($request->get('min_price')));
@@ -314,7 +316,7 @@ class PatientController extends BaseController
             }
 
 
-    }
+
 
 
     // if (!empty($str)) {
