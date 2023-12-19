@@ -313,6 +313,7 @@ class PatientController extends BaseController
 
     }
 
+
     // if (!empty($str)) {
     //     $doctors->where(function ($q) use ($str) {
     //         $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
