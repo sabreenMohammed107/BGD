@@ -269,6 +269,13 @@ class PatientController extends BaseController
     }
     public function search(Request $request)
     {
+        $search = '';
+        $str = $request->get('str');
+        $lower = $request->get('lower');
+
+        $homeVisit = $request->get('homeVisit');
+        $parkingSpace = $request->get('parkingSpace');
+        $disableAccess = $request->get('disableAccess');
         $str = $request->get('str');
         $doctors = Doctor_clinic::select('doctor_clinics.*')->
         join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
