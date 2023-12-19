@@ -308,10 +308,11 @@ class PatientController extends BaseController
         }
 
         if ($insurance) {
+            dd($insurance);
             if ($insurance == 1) { //public
                 $doctors = $doctors->where("insurance_types.id", 1);
 
-            } else if ($insurance != 1) { //private
+            } else if ($insurance == 0) { //private
                 $doctors = $doctors->where("insurance_types.id", 2);
                 if ($min_price) {
 
@@ -321,6 +322,8 @@ class PatientController extends BaseController
 
                     $doctors->where('doctor_clinics.visit_fees', '<=', $max_price);
                 }
+            }else{
+                $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
             }
 
         }
