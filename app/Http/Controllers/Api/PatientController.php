@@ -295,15 +295,15 @@ class PatientController extends BaseController
 
         if ($request->get('insurance') == 1) { //public
             $doctors = $doctors->where("insurance_types.id", 1);
-            dd("bublic");
+
         } else if ($request->get('insurance') == 0) { //private
 
             $doctors = $doctors->where("insurance_types.id", 2);
-            dd("privet");
+
         }
         else{
             $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
-            dd("both");
+
         }
 
 
