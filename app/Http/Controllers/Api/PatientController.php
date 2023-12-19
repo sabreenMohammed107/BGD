@@ -285,34 +285,33 @@ class PatientController extends BaseController
 // $sort_name=$request->get('sort_name');
 
         $search = $str;
-dd($request->get('insurance'));
+
         $doctors = Doctor_clinic::select('doctor_clinics.*')->
             join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
             ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
             ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
             ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
 
-        if ($speciality) {
-            $r = json_decode($speciality, true);
+        if ($request->get('speciality')) {
+            $r = json_decode($request->get('speciality'), true);
             if (count($r) > 0) {
 
                 $doctors = $doctors->whereIn("doctor_feilds.medical_field_id", $r);
             }
 
         }
-        if ($selectdays) {
-            $s = json_decode($selectdays, true);
+        if ($request->get('selectdays')) {
+            $s = json_decode($request->get('selectdays'), true);
             if (count($s) > 0) {
                 $doctors = $doctors->whereIn("doctor_schedules.days_id", $s);
             }
         }
 
-        if ($insurance) {
-            dd($insurance);
-            if ($insurance == 1) { //public
+        if ($request->get('insurance')) {
+            if ($request->get('insurance') == 1) { //public
                 $doctors = $doctors->where("insurance_types.id", 1);
 
-            } else if ($insurance == 0) { //private
+            } else if ($request->get('insurance') == 0) { //private
                 $doctors = $doctors->where("insurance_types.id", 2);
                 if ($min_price) {
 
@@ -328,9 +327,9 @@ dd($request->get('insurance'));
 
         }
 
-        if ($city) {
+        if ($request->get('city')) {
 
-            $doctors = $doctors->where("city_id", $city);
+            $doctors = $doctors->where("city_id", $request->get('city'));
         }
 
         //  if ($min_price && $max_price) {
