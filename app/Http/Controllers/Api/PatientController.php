@@ -267,8 +267,67 @@ class PatientController extends BaseController
         }
 
     }
-
     public function search(Request $request)
+    {
+        $str = $request->get('str');
+        $doctors = Doctor_clinic::select('doctor_clinics.*')->
+        join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+        ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+        ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
+
+    if ($request->get('speciality')) {
+        $r = json_decode($request->get('speciality'), true);
+        if (count($r) > 0) {
+
+            $doctors = $doctors->whereIn("doctor_feilds.medical_field_id", $r);
+        }
+
+    }
+
+    if ($request->get('selectdays')) {
+        $s = json_decode($request->get('selectdays'), true);
+        if (count($s) > 0) {
+            $doctors = $doctors->whereIn("doctor_schedules.days_id", $s);
+        }
+    }
+
+    if ($request->get('insurance')) {
+        if ($request->get('insurance') == 1) { //public
+            $doctors = $doctors->where("insurance_types.id", 1);
+
+        } else if ($request->get('insurance') == 0) { //private
+            $doctors = $doctors->where("insurance_types.id", 2);
+        }else{
+            $doctors = $doctors->whereIn("insurance_types.id", [1,2]);
+        }
+            if (floatval($request->get('min_price'))) {
+
+                $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '>=',floatval($request->get('min_price')));
+            }
+            if (floatval($request->get('max_price'))) {
+
+                $doctors->where("insurance_types.id", 2)->where('doctor_clinics.visit_fees', '<=', floatval($request->get('max_price')));
+            }
+
+
+    }
+
+    if (!empty($str)) {
+        $doctors->where(function ($q) use ($str) {
+            $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
+                ->orWhereHas('doctor', function ($q) use ($str) {
+                    $q->where('doctors.name', 'like', '%' . $str . '%');
+                });
+        });
+    }
+    $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+
+
+    return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
+
+    }
+    public function searchOld(Request $request)
     {
         $search = '';
         $str = $request->get('str');
