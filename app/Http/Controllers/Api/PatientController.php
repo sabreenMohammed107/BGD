@@ -294,6 +294,7 @@ class PatientController extends BaseController
 
 
         if ($request->get('insurance') == 1) { //public
+            dd($request->get('insurance'));
             $doctors = $doctors->where("insurance_types.id", 1);
 
         } else if ($request->get('insurance') == 0) { //private
