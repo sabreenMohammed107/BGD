@@ -313,14 +313,14 @@ class PatientController extends BaseController
 
     }
 
-    if (!empty($str)) {
-        $doctors->where(function ($q) use ($str) {
-            $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
-                ->orWhereHas('doctor', function ($q) use ($str) {
-                    $q->where('doctors.name', 'like', '%' . $str . '%');
-                });
-        });
-    }
+    // if (!empty($str)) {
+    //     $doctors->where(function ($q) use ($str) {
+    //         $q->where('doctor_clinics.name', 'like', '%' . $str . '%')
+    //             ->orWhereHas('doctor', function ($q) use ($str) {
+    //                 $q->where('doctors.name', 'like', '%' . $str . '%');
+    //             });
+    //     });
+    // }
     $doctors = $doctors->groupBy('doctor_clinics.id')->get();
 
 
