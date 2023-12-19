@@ -163,37 +163,6 @@
                         @endif
                         {{-- if cancel by patient or doctor --}}
 
-
-                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-200px py-4"
-                            data-kt-menu="true" >
-                            <!--begin::Menu item-->
-                            <div class="menu-item px-3">
-                                {{-- @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
-                                --}}
-                                <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
-                                    title="complete" style="cursor: pointer"
-                                    class="fw-bolder d-flex align-items-center fs-5 ">Reservation Done</a>
-                                <div class="separator my-2"></div>
-                                {{-- @endif --}}
-                                {{-- @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
-                                --}}
-                                <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
-                                    title="cancelled" style="cursor: pointer"
-                                    class="fw-bolder d-flex align-items-center fs-5">Cancel Reservation</a>
-                                <div class="separator my-2"></div>
-                                <a data-bs-toggle="modal" style="cursor: pointer" {{-- @endif
-                                    @if($newrow->reservation_status_id == 1) --}}
-                                    data-bs-target="#confReservation{{$newrow->id }}"
-                                    class="fw-bolder d-flex align-items-center fs-5" >Reservation Confirmed</a>
-                                <div class="separator my-2"></div>
-                                {{-- @endif --}}
-
-                                {{-- @endif --}}
-
-                            </div>
-                            <!--end::Menu item-->
-
-                        </div>
                         <!--end::Menu-->
                         @endif
                     </td>
