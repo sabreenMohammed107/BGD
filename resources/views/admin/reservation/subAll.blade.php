@@ -165,21 +165,25 @@
                             <div class="menu-item px-3">
                                 {{-- @if($newrow->reservation_status_id == 5 || $newrow->reservation_status_id == 1)
                                 --}}
-                                <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
-                                    title="complete" style="cursor: pointer"
-                                    class="fw-bolder d-flex align-items-center fs-5 ">Reservation Done</a>
-                                <div class="separator my-2"></div>
-                                {{-- @endif --}}
-                                {{-- @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
-                                --}}
-                                <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
-                                    title="cancelled" style="cursor: pointer"
-                                    class="fw-bolder d-flex align-items-center fs-5">Cancel Reservation</a>
-                                <div class="separator my-2"></div>
                                 <a data-bs-toggle="modal" style="cursor: pointer" {{-- @endif
                                     @if($newrow->reservation_status_id == 1) --}}
                                     data-bs-target="#confReservation{{$newrow->id }}"
-                                    class="fw-bolder d-flex align-items-center fs-5" >Reservation Confirmed</a>
+                                    class="fw-bolder d-flex align-items-center fs-5" >Confirm Reservation</a>
+                                    <div class="separator my-2"></div>
+                                    <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
+                                        title="cancelled" style="cursor: pointer"
+                                        class="fw-bolder d-flex align-items-center fs-5">Cancel Visit</a>
+                                        <div class="separator my-2"></div>
+                                        <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
+                                    title="complete" style="cursor: pointer"
+                                    class="fw-bolder d-flex align-items-center fs-5 ">Visit Done</a>
+
+                                {{-- @endif --}}
+                                {{-- @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
+                                --}}
+
+
+
                                 <div class="separator my-2"></div>
                                 {{-- @endif --}}
 
