@@ -27,7 +27,7 @@ class scadualInfoResource extends JsonResource
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
 
                     'status'=>$this->status->en_status ?? '',
-                    'reservation_date' => $this->reservation_date ?? '',
+                    'reservation_date' => date_format(date_create($this->reservation_date), "D M Y"),
                     'av_day' => $this->reserv_day ?? '',
                     'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
                     'street' => $this->clinic->en_street ?? '',
