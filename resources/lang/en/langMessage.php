@@ -21,7 +21,7 @@ return [
       'make_fav' => 'U make favourite successfully.',
       'remove_fav' => 'U remove favourite successfully.',
       'reserve_data' => 'get all reserve data ',
-      'make_reserve'=>'Your reservation has been successfully confirmed',
+      'make_reserve'=>'Your reservation has been successfully booked',
       'old_reserve'=>'Old  reservations',
       'new_reservations'=>'all New  reservations',
       'Cancelled_reservations'=>'Reservation cancelled done.',
