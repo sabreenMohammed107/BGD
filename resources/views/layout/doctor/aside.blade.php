@@ -89,7 +89,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Patients Reservations</span>
+                        <span class="menu-title">All Patients Reservations</span>
                     </a>
                 </div>
                 <!-- end Doctors -->
@@ -112,7 +112,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Completed Reservations</span>
+                        <span class="menu-title">Done Visits</span>
                     </a>
                 </div>
                 <!-- end Doctors -->
@@ -135,7 +135,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Cancelled Reservations</span>
+                        <span class="menu-title">Cancelled Visits</span>
                     </a>
                 </div>
                 <!-- end Doctors -->
@@ -267,7 +267,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">My Subscriptions</span>
+                        <span class="menu-title">My Subscriptions (soon)</span>
                     </a>
                 </div>
                 <div class="menu-item">
@@ -287,11 +287,11 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Payments Reports</span>
+                        <span class="menu-title">Payments Reports (soon)</span>
                     </a>
                 </div>
 
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <a class="menu-link" href="{{ route('doctor.complete-reservations') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen009.svg-->
@@ -310,7 +310,7 @@
                         </span>
                         <span class="menu-title">Completed Reservations</span>
                     </a>
-                </div>
+                </div> --}}
 
 
 
