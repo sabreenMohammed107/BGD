@@ -37,6 +37,7 @@ try{
     Mail::send('emails.forgot', ['token' => $token], function($message) use($email){
         $message->to($email);
         $message->subject('Reset Password');
+        $message->line('You are receiving this email because we received a password reset request for your account.');
     });
 
     return response([
