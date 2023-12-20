@@ -138,7 +138,7 @@
 
                         {{-- new Action As Menu --}}
                         <!--begin::Menu-->
-                        @if($newrow->reservation_status_id == 3 || $newrow->reservation_status_id == 4)
+                        @if($newrow->reservation_status_id == 3 || $newrow->reservation_status_id == 4 || $newrow->reservation_status_id == 2)
                         <span class="fw-bolder ms-3">Cannot change status</span>
 
                         @else
