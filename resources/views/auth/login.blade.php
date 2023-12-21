@@ -26,7 +26,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:url" content="https://themes.getbootstrap.com/product/craft-bootstrap-5-admin-dashboard-theme" />
 		<meta property="og:site_name" content="Keenthemes | Craft" />
 		<link rel="canonical" href="https://preview.keenthemes.com/craft" />
-		<link rel="shortcut icon" href="{{asset('dist/assets/assets/media/logos/favicon.ico')}}" />
+		<link rel="shortcut icon" href="{{asset('dist/assets/assets/media/logos/favicon2.ico')}}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
 		<!--end::Fonts-->
