@@ -11,7 +11,7 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb fw-bold fs-base my-1">
                     <li class="breadcrumb-item text-muted">
-                        <a href="../dist/index.html" class="text-muted text-hover-primary">Home</a>
+                        <a href="#" class="text-muted text-hover-primary">Home</a>
                     </li>
                     <li class="breadcrumb-item text-muted">Clinics</li>
 
