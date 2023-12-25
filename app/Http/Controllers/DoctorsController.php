@@ -217,7 +217,7 @@ class DoctorsController extends Controller
         $file_name = public_path('uploads/doctors/' . $file);
         try {
             File::delete($file_name);
- $row->medicines()->detach);
+ $row->medicines()->detach();
             $row->delete();
             return redirect()->back()->with('flash_del', 'Successfully Delete!');
 
