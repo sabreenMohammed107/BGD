@@ -158,7 +158,7 @@ class DoctorsController extends Controller
             'email' => 'required|email|unique:doctors,email,'.$id,
             'name' => 'required',
             'password' =>'required_with:confirmed|nullable',
-            'phone'=> ['required','digits:14'],
+            'mobile'=> ['required','digits:14'],
            ]);
         if($validator->fails()) {
             $errors = $validator->errors();
