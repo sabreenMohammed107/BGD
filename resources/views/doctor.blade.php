@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div>
                             <h4 class="p-3 pb-0">
-                                Monthly Number of Reserved Patients 
+                                Monthly Number of Reserved Patients
                                     <i class="fa fa-info text-primary p-2 float-end border border-primary rounded"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This statistical graph shows how many patients applied for a reservation during the last 5 month"></i>
                             </h4>
                             <canvas id="kt_chartjs_1" class="mh-400px"></canvas>
@@ -25,13 +25,13 @@
                                 <i class="fa fa-info text-primary p-2 float-end border border-primary rounded"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This statistical graph shows the reservations distribution all over the doctor clinics in this month"></i>
 
                             </h4>
-                            <canvas id="kt_chartjs_4"></canvas>
+                            {{-- <canvas id="kt_chartjs_4"></canvas> --}}
                         </div>
 
-                        
+
                     </div>
                     <div class="col-md-6">
-                        <h4 class="p-3 pb-0">This Month Reservation 
+                        <h4 class="p-3 pb-0">This Month Reservation
                             <i class="fa fa-info text-primary p-2 float-end border border-primary rounded"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This statistical graph shows the reservations types percentages this month"></i>
 
                         </h4>
