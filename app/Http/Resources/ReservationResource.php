@@ -20,7 +20,9 @@ class ReservationResource extends JsonResource
             // 'clinic' => $this->clinic->name ?? '',
             'reservation_status' => $this->status->en_status ?? '',
             'doctor' => DocorProfileResource::make( $this->clinic),
-            'reservation_date' => date_format(date_create($this->reservation_date), "d-m-Y"),
+            'reservation_date' => $this->reservation_date,
+
+            // 'reservation_date' => date_format(date_create($this->reservation_date), "d-m-Y"),
             'time_from' => $this->time_from ?? '',
             'time_to' => $this->time_to ?? '',
             'me / other' => ($this->other_flag ==1) ? 'other' : 'me',
