@@ -305,7 +305,7 @@ if ($request->get('map_tude')) {
         $yearEnd = Carbon::now()->endOfYear();
 
         $counts = Reservation::join('reservation_statuses', 'reservations.reservation_status_id', '=', 'reservation_statuses.id')
-            ->whereBetween('reservation_date', [$monthStart, $monthEnd])
+            ->whereBetween('reservation_date', [$currentYear, $yearEnd])
             ->whereIn('clinic_id', $clinicIds)
             ->selectRaw('reservation_statuses.en_status as status, count(*) as count')
             ->groupBy('reservation_statuses.en_status')
@@ -318,12 +318,7 @@ if ($request->get('map_tude')) {
             ->groupBy('doctor_clinics.name')
             ->pluck('count', 'name');
 
-        if($counts = []){
-            $counts = [0];
-        }
-        if($clinics_counts = []){
-            $clinics_counts = [0];
-        }
+        
         
         return [$reservationCounts, $counts, $clinics_counts];
     }
