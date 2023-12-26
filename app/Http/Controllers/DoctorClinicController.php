@@ -317,6 +317,13 @@ if ($request->get('map_tude')) {
             ->selectRaw('doctor_clinics.name as name, count(*) as count')
             ->groupBy('doctor_clinics.name')
             ->pluck('count', 'name');
+
+        if($counts = []){
+            $counts = [0];
+        }
+        if($clinics_counts = []){
+            $clinics_counts = [0];
+        }
         
         return [$reservationCounts, $counts, $clinics_counts];
     }
