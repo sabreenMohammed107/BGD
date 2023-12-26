@@ -93,8 +93,11 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('/update-doctor-profile', [DoctorDataController::class, 'updateDoctorProfile'])->name('update-doctor-profile');
     Route::get('/doctor-patients-review', [DoctorDataController::class, 'review'])->name('doctor-patients-review');
 
-    Route::resource('doctor-clinics', DoctorClinicController::class);
+    // Charts
+    Route::get('/reservations/charts', [DoctorClinicController::class, 'getReservationChartData']);
     Route::resource('doctor-clinic-gallery', DoctorClinicGalleryController::class);
+
+    Route::resource('doctor-clinics', DoctorClinicController::class);
     Route::post('/mark-as-read', [HomeController::class, 'markAsNotification'])->name('markAsNotification');
 });
 Route::group([ 'prefix' => 'admin'], function () {

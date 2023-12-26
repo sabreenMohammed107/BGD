@@ -9,7 +9,9 @@ use App\Models\Doctor;
 use App\Models\Doctor_clinic;
 use App\Models\Doctor_schedule;
 use App\Models\Insurance_type;
+use App\Models\Reservation;
 use App\Models\Status;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -271,5 +273,51 @@ if ($request->get('map_tude')) {
             return redirect()->back()->withInput()->with('flash_danger', 'Can’t delete This Row
             Because it related with another table');
         }
+    }
+
+
+    function getReservationChartData(Request $request)
+    {
+        $currentDate = Carbon::now();
+        $reservationCounts = [];
+        $clinicIds = Doctor_clinic::where('doctor_id', $this->doctorId)->pluck('id')->toArray();
+
+        for ($i = 4; $i >= 0; $i--) {
+            $monthStart = $currentDate->copy()->subMonths($i)->startOfMonth();
+            $monthEnd = $currentDate->copy()->subMonths($i)->endOfMonth();
+        
+            $count = Reservation::whereBetween('reservation_date', [$monthStart, $monthEnd])
+                ->whereIn('clinic_id', $clinicIds)
+                ->distinct('patient_id')
+                ->count('patient_id');
+
+                
+        
+            // Store the count for the month in an array
+            $reservationCounts[$monthStart->format('M')] = $count;
+        }
+
+
+        $currentDate = Carbon::now();
+        $monthStart = $currentDate->startOfMonth();
+        $monthEnd = $currentDate->endOfMonth();
+        $currentYear = Carbon::now()->startOfYear();
+        $yearEnd = Carbon::now()->endOfYear();
+
+        $counts = Reservation::join('reservation_statuses', 'reservations.reservation_status_id', '=', 'reservation_statuses.id')
+            ->whereBetween('reservation_date', [$currentYear, $yearEnd])
+            ->whereIn('clinic_id', $clinicIds)
+            ->selectRaw('reservation_statuses.en_status as status, count(*) as count')
+            ->groupBy('reservation_statuses.en_status')
+            ->pluck('count', 'status');
+
+        $clinics_counts = Reservation::join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
+            ->whereBetween('reservation_date', [$currentYear, $yearEnd])
+            ->whereIn('clinic_id', $clinicIds)
+            ->selectRaw('doctor_clinics.name as name, count(*) as count')
+            ->groupBy('doctor_clinics.name')
+            ->pluck('count', 'name');
+        
+        return [$reservationCounts, $counts, $clinics_counts];
     }
 }
