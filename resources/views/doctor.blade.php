@@ -25,7 +25,7 @@
                                 <i class="fa fa-info text-primary p-2 float-end border border-primary rounded"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="This statistical graph shows the reservations distribution all over the doctor clinics in this month"></i>
 
                             </h4>
-                            {{-- <canvas id="kt_chartjs_4"></canvas> --}}
+                            <canvas id="kt_chartjs_4"></canvas>
                         </div>
 
 
