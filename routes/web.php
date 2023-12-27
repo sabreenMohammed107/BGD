@@ -129,5 +129,6 @@ Route::group([ 'prefix' => 'admin'], function () {
  Route::get('/bdg-data', [FaqController::class, 'createForm'])->name('bdg-data');
 Route::post('/bdg-data', [FaqController::class, 'DataForm'])->name('data.store');
 Route::resource('all-admins', AdminController::class);
+Route::get('/reservations/charts', [AdminController::class, 'getReservationChartData']);
 
 });
