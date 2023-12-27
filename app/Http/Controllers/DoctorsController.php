@@ -77,7 +77,9 @@ class DoctorsController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:doctors'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'mobile'=> ['required','digits:14'],
+            // 'mobile'=> ['required','digits:14'],
+            'mobile'=> ['required','string','min:10','max:14','regex:/^([0-9\s\-\+\(\)]*)$/'],
+
            ]);
         if($validator->fails()) {
             $errors = $validator->errors();
@@ -158,7 +160,7 @@ class DoctorsController extends Controller
             'email' => 'required|email|unique:doctors,email,'.$id,
             'name' => 'required',
             'password' =>'required_with:confirmed|nullable',
-            'mobile'=> ['required','digits:14'],
+            'mobile'=> ['required','string','min:10','max:14','regex:/^([0-9\s\-\+\(\)]*)$/'],
            ]);
         if($validator->fails()) {
             $errors = $validator->errors();

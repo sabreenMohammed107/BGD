@@ -21,16 +21,30 @@ class RedirectIfAuthenticated
 
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($guard == "admin" && Auth::guard($guard)->check()) {
-            return redirect('/admin');
-        }
-        if ($guard == "doctor" && Auth::guard($guard)->check()) {
-            return redirect('/doctor');
-        }
-        if (Auth::guard($guard)->check()) {
-            return redirect('/login');
+        // if ($guard == "admin" && Auth::guard($guard)->check()) {
+        //     return redirect('/admin');
+        // }
+        // if ($guard == "doctor" && Auth::guard($guard)->check()) {
+        //     return redirect('/doctor');
+        // }
+        // if (Auth::guard($guard)->check()) {
+        //     return redirect('/login');
+        // }
+
+        // return $next($request);
+        $guards = empty($guards) ? ['admin', 'doctor'] : $guards;
+
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                if ($guard == "doctor"){
+                    return redirect('/doctor');
+                } else{
+                    return redirect('/admin');
+                }
+            }
         }
 
         return $next($request);
     }
+
 }

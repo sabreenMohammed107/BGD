@@ -71,14 +71,14 @@ class Handler extends ExceptionHandler
         public function render($request, Throwable $e)
 {
     if ($e instanceof AuthenticationException) {
-        // return response()->json(
-        //     [
-        //         'type' => 'error',
-        //         'status' => Response::HTTP_UNAUTHORIZED,
-        //         'message' => 'Access Token expires',
-        //     ],
-        //     Response::HTTP_UNAUTHORIZED
-        // );
+        return response()->json(
+            [
+                'type' => 'error',
+                'status' => Response::HTTP_UNAUTHORIZED,
+                'message' => 'Access Token expires',
+            ],
+            Response::HTTP_UNAUTHORIZED
+        );
         if ($request->is('admin') || $request->is('admin/*')) {
 
             return redirect()->guest('/login/admin');
