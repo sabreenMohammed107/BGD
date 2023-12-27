@@ -44,18 +44,22 @@ class LoginController extends Controller
 
     public function showAdminLoginForm()
     {
-        \Session::regenerate(true);
+
 
         return view('auth.login', ['url' => 'admin']);
     }
 
     public function adminLogin(Request $request)
     {
+        $request->session()->flush();
+
+        $request->session()->regenerate();
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
             return redirect()->intended('/admin');
         }
         return back()->withInput($request->only('email', 'remember'));
@@ -64,12 +68,16 @@ class LoginController extends Controller
 
     public function showDoctorLoginForm()
     {
-        \Session::regenerate(true);
+
         return view('auth.login', ['url' => 'doctor']);
     }
 
     public function doctorLogin(Request $request)
     {
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
@@ -84,6 +92,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+
         if (Auth::guard('admin')->check()) {
         //   $guard = 'admin';
           $this->guard()->logout();
