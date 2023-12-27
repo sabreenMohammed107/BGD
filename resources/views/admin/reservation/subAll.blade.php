@@ -195,10 +195,7 @@
                         </div>
                         <!--end::Menu-->
                         @endif
-                    </td>
-
-                    <!--end::Table row-->
-                    <!--begin::Modal - New Target-->
+                         <!--begin::Modal - New Target-->
                     <div class="modal fade" id="confReservation{{ $newrow->id }}" tabindex="-1" aria-hidden="true">
                         <!--begin::Modal dialog-->
                         <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -415,6 +412,10 @@
                         <!--end::Modal dialog-->
                     </div>
                     <!--end::Modal - New Target-->
+                    </td>
+
+                    <!--end::Table row-->
+
 
                 </tr>
                 @endforeach
