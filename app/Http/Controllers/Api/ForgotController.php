@@ -18,7 +18,8 @@ class ForgotController extends BaseController
 {
 public function forgot(ForgotRequest $request){
 $email=$request->input(key:'email');
-if(User::where('email',$email)->doesntExist()){
+$user = User::where('email',$email);
+if($user->doesntExist()){
     return response([
         'status'=>false,
         'message'=> __("langMessage.user_not_exist"),
@@ -34,10 +35,30 @@ try{
         'token'=>$token
     ]);
     //send Email
-    Mail::send('emails.forgot', ['token' => $token], function($message) use($email){
+    $plainTextContent = __("langMessage.dear") . " " . $user->first()->name . ",\n\n" . __("langMessage.before") . "\n\n" . $token . "\n\n" . __("langMessage.after") . "\n\n" . __("langMessage.thanks") . "\n" . __("langMessage.regards") . "\n";
+
+    Mail::raw($plainTextContent, function($message) use ($email) {
         $message->to($email);
         $message->subject('Reset Password');
     });
+    // Mail::send([], [], function($message) use ($email, $plainTextContent) {
+    //     $message->to($email);
+    //     $message->subject('Subject');
+    //     $message->setBody($plainTextContent, 'text/plain');
+    // });
+
+    // Mail::send('emails.forgot', [
+    //     'token' => $token, 
+    //     'dear' => __("langMessage.dear"),
+    //     'name' => $user->first()->name,
+    //     'before' => __("langMessage.before"),
+    //     'after' => __("langMessage.after"),
+    //     'thanks' => __("langMessage.thanks"),
+    //     'regards' => __("langMessage.regards"),
+    // ], function($message) use($email){
+    //     $message->to($email);
+    //     $message->subject('Reset Password');
+    // });
 
     return response([
         'status'=>true,
