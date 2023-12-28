@@ -28,6 +28,10 @@
                 background-size: contain;
     background-position: center;
             }
+			.menu.menu-sub.menu-sub-dropdown.menu-column{
+				max-height: 500px;
+    overflow-y: scroll;
+			}
             </style>
 
 
