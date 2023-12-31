@@ -3,6 +3,11 @@
 return [
     /*----DoctorsInfController*/
     'home_data' => 'get all home data',
+    'dear' => 'Dear',
+    'before' => 'You recently requested to reset your password. To complete this process, please check for the following code',
+    'after' => 'If you did not make this request, you can safely ignore this email.',
+    'thanks' => 'Thank you,',
+    'regards' => 'The BDG App Team',
     /*----ForgotController*/
     'user_not_exist' => 'user doen\'t exsists !',
     'check_email' => 'check your email',

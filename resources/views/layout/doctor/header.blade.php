@@ -932,12 +932,30 @@ Notifications                                        <span
                           $notifications=Auth::guard('doctor')->user()->unreadNotifications;
                         @endphp
                         @forelse($notifications as $notification)
-        <div class="alert alert-success main-cls">
-            [{{ Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}] Patient : {{ $notification->data['name'] }}
-            ({{ $notification->data['body'] }})  {{ $notification->data['date']}}  -  {{ $notification->data['time'] }}
+        <div class="alert main-cls mb-0">
+            <div>
+                <i class="fa fa-bell text-primary"></i>
+                <div class="float-end" style="color:#7c7c7c">
+                    {{ Carbon\Carbon::parse($notification->created_at)->diffForHumans()}}
+                </div>
+            </div>
+            <p class="m-0">
+                
+            {{ $notification->data['name'] }}
+            {{ $notification->data['body'] }} 
+        
+        </p> 
+        <p class="m-0">
+            {{ $notification->data['date']}}  -  {{ $notification->data['time'] }}
+        </p>
             <a style="color:#000;text-decoration:underline" href="{{ $notification->data['reservUrl']}}" >click here to show  </a>
-            <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">Mark as read</a>
+            <div>
+                <div class="float-end">
+                    <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">Mark as read</a>
+                </div>
+            </div>
         </div>
+
         <div class="separator my-2"></div>
     {{-- @if(count($notification) > 0)
         @if($loop->last)

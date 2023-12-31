@@ -3,6 +3,11 @@
 return [
     /*----DoctorsInfController*/
     'home_data' => 'Holen Sie sich alle Heimdaten',
+    'dear' => 'Sehr geehrter',
+    'before' => 'Sie haben kürzlich eine Anfrage zur Zurücksetzung Ihres Passworts gestellt. Um diesen Vorgang abzuschließen, überprüfen Sie bitte den folgenden Code.',
+    'after' => 'Wenn Sie diese Anfrage nicht gestellt haben, können Sie diese E-Mail sicher ignorieren.',
+    'thanks' => 'Vielen Dank,',
+    'regards' => 'Das BDG App Team',
     /*----ForgotController*/
     'user_not_exist' => 'Benutzer existiert nicht!',
     'check_email' => 'check deine E-Mails',
