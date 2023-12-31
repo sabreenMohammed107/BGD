@@ -242,16 +242,16 @@ class DoctorDataController extends Controller
                 $data = [
                     "registration_ids" => $tokens,
                     "notification" => [
-                        "title" => 'hello',
-                        "body" => 'your reservation complete',
+                        "title" => 'BDG App :',
+                        "body" => 'You Visit ('.$row->reservation_date.') with Dr. ( '.$row->clinic->doctor->name ?? ' ) was Done - Thank you',
                     ],
                 ];
             } else {
                 $data = [
                     "registration_ids" => $tokens,
                     "notification" => [
-                        "title" => 'Hallo',
-                        "body" => 'Ihre Reservierung wird storniert',
+                        "title" => 'BDG App :',
+                        "body" => 'Ihr Besuch am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name ?? ' ) wurde abgeschlossen - Vielen Dank',
 
                     ],
                 ];
@@ -325,16 +325,16 @@ try
         $data = [
             "registration_ids" => $tokens,
             "notification" => [
-                "title" => 'hello',
-                "body" => 'your reservation confirmed',
+                "title" => 'BDG App : ',
+                "body" => 'You booking with Dr. ('.$row->clinic->doctor->name ?? ') was confirmed on ('.$row->reservation_date.') between ('.$row->time_from.') and ('.$row->time_to.')',
             ],
         ];
     } else {
         $data = [
             "registration_ids" => $tokens,
             "notification" => [
-                "title" => 'Hallo',
-                "body" => 'Ihre Reservierung wird bestätigt',
+                "title" => 'BDG App : ',
+                "body" => 'Ihre Buchung beim Dr. ('.$row->clinic->doctor->name ?? ') wurde am ('.$row->reservation_date.') zwischen ('.$row->time_from.') und ('.$row->time_to.') bestätigt.',
 
             ],
         ];
@@ -406,16 +406,16 @@ try
                     "registration_ids" => $tokens,
                     "notification" => [
 
-                        "title" => 'hello',
-                        "body" => 'your reservation cancelled',
+                        "title" => 'BDG App',
+                        "body" => 'Your booking ('.$row->reservation_date.') with Dr. ('.$row->clinic->doctor->name ?? ') was cancelled by doctor at (today date)',
                     ],
                 ];
             } else {
                 $data = [
                     "registration_ids" => $tokens,
                     "notification" => [
-                        "title" => 'Hallo',
-                        "body" => 'Ihre Reservierung wird storniert',
+                        "title" => 'BDG App',
+                        "body" => 'Ihre Buchung am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name ?? ') wurde heute vom Arzt storniert.',
                     ],
                 ];
             }

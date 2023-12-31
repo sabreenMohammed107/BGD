@@ -54,4 +54,18 @@ class HomeController extends Controller
         })->markAsRead();
         return response()->noContent();
     }
+
+    public function MarkAsRead_all (Request $request)
+    {
+
+        $userUnreadNotification= auth()->user()->unreadNotifications;
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+
+        }
+
+
+    }
 }

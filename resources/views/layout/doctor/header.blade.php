@@ -918,7 +918,11 @@
                                     <div class="fw-bolder d-flex align-items-center fs-5">
 Notifications                                        <span
                                             class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2 count">{{ count(Auth::guard('doctor')->user()->unreadNotifications) }}</span>
-                                    </div>
+
+
+
+                                        </div>
+
 
                                 </div>
                                 <!--end::Username-->
@@ -926,13 +930,17 @@ Notifications                                        <span
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
+                        <div class="fw-bolder d-flex align-items-right fs-5" style="justify-content: flex-end;">
+
+                            <a style="color:#7c7c7c;font-size:12px" href="{{ route('markAllRead') }}" >Show all</a>
+                            </div>
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
                         @php
                           $notifications=Auth::guard('doctor')->user()->unreadNotifications;
                         @endphp
                         @forelse($notifications as $notification)
-        <div class="alert main-cls mb-0">
+        <div class="alert main-cls mb-0" style="border-bottom: 1px solid #ccc" >
             <div>
                 <i class="fa fa-bell text-primary"></i>
                 <div class="float-end" style="color:#7c7c7c">
@@ -940,37 +948,37 @@ Notifications                                        <span
                 </div>
             </div>
             <p class="m-0">
-                
+
             {{ $notification->data['name'] }}
-            {{ $notification->data['body'] }} 
-        
-        </p> 
+            {{ $notification->data['body'] }}
+
+        </p>
         <p class="m-0">
             {{ $notification->data['date']}}  -  {{ $notification->data['time'] }}
         </p>
             <a style="color:#000;text-decoration:underline" href="{{ $notification->data['reservUrl']}}" >click here to show  </a>
-            <div>
-                <div class="float-end">
+            <div >
+                <div class="float-end" >
                     <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">Mark as read</a>
                 </div>
             </div>
         </div>
 
-        <div class="separator my-2"></div>
-    {{-- @if(count($notification) > 0)
+        {{-- <div class="separator my-2"></div> --}}
+    @if(count($notifications) > 0)
         @if($loop->last)
-            <a href="#" id="mark-all">Mark all as read</a>
+            <a href="{{ route('markAllRead') }}" id="mark-all">Mark all as read</a>
         @endif
         @else
         <p>There are no new notifications.</p>
-    @endif --}}
+    @endif
     @empty
         <p>There are no new notifications.</p>
     @endforelse
 
 
 
-                        <div class="separator my-2"></div>
+                        {{-- <div class="separator my-2"></div> --}}
 
                     </div>
                     <!--end::User account menu-->

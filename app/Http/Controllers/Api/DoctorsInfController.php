@@ -75,14 +75,14 @@ class DoctorsInfController extends BaseController
                     // echo  $start_date;
                     if (App::getLocale() == "en") {
                         $doctor_schedule[$i] = (object) [
-                            'date' => $start_date->format('Y-m-d'),
+                            'date' => $start_date->format('d-m-Y'),
                             'day' => $schad->daName->en_day ?? '',
                             'from' =>Carbon::parse($schad->time_from)->format('H:i') ?? '',
                             'to' =>Carbon::parse($schad->time_to)->format('H:i') ?? '',
                         ];
                     } else {
                         $doctor_schedule[$i] = (object) [
-                            'date' => $start_date->format('Y-m-d'),
+                            'date' => $start_date->format('d-m-Y'),
                             'day' => $schad->daName->dt_day ?? '',
                             'from' =>Carbon::parse($schad->time_from)->format('H:i')  ?? '',
                             'to' =>Carbon::parse($schad->time_to)->format('H:i') ?? '',
