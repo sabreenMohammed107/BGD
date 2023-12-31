@@ -52,7 +52,8 @@ class HomeController extends Controller
         auth()->user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
             return $query->where('id', $request->input('id'));
         })->markAsRead();
-        return response()->noContent();
+        // return response()->noContent();
+        return back();
     }
 
     public function MarkAsRead_all (Request $request)
