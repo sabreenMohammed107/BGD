@@ -144,7 +144,7 @@ class PatientController extends BaseController
             'reservation_date' => 'required',
             'time_from' => 'required',
             'time_to' => 'required',
-            'patient_mobile' =>  ['nullable','string','min:10','max:14','regex:/^([0-9\s\-\+\(\)]*)$/'],
+            // 'patient_mobile' =>  ['nullable','string','min:10','max:14','regex:/^([0-9\s\-\+\(\)]*)$/'],
         ]);
 
         if ($validator->fails()) {

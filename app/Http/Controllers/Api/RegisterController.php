@@ -256,14 +256,14 @@ class RegisterController extends BaseController
         {
 
 
-            return $this->sendError(null, __("langMessage.current_pass"));
+            return $this->sendResponse(null, __("langMessage.current_pass"));
         }
 
 // Current password and new password same
         if (strcmp($request->get('current_password'), $request->new_password) == 0)
         {
 
-            return $this->sendError(null, __("langMessage.same_pass"));
+            return $this->sendResponse(null, __("langMessage.same_pass"));
 
         }
 
