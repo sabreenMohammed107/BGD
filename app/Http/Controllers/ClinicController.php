@@ -12,6 +12,7 @@ use App\Models\Status;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Clinic_gallery;
 class ClinicController extends Controller
 {
     protected $object;
@@ -118,9 +119,11 @@ if ($request->get('map_tude')) {
         $status = Status::all();
         $insurances = Insurance_type::all();
         $days = DayNew::all();
+        $rows=Clinic_gallery::where('clinic_id',$id)->orderBy("created_at", "Desc")->get();
+
         $doctorDays = Doctor_schedule::where('clinic_id',$id)->get();
         //
-        return view($this->viewName.'edit', compact('row','doctors','cities','status','insurances','days','doctorDays'));
+        return view($this->viewName.'edit', compact('rows','row','doctors','cities','status','insurances','days','doctorDays'));
     }
 
     /**

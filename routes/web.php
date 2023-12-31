@@ -1,26 +1,28 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DoctorsController;
-use App\Http\Controllers\MedicalFieldController;
-use App\Http\Controllers\MedicalSubFieldController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\BoardingController;
-use App\Http\Controllers\ClinicController;
-use App\Http\Controllers\ClinicGalleryController;
-use App\Http\Controllers\DoctorClinicController;
-use App\Http\Controllers\DoctorClinicGalleryController;
-use App\Http\Controllers\DoctorDataController;
-use App\Http\Controllers\DoctorsPositionController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DoctorsController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\BoardingController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DoctorDataController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\DoctorClinicController;
+use App\Http\Controllers\MedicalFieldController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ClinicGalleryController;
+use App\Http\Controllers\DoctorsPositionController;
+use App\Http\Controllers\MedicalSubFieldController;
+use App\Http\Controllers\DoctorClinicGalleryController;
+use App\Http\Controllers\SingleClinicGalleryController;
+use App\Http\Controllers\DoctorSingleClinicGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/show-complete-reservation/{id}', [ReservationController::class, 'showCompleteReservation'])->name('admin.show-complete-reservation');
     Route::get('/show-cancelled-reservation/{id}', [ReservationController::class, 'showCancelledReservation'])->name('admin.show-cancelled-reservation');
     Route::resource('admin-clinic-gallery', ClinicGalleryController::class);
+    Route::resource('admin-clinic-gallery-single', SingleClinicGalleryController::class);
 });
 // Route::prefix('doctor')->name('doctor.')->middleware(['doctor', 'auth'])->group(function () {
  Route::prefix('doctor')->middleware('auth:doctor')->group(function () {
@@ -96,6 +99,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     // Charts
     Route::get('/reservations/charts', [DoctorClinicController::class, 'getReservationChartData']);
     Route::resource('doctor-clinic-gallery', DoctorClinicGalleryController::class);
+    Route::resource('doctor-clinic-gallery-single', DoctorSingleClinicGalleryController::class);
 
     Route::resource('doctor-clinics', DoctorClinicController::class);
     Route::post('/mark-as-read', [HomeController::class, 'markAsNotification'])->name('markAsNotification');

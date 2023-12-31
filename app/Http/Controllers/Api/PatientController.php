@@ -430,7 +430,6 @@ class PatientController extends BaseController
         }
         if ($request->has('lower')) {
             if ($lower == 1) {
-
                 $doctors = $doctors->where("insurance_types.id", 2)->orderBy("doctor_clinics.visit_fees", 'Desc');
             } else if ($lower == 2) {
                 $doctors = $doctors->orderBy("doctor_clinics.name", 'asc');
