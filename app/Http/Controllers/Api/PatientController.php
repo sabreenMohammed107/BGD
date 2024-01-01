@@ -489,27 +489,33 @@ class PatientController extends BaseController
                 //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
                 //     ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
                 
-                $doctorsBefore = Doctor_clinic::select('doctor_clinics.*')->
-                    join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                $doctorsBefore = Doctor_clinic::select('doctor_clinics.*')
+                    ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
                     ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
                     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
                     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-                    ->where("doctor_schedules.days_id","<", $dFake)->orderBy("doctor_schedules.days_id", 'asc');
-                $doctorsAfter = Doctor_clinic::select('doctor_clinics.*')->
-                    join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                    ->where("doctor_schedules.days_id", "<", $dFake)
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->get();
+
+                $doctorsAfter = Doctor_clinic::select('doctor_clinics.*')
+                    ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
                     ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
                     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
                     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-                    ->where("doctor_schedules.days_id",">=", $dFake)->orderBy("doctor_schedules.days_id", 'asc')
-                    ->union($doctorsBefore)
-                    ->groupBy('doctor_clinics.id')->get();
+                    ->where("doctor_schedules.days_id", ">=", $dFake)
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->get();
+
+                $mergedDoctors = $doctorsAfter->merge($doctorsBefore)->unique('id')->values();
+
                 // $result = DB::table(DB::raw("({$doctorsAfter->toSql()} UNION {$doctorsBefore->toSql()}) AS merged"))
                 //     ->mergeBindings($doctorsAfter->getQuery())
                 //     ->mergeBindings($doctorsBefore->getQuery())
                 //     ->select('*')
                 //     ->groupBy('merged.id')
                 //     ->get();
-                return $this->sendResponse(DoctorClinicResource::collection($doctorsAfter), __("langMessage.search_result"));
+                return $this->sendResponse(DoctorClinicResource::collection($mergedDoctors), __("langMessage.search_result"));
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
