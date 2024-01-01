@@ -405,15 +405,15 @@ class PatientController extends BaseController
         //     $doctors->whereBetween('visit_fees', [$min_price, $max_price]);
         //  }
 
-        if (isset($homeVisit)) {
+        if ($homeVisit) {
 
             $doctors = $doctors->where("home_visit_allowed", $homeVisit);
         }
-        if (isset($parkingSpace)) {
+        if ($parkingSpace) {
 
             $doctors = $doctors->where("parking_allowed", $parkingSpace);
         }
-        if (isset($disableAccess)) {
+        if ($disableAccess) {
 
             $doctors = $doctors->where("disability_allowed", $disableAccess);
         }
