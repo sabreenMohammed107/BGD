@@ -932,7 +932,7 @@ Notifications                                        <span
                         <!--begin::Menu separator-->
                         <div class="fw-bolder d-flex align-items-right fs-5" style="justify-content: flex-end;">
 
-                            <a style="color:#7c7c7c;font-size:12px" href="{{ route('markAllRead') }}" >Show all</a>
+                            <a style="color:#7c7c7c;font-size:12px;padding-right: 10px" href="{{ route('markAllRead') }}"  >Show all</a>
                             </div>
                         <div class="separator my-2"></div>
                         <!--end::Menu separator-->
@@ -967,7 +967,7 @@ Notifications                                        <span
         {{-- <div class="separator my-2"></div> --}}
     @if(count($notifications) > 0)
         @if($loop->last)
-            <a href="{{ route('markAllRead') }}" id="mark-all">Mark all as read</a>
+            <a href="{{ route('markAllRead') }}" id="mark-all" style="padding-left: 10px" >Mark all as read</a>
         @endif
         @else
         <p>There are no new notifications.</p>
