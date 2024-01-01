@@ -25,7 +25,9 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:site_name" content="Keenthemes | Craft" />
 
         @include('layout.doctor.style')
+        <script>
 
+            </script>
     </head>
 	<!--end::Head-->
 

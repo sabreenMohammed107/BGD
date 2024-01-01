@@ -104,6 +104,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('doctor-clinics', DoctorClinicController::class);
     Route::post('/mark-as-read', [HomeController::class, 'markAsNotification'])->name('markAsNotification');
     Route::get('/mark-all-read', [HomeController::class, 'MarkAsRead_all'])->name('markAllRead');
+
+    Route::get('/getRefreshNotification', [HomeController::class, 'getRefreshNotification'])->name('getRefreshNotification');
+
 });
 Route::group([ 'prefix' => 'admin'], function () {
  //medicine-fields
