@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Doctor_clinic;
+use App\Models\Clinic_gallery;
 class DoctorClinicController extends Controller
 {
 
