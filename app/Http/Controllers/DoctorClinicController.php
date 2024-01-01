@@ -6,7 +6,6 @@ use App\Models\City;
 use App\Models\Day;
 use App\Models\DayNew;
 use App\Models\Doctor;
-use App\Models\Doctor_clinic;
 use App\Models\Doctor_schedule;
 use App\Models\Insurance_type;
 use App\Models\Reservation;
@@ -16,6 +15,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Doctor_clinic;
+use App\Models\Clinic_gallery;
 class DoctorClinicController extends Controller
 {
 
@@ -135,7 +136,9 @@ if ($request->get('map_tude')) {
         $days = DayNew::all();
         $doctorDays = Doctor_schedule::where('clinic_id',$id)->get();
         //
-        return view($this->viewName.'edit', compact('row','doctor','cities','status','insurances','days','doctorDays'));
+        $ids=Doctor_clinic::where('doctor_id',$this->doctorId)->pluck('id');
+        $rows = Clinic_gallery::whereIn('clinic_id',$ids)->orderBy("created_at", "Desc")->get();
+        return view($this->viewName.'edit', compact('rows','row','doctor','cities','status','insurances','days','doctorDays'));
     }
 
     /**
@@ -285,14 +288,14 @@ if ($request->get('map_tude')) {
         for ($i = 4; $i >= 0; $i--) {
             $monthStart = $currentDate->copy()->subMonths($i)->startOfMonth();
             $monthEnd = $currentDate->copy()->subMonths($i)->endOfMonth();
-        
+
             $count = Reservation::whereBetween('reservation_date', [$monthStart, $monthEnd])
                 ->whereIn('clinic_id', $clinicIds)
                 ->distinct('patient_id')
                 ->count('patient_id');
 
-                
-        
+
+
             // Store the count for the month in an array
             $reservationCounts[$monthStart->format('M')] = $count;
         }
@@ -318,8 +321,8 @@ if ($request->get('map_tude')) {
             ->groupBy('doctor_clinics.name')
             ->pluck('count', 'name');
 
-        
-        
+
+
         return [$reservationCounts, $counts, $clinics_counts];
     }
 }

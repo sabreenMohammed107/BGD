@@ -61,14 +61,15 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
-                    <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
-                        action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+
                         <div class="d-flex flex-column gap-7 gap-lg-10">
 
                             <div class="card card-flush py-4">
+                                <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                                action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <!--begin::Card header-->
 
                                 <!--end::Card header-->
@@ -318,35 +319,39 @@
                                     </div>
                                     <!--end:checkbox-->
 
-                                </div>
+
                                 <!--end::Card header-->
+                                <div class="d-flex justify-content-end mt-5">
+                                    <!--begin::Button-->
+                                    <a href="{{ route('doctor-clinics.index') }}" id="kt_ecommerce_add_product_cancel"
+                                        class="btn btn-light me-5">Cancel</a>
+                                    <!--end::Button-->
+                                    <!--begin::Button-->
+                                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                        <span class="indicator-label">Save Changes</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                    <!--end::Button-->
+                                </div>
+                            </div>
+                                </form>
                             </div>
                             <!--end::General options-->
+
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <!--begin::Button-->
-                            <a href="{{ route('doctor-clinics.index') }}" id="kt_ecommerce_add_product_cancel"
-                                class="btn btn-light me-5">Cancel</a>
-                            <!--end::Button-->
-                            <!--begin::Button-->
-                            <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                <span class="indicator-label">Save Changes</span>
-                                <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                            <!--end::Button-->
-                        </div>
-                    </form>
+
+
                 </div>
                 <!--begin::Tab pane-->
                 <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
-                    <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
-                        action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
 
+                        <div class="d-flex flex-column gap-7 gap-lg-10">
+                            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                            action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <!--begin::Variations-->
                             <div class="card card-flush py-4">
                                 <!--begin::Card header-->
@@ -493,24 +498,25 @@
                                     <!--end::Input group-->
                                 </div>
                                 <!--end::Card header-->
+                                <div class="d-flex justify-content-end mt-5">
+                                    <!--begin::Button-->
+                                    <a href="{{ route('doctor-clinics.index') }}" id="kt_ecommerce_add_product_cancel"
+                                        class="btn btn-light me-5">Cancel</a>
+                                    <!--end::Button-->
+                                    <!--begin::Button-->
+                                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                        <span class="indicator-label">Save Changes</span>
+                                        <span class="indicator-progress">Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                    <!--end::Button-->
+                                </div>
                             </div>
+                        </form>
                             <!--end::Variations-->
 
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <!--begin::Button-->
-                            <a href="{{ route('doctor-clinics.index') }}" id="kt_ecommerce_add_product_cancel"
-                                class="btn btn-light me-5">Cancel</a>
-                            <!--end::Button-->
-                            <!--begin::Button-->
-                            <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                <span class="indicator-label">Save Changes</span>
-                                <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                            <!--end::Button-->
-                        </div>
-                    </form>
+
                 </div>
                 <!--end::Tab pane-->
                 <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced_gallery" role="tab-panel">
