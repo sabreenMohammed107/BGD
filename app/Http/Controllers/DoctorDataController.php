@@ -243,7 +243,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'You Visit ('.$row->reservation_date.') with Dr. ( '.$row->clinic->doctor->name ?? ' ) was Done - Thank you',
+                        "body" => 'You Visit ('.$row->reservation_date.') with Dr. ( '.$row->clinic->doctor->name.' ) was Done - Thank you',
                     ],
                 ];
             } else {
@@ -251,7 +251,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'Ihr Besuch am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name ?? ' ) wurde abgeschlossen - Vielen Dank',
+                        "body" => 'Ihr Besuch am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name.' ) wurde abgeschlossen - Vielen Dank',
 
                     ],
                 ];
@@ -326,7 +326,7 @@ try
             "registration_ids" => $tokens,
             "notification" => [
                 "title" => 'BDG App : ',
-                "body" => 'You booking with Dr. ('.$row->clinic->doctor->name ?? ') was confirmed on ('.$row->reservation_date.') between ('.$row->time_from.') and ('.$row->time_to.')',
+                "body" => 'You booking with Dr. ('.$row->clinic->doctor->name.') was confirmed on ('.$row->reservation_date.') between ('.$row->time_from.') and ('.$row->time_to.')',
             ],
         ];
     } else {
@@ -334,7 +334,7 @@ try
             "registration_ids" => $tokens,
             "notification" => [
                 "title" => 'BDG App : ',
-                "body" => 'Ihre Buchung beim Dr. ('.$row->clinic->doctor->name ?? ') wurde am ('.$row->reservation_date.') zwischen ('.$row->time_from.') und ('.$row->time_to.') bestätigt.',
+                "body" => 'Ihre Buchung beim Dr. ('.$row->clinic->doctor->name.') wurde am ('.$row->reservation_date.') zwischen ('.$row->time_from.') und ('.$row->time_to.') bestätigt.',
 
             ],
         ];
@@ -407,7 +407,7 @@ try
                     "notification" => [
 
                         "title" => 'BDG App',
-                        "body" => 'Your booking ('.$row->reservation_date.') with Dr. ('.$row->clinic->doctor->name ?? ') was cancelled by doctor at (today date)',
+                        "body" => 'Your booking ('.$row->reservation_date.') with Dr. ('.$row->clinic->doctor->name.') was cancelled by doctor at (today date)',
                     ],
                 ];
             } else {
@@ -415,7 +415,7 @@ try
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App',
-                        "body" => 'Ihre Buchung am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name ?? ') wurde heute vom Arzt storniert.',
+                        "body" => 'Ihre Buchung am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name.') wurde heute vom Arzt storniert.',
                     ],
                 ];
             }
