@@ -103,16 +103,17 @@ setInterval(function() {
                         var dd=``;
                         const markAllRead ='<a href="{{route("markAllRead")}}" id="mark-all" style="padding-left: 10px">Mark all as read</a>';
                         const noData ='<p>There are no new notifications.</p>';
+                        // ${prettyDate(notification.created_at) =='undefined' ? prettyDate(notification.created_at) : notification.created_at}
 
                         const notifications =result[1];
                         for(let notification of result[1]){
-
+                            var xx= notification.id;
                         dd +=`<div class="alert main-cls mb-0" style="border-bottom: 1px solid #ccc">
                              <div>
                                     <i class="fa fa-bell text-primary"></i>
                                     <div class="float-end" style="color:#7c7c7c">
-                                        ${prettyDate(notification.created_at) =='undefined' ? prettyDate(notification.created_at) : notification.created_at}
-                                    </div>
+                                        ${prettyDate(notification.created_at)}
+                                        </div>
                                 </div>
                                 <p class="m-0">
 
@@ -127,7 +128,7 @@ setInterval(function() {
                                     href="${notification.data['reservUrl']}">click here to show </a>
                                 <div>
                                     <div class="float-end">
-                                        <a href="#" class="mark-as-read" onclick="markRead()" data-id="${notification.id}" >Mark as
+                                        <a href="#" class="mark-as-read"  onclick="markRead(this); return false;" data-id="${notification.id}" >Mark as
                                             read </a>
                                     </div>
                                 </div>
@@ -151,8 +152,10 @@ setInterval(function() {
                 });
         }
 
-        function markRead() {
-            var request = sendRequest($(this).data('id'));
+        function markRead(obj) {
+            var id = obj.getAttribute('data-id');
+    console.log(id);
+            var request = sendRequest(id);
             loadRequest();
 
                 // request.done(() => {
