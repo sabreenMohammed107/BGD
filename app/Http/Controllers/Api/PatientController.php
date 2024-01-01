@@ -478,7 +478,8 @@ class PatientController extends BaseController
 
                 //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
                 // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
-// new testing
+// new testing  
+// return $dFake;
                 $scadsaft = Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
                 $scadsbef = Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
                 $doctorsTest = $scadsaft->merge($scadsbef);
@@ -507,7 +508,20 @@ class PatientController extends BaseController
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
-                $mergedDoctors = $doctorsAfter->merge($doctorsBefore)->unique('id')->values();
+                $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
+                // ->unique('id')->values();
+
+                $uniqueDoctors = collect([]);
+
+                foreach ($mergedDoctors as $doctor) {
+                    $exists = $uniqueDoctors->first(function ($item) use ($doctor) {
+                        return $item->id === $doctor->id;
+                    });
+
+                    if (!$exists) {
+                        $uniqueDoctors->push($doctor);
+                    }
+                }
 
                 // $result = DB::table(DB::raw("({$doctorsAfter->toSql()} UNION {$doctorsBefore->toSql()}) AS merged"))
                 //     ->mergeBindings($doctorsAfter->getQuery())
@@ -515,7 +529,7 @@ class PatientController extends BaseController
                 //     ->select('*')
                 //     ->groupBy('merged.id')
                 //     ->get();
-                return $this->sendResponse(DoctorClinicResource::collection($mergedDoctors), __("langMessage.search_result"));
+                return $this->sendResponse(DoctorClinicResource::collection($uniqueDoctors), __("langMessage.search_result"));
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
             }
