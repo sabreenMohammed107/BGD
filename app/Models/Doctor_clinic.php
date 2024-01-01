@@ -85,7 +85,10 @@ public function getClinicIdAttribute()
         $dFake = $weekMap[$dayOfTheWeek];
         $day = Carbon::now()->dayOfWeek;
 // $schad = Doctor_schedule::where('clinic_id',  $this->id)->where('days_id', '>=', $day)->min('days_id');
-$schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
+$schad = Doctor_schedule::where([['clinic_id',  $this->id],['days_id','>=', $dFake]])->min('days_id');
+if(!$schad){
+    $schad = Doctor_schedule::where('clinic_id',  $this->id)->min('days_id');
+}
 
 
          $avDay=DayNew::where('id',$schad)->first();
