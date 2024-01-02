@@ -153,10 +153,13 @@ class PatientController extends BaseController
             return $this->sendError($validator->messages());
         }
         try {
+            $time = strtotime($request->reservation_date);
+
+            $newformat= date('Y-m-d',$time);
             $data = [
                 'clinic_id' => $request->clinic_id,
                 'patient_id' => $userid,
-                'reservation_date' =>Carbon::createFromFormat('d-m-y', $request->reservation_date)->format('Y-m-d'),
+                'reservation_date' =>$newformat,
                 'time_from' => $request->time_from,
                 'time_to' => $request->time_to,
                 'other_flag' => $request->other_flag,
