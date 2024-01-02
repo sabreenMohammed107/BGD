@@ -156,7 +156,7 @@ class PatientController extends BaseController
             $data = [
                 'clinic_id' => $request->clinic_id,
                 'patient_id' => $userid,
-                'reservation_date' => $request->reservation_date,
+                'reservation_date' =>Carbon::createFromFormat('Y-m-d', $request->reservation_date),
                 'time_from' => $request->time_from,
                 'time_to' => $request->time_to,
                 'other_flag' => $request->other_flag,
@@ -478,7 +478,7 @@ class PatientController extends BaseController
 
                 //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
                 // return $this->sendResponse(DoctorClinicResource::collection($doctors), 'All Search result Retrieved  Successfully');
-// new testing  
+// new testing
 // return $dFake;
                 $scadsaft = Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
                 $scadsbef = Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
