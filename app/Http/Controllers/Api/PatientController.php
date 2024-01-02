@@ -156,7 +156,7 @@ class PatientController extends BaseController
             $data = [
                 'clinic_id' => $request->clinic_id,
                 'patient_id' => $userid,
-                'reservation_date' =>Carbon::createFromFormat('Y-m-d', $request->reservation_date),
+                'reservation_date' =>$request->reservation_date,
                 'time_from' => $request->time_from,
                 'time_to' => $request->time_to,
                 'other_flag' => $request->other_flag,
