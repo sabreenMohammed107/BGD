@@ -499,18 +499,9 @@ class PatientController extends BaseController
 
 
 
-                    $afterDoctors = collect();
-                    $beforDoctors = collect();
-                    foreach ($doctors as $doctor) {
+                    $afterDoctors = $doctors;
+                    $beforDoctors = $doctors;
 
-                            $afterDoctors->push($doctor);
-
-                    }
-                    foreach ($doctors as $doctor) {
-
-                        $beforDoctors->push($doctor);
-
-                    }
                     $doctorsAfter =$afterDoctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
