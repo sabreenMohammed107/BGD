@@ -507,10 +507,11 @@ class PatientController extends BaseController
                     $doctorsAfter =$doctors->whereNotIn("doctor_clinics.id",$doctorsBeforeIds)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
-dd($doctorsAfter);
+
 $doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
 ->orderBy("doctor_schedules.days_id", 'asc')
 ->get();
+dd(count($doctorsBefore));
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
