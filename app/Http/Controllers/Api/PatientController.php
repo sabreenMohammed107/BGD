@@ -498,7 +498,15 @@ class PatientController extends BaseController
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
-                $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
+                // $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
+                //     ->orderBy("doctor_schedules.days_id", 'asc')
+                //     ->get();
+                    //after where not in
+                    $doctorsBeforeIds =$doctors->where("doctor_schedules.days_id", "<", $dFake)
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->pluck('doctor_clinics.id');
+
+                    $doctorsAfter =$doctors->whereNotIn("doctor_clinics.id",$doctorsBeforeIds)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 dd($doctorsAfter);
