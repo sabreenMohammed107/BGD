@@ -493,10 +493,9 @@ class PatientController extends BaseController
                 //     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
                 //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
                 //     ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
-                $doctorsBeforeIds =$doctors
-                ->where("doctor_schedules.days_id", "<", $dFake)
-                    ->orderBy("doctor_schedules.days_id", 'asc')
-                    ->pluck("doctor_clinics.id");
+                // $doctorsBeforeIds =$doctors->where("doctor_schedules.days_id", "<", $dFake)
+                //     ->orderBy("doctor_schedules.days_id", 'asc')
+                //     ->pluck("doctor_clinics.id");
 
                 $doctorsAfterIds =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
