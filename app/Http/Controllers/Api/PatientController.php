@@ -499,8 +499,8 @@ class PatientController extends BaseController
 
 
 
-                    $afterDoctors = collect([]);
-                    $beforDoctors = collect([]);
+                    $afterDoctors = collect();
+                    $beforDoctors = collect();
                     foreach ($doctors as $doctor) {
 
                             $afterDoctors->push($doctor);
