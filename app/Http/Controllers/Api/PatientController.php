@@ -357,11 +357,11 @@ class PatientController extends BaseController
 
         $search = $str;
 
-        $doctors = Doctor_clinic::select('doctor_clinics.*')->
-            join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-            ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-            ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-            ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
+        $doctors = Doctor_clinic::select('doctor_clinics.*')
+        ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+        ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+        ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
@@ -486,46 +486,34 @@ class PatientController extends BaseController
                 $scadsaft = Doctor_schedule::where('days_id', '>=', $dFake)->orderBy("days_id", 'asc')->pluck('id');
                 $scadsbef = Doctor_schedule::where('days_id', '<', $dFake)->orderBy("days_id", 'asc')->pluck('id');
                 $doctorsTest = $scadsaft->merge($scadsbef);
-             //abdallah
-                // $doctorsBefore = Doctor_clinic::select('doctor_clinics.*')
-                //     ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                // $doctors = Doctor_clinic::select('doctor_clinics.*')->
+                //     join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
                 //     ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
                 //     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
                 //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-                //     ->where("doctor_schedules.days_id", "<", $dFake)
-                //     ->orderBy("doctor_schedules.days_id", 'asc')
-                //     ->get();
-
-                // $doctorsAfter = Doctor_clinic::select('doctor_clinics.*')
-                //     ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
-                //     ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
-                //     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-                //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
-                //     ->where("doctor_schedules.days_id", ">=", $dFake)
-                //     ->orderBy("doctor_schedules.days_id", 'asc')
-                //     ->get();
-
-                    //sabreen get prev data
+                //     ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
 
                 $doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
-                   ->orderBy("doctor_schedules.days_id", 'asc')
-                    ->get();
-
-                    $doctorsAfter = $doctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
+
+                $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->get();
+
+                    //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
 
                 $uniqueDoctors = collect([]);
 
-                foreach ($mergedDoctors as $doctor) {
-                    $exists = $uniqueDoctors->first(function ($item) use ($doctor) {
-                        return $item->id === $doctor->id;
+                foreach ($mergedDoctors as $doctorNext) {
+                    $exists = $uniqueDoctors->first(function ($item) use ($doctorNext) {
+                        return $item->id === $doctorNext->id;
                     });
 
                     if (!$exists) {
-                        $uniqueDoctors->push($doctor);
+                        $uniqueDoctors->push($doctorNext);
                     }
                 }
 
