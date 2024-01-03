@@ -501,21 +501,21 @@ class PatientController extends BaseController
                 $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
-
+dd($doctorsBefore);
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
-                // dd($mergedDoctors);
+                dd($mergedDoctors);
                 $uniqueDoctors = collect([]);
 
                 foreach ($mergedDoctors as $doctor) {
-                    // $exists = $uniqueDoctors->first(function ($item) use ($doctor) {
-                    //     return $item->id === $doctor->id;
-                    // });
+                    $exists = $uniqueDoctors->first(function ($item) use ($doctor) {
+                        return $item->id === $doctor->id;
+                    });
 
-                    // if (!$exists) {
+                    if (!$exists) {
                         $uniqueDoctors->push($doctor);
-                    // }
+                    }
                 }
 
 
