@@ -497,10 +497,27 @@ class PatientController extends BaseController
                 //     ->orderBy("doctor_schedules.days_id", 'asc')
                 //     ->pluck("doctor_clinics.id");
 
-                $doctorsAfterIds =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
+
+
+                    $afterDoctors = collect([]);
+                    $beforDoctors = collect([]);
+                    foreach ($doctors as $doctor) {
+
+                            $afterDoctors->push($doctor);
+
+                    }
+                    foreach ($doctors as $doctor) {
+
+                        $beforDoctors->push($doctor);
+
+                    }
+                    $doctorsAfter =$afterDoctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
-                    ->pluck("doctor_clinics.id");
-dd($doctorsAfterIds);
+                    ->get();
+
+                    $doctorsBefore =$beforDoctors->where("doctor_schedules.days_id", ">=", $dFake)
+                    ->orderBy("doctor_schedules.days_id", 'asc')
+                    ->get();
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
