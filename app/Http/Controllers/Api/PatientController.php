@@ -507,7 +507,7 @@ class PatientController extends BaseController
 
                     //sabreen get prev data
 
-                $doctorsBefore =$doctors ->where("doctor_schedules.days_id", "<", $dFake)
+                $doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
                    ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
