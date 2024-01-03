@@ -504,7 +504,7 @@ class PatientController extends BaseController
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
-dd($mergedDoctors);
+dd($doctorsBefore);
                 $uniqueDoctors = collect([]);
 
                 foreach ($mergedDoctors as $doctorNext) {
