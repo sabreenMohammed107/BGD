@@ -477,7 +477,7 @@ class PatientController extends BaseController
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->groupBy('doctor_clinics.id')->get();
 
-                    dd( $doctorsMapAfter);
+                    dd( $doctorsMapBefore);
                 //get days
 
                 //    $doctors= $doctorsMapAfter->merge($doctorsMapBefore);
