@@ -361,7 +361,7 @@ class PatientController extends BaseController
         ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
         ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
         ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
