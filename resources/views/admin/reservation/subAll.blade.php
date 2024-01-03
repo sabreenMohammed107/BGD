@@ -173,10 +173,12 @@
                                     <a data-bs-toggle="modal" data-bs-target="#delReservation{{$newrow->id }}"
                                         title="cancelled" style="cursor: pointer"
                                         class="fw-bolder d-flex align-items-center fs-5">Cancel Visit</a>
+                                        @if($newrow->reservation_status_id == 5)
                                         <div class="separator my-2"></div>
                                         <a data-bs-toggle="modal" data-bs-target="#comReservation{{$newrow->id }}"
                                     title="complete" style="cursor: pointer"
                                     class="fw-bolder d-flex align-items-center fs-5 ">Visit Done</a>
+                                    @endif
 
                                 {{-- @endif --}}
                                 {{-- @if($newrow->reservation_status_id == 1 || $newrow->reservation_status_id == 5 )
