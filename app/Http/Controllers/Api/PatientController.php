@@ -494,9 +494,7 @@ class PatientController extends BaseController
                 //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
                 //     ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
 
-                $doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
-                    ->orderBy("doctor_schedules.days_id", 'asc')
-                    ->get();
+
 
                 // $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
                 //     ->orderBy("doctor_schedules.days_id", 'asc')
@@ -510,10 +508,12 @@ class PatientController extends BaseController
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 dd($doctorsAfter);
+$doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
+->orderBy("doctor_schedules.days_id", 'asc')
+->get();
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
-                dd($mergedDoctors);
                 $uniqueDoctors = collect([]);
 
                 foreach ($mergedDoctors as $doctor) {
