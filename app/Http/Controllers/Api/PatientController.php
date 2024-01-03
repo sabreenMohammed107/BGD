@@ -361,7 +361,7 @@ class PatientController extends BaseController
         ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
         ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
         ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
-        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
+        ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
@@ -492,28 +492,38 @@ class PatientController extends BaseController
                 //     ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
                 //     ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
                 //     ->whereIn("doctor_schedules.id", $doctorsTest)->orderBy("doctor_schedules.days_id", 'asc')->groupBy('doctor_clinics.id')->get();
-                dd($doctors->get());
-                $doctorsBefore =$doctors->where("doctor_schedules.days_id", "<", $dFake)
+
+                $doctorsBefore = Doctor_clinic::select('doctor_clinics.*')
+                    ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                    ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+                    ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+                    ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+                    ->where("doctor_schedules.days_id", "<", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
-                $doctorsAfter =$doctors->where("doctor_schedules.days_id", ">=", $dFake)
+                $doctorsAfter = Doctor_clinic::select('doctor_clinics.*')
+                    ->join('doctors', 'doctor_clinics.doctor_id', '=', 'doctors.id')
+                    ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
+                    ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
+                    ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id')
+                    ->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
-
+dd($mergedDoctors);
                 $uniqueDoctors = collect([]);
 
-                foreach ($mergedDoctors as $doctorNext) {
-                    $exists = $uniqueDoctors->first(function ($item) use ($doctorNext) {
-                        return $item->id === $doctorNext->id;
+                foreach ($mergedDoctors as $doctor) {
+                    $exists = $uniqueDoctors->first(function ($item) use ($doctor) {
+                        return $item->id === $doctor->id;
                     });
 
                     if (!$exists) {
-                        $uniqueDoctors->push($doctorNext);
+                        $uniqueDoctors->push($doctor);
                     }
                 }
 
