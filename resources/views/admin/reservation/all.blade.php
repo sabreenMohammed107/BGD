@@ -201,7 +201,7 @@
                     $('#preIndex').html(result);
 
                     $('#name').val(name);
-
+                    $('.menu-sub-dropdown').get('menu');
                     datatable = $('#kt_ecommerce_category_table').DataTable({
                         "info": false,
                         'order': [],
@@ -217,13 +217,14 @@
                         ]
                     });
                     // $(".dropdown-toggle").dropdown();
-                    $('.menu-sub-dropdown').get('menu');
                     const filterSearch = document.querySelector(
                         '[data-kt-ecommerce-category-filter="search"]');
                     filterSearch.addEventListener('keyup', function(e) {
                         datatable.search(e.target.value).draw();
                     });
                     KTMenu.createInstances();
+
+
 
 
 
