@@ -27,7 +27,7 @@ class scadualInfoResource extends JsonResource
                     'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
 
                     'status'=>$this->status->en_status ?? '',
-                    'reservation_date' => date_format(date_create($this->reservation_date), "d-m-Y"),
+                    'reservation_date' => date_format(date_create($this->reservation_date), "d.m.Y"),
                     'av_day' => $this->reserv_day ?? '',
                     'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
                     'street' => $this->clinic->en_street ?? '',
@@ -50,7 +50,7 @@ class scadualInfoResource extends JsonResource
                 'image' => asset('uploads/doctors/' . $this->clinic->doctor->img) ?? '',
 
                 'status'=>$this->status->dt_status ?? '',
-                'reservation_date' => date_format(date_create($this->reservation_date), "d-m-Y"),
+                'reservation_date' => date_format(date_create($this->reservation_date), "d.m.Y"),
                 'av_day' => $this->reserv_day ?? '',
                 'av_time' =>Carbon::parse($this->time_from)->format('H:i')?? '',
                 'street' => $this->clinic->dt_street ?? '',

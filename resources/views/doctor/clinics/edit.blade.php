@@ -62,10 +62,10 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
 
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
+                    <div class="d-flex flex-column gap-7 gap-lg-10">
 
-                            <div class="card card-flush py-4">
-                                <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                        <div class="card card-flush py-4">
+                            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
                                 action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -237,6 +237,20 @@
                                         </select>
                                     </div>
                                     <!--end::Input group-->
+                                      <!--end::Input group-->
+                                      @if ($row->insurance_type_id == 2)
+                                      <div id="hidden_div">
+                                          <!--begin::Label-->
+                                          <label class="form-label">Visit Fees</label>
+                                          <!--end::Label-->
+                                          <!--begin::Editor-->
+                                          <input type="text" id="visit_fees" name="visit_fees" class="form-control mb-2"
+                                              placeholder="visit_fees" value="{{ $row->visit_fees }}" />
+                                          <!--end::Editor-->
+
+                                      </div>
+                                      @endif
+
                                     <!--begin::Input group-->
                                     <div>
                                         <!--begin::Label-->
@@ -262,22 +276,8 @@
                                         <!--end::Editor-->
 
                                     </div>
-                                    <!--end::Input group-->
 
 
-                                    <!--begin::Input group-->
-                                    <div id="hidden_div" @if($row->insurance_type_id == 1) style="display:block;" @else
-                                        style="display:none;" @endif >
-                                        <!--begin::Label-->
-                                        <label class="form-label">Visit Fees</label>
-                                        <!--end::Label-->
-                                        <!--begin::Editor-->
-                                        <input type="text" id="visit_fees" name="visit_fees" class="form-control mb-2"
-                                            placeholder="visit_fees" value="{{ $row->visit_fees }}" />
-                                        <!--end::Editor-->
-
-                                    </div>
-                                    <!--end::Input group-->
 
 
                                     <!--begin::checkbox-->
@@ -320,34 +320,36 @@
                                     <!--end:checkbox-->
 
 
-                                <!--end::Card header-->
-                                <div class="d-flex justify-content-end mt-5">
-                                    <!--begin::Button-->
-                                    <a href="{{ route('doctor-clinics.index') }}" id="kt_ecommerce_add_product_cancel"
-                                        class="btn btn-light me-5">Cancel</a>
-                                    <!--end::Button-->
-                                    <!--begin::Button-->
-                                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                        <span class="indicator-label">Save Changes</span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                    <!--end::Button-->
+                                    <!--end::Card header-->
+                                    <div class="d-flex justify-content-end mt-5">
+                                        <!--begin::Button-->
+                                        <a href="{{ route('doctor-clinics.index') }}"
+                                            id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" id="kt_ecommerce_add_category_submit"
+                                            class="btn btn-primary">
+                                            <span class="indicator-label">Save Changes</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span
+                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
+                                    </div>
                                 </div>
-                            </div>
-                                </form>
-                            </div>
-                            <!--end::General options-->
-
+                            </form>
                         </div>
+                        <!--end::General options-->
+
+                    </div>
 
 
                 </div>
                 <!--begin::Tab pane-->
                 <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
 
-                        <div class="d-flex flex-column gap-7 gap-lg-10">
-                            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                    <div class="d-flex flex-column gap-7 gap-lg-10">
+                        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
                             action="{{ route('doctor-clinics.update', $row->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
@@ -507,15 +509,16 @@
                                     <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
                                         <span class="indicator-label">Save Changes</span>
                                         <span class="indicator-progress">Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                            <span
+                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                     <!--end::Button-->
                                 </div>
                             </div>
                         </form>
-                            <!--end::Variations-->
+                        <!--end::Variations-->
 
-                        </div>
+                    </div>
 
                 </div>
                 <!--end::Tab pane-->
@@ -666,14 +669,14 @@
 
 
         function showDiv(select){
-
+          var val={{$row->visit_fees}};
             if(select.value==1){
         document.getElementById('visit_fees').value = "";
         document.getElementById('hidden_div').style.display = "none";
        } else{
 
         document.getElementById('hidden_div').style.display = "block";
-
+        document.getElementById('visit_fees').value = val;
        }
 }
 </script>

@@ -254,19 +254,14 @@
                                                     @foreach ($insurances as $insurance)
                                                     <option value="{{ $insurance->id }}" {{ $row->insurance_type_id ==
                                                         $insurance->id ? 'selected' : '' }}>
-                                                        {{ $insurance->en_type }}</option>
+                                                        {{ $insurance->en_type }} </option>
                                                     @endforeach
 
                                                 </select>
                                             </div>
                                             <!--end::Input group-->
-
-
-
-                                            <!--begin::Input group-->
-                                            <div id="hidden_div" @if ($row->insurance_type_id == 2)
-                                                style="display:block;"
-                                                @else style="display:none;" @endif>
+                                            @if ($row->insurance_type_id == 2)
+                                            <div id="hidden_div" >
                                                 <!--begin::Label-->
                                                 <label class="form-label">Visit Fees</label>
                                                 <!--end::Label-->
@@ -277,6 +272,10 @@
                                                 <!--end::Editor-->
 
                                             </div>
+                                            @endif
+
+                                            <!--begin::Input group-->
+
                                             <!--end::Input group-->
 
                                             <!--begin::Input group-->
@@ -703,14 +702,14 @@
         });
 
         function showDiv(select) {
-
+            var val={{$row->visit_fees}};
             if(select.value==1){
         document.getElementById('visit_fees').value = "";
         document.getElementById('hidden_div').style.display = "none";
        } else{
 
         document.getElementById('hidden_div').style.display = "block";
-
+        document.getElementById('visit_fees').value = val;
        }
         }
 </script>

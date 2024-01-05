@@ -45,110 +45,78 @@ var KTModalNewTarget = function () {
 		// Stepper custom navigation
 
 		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-		validator = FormValidation.formValidation(
-			form,
-			{
-				fields: {
-					target_title: {
-						validators: {
-							notEmpty: {
-								message: 'Target title is required'
-							}
-						}
-					},
-					target_assign: {
-						validators: {
-							notEmpty: {
-								message: 'Target assign is required'
-							}
-						}
-					},
-					target_due_date: {
-						validators: {
-							notEmpty: {
-								message: 'Target due date is required'
-							}
-						}
-					},
-					target_tags: {
-						validators: {
-							notEmpty: {
-								message: 'Target tags are required'
-							}
-						}
-					},
-					'targets_notifications[]': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please select at least one communication method'
+        validator = (function() {
+
+
+            for(var i=0; i < form.elements.length; i++){
+                if(form.elements[i].value === '' && form.elements[i].hasAttribute('required')){
+                  return false;
+                }
+              }
+              return true;
+        })();
+
+    // );
+
+    // Action buttons
+    submitButton.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        // Validate form before submit
+        console.log(validator)
+        // if (validator == true) {
+        //     validator.validate().then(function(status) {
+        //         console.log('validated!');
+
+                if (validator == true) {
+                    submitButton.setAttribute('data-kt-indicator', 'on');
+
+                    // Disable button to avoid multiple click
+                    submitButton.disabled = true;
+
+                    setTimeout(function() {
+                        submitButton.removeAttribute('data-kt-indicator');
+
+                        // Enable button
+                        submitButton.disabled = false;
+
+                        // Show success message. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                        Swal.fire({
+                            text: "Form has been successfully submitted!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
                             }
+                        }).then(function(result) {
+                            console.log('confirmed !!')
+                            if (result.isConfirmed) {
+                                //submit form
+                                console.log('confirm')
+                                form.submit();
+                                modal.hide();
+                            }
+                        });
+
+                        //form.submit(); // Submit form
+                    }, 2000);
+                } else {
+                    // Show error message.
+                    console.log('else')
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
                         }
-                    },
-				},
-				plugins: {
-					trigger: new FormValidation.plugins.Trigger(),
-					bootstrap: new FormValidation.plugins.Bootstrap5({
-						rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-					})
-				}
-			}
-		);
-
-		// Action buttons
-		submitButton.addEventListener('click', function (e) {
-			e.preventDefault();
-
-			// Validate form before submit
-			if (validator) {
-				validator.validate().then(function (status) {
-					console.log('validated!');
-
-					if (status == 'Valid') {
-						submitButton.setAttribute('data-kt-indicator', 'on');
-
-						// Disable button to avoid multiple click 
-						submitButton.disabled = true;
-
-						setTimeout(function() {
-							submitButton.removeAttribute('data-kt-indicator');
-
-							// Enable button
-							submitButton.disabled = false;
-							
-							// Show success message. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-							Swal.fire({
-								text: "Form has been successfully submitted!",
-								icon: "success",
-								buttonsStyling: false,
-								confirmButtonText: "Ok, got it!",
-								customClass: {
-									confirmButton: "btn btn-primary"
-								}
-							}).then(function (result) {
-								if (result.isConfirmed) {
-									modal.hide();
-								}
-							});
-
-							//form.submit(); // Submit form
-						}, 2000);   						
-					} else {
-						// Show error message.
-						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
-							icon: "error",
-							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
-							customClass: {
-								confirmButton: "btn btn-primary"
-							}
-						});
-					}
-				});
-			}
-		});
+                    });
+                }
+            });
+        // }
+    });
 
 		cancelButton.addEventListener('click', function (e) {
 			e.preventDefault();
@@ -166,8 +134,8 @@ var KTModalNewTarget = function () {
 				}
 			}).then(function (result) {
 				if (result.value) {
-					form.reset(); // Reset form	
-					modal.hide(); // Hide modal				
+					form.reset(); // Reset form
+					modal.hide(); // Hide modal
 				} else if (result.dismiss === 'cancel') {
 					Swal.fire({
 						text: "Your form has not been cancelled!.",

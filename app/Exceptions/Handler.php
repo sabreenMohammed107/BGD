@@ -68,29 +68,29 @@ class Handler extends ExceptionHandler
             return redirect()->guest(route('login'));
         }
 
-        public function render($request, Throwable $e)
-{
-    if ($e instanceof AuthenticationException) {
-        return response()->json(
-            [
-                'type' => 'error',
-                'status' => Response::HTTP_UNAUTHORIZED,
-                'message' => 'Access Token expires',
-            ],
-            Response::HTTP_UNAUTHORIZED
-        );
-        if ($request->is('admin') || $request->is('admin/*')) {
+//         public function render($request, Throwable $e)
+// {
+//     if ($e instanceof AuthenticationException) {
+//         return response()->json(
+//             [
+//                 'type' => 'error',
+//                 'status' => Response::HTTP_UNAUTHORIZED,
+//                 'message' => 'Access Token expires',
+//             ],
+//             Response::HTTP_UNAUTHORIZED
+//         );
+//         if ($request->is('admin') || $request->is('admin/*')) {
 
-            return redirect()->guest('/login/admin');
-        }
-        if ($request->is('doctor') || $request->is('doctor/*')) {
+//             return redirect()->guest('/login/admin');
+//         }
+//         if ($request->is('doctor') || $request->is('doctor/*')) {
 
-            return redirect()->guest('/login/doctor');
-        }
+//             return redirect()->guest('/login/doctor');
+//         }
 
-        return redirect()->guest(route('login'));
-    }
+//         return redirect()->guest(route('login'));
+//     }
 
-    return parent::render($request, $e);
-}
+//     return parent::render($request, $e);
+// }
 }

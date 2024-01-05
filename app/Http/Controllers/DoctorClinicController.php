@@ -104,6 +104,9 @@ if ($request->get('map_tude')) {
     $tude=explode(',', $request->get('map_tude'));
       $input['latitude'] = $tude[0];
       $input['longitude'] = $tude[1];
+  }else{
+    $input['latitude'] =null;
+    $input['longitude'] =null;
   }
         Doctor_clinic::create($input);
         return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');
@@ -181,6 +184,9 @@ if ($request->get('map_tude')) {
     $tude=explode(',', $request->get('map_tude'));
       $input['latitude'] = $tude[0];
       $input['longitude'] = $tude[1];
+  }else{
+    $input['latitude'] =null;
+    $input['longitude'] =null;
   }
         $row->update($input);
         //schadual

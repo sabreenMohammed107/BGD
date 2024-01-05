@@ -244,7 +244,7 @@
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                placeholder="Enter En Position Name"
+                                                                placeholder="Enter En Position Name" required
                                                                 name="en_pasition"
                                                                 value="{{ $row->en_pasition }}" />
                                                         </div>
@@ -260,7 +260,7 @@
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
                                                                 placeholder="Enter De Position Name"
-                                                                name="dt_pasition"
+                                                                name="dt_pasition" required
                                                                 value="{{ $row->dt_pasition }}" />
                                                         </div>
                                                         <!--end::Input group-->
@@ -361,7 +361,7 @@
                                     title="Enter Position En Name"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid"
+                            <input type="text" class="form-control form-control-solid" required
                                 placeholder="Enter Position En Name" name="en_pasition" />
                         </div>
                         <!--end::Input group-->
@@ -378,7 +378,7 @@
             title="Enter Position De Name"></i>
     </label>
     <!--end::Label-->
-    <input type="text" class="form-control form-control-solid"
+    <input type="text" class="form-control form-control-solid" required
         placeholder="Enter Position De Name" name="dt_pasition" />
 </div>
 <!--end::Input group-->

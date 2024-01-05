@@ -126,12 +126,12 @@ setInterval(function() {
                                 </p>
                                 <a style="color:#000;text-decoration:underline"
                                     href="${notification.data['reservUrl']}">click here to show </a>
-                                <div>
+
                                     <div class="float-end">
                                         <a href="#" class="mark-as-read"  onclick="markRead(this); return false;" data-id="${notification.id}" >Mark as
                                             read </a>
                                     </div>
-                                </div>
+
 </div>
 
                         `;

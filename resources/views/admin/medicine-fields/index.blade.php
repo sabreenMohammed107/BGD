@@ -302,7 +302,7 @@
                                                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                                                             </label>
                                                             <!--end::Label-->
-                                                            <input type="text" class="form-control form-control-solid"
+                                                            <input type="text" class="form-control form-control-solid" required
                                                                 placeholder="Enter Field En Name" name="field_enname" value="{{$row->field_enname}}" />
                                                         </div>
                                                         <!--end::Input group-->
@@ -314,7 +314,7 @@
                                                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                                                             </label>
                                                             <!--end::Label-->
-                                                            <input type="text" class="form-control form-control-solid"
+                                                            <input type="text" class="form-control form-control-solid" required
                                                                 placeholder="Enter Field De Name" name="field_dtname" value="{{$row->field_dtname}}" />
                                                         </div>
                                                         <!--end::Input group-->
@@ -489,12 +489,12 @@
                         <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Field En Name</span>
+                                <span class="required">....Field En Name</span>
                                 <i class="fas fa-exclamation-circle ms-2 fs-7"
                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid"
+                            <input type="text" class="form-control form-control-solid" required
                                 placeholder="Enter Field En Name" name="field_enname"  />
                         </div>
                         <!--end::Input group-->
@@ -506,7 +506,7 @@
                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid"
+                            <input type="text" class="form-control form-control-solid" required
                                 placeholder="Enter Field De Name" name="field_dtname"  />
                         </div>
                         <!--end::Input group-->

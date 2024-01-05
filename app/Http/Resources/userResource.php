@@ -26,7 +26,7 @@ class userResource extends JsonResource
                 "image" => $this->image ? asset('uploads/users/' . $this->image) : asset('img/default.png') ,
                 'gender'=> $this->gender ?? '',
 
-                'birth_date'=> date_format(date_create($this->birth_date), "d-m-Y"),
+                'birth_date'=> date_format(date_create($this->birth_date), "d.m.Y"),
                 'details_address'=> $this->details_address ?? '',
                 'postal_code'=> $this->postal_code ?? '',
                 'google_map'=> $this->google_map ?? '',

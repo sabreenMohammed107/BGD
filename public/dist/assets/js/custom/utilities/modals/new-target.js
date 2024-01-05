@@ -45,66 +45,79 @@ var KTModalNewTarget = function() {
         // Stepper custom navigation
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(
-            form, {
-                fields: {
-                    target_title: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Target title is required'
-                            }
-                        }
-                    },
-                    target_assign: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Target assign is required'
-                            }
-                        }
-                    },
-                    target_due_date: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Target due date is required'
-                            }
-                        }
-                    },
-                    target_tags: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Target tags are required'
-                            }
-                        }
-                    },
-                    'targets_notifications[]': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please select at least one communication method'
-                            }
-                        }
-                    },
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
-                }
-            }
-        );
+        // validator = FormValidation.formValidation(
+        //     form, {
+        //         fields: {
+        //             target_title: {
+        //                 validators: {
+        //                     notEmpty: {
+        //                         message: 'Target title is required'
+        //                     }
+        //                 }
+        //             },
+        //             target_assign: {
+        //                 validators: {
+        //                     notEmpty: {
+        //                         message: 'Target assign is required'
+        //                     }
+        //                 }
+        //             },
+        //             target_due_date: {
+        //                 validators: {
+        //                     notEmpty: {
+        //                         message: 'Target due date is required'
+        //                     }
+        //                 }
+        //             },
+        //             target_tags: {
+        //                 validators: {
+        //                     notEmpty: {
+        //                         message: 'Target tags are required'
+        //                     }
+        //                 }
+        //             },
+        //             'targets_notifications[]': {
+        //                 validators: {
+        //                     notEmpty: {
+        //                         message: 'Please select at least one communication method'
+        //                     }
+        //                 }
+        //             },
+        //         },
+        //         plugins: {
+        //             trigger: new FormValidation.plugins.Trigger(),
+        //             bootstrap: new FormValidation.plugins.Bootstrap5({
+        //                 rowSelector: '.fv-row',
+        //                 eleInvalidClass: '',
+        //                 eleValidClass: ''
+        //             })
+        //         }
+        //     });
+
+            validator = (function() {
+
+
+                for(var i=0; i < form.elements.length; i++){
+                    if(form.elements[i].value === '' && form.elements[i].hasAttribute('required')){
+                      return false;
+                    }
+                  }
+                  return true;
+            })();
+
+        // );
 
         // Action buttons
         submitButton.addEventListener('click', function(e) {
             e.preventDefault();
 
             // Validate form before submit
-            if (validator) {
-                validator.validate().then(function(status) {
-                    console.log('validated!');
+            console.log(validator)
+            // if (validator == true) {
+            //     validator.validate().then(function(status) {
+            //         console.log('validated!');
 
-                    if (status == 'Valid') {
+                    if (validator == true) {
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
                         // Disable button to avoid multiple click
@@ -139,6 +152,7 @@ var KTModalNewTarget = function() {
                         }, 2000);
                     } else {
                         // Show error message.
+                        console.log('else')
                         Swal.fire({
                             text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
@@ -150,7 +164,7 @@ var KTModalNewTarget = function() {
                         });
                     }
                 });
-            }
+            // }
         });
 
         cancelButton.addEventListener('click', function(e) {

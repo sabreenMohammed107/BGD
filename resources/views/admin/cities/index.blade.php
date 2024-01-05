@@ -244,7 +244,7 @@
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                placeholder="Enter City En Name"
+                                                                placeholder="Enter City En Name" required
                                                                 name="en_city"
                                                                 value="{{ $row->en_city }}" />
                                                         </div>
@@ -262,7 +262,7 @@
                                                             </label>
                                                             <!--end::Label-->
                                                             <input type="text" class="form-control form-control-solid"
-                                                                placeholder="Enter City De Name"
+                                                                placeholder="Enter City De Name" required
                                                                 name="dt_city"
                                                                 value="{{ $row->dt_city }}" />
                                                         </div>
@@ -383,7 +383,7 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid"
-                                placeholder="Enter City En Name" name="en_city" />
+                                placeholder="Enter City En Name" required name="en_city" />
                         </div>
                         <!--end::Input group-->
 
@@ -399,7 +399,7 @@
                                         </label>
                                         <!--end::Label-->
                                         <input type="text" class="form-control form-control-solid"
-                                            placeholder="Enter City De Name" name="dt_city" />
+                                            placeholder="Enter City De Name" required name="dt_city" />
                                     </div>
                                     <!--end::Input group-->
 

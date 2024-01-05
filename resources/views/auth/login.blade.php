@@ -26,8 +26,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:url" content="https://themes.getbootstrap.com/product/craft-bootstrap-5-admin-dashboard-theme" />
 		<meta property="og:site_name" content="Keenthemes | Craft" />
 		<link rel="canonical" href="https://preview.keenthemes.com/craft" />
-		<link rel="shortcut icon" href="{{asset('dist/assets/assets/media/logos/favicon2.ico')}}" />
-		<!--begin::Fonts-->
+        <link rel="shortcut icon" href="{{asset('dist/assets/media/logos/favicon2.ico')}}" />		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
@@ -49,16 +48,18 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Header-->
 						<div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
 							<!--begin::Logo-->
-							<a href="#" class="py-9 pt-lg-20">
+							<a href="#" class="py-9 pt-lg-20" style="cursor: none">
 								<img alt="Logo" src="{{ asset('uploads/data') }}/{{ $data->logo }}" class="h-150px" style="opacity: 1" />
 							</a>
 							<!--end::Logo-->
 							<!--begin::Title-->
-							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Welcome to BDG App</h1>
+							<h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Willkommen bei der BDG-App</h1>
 							<!--end::Title-->
 							<!--begin::Description-->
-							<p class="fw-bold fs-2 text-white">Plan your blog post by choosing a topic creating
-							<br />an outline and checking facts</p>
+							<p class="fw-bold fs-2 text-white">Arzttermine effizient über das BDG-App-Dashboard
+                                verwalten
+							Leichtfertige Administrator-Kontrolle, Nahtlose
+                            Arztplanung</p>
 							<!--end::Description-->
 						</div>
 						<!--end::Header-->

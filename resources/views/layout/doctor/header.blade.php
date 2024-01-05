@@ -1090,7 +1090,7 @@
                             @endphp
                             <div id="main-cls">
                             @forelse($notifications as $notification)
-                            <div class="alert main-cls mb-0" style="border-bottom: 1px solid #ccc">
+                            <div class="alert main-cls mb-2" style="border-bottom: 1px solid #ccc">
                                 <div>
                                     <i class="fa fa-bell text-primary"></i>
                                     <div class="float-end" style="color:#7c7c7c">
@@ -1108,12 +1108,12 @@
                                 </p>
                                 <a style="color:#000;text-decoration:underline"
                                     href="{{ $notification->data['reservUrl']}}">click here to show </a>
-                                <div>
-                                    <div class="float-end">
-                                        <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">Mark as
+
+                                    <div class="float-end mb-5">
+                                        <a href="#" class="mark-as-read"  data-id="{{ $notification->id }}">Mark as
                                             read</a>
                                     </div>
-                                </div>
+
                             </div>
 
                             {{-- <div class="separator my-2"></div> --}}
