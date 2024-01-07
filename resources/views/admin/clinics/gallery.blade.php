@@ -50,8 +50,9 @@
                                 value="1" />
                         </div>
                     </th>
-                    <th class="min-w-150px">image</th>
+                    <th class="min-w-150px">Image</th>
 
+                    <th class="min-w-150px">Image name</th>
 
                     <th class="text-end min-w-70px">Actions</th>
                 </tr>
@@ -86,17 +87,17 @@
                         </td>
 
 
-                        {{-- <td>
+                         <td>
 
                             <div class="d-flex">
                                 <input type="hidden" name="" id=""
                                     data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
 
-                                <span class="symbol-label"> {{ $row->tour->en_overview ?? '' }}</span>
+                                <span class="symbol-label"> {{ $row->image }}</span>
 
                             </div>
 
-                        </td> --}}
+                        </td>
                         <!--end::Type=-->
                         <!--begin::Action=-->
                         <td class="text-end">
@@ -183,6 +184,8 @@
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
+                                            <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced_gallery">
+
                                             <!--begin::Heading-->
                                             <div class="mb-13 text-center">
                                                 <!--begin::Title-->

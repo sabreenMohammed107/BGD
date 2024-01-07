@@ -123,7 +123,9 @@ if ($request->get('map_tude')) {
 
         $doctorDays = Doctor_schedule::where('clinic_id',$id)->get();
         //
-        return view($this->viewName.'edit', compact('rows','row','doctors','cities','status','insurances','days','doctorDays'));
+        $tab ='kt_ecommerce_add_product_general';
+
+        return view($this->viewName.'edit', compact('tab','rows','row','doctors','cities','status','insurances','days','doctorDays'));
     }
 
     /**

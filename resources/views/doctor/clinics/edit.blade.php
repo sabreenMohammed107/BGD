@@ -38,7 +38,7 @@
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                 <!--begin:::Tab item-->
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+                    <a class="nav-link text-active-primary pb-4 @if ($tab == 'kt_ecommerce_add_product_general') active @endif " data-bs-toggle="tab"
                         href="#kt_ecommerce_add_product_general">General</a>
                 </li>
                 <!--end:::Tab item-->
@@ -51,16 +51,16 @@
 
                 <!--begin:::Tab item-->
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                    <a class="nav-link text-active-primary pb-4 @if ($tab == 'kt_ecommerce_add_days_advanced') active @endif " data-bs-toggle="tab"
                         href="#kt_ecommerce_add_days_advanced">Days</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                    <a class="nav-link text-active-primary pb-4 @if ($tab == 'kt_ecommerce_add_days_advanced_gallery') active @endif " data-bs-toggle="tab"
                         href="#kt_ecommerce_add_days_advanced_gallery">Gallery</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+                <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced') show active @endif " id="kt_ecommerce_add_product_general" role="tab-panel">
 
                     <div class="d-flex flex-column gap-7 gap-lg-10">
 
@@ -346,7 +346,7 @@
 
                 </div>
                 <!--begin::Tab pane-->
-                <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
+                <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced') show active @endif " id="kt_ecommerce_add_days_advanced" role="tab-panel">
 
                     <div class="d-flex flex-column gap-7 gap-lg-10">
                         <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
@@ -522,7 +522,7 @@
 
                 </div>
                 <!--end::Tab pane-->
-                <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced_gallery" role="tab-panel">
+                <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced_gallery') show active @endif " id="kt_ecommerce_add_days_advanced_gallery" role="tab-panel">
                     <div class="d-flex flex-column gap-7 gap-lg-10">
 
                         <!--begin::Variations-->

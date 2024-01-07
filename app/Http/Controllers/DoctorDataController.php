@@ -243,7 +243,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'You Visit ('.$row->reservation_date.') with Dr. ( '.$row->clinic->doctor->name.' ) was Done - Thank you',
+                        "body" => 'You Visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was Done - Thank you',
                     ],
                 ];
             } else {
@@ -251,7 +251,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'Ihr Besuch am ('.$row->reservation_date.') beim Dr. ('.$row->clinic->doctor->name.' ) wurde abgeschlossen - Vielen Dank',
+                        "body" => 'Ihr Besuch am '.date_format(date_create($row->reservation_date), "d.m.Y").' beim '.$row->clinic->doctor->name.' wurde abgeschlossen - Vielen Dank',
 
                     ],
                 ];
@@ -295,14 +295,14 @@ class DoctorDataController extends Controller
         }
         // $row->update(['reservation_status_id'=>2]);
  //send notification api for confirm reservation
- $data = [
+          $data = [
     'title_dt' => 'BDG App : ',
     'body_dt' => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('g:ia', strtotime($row->time_from)).' und '.date('g:ia', strtotime($row->time_to)).' bestätigt.',
     'title_en' => 'BDG App : ',
     'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('g:ia', strtotime($row->time_from)).' and '.date('g:ia', strtotime($row->time_to)).'',
     'status' => 'not_seen',
 ];
-
+if (App::getLocale() == "en") {
    //save f_c_m notification table
 FCMNotification::create([
     'title_dt' => 'BDG App : ',

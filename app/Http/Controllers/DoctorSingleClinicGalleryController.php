@@ -61,7 +61,9 @@ class DoctorSingleClinicGalleryController extends Controller
                 Clinic_gallery::create($input);
             }
         }
-        return redirect()->route('doctor-clinics.edit', $request->get('clinic_id'))->with('flash_success', 'Successfully Saved!');
+        $tab =$request->tab;
+        return \Redirect::back()->withErrors(['tab' => $tab]);
+        // return redirect()->route('doctor-clinics.edit', $request->get('clinic_id'))->with('flash_success', 'Successfully Saved!');
     }
 
     /**
@@ -110,7 +112,9 @@ class DoctorSingleClinicGalleryController extends Controller
         }
         // $input['clinic_id'] =$request->get('clinic_id');
         Clinic_gallery::findOrFail($id)->update($input);
-        return redirect()->route('doctor-clinics.edit', $gallery->clinic_id)->with('flash_success', 'Successfully Saved!');
+        $tab =$request->tab;
+        return \Redirect::back()->withErrors(['tab' => $tab]);
+        // return redirect()->route('doctor-clinics.edit', $gallery->clinic_id)->with('flash_success', 'Successfully Saved!');
     }
 
     /**
@@ -130,7 +134,9 @@ class DoctorSingleClinicGalleryController extends Controller
              File::delete($file_name);
 
             $gallery->delete();
-            return redirect()->back()->with('flash_del', 'Successfully Delete!');
+            $tab ='kt_ecommerce_add_days_advanced_gallery';
+            return \Redirect::back()->withErrors(['tab' => $tab])->with('flash_del', 'Successfully Delete!');
+            // return redirect()->back()->with('flash_del', 'Successfully Delete!');
 
         } catch (QueryException $q) {
             // return redirect()->back()->withInput()->with('flash_danger', $q->getMessage());

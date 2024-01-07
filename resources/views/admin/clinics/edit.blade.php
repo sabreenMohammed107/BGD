@@ -34,14 +34,19 @@
             action="{{ route('clinics.update', $row->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+<?php
+if($errors->any()){
+    $tab=$errors->first();
+}
 
+?>
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                 <!--begin::General options-->
                 <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-n2">
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+                        <a class="nav-link text-active-primary pb-4 @if ($tab == 'kt_ecommerce_add_product_general') active @endif " data-bs-toggle="tab"
                             href="#kt_ecommerce_add_product_general">General</a>
                     </li>
                     <!--end:::Tab item-->
@@ -54,17 +59,18 @@
 
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                        <a class="nav-link text-active-primary pb-4  @if ($tab == 'kt_ecommerce_add_days_advanced') active @endif " data-bs-toggle="tab"
                             href="#kt_ecommerce_add_days_advanced">Days</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab"
+                        <a class="nav-link text-active-primary pb-4 @if ($tab == 'kt_ecommerce_add_days_advanced_gallery') active @endif " data-bs-toggle="tab"
                             href="#kt_ecommerce_add_days_advanced_gallery">Gallery</a>
                     </li>
                 </ul>
+
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
-                        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                    <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_product_general') show active @endif" id="kt_ecommerce_add_product_general" role="tab-panel">
+                        <form id="kt_ecommerce_add_category_form2" class="form d-flex flex-column flex-lg-row"
                             action="{{ route('clinics.update', $row->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
@@ -261,7 +267,7 @@
                                             </div>
                                             <!--end::Input group-->
                                             @if ($row->insurance_type_id == 2)
-                                            <div id="hidden_div" >
+                                            <div id="hidden_div">
                                                 <!--begin::Label-->
                                                 <label class="form-label">Visit Fees</label>
                                                 <!--end::Label-->
@@ -369,8 +375,8 @@
                         </form>
                     </div>
                     <!--begin::Tab pane-->
-                    <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced" role="tab-panel">
-                        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+                    <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced') show active @endif" id="kt_ecommerce_add_days_advanced" role="tab-panel">
+                        <form id="kt_ecommerce_add_category_form3" class="form d-flex flex-column flex-lg-row"
                             action="{{ route('clinics.update', $row->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
@@ -556,7 +562,7 @@
                         </form>
                     </div>
                     <!--end::Tab pane-->
-                    <div class="tab-pane fade" id="kt_ecommerce_add_days_advanced_gallery" role="tab-panel">
+                    <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced_gallery') show active @endif " id="kt_ecommerce_add_days_advanced_gallery" role="tab-panel">
                         <div class="d-flex flex-column gap-7 gap-lg-10">
 
                             <!--begin::Variations-->
@@ -617,10 +623,12 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kt_modal_new_target_form" class="form" action="{{ route('admin-clinic-gallery-single.store') }}"
-                    method="post" enctype="multipart/form-data">
+                <form id="kt_modal_new_target_form_gallery" class="form"
+                    action="{{ route('admin-clinic-gallery-single.store') }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="clinic_id" value="{{ $row->id }}" />
+                    <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced_gallery">
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
@@ -712,5 +720,30 @@
         document.getElementById('visit_fees').value = val;
        }
         }
+
+
+
+        // this is the id of the form
+// $("#kt_modal_new_target_form_gallery").submit(function(e) {
+
+// e.preventDefault(); // avoid to execute the actual submit of the form.
+
+// var form = $(this);
+// var actionUrl = form.attr('action');
+
+// $.ajax({
+//     type: "POST",
+//     url: actionUrl,
+//     data: form.serialize(), // serializes the form's elements.
+//     success: function(data)
+//     {
+//         console.log(data);
+//       $("#kt_ecommerce_add_product_general").removeClass('active');
+
+//       $("#kt_ecommerce_add_days_advanced_gallery").addClass('active');
+//     }
+// });
+
+// });
 </script>
 @endsection

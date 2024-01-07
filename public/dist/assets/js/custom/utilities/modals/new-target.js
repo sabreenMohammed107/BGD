@@ -165,7 +165,7 @@ var KTModalNewTarget = function() {
                     }
                 });
             // }
-        });
+
 
         cancelButton.addEventListener('click', function(e) {
             e.preventDefault();

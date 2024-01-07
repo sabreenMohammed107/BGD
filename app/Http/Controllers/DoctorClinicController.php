@@ -141,7 +141,8 @@ if ($request->get('map_tude')) {
         //
         $ids=Doctor_clinic::where('doctor_id',$this->doctorId)->pluck('id');
         $rows = Clinic_gallery::whereIn('clinic_id',$ids)->orderBy("created_at", "Desc")->get();
-        return view($this->viewName.'edit', compact('rows','row','doctor','cities','status','insurances','days','doctorDays'));
+        $tab ='kt_ecommerce_add_product_general';
+        return view($this->viewName.'edit', compact('tab','rows','row','doctor','cities','status','insurances','days','doctorDays'));
     }
 
     /**
