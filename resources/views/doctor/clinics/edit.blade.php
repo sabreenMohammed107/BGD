@@ -30,6 +30,12 @@
 <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div class="container-xxl">
+        <?php
+        if($errors->any()){
+            $tab=$errors->first();
+        }
+
+        ?>
 
         <input type="hidden" name="doctor_id" value="{{$doctor->id}}" id="">
         <!--begin::Main column-->
@@ -60,7 +66,7 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_days_advanced') show active @endif " id="kt_ecommerce_add_product_general" role="tab-panel">
+                <div class="tab-pane fade @if ($tab == 'kt_ecommerce_add_product_general') show active @endif " id="kt_ecommerce_add_product_general" role="tab-panel">
 
                     <div class="d-flex flex-column gap-7 gap-lg-10">
 
@@ -71,6 +77,7 @@
                                 @csrf
                                 @method('PUT')
                                 <!--begin::Card header-->
+                                <input type="hidden" name="tab" value="kt_ecommerce_add_product_general">
 
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
@@ -354,6 +361,8 @@
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced">
+
                             <!--begin::Variations-->
                             <div class="card card-flush py-4">
                                 <!--begin::Card header-->
@@ -587,6 +596,8 @@
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="clinic_id" value="{{ $row->id }}" />
+                    <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced_gallery">
+
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->

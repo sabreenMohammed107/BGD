@@ -30,10 +30,10 @@
 <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div class="container-xxl">
-        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
+        {{-- <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
             action="{{ route('clinics.update', $row->id) }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('PUT') --}}
 <?php
 if($errors->any()){
     $tab=$errors->first();
@@ -76,7 +76,7 @@ if($errors->any()){
                             @csrf
                             @method('PUT')
                             <div class="d-flex flex-column gap-7 gap-lg-10">
-
+                                <input type="hidden" name="tab" value="kt_ecommerce_add_product_general">
                                 <div class="card card-flush py-4">
                                     <!--begin::Card header-->
 
@@ -382,7 +382,7 @@ if($errors->any()){
                             @csrf
                             @method('PUT')
                             <div class="d-flex flex-column gap-7 gap-lg-10">
-
+                                <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced">
                                 <!--begin::Variations-->
                                 <div class="card card-flush py-4">
                                     <!--begin::Card header-->
