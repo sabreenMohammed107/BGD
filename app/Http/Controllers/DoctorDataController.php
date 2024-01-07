@@ -302,7 +302,7 @@ class DoctorDataController extends Controller
     'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('g:ia', strtotime($row->time_from)).' and '.date('g:ia', strtotime($row->time_to)).'',
     'status' => 'not_seen',
 ];
-if (App::getLocale() == "en") {
+
    //save f_c_m notification table
 FCMNotification::create([
     'title_dt' => 'BDG App : ',
