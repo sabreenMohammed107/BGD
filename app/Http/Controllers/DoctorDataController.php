@@ -243,7 +243,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'Your Visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was done - Thank you',
+                        "body" => 'Your visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was done - Thank you',
                     ],
                 ];
             } else {
@@ -297,18 +297,18 @@ class DoctorDataController extends Controller
  //send notification api for confirm reservation
           $data = [
     'title_dt' => 'BDG App : ',
-    'body_dt' => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('g:i A', strtotime($row->time_from)).' und '.date('g:i A', strtotime($row->time_to)).' bestätigt.',
+    'body_dt' => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' bestätigt.',
     'title_en' => 'BDG App : ',
-    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('g:i A', strtotime($row->time_from)).' and '.date('g:i A', strtotime($row->time_to)).'',
+    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
     'status' => 'not_seen',
 ];
 
    //save f_c_m notification table
 FCMNotification::create([
     'title_dt' => 'BDG App : ',
-    'body_dt' => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('g:i A', strtotime($row->time_from)).' und '.date('g:i A', strtotime($row->time_to)).' bestätigt.',
+    'body_dt' => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' bestätigt.',
     'title_en' => 'BDG App : ',
-    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('g:i A', strtotime($row->time_from)).' and '.date('g:i A', strtotime($row->time_to)).'',
+    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
     'status' => 'not_seen',
     'user_id' => $row->patient_id,
 ]);
@@ -326,7 +326,7 @@ try
             "registration_ids" => $tokens,
             "notification" => [
                 "title" => 'BDG App : ',
-                "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('g:i A', strtotime($row->time_from)).' and '.date('g:i A', strtotime($row->time_to)).'',
+                "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
             ],
         ];
     } else {
@@ -334,7 +334,7 @@ try
             "registration_ids" => $tokens,
             "notification" => [
                 "title" => 'BDG App : ',
-                "body" => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('g:i A', strtotime($row->time_from)).' und '.date('g:i A', strtotime($row->time_to)).' bestätigt.',
+                "body" => 'Ihre Buchung beim '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' bestätigt.',
 
             ],
         ];
