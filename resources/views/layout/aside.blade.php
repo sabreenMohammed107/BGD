@@ -210,14 +210,14 @@
                                             <span class="menu-title">Add Clinic</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
+                                    {{-- <div class="menu-item">
                                         <a class="menu-link" href="{{route('admin-clinic-gallery.index')}}">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title"> Clinic Gallery</span>
                                         </a>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
-                                    <span class="menu-title">Patients Reservations</span>
+                                    <span class="menu-title">All Patients Reservations</span>
                                 </a>
                             </div>
                              <!-- end Doctors -->
@@ -321,7 +321,6 @@
                               <div class="menu-item">
                                 <a class="menu-link" href="{{ route('admin.complete-reservations') }}">
                                     <span class="menu-icon">
-                                        <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M18 21.6C16.6 20.4 9.1 20.3 6.3 21.2C5.7 21.4 5.1 21.2 4.7 20.8L2 18C4.2 15.8 10.8 15.1 15.8 15.8C16.2 18.3 17 20.5 18 21.6ZM18.8 2.8C18.4 2.4 17.8 2.20001 17.2 2.40001C14.4 3.30001 6.9 3.2 5.5 2C6.8 3.3 7.4 5.5 7.7 7.7C9 7.9 10.3 8 11.7 8C15.8 8 19.8 7.2 21.5 5.5L18.8 2.8Z" fill="black" />
@@ -330,7 +329,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
-                                    <span class="menu-title">Completed Reservations</span>
+                                    <span class="menu-title">Done Visits</span>
                                 </a>
                             </div>
                              <!-- end Doctors -->
@@ -348,7 +347,7 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </span>
-                                    <span class="menu-title">Cancelled Reservations</span>
+                                    <span class="menu-title">Cancelled Visits</span>
                                 </a>
                             </div>
                              <!-- end Doctors -->
@@ -377,7 +376,7 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Doctors Subscriptions</span>
+                                <span class="menu-title">Doctors Subscriptions(soon)</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -392,14 +391,13 @@
                                     </span>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-title">Payments Reports</span>
+                                <span class="menu-title">Payments Reports (soon)</span>
                             </a>
                         </div>
 
-                        <div class="menu-item">
+                        {{-- <div class="menu-item">
                             <a class="menu-link" href="{{ route('admin.complete-reservations') }}">
                                 <span class="menu-icon">
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen009.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path opacity="0.3" d="M21 22H14C13.4 22 13 21.6 13 21V3C13 2.4 13.4 2 14 2H21C21.6 2 22 2.4 22 3V21C22 21.6 21.6 22 21 22Z" fill="black" />
@@ -410,7 +408,7 @@
                                 </span>
                                 <span class="menu-title">Completed Reservations</span>
                             </a>
-                        </div>
+                        </div> --}}
 
 
 

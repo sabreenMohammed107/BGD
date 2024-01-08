@@ -26,6 +26,17 @@
 @endsection
 
 @section('content')
+<style>
+    .field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -31px;
+    position: relative;
+    z-index: 2;
+    padding: 0 10px;
+    font-size: 20px;
+}
+    </style>
 <!--begin::Post-->
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -254,7 +265,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                                <i class="bi bi-eye-slash field-icon" id="togglePassword"></i>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -349,6 +360,23 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
+    const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        // prevent form submit
+        const form = document.querySelector("form");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
     // $('#medical_field_id').on('change', function() {
 
     //     var select_value = $('#medical_field_id option:selected').val();

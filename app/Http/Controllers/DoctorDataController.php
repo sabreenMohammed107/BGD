@@ -243,7 +243,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'You Visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was Done - Thank you',
+                        "body" => 'Your Visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was Done - Thank you',
                     ],
                 ];
             } else {
