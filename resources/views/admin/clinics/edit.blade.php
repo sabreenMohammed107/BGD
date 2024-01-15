@@ -75,7 +75,7 @@ if($errors->any()){
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="d-flex flex-column gap-7 gap-lg-10">
+                            <div class="d-flex flex-column gap-7 gap-lg-10" style="flex-grow: 1">
                                 <input type="hidden" name="tab" value="kt_ecommerce_add_product_general">
                                 <div class="card card-flush py-4">
                                     <!--begin::Card header-->
@@ -357,21 +357,27 @@ if($errors->any()){
                                     </div>
                                     <!--end::General options-->
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <!--begin::Button-->
-                                <a href="{{ route('clinics.index') }}" id="kt_ecommerce_add_product_cancel"
-                                    class="btn btn-light me-5">Cancel</a>
-                                <!--end::Button-->
-                                <!--begin::Button-->
-                                <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Save Changes</span>
-                                    <span class="indicator-progress">Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
-                                <!--end::Button-->
+                                <div class="fv-row w-100 flex-md-root">
 
+
+                                    <div class="d-flex justify-content-end">
+                                        <!--begin::Button-->
+                                        <a href="{{ route('clinics.index') }}" id="kt_ecommerce_add_product_cancel"
+                                            class="btn btn-light me-5">Cancel</a>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Save Changes</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span
+                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
+
+                                    </div>
+                                </div>
                             </div>
+
                         </form>
                     </div>
                     <!--begin::Tab pane-->
@@ -381,7 +387,7 @@ if($errors->any()){
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="d-flex flex-column gap-7 gap-lg-10">
+                            <div class="d-flex flex-column gap-7 gap-lg-10" style="flex-grow: 1">
                                 <input type="hidden" name="tab" value="kt_ecommerce_add_days_advanced">
                                 <!--begin::Variations-->
                                 <div class="card card-flush py-4">
@@ -537,28 +543,28 @@ if($errors->any()){
                                     <!--end::Card header-->
                                 </div>
                                 <!--end::Variations-->
-
-                            </div>
-
-                            <div class="fv-row w-100 flex-md-root">
+                                <div class="fv-row w-100 flex-md-root">
 
 
-                                <div class="d-flex justify-content-end">
-                                    <!--begin::Button-->
-                                    <a href="{{ route('clinics.index') }}" id="kt_ecommerce_add_product_cancel"
-                                        class="btn btn-light me-5">Cancel</a>
-                                    <!--end::Button-->
-                                    <!--begin::Button-->
-                                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                                        <span class="indicator-label">Save Changes</span>
-                                        <span class="indicator-progress">Please wait...
-                                            <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                    <!--end::Button-->
+                                    <div class="d-flex justify-content-end">
+                                        <!--begin::Button-->
+                                        <a href="{{ route('clinics.index') }}" id="kt_ecommerce_add_product_cancel"
+                                            class="btn btn-light me-5">Cancel</a>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Save Changes</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span
+                                                    class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
 
+                                    </div>
                                 </div>
                             </div>
+
+
                         </form>
                     </div>
                     <!--end::Tab pane-->

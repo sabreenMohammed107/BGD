@@ -99,6 +99,9 @@
                         <tbody class="fw-bold text-gray-600">
                             @foreach ($rows as $index => $row)
      <!--begin::Table row-->
+     <?php
+      $doctorDays = App\Models\Doctor_schedule::where('clinic_id',$row->id)->get();
+     ?>
      <tr>
         <!--begin::Checkbox-->
         <td>
@@ -110,7 +113,13 @@
         <!--begin::Category=-->
 
         <td class="text-start pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->id}}</span>
+            @if(isset($doctorDays) && $doctorDays->count() > 0 )
+
+                <span class="fw-bolder ms-3" > {{ $row->id}}</span>
+                @else
+                <span class="fw-bolder ms-3"  style="color: red">{{ $row->id}} -Missing Days</span>
+
+                @endif
         </td>
         <td>
             <div class="d-flex align-items-center">
@@ -124,7 +133,19 @@
             </div>
         </td>
         <td class="text-end pe-0" data-order="15">
-            <span class="fw-bolder ms-3">{{ $row->name}}</span>
+
+
+                @if(isset($doctorDays) && $doctorDays->count() > 0 )
+
+                <span class="fw-bolder ms-3" > {{ $row->name}}</span>
+                @else
+                <span class="fw-bolder ms-3" title="You must add days to clinic to show in app " style="color: red">{{ $row->name}}</span>
+
+                @endif
+
+
+
+
         </td>
         <!--end::Category=-->
         <!--begin::SKU=-->
