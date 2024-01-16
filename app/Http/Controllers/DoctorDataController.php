@@ -243,7 +243,9 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'Your visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was done - Thank you',
+                        // "body" => 'Your visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was done - Thank you',
+                        "body" => 'Dein Besuch vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' ist abgeschlossen – Vielen Dank!',
+
                     ],
                 ];
             } else {
@@ -326,7 +328,9 @@ try
             "registration_ids" => $tokens,
             "notification" => [
                 "title" => 'BDG App : ',
-                "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
+                // "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
+                "body" => 'Deine Buchung bei '.$row->clinic->doctor->name.' wurde für den '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' Uhr bestätigt.',
+
             ],
         ];
     } else {
@@ -407,7 +411,9 @@ try
                     "notification" => [
 
                         "title" => 'BDG App',
-                        "body" => 'Your booking '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was cancelled by doctor at '.date_format(date_create(now()), "d.m.Y").'',
+                        "body" => 'Deine Buchung vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' von '.$row->clinic->doctor->name.' storniert.',
+
+                        // "body" => 'Your booking '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was cancelled by doctor at '.date_format(date_create(now()), "d.m.Y").'',
                     ],
                 ];
             } else {
