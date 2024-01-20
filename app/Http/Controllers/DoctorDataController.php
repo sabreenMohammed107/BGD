@@ -125,9 +125,9 @@ class DoctorDataController extends Controller
         $status = Reservation_status::get();
 
         $rows = Reservation::with('status')
-        ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
-        ->where('doctor_clinics.doctor_id', $docId)
-        ->select('reservations.*')->orderBy("created_at", "Desc")->get();
+            ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
+            ->where('doctor_clinics.doctor_id', $docId)
+            ->select('reservations.*')->orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'all', compact('rows', 'status'));
 
@@ -142,10 +142,10 @@ class DoctorDataController extends Controller
         $status = Reservation_status::get();
         $name = $request->get('name');
         //search func
-        $opo =Reservation::with('status')
-        ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
-        ->where('doctor_clinics.doctor_id', $docId)
-        ->select('reservations.*');
+        $opo = Reservation::with('status')
+            ->join('doctor_clinics', 'reservations.clinic_id', '=', 'doctor_clinics.id')
+            ->where('doctor_clinics.doctor_id', $docId)
+            ->select('reservations.*');
 
         if ($request->get("filter_date") && $request->get("filter_date") == 2) {
 
@@ -220,7 +220,7 @@ class DoctorDataController extends Controller
             'status' => 'not_seen',
         ];
 
-           //save f_c_m notification table
+        //save f_c_m notification table
         FCMNotification::create([
             'title_dt' => 'Ihre Reservierung ist vollständig',
             'body_dt' => 'gute Besserung',
@@ -230,11 +230,11 @@ class DoctorDataController extends Controller
             'user_id' => $row->patient_id,
         ]);
 
-                //fcm notify
+        //fcm notify
         $tokens = User::where('id', $row->patient_id)->whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
         try
         {
-                 //test sabreen
+            //test sabreen
 
             $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP0yNUnND_r1EbnQtmz9Nt1QIB3ekVXRAUG-SqZf3OCxGFw2zn1WDsizxoOC9SSfC82YziE1SaQoGe4A4Luq_0kcK3po7';
 
@@ -244,7 +244,7 @@ class DoctorDataController extends Controller
                     "notification" => [
                         "title" => 'BDG App :',
                         // "body" => 'Your visit '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was done - Thank you',
-                        "body" => 'Dein Besuch vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' ist abgeschlossen – Vielen Dank!',
+                        "body" => 'Dein Besuch vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' ist abgeschlossen – Vielen Dank!',
 
                     ],
                 ];
@@ -253,7 +253,7 @@ class DoctorDataController extends Controller
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App :',
-                        "body" => 'Dein Besuch vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' ist abgeschlossen – Vielen Dank!',
+                        "body" => 'Dein Besuch vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' ist abgeschlossen – Vielen Dank!',
 
                     ],
                 ];
@@ -279,7 +279,7 @@ class DoctorDataController extends Controller
 //    dd($response);
 
         } catch (\Exception $e) {
-          // DB::rollback();
+            // DB::rollback();
             return redirect()->back()->with($e->getMessage());
         }
 
@@ -296,77 +296,77 @@ class DoctorDataController extends Controller
             $row->save();
         }
         // $row->update(['reservation_status_id'=>2]);
- //send notification api for confirm reservation
-          $data = [
-    'title_dt' => 'BDG App : ',
-    'body_dt' => 'Deine Buchung bei '.$row->clinic->doctor->name.' wurde für den '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' Uhr bestätigt.',
-    'title_en' => 'BDG App : ',
-    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
-    'status' => 'not_seen',
-];
+        //send notification api for confirm reservation
+        $data = [
+            'title_dt' => 'BDG App : ',
+            'body_dt' => 'Deine Buchung bei ' . $row->clinic->doctor->name . ' wurde für den ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' zwischen ' . date('H:i', strtotime($row->time_from)) . ' und ' . date('H:i', strtotime($row->time_to)) . ' Uhr bestätigt.',
+            'title_en' => 'BDG App : ',
+            'body_en' => 'Your booking with ' . $row->clinic->doctor->name . ' was confirmed on ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' between ' . date('H:i', strtotime($row->time_from)) . ' and ' . date('H:i', strtotime($row->time_to)) . '',
+            'status' => 'not_seen',
+        ];
 
-   //save f_c_m notification table
-FCMNotification::create([
-    'title_dt' => 'BDG App : ',
-    'body_dt' => 'Deine Buchung bei '.$row->clinic->doctor->name.' wurde für den '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' Uhr bestätigt.',
-    'title_en' => 'BDG App : ',
-    'body_en' => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
-    'status' => 'not_seen',
-    'user_id' => $row->patient_id,
-]);
+        //save f_c_m notification table
+        FCMNotification::create([
+            'title_dt' => 'BDG App : ',
+            'body_dt' => 'Deine Buchung bei ' . $row->clinic->doctor->name . ' wurde für den ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' zwischen ' . date('H:i', strtotime($row->time_from)) . ' und ' . date('H:i', strtotime($row->time_to)) . ' Uhr bestätigt.',
+            'title_en' => 'BDG App : ',
+            'body_en' => 'Your booking with ' . $row->clinic->doctor->name . ' was confirmed on ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' between ' . date('H:i', strtotime($row->time_from)) . ' and ' . date('H:i', strtotime($row->time_to)) . '',
+            'status' => 'not_seen',
+            'user_id' => $row->patient_id,
+        ]);
 
         //fcm notify
-$tokens = User::where('id', $row->patient_id)->whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
-try
-{
-         //test sabreen
+        $tokens = User::where('id', $row->patient_id)->whereNotNull('fcm_token')->pluck('fcm_token')->toArray();
+        try
+        {
+            //test sabreen
 
-    $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP0yNUnND_r1EbnQtmz9Nt1QIB3ekVXRAUG-SqZf3OCxGFw2zn1WDsizxoOC9SSfC82YziE1SaQoGe4A4Luq_0kcK3po7';
+            $SERVER_API_KEY = 'AAAAJnomq2Q:APA91bG29GU_QCYVh23XsdQM645Bgc61hX1orWqhbTOdsROrP0yNUnND_r1EbnQtmz9Nt1QIB3ekVXRAUG-SqZf3OCxGFw2zn1WDsizxoOC9SSfC82YziE1SaQoGe4A4Luq_0kcK3po7';
 
-    if (App::getLocale() == "en") {
-        $data = [
-            "registration_ids" => $tokens,
-            "notification" => [
-                "title" => 'BDG App : ',
-                // "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
-                "body" => 'Deine Buchung bei '.$row->clinic->doctor->name.' wurde für den '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' Uhr bestätigt.',
+            if (App::getLocale() == "en") {
+                $data = [
+                    "registration_ids" => $tokens,
+                    "notification" => [
+                        "title" => 'BDG App : ',
+                        // "body" => 'Your booking with '.$row->clinic->doctor->name.' was confirmed on '.date_format(date_create($row->reservation_date), "d.m.Y").' between '.date('H:i', strtotime($row->time_from)).' and '.date('H:i', strtotime($row->time_to)).'',
+                        "body" => 'Deine Buchung bei ' . $row->clinic->doctor->name . ' wurde für den ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' zwischen ' . date('H:i', strtotime($row->time_from)) . ' und ' . date('H:i', strtotime($row->time_to)) . ' Uhr bestätigt.',
 
-            ],
-        ];
-    } else {
-        $data = [
-            "registration_ids" => $tokens,
-            "notification" => [
-                "title" => 'BDG App : ',
-                "body" => 'Deine Buchung bei '.$row->clinic->doctor->name.' wurde für den '.date_format(date_create($row->reservation_date), "d.m.Y").' zwischen '.date('H:i', strtotime($row->time_from)).' und '.date('H:i', strtotime($row->time_to)).' Uhr bestätigt.',
+                    ],
+                ];
+            } else {
+                $data = [
+                    "registration_ids" => $tokens,
+                    "notification" => [
+                        "title" => 'BDG App : ',
+                        "body" => 'Deine Buchung bei ' . $row->clinic->doctor->name . ' wurde für den ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' zwischen ' . date('H:i', strtotime($row->time_from)) . ' und ' . date('H:i', strtotime($row->time_to)) . ' Uhr bestätigt.',
 
-            ],
-        ];
-    }
-    $dataString = json_encode($data);
+                    ],
+                ];
+            }
+            $dataString = json_encode($data);
 
-    $headers = [
-        'Authorization: key=' . $SERVER_API_KEY,
-        'Content-Type: application/json',
-    ];
+            $headers = [
+                'Authorization: key=' . $SERVER_API_KEY,
+                'Content-Type: application/json',
+            ];
 
-    $ch = curl_init();
+            $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
-    $response = curl_exec($ch);
+            $response = curl_exec($ch);
 
 //    dd($response);
 
-} catch (\Exception $e) {
-  // DB::rollback();
-    return redirect()->back()->with($e->getMessage());
-}
+        } catch (\Exception $e) {
+            // DB::rollback();
+            return redirect()->back()->with($e->getMessage());
+        }
         return redirect()->back();
     }
     public function delReservation($id)
@@ -382,18 +382,18 @@ try
         //send notification api for cancelled reservation
         $data = [
             'title_dt' => 'BDG App : ',
-            'body_dt' => 'Deine Buchung vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' von '.$row->clinic->doctor->name.' storniert.',
+            'body_dt' => 'Deine Buchung vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' wurde am ' . date_format(date_create(now()), "d.m.Y"). ' von ' . $row->clinic->doctor->name . ' storniert.',
             'title_en' => 'BDG App : ',
-            'body_en' => 'Your booking '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was cancelled by doctor at '.date_format(date_create(now()), "d.m.Y").'',
+            'body_en' => 'Your booking ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' with ' . $row->clinic->doctor->name . ' was cancelled by doctor at ' . date_format(date_create(now()), "d.m.Y") . '',
             'status' => 'not_seen',
         ];
 
 //save f_c_m notification table
         FCMNotification::create([
             'title_dt' => 'BDG App : ',
-            'body_dt' => 'Deine Buchung vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' von '.$row->clinic->doctor->name.' storniert.',
+            'body_dt' => 'Deine Buchung vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' wurde am ' . date_format(date_create(now()), "d.m.Y") . ' von ' . $row->clinic->doctor->name . ' storniert.',
             'title_en' => 'BDG App : ',
-            'body_en' => 'Your booking '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was cancelled by doctor at '.date_format(date_create(now()), "d.m.Y").'',
+            'body_en' => 'Your booking ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' with ' . $row->clinic->doctor->name . ' was cancelled by doctor at ' . date_format(date_create(now()), "d.m.Y") . '',
             'status' => 'not_seen',
             'user_id' => $row->patient_id,
         ]);
@@ -411,7 +411,7 @@ try
                     "notification" => [
 
                         "title" => 'BDG App',
-                        "body" => 'Deine Buchung vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' von '.$row->clinic->doctor->name.' storniert.',
+                        "body" => 'Deine Buchung vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' wurde am ' . date_format(date_create(now()), "d.m.Y") . ' von ' . $row->clinic->doctor->name . ' storniert.',
 
                         // "body" => 'Your booking '.date_format(date_create($row->reservation_date), "d.m.Y").' with '.$row->clinic->doctor->name.' was cancelled by doctor at '.date_format(date_create(now()), "d.m.Y").'',
                     ],
@@ -421,7 +421,7 @@ try
                     "registration_ids" => $tokens,
                     "notification" => [
                         "title" => 'BDG App',
-                        "body" => 'Deine Buchung vom '.date_format(date_create($row->reservation_date), "d.m.Y").' bei '.$row->clinic->doctor->name.' wurde am '.date_format(date_create($row->reservation_date), "d.m.Y").' von '.$row->clinic->doctor->name.' storniert.',
+                        "body" => 'Deine Buchung vom ' . date_format(date_create($row->reservation_date), "d.m.Y") . ' bei ' . $row->clinic->doctor->name . ' wurde am ' . date_format(date_create(now()), "d.m.Y") . ' von ' . $row->clinic->doctor->name . ' storniert.',
                     ],
                 ];
             }
