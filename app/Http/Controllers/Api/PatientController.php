@@ -362,6 +362,12 @@ class PatientController extends BaseController
         ->join('insurance_types', 'doctor_clinics.insurance_type_id', '=', 'insurance_types.id')
         ->join('doctor_schedules', 'doctor_clinics.id', '=', 'doctor_schedules.clinic_id')
         ->join('doctor_feilds', 'doctor_feilds.doctor_id', '=', 'doctor_clinics.doctor_id');
+// at first filter by distance 40km after 40 not getting data
+// order by distance 5km , 10km , 20km , 30km , 40km
+//finally order by schedule
+
+
+
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
