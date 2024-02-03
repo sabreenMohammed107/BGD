@@ -343,26 +343,26 @@ class PatientController extends BaseController
 
     public function calcDistance($lat1, $lon1, $lat2, $lon2) {
         $R = 6371;
-    
+
         $lat1 = deg2rad($lat1);
         $lon1 = deg2rad($lon1);
         $lat2 = deg2rad($lat2);
         $lon2 = deg2rad($lon2);
-    
+
         $dlat = $lat2 - $lat1;
         $dlon = $lon2 - $lon1;
-    
+
         $a = sin($dlat/2) * sin($dlat/2) + cos($lat1) * cos($lat2) * sin($dlon/2) * sin($dlon/2);
         $c = 2 * atan2(sqrt($a), sqrt(1-$a));
-    
+
         $distance = $R * $c;
-    
+
         return $distance;
     }
 
     public function search(Request $request)
     {
-        
+
         $search = '';
         $str = $request->get('str');
         $lower = $request->get('lower');
@@ -385,7 +385,7 @@ class PatientController extends BaseController
         }
 
         // return $this->sendResponse($request->all(), __("langMessage.search_result"));
-        
+
 // $sort_name=$request->get('sort_name');
 
         $search = $str;
@@ -402,7 +402,7 @@ class PatientController extends BaseController
 
 
 
-        
+
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
@@ -638,7 +638,28 @@ class PatientController extends BaseController
                 4 => ["id" => 4, "name" => "Nächster Termin"],
             ];
         }
+
+        if (App::getLocale() == "en") {
+            $distance = [
+                0 => ["id" => 5, "name" => "5 km"],
+                1 => ["id" => 10, "name" => "10 km"],
+                2 => ["id" => 20, "name" => "20 km"],
+                3 => ["id" => 30, "name" => "30 km"],
+                4 => ["id" => 40, "name" => "40 km"],
+                5 => ["id" => -1, "name" => "undefined"],
+            ];
+        } else {
+            $distance = [
+                0 => ["id" => 5, "name" => "5 km"],
+                1 => ["id" => 10, "name" => "10 km"],
+                2 => ["id" => 20, "name" => "20 km"],
+                3 => ["id" => 30, "name" => "30 km"],
+                4 => ["id" => 40, "name" => "40 km"],
+                5 => ["id" => -1, "name" => "nicht definiert"],
+            ];
+        }
         $page['sort'] = $sort;
+        $page['distance'] = $distance;
         $page['specialists'] = MedSearch::collection($specialists);
         $daysList = DayNew::all();
         $page['days'] = DayResource::collection($daysList);
