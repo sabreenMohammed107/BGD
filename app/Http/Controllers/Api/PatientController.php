@@ -339,8 +339,30 @@ class PatientController extends BaseController
     return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
 
     }
+
+
+    public function calcDistance($lat1, $lon1, $lat2, $lon2) {
+        $R = 6371;
+    
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+    
+        $dlat = $lat2 - $lat1;
+        $dlon = $lon2 - $lon1;
+    
+        $a = sin($dlat/2) * sin($dlat/2) + cos($lat1) * cos($lat2) * sin($dlon/2) * sin($dlon/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    
+        $distance = $R * $c;
+    
+        return $distance;
+    }
+
     public function search(Request $request)
     {
+        
         $search = '';
         $str = $request->get('str');
         $lower = $request->get('lower');
@@ -353,6 +375,17 @@ class PatientController extends BaseController
         $homeVisit = $request->get('homeVisit');
         $parkingSpace = $request->get('parkingSpace');
         $disableAccess = $request->get('disableAccess');
+
+        $lat = $request->get('latude');
+        $lng = $request->get('longtude');
+        $dst = $request->get('distance');
+
+        if($dst && $dst != -1 && !$city && ($lat == null || $lng == null)){
+            return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+        }
+
+        // return $this->sendResponse($request->all(), __("langMessage.search_result"));
+        
 // $sort_name=$request->get('sort_name');
 
         $search = $str;
@@ -368,6 +401,8 @@ class PatientController extends BaseController
 
 
 
+
+        
 
         if ($request->get('speciality')) {
             $r = json_decode($request->get('speciality'), true);
@@ -527,10 +562,18 @@ class PatientController extends BaseController
                     });
 
                     if (!$exists) {
-                        $uniqueDoctors->push($doctor);
+                        if($dst && $dst != -1 && !$city){
+                            $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                            if($calculatedDst <= $dst){
+                                $doctor->distance = $calculatedDst;
+                                $uniqueDoctors->push($doctor);
+                            }
+                        }else{
+                            $uniqueDoctors->push($doctor);
+                        }
+                        // $uniqueDoctors->push($doctor);
                     }
                 }
-
 
                 return $this->sendResponse(DoctorClinicResource::collection($uniqueDoctors), __("langMessage.search_result"));
             } else {
@@ -539,12 +582,26 @@ class PatientController extends BaseController
         }
 
 
+
         $doctors = $doctors->groupBy('doctor_clinics.id')->get();
+
+        $returnedDoctors = collect([]);
+        if($dst && $dst != -1 && !$city){
+            foreach ($doctors as $doctor) {
+                $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                if($calculatedDst <= $dst){
+                    $doctor->distance = $calculatedDst;
+                    $returnedDoctors->push($doctor);
+                }
+            }
+        }else{
+            $returnedDoctors = $doctors;
+        }
 
         //  return $doctors;
         //
         // return $this->sendResponse($doctors, 'All Search result Retrieved  Successfully');
-        return $this->sendResponse(DoctorClinicResource::collection($doctors), __("langMessage.search_result"));
+        return $this->sendResponse(DoctorClinicResource::collection($returnedDoctors), __("langMessage.search_result"));
 
     }
 

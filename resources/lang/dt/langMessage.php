@@ -33,6 +33,7 @@ return [
       'search_result'=>'Alle Suchergebnisse erfolgreich abgerufen',
       'vafourite_result'=>'Das Ergebnis aller Vafourite-Ärzte wurde erfolgreich abgerufen',
       'all_data'=>'Holen Sie sich alle Daten',
+      'missing_data'=>'fehlende Daten',
 
 
 ];
