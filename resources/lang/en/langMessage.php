@@ -32,6 +32,7 @@ return [
       'Cancelled_reservations'=>'Reservation cancelled done.',
       'search_result'=>'All Search result Retrieved  Successfully',
       'vafourite_result'=>'All vafourite doctors result Retrieved  Successfully',
-'all_data'=>'get all  data',
+      'all_data'=>'get all  data',  
+      'missing_data'=>'missing data',
 
 ];
