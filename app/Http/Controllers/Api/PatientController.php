@@ -380,6 +380,10 @@ class PatientController extends BaseController
         $lng = $request->get('longtude');
         $dst = $request->get('distance');
 dd([$request->get('latude'),$request->get('min_price')]);
+if(!$request->has('latude') || !$request->has('longtude')){
+    return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+
+}
         if($dst && $dst != -1 && !$city && ($lat == null || $lng == null)){
             return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
         }
