@@ -379,12 +379,18 @@ class PatientController extends BaseController
         $lat = $request->get('latude');
         $lng = $request->get('longtude');
         $dst = $request->get('distance');
-if(!$request->has('latude') || !$request->has('longtude')){
-    return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+// if(!$request->has('latude') || !$request->has('longtude')){
+//     return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
 
-}
-        if($dst && $dst != -1 && !$city && ($lat == null || $lng == null)){
+// }
+        if($lat == null || $lng == null){
             return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+        }
+        // return $this->sendError(null, 'Error: ' . $dst . ' [Latitude, Longitude] are required for distance search.');
+
+        // $dst && $dst != -1 && !$city
+        if(!$dst){
+            $dst = 5;
         }
 
         // return $this->sendResponse($request->all(), __("langMessage.search_result"));
