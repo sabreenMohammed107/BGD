@@ -589,12 +589,15 @@ class PatientController extends BaseController
                         if($doctor->latitude && $doctor->longitude){
                             $doctor->distance = $calculatedDst;
                         }
-                        if($dst && $dst != -1 && !$city && $doctor->latitude && $doctor->longitude){
-                            if($calculatedDst <= $dst){
+                        if($doctor->latitude && $doctor->longitude){
+                            if($dst && $dst != -1 && !$city){
+                                if($calculatedDst <= $dst){
+                                    $uniqueDoctors->push($doctor);
+                                }
+                            }else{
                                 $uniqueDoctors->push($doctor);
                             }
-                        }else{
-                            $uniqueDoctors->push($doctor);
+
                         }
                     }
                 }
