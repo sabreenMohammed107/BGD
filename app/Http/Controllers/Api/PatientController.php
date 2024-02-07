@@ -575,16 +575,27 @@ class PatientController extends BaseController
                     });
 
                     if (!$exists) {
+                        // if($dst && $dst != -1 && !$city){
+                        //     $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                        //     if($calculatedDst <= $dst){
+                        //         $doctor->distance = $calculatedDst;
+                        //         $uniqueDoctors->push($doctor);
+                        //     }
+                        // }else{
+                        //     $uniqueDoctors->push($doctor);
+                        // }
+
+                        $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                        if($doctor->latitude && $doctor->longitude){
+                            $doctor->distance = $calculatedDst;
+                        }
                         if($dst && $dst != -1 && !$city){
-                            $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
                             if($calculatedDst <= $dst){
-                                $doctor->distance = $calculatedDst;
                                 $uniqueDoctors->push($doctor);
                             }
                         }else{
                             $uniqueDoctors->push($doctor);
                         }
-                        // $uniqueDoctors->push($doctor);
                     }
                 }
 
@@ -599,17 +610,24 @@ class PatientController extends BaseController
         $doctors = $doctors->groupBy('doctor_clinics.id')->get();
 
         $returnedDoctors = collect([]);
-        if($dst && $dst != -1 && !$city){
-            foreach ($doctors as $doctor) {
-                $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
-                if($calculatedDst <= $dst){
-                    $doctor->distance = $calculatedDst;
-                    $returnedDoctors->push($doctor);
-                }
+
+
+        $filter_cond = $dst && $dst != -1 && !$city;
+
+        foreach ($doctors as $doctor) {
+            $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+            if($doctor->latitude && $doctor->longitude){
+                $doctor->distance = $calculatedDst;
             }
-        }else{
+            if($calculatedDst <= $dst && $filter_cond){
+                $returnedDoctors->push($doctor);
+            }
+        }
+
+        if(!$filter_cond){
             $returnedDoctors = $doctors;
         }
+
 
         //  return $doctors;
         //
