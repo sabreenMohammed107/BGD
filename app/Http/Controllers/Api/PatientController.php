@@ -549,16 +549,20 @@ class PatientController extends BaseController
 
 
 
-                    $afterDoctors = $doctors;
-                    $beforDoctors = $doctors;
-
+                    $afterDoctors = clone $doctors;
+                    $beforDoctors = clone $doctors;
+                    
                     $doctorsAfter =$afterDoctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
-
-                    $doctorsBefore =$beforDoctors->where("doctor_schedules.days_id", ">=", $dFake)
+                    
+                    $doctorsBefore =$beforDoctors->where("doctor_schedules.days_id", "<=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
+                    // __("langMessage.search_result")
+
+
+
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
