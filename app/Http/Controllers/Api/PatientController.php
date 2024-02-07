@@ -598,6 +598,8 @@ class PatientController extends BaseController
                                 $uniqueDoctors->push($doctor);
                             }
 
+                        }else if($dst == -1){
+                            $uniqueDoctors->push($doctor);
                         }
                     }
                 }
