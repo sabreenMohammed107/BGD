@@ -393,6 +393,7 @@ class PatientController extends BaseController
             $dst = 5;
         }
 
+
         // return $this->sendResponse($request->all(), __("langMessage.search_result"));
 
 // $sort_name=$request->get('sort_name');
@@ -604,6 +605,12 @@ class PatientController extends BaseController
                     }
                 }
 
+                $uniqueDoctors = $uniqueDoctors->where('distance', '!=', '')
+                ->sortBy('distance')
+                ->concat($uniqueDoctors->where('distance', ''));
+
+                
+
                 return $this->sendResponse(DoctorClinicResource::collection($uniqueDoctors), __("langMessage.search_result"));
             } else {
                 $doctors = $doctors->orderBy("doctor_clinics.visit_fees", 'asc');
@@ -633,6 +640,9 @@ class PatientController extends BaseController
             $returnedDoctors = $doctors;
         }
 
+        $returnedDoctors = $returnedDoctors->where('distance', '!=', '')
+        ->sortBy('distance')
+        ->concat($returnedDoctors->where('distance', ''));
 
         //  return $doctors;
         //
