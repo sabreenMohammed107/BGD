@@ -152,8 +152,8 @@ class MedicalSubFieldController extends Controller
         $mime = $file->getMimeType();
 
         // Rename The Image ..
-    //   $imageName = $name;
-        $imageName = preg_replace('/[^A-Za-z0-9]/', '', $name);
+      $imageName = $name;
+        // $imageName = preg_replace('/[^A-Za-z0-9]/', '', $name);
 
         $uploadPath = public_path('uploads/medical_sub_fields');
 
