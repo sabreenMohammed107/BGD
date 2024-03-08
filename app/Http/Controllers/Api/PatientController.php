@@ -379,13 +379,20 @@ class PatientController extends BaseController
         $lat = $request->get('latude');
         $lng = $request->get('longtude');
         $dst = $request->get('distance');
-if(!$request->has('latude') || !$request->has('longtude')){
-    return $this->sendError("Error", 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+// if(!$request->has('latude') || !$request->has('longtude')){
+//     return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
 
-}
-        if($dst && $dst != -1 && !$city && ($lat == null || $lng == null)){
-            return $this->sendError("Error", 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
+// }
+        if($lat == null || $lng == null){
+            return $this->sendError(null, 'Error: ' . __("langMessage.missing_data") . ' [Latitude, Longitude] are required for distance search.');
         }
+        // return $this->sendError(null, 'Error: ' . $dst . ' [Latitude, Longitude] are required for distance search.');
+
+        // $dst && $dst != -1 && !$city
+        if(!$dst){
+            $dst = 5;
+        }
+
 
         // return $this->sendResponse($request->all(), __("langMessage.search_result"));
 
@@ -543,16 +550,20 @@ if(!$request->has('latude') || !$request->has('longtude')){
 
 
 
-                    $afterDoctors = $doctors;
-                    $beforDoctors = $doctors;
+                    $afterDoctors = clone $doctors;
+                    $beforDoctors = clone $doctors;
 
                     $doctorsAfter =$afterDoctors->where("doctor_schedules.days_id", ">=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
 
-                    $doctorsBefore =$beforDoctors->where("doctor_schedules.days_id", ">=", $dFake)
+                    $doctorsBefore =$beforDoctors->where("doctor_schedules.days_id", "<=", $dFake)
                     ->orderBy("doctor_schedules.days_id", 'asc')
                     ->get();
+                    // __("langMessage.search_result")
+
+
+
                     //sabreen
                 $mergedDoctors = $doctorsAfter->merge($doctorsBefore);
                 // ->unique('id')->values();
@@ -565,18 +576,40 @@ if(!$request->has('latude') || !$request->has('longtude')){
                     });
 
                     if (!$exists) {
-                        if($dst && $dst != -1 && !$city){
-                            $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
-                            if($calculatedDst <= $dst){
-                                $doctor->distance = $calculatedDst;
+                        // if($dst && $dst != -1 && !$city){
+                        //     $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                        //     if($calculatedDst <= $dst){
+                        //         $doctor->distance = $calculatedDst;
+                        //         $uniqueDoctors->push($doctor);
+                        //     }
+                        // }else{
+                        //     $uniqueDoctors->push($doctor);
+                        // }
+
+                        $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+                        if($doctor->latitude && $doctor->longitude){
+                            $doctor->distance = $calculatedDst;
+                        }
+                        if($doctor->latitude && $doctor->longitude){
+                            if($dst && $dst != -1 && !$city){
+                                if($calculatedDst <= $dst){
+                                    $uniqueDoctors->push($doctor);
+                                }
+                            }else{
                                 $uniqueDoctors->push($doctor);
                             }
-                        }else{
+
+                        }else if($dst == -1){
                             $uniqueDoctors->push($doctor);
                         }
-                        // $uniqueDoctors->push($doctor);
                     }
                 }
+
+                $uniqueDoctors = $uniqueDoctors->where('distance', '!=', '')
+                ->sortBy('distance')
+                ->concat($uniqueDoctors->where('distance', ''));
+
+
 
                 return $this->sendResponse(DoctorClinicResource::collection($uniqueDoctors), __("langMessage.search_result"));
             } else {
@@ -589,17 +622,27 @@ if(!$request->has('latude') || !$request->has('longtude')){
         $doctors = $doctors->groupBy('doctor_clinics.id')->get();
 
         $returnedDoctors = collect([]);
-        if($dst && $dst != -1 && !$city){
-            foreach ($doctors as $doctor) {
-                $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
-                if($calculatedDst <= $dst){
-                    $doctor->distance = $calculatedDst;
-                    $returnedDoctors->push($doctor);
-                }
+
+
+        $filter_cond = $dst && $dst != -1 && !$city;
+
+        foreach ($doctors as $doctor) {
+            $calculatedDst = $this->calcDistance($lat, $lng, $doctor->latitude, $doctor->longitude);
+            if($doctor->latitude && $doctor->longitude){
+                $doctor->distance = $calculatedDst;
             }
-        }else{
+            if($calculatedDst <= $dst && $filter_cond && $doctor->latitude && $doctor->longitude){
+                $returnedDoctors->push($doctor);
+            }
+        }
+
+        if(!$filter_cond){
             $returnedDoctors = $doctors;
         }
+
+        $returnedDoctors = $returnedDoctors->where('distance', '!=', '')
+        ->sortBy('distance')
+        ->concat($returnedDoctors->where('distance', ''));
 
         //  return $doctors;
         //

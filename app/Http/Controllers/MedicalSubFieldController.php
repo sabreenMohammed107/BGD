@@ -144,20 +144,22 @@ class MedicalSubFieldController extends Controller
       public function UplaodImage($file_request)
       {
           //  This is Image Info..
-          $file = $file_request;
-          $name = $file->getClientOriginalName();
-          $ext = $file->getClientOriginalExtension();
-          $size = $file->getSize();
-          $path = $file->getRealPath();
-          $mime = $file->getMimeType();
+        $file = $file_request;
+        $name = $file->getClientOriginalName();
+        $ext = $file->getClientOriginalExtension();
+        $size = $file->getSize();
+        $path = $file->getRealPath();
+        $mime = $file->getMimeType();
 
-          // Rename The Image ..
-          $imageName = $name;
-          $uploadPath = public_path('uploads/medical_sub_fields');
+        // Rename The Image ..
+      $imageName = $name;
+        // $imageName = preg_replace('/[^A-Za-z0-9]/', '', $name);
 
-          // Move The image..
-          $file->move($uploadPath, $imageName);
+        $uploadPath = public_path('uploads/medical_sub_fields');
 
-          return $imageName;
+        // Move The image..
+        $file->move($uploadPath, $imageName);
+
+        return $imageName;
       }
 }
