@@ -1,6 +1,6 @@
-@extends('layout.main')
+@extends("layout.main")
 
-@section('breadcrumb')
+@section("breadcrumb")
     <div class="toolbar" id="kt_toolbar">
         <div class="container-fluid d-flex flex-stack flex-wrap flex-sm-nowrap">
             <!--begin::Info-->
@@ -25,7 +25,7 @@
     </div>
 @endsection
 
-@section('content')
+@section("content")
     <!--begin::Post-->
     <div class="post fs-6 d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -109,7 +109,7 @@
                                         <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
                                             <a href="#">
                                                 <div class="symbol-label fs-3 bg-light-danger text-danger">
-                                                    <img src="{{ asset('uploads/medical_fields') }}/{{ $row->field_img }}"
+                                                    <img src="{{ asset("uploads/medical_fields") }}/{{ $row->field_img }}"
                                                         class="w-100" alt="">
                                                 </div>
                                             </a>
@@ -121,9 +121,8 @@
                                         <div class="d-flex">
 
                                             <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                                            data-kt-ecommerce-category-filter="category_name" >
+                                                data-kt-ecommerce-category-filter="category_name">
                                                 {{ $row->field_enname }}</a>
-
 
                                         </div>
                                     </td>
@@ -131,11 +130,10 @@
                                     <td>
 
                                         <div class="d-flex">
-                                            <input type="hidden" name="" id=""  data-kt-ecommerce-category-filter="category_id" value="{{$row->id}}" >
-                                            <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
-                                             >
+                                            <input type="hidden" name="" id=""
+                                                data-kt-ecommerce-category-filter="category_id" value="{{ $row->id }}">
+                                            <a href="#" class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1">
                                                 {{ $row->field_dtname }}</a>
-
 
                                         </div>
                                     </td>
@@ -180,7 +178,8 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a data-bs-toggle="modal" data-bs-target="#kt_modal_new_targetEdit{{$row->id}}"
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#kt_modal_new_targetEdit{{ $row->id }}"
                                                     class="menu-link px-3">Edit</a>
                                             </div>
                                             <!--end::Menu item-->
@@ -189,13 +188,14 @@
                                                 <a href="#" class="menu-link px-3"
                                                     data-kt-ecommerce-category-filter="delete_row">Delete</a>
 
+                                                <form id="delete_{{ $row->id }}"
+                                                    action="{{ route("medicine-fields.destroy", $row) }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method("DELETE")
 
-									<form id="delete_{{$row->id}}" action="{{ route('medicine-fields.destroy', $row) }}"  method="POST" style="display: none;">
-									@csrf
-									@method('DELETE')
-
-									<button type="submit" value=""></button>
-									</form>
+                                                    <button type="submit" value=""></button>
+                                                </form>
                                             </div>
                                             <!--end::Menu item-->
                                         </div>
@@ -203,11 +203,9 @@
                                     </td>
                                     <!--end::Action=-->
 
-
-
                                     <!--begin::Modal - New Target-->
-                                    <div class="modal fade" id="kt_modal_new_targetEdit{{$row->id}}" tabindex="-1"
-                                        aria-hidden="true">
+                                    <div class="modal fade" id="kt_modal_new_targetEdit{{ $row->id }}"
+                                        tabindex="-1" aria-hidden="true">
                                         <!--begin::Modal dialog-->
                                         <div class="modal-dialog modal-dialog-centered mw-650px">
                                             <!--begin::Modal content-->
@@ -221,12 +219,12 @@
                                                         <span class="svg-icon svg-icon-1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                 height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.5" x="6" y="17.3137"
-                                                                    width="16" height="2" rx="1"
-                                                                    transform="rotate(-45 6 17.3137)" fill="black" />
-                                                                <rect x="7.41422" y="6" width="16"
+                                                                <rect opacity="0.5" x="6" y="17.3137" width="16"
                                                                     height="2" rx="1"
-                                                                    transform="rotate(45 7.41422 6)" fill="black" />
+                                                                    transform="rotate(-45 6 17.3137)" fill="black" />
+                                                                <rect x="7.41422" y="6" width="16" height="2"
+                                                                    rx="1" transform="rotate(45 7.41422 6)"
+                                                                    fill="black" />
                                                             </svg>
                                                         </span>
                                                         <!--end::Svg Icon-->
@@ -238,10 +236,10 @@
                                                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                                                     <!--begin:Form-->
                                                     <form id="kt_modal_update_target_updateForm" class="form"
-                                                        action="{{ route('medicine-fields.update', $row->id) }}"
+                                                        action="{{ route("medicine-fields.update", $row->id) }}"
                                                         method="post" enctype="multipart/form-data">
                                                         @csrf
-                                                        @method('PUT')
+                                                        @method("PUT")
                                                         <!--begin::Heading-->
                                                         <div class="mb-13 text-center">
                                                             <!--begin::Title-->
@@ -250,26 +248,27 @@
 
                                                         </div>
                                                         <!--end::Heading-->
-                                                        <!--begin::Input group-->
-                                                        <div class="mb-7">
-                                                            <!--begin::Label-->
-                                                            <label class="fs-6 fw-bold mb-3">
-                                                                <span>Update Avatar</span>
-                                                                <i class="fas fa-exclamation-circle ms-1 fs-7"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Allowed file types: png, jpg, jpeg."></i>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                            <!--begin::Image input wrapper-->
+                                                        <div class="d-flex flex-wrap gap-5">
+                                                            <!--begin::Input group-->
+                                                            <div class="fv-row w-100 flex-md-root">
+                                                                <div class="card-header">
+                                                                    <!--begin::Card title-->
+                                                                    <div class="card-title">
+                                                                        <h2>Image</h2>
+                                                                    </div>
+                                                                    <!--end::Card title-->
+                                                                </div>
+                                                                <!--begin::Image input-->
+                                                                 <!--begin::Image input wrapper-->
                                                             <div class="mt-1">
                                                                 <!--begin::Image input-->
                                                                 <div class="image-input image-input-outline"
                                                                     data-kt-image-input="true"
-                                                                    style="background-image: url(' {{ asset('uploads/medical_fields') }}/{{ $row->field_img }}')">
+                                                                    style="background-image: url(' {{ asset("uploads/medical_fields") }}/{{ $row->field_img }}')">
                                                                     <!--begin::Preview existing avatar-->
 
                                                                     <div class="image-input-wrapper w-100px h-100px"
-                                                                        style="background-image: url(' {{ asset('uploads/medical_fields') }}/{{ $row->field_img }}')">
+                                                                        style="background-image: url(' {{ asset("uploads/medical_fields") }}/{{ $row->field_img }}')">
 
                                                                     </div>
                                                                     <!--end::Preview existing avatar-->
@@ -291,7 +290,58 @@
                                                                 <!--end::Image input-->
                                                             </div>
                                                             <!--end::Image input wrapper-->
+                                                                <!--end::Image input-->
+
+                                                            </div>
+                                                            <!--end::Input-->
+
+                                                            <!--begin::Input group-->
+                                                            <div class="fv-row w-100 flex-md-root">
+
+                                                                <div class="card-header">
+                                                                    <!--begin::Card title-->
+                                                                    <div class="card-title">
+                                                                        <h2>Thumbnail</h2>
+                                                                    </div>
+                                                                    <!--end::Card title-->
+                                                                </div>
+                                                                <!--begin::Image input-->
+                                                                 <!--begin::Image input wrapper-->
+                                                            <div class="mt-1">
+                                                                <!--begin::Image input-->
+                                                                <div class="image-input image-input-outline"
+                                                                    data-kt-image-input="true"
+                                                                    style="background-image: url(' {{ asset("uploads/medical_fields") }}/{{ $row->thumbnail }}')">
+                                                                    <!--begin::Preview existing avatar-->
+
+                                                                    <div class="image-input-wrapper w-100px h-100px"
+                                                                        style="background-image: url(' {{ asset("uploads/medical_fields") }}/{{ $row->thumbnail }}')">
+
+                                                                    </div>
+                                                                    <!--end::Preview existing avatar-->
+                                                                    <!--begin::Edit-->
+                                                                    <label
+                                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                                        data-kt-image-input-action="change"
+                                                                        data-bs-toggle="tooltip" title="Change thumbnail">
+                                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                                        <!--begin::Inputs-->
+                                                                        <input type="file" name="thumbnail"
+                                                                            accept=".png, .jpg, .jpeg" />
+                                                                        <input type="hidden" name="avatar_remove" />
+                                                                        <!--end::Inputs-->
+                                                                    </label>
+                                                                    <!--end::Edit-->
+
+                                                                </div>
+                                                                <!--end::Image input-->
+                                                            </div>
+                                                            <!--end::Image input wrapper-->
+                                                                <!--end::Image input-->
+
+                                                            </div>
                                                         </div>
+                                                        <!--begin::Input group-->
 
 
                                                         <div class="d-flex flex-column mb-8 fv-row">
@@ -302,8 +352,9 @@
                                                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                                                             </label>
                                                             <!--end::Label-->
-                                                            <input type="text" class="form-control form-control-solid" required
-                                                                placeholder="Enter Field En Name" name="field_enname" value="{{$row->field_enname}}" />
+                                                            <input type="text" class="form-control form-control-solid"
+                                                                required placeholder="Enter Field En Name"
+                                                                name="field_enname" value="{{ $row->field_enname }}" />
                                                         </div>
                                                         <!--end::Input group-->
                                                         <div class="d-flex flex-column mb-8 fv-row">
@@ -314,23 +365,24 @@
                                                                     data-bs-toggle="tooltip" title="Enter Field Name"></i>
                                                             </label>
                                                             <!--end::Label-->
-                                                            <input type="text" class="form-control form-control-solid" required
-                                                                placeholder="Enter Field De Name" name="field_dtname" value="{{$row->field_dtname}}" />
+                                                            <input type="text" class="form-control form-control-solid"
+                                                                required placeholder="Enter Field De Name"
+                                                                name="field_dtname" value="{{ $row->field_dtname }}" />
                                                         </div>
                                                         <!--end::Input group-->
                                                         <!--begin::Input group-->
                                                         <div class="d-flex flex-column mb-8">
                                                             <label class="fs-6 fw-bold mb-2">Field En Overview</label>
                                                             <textarea class="form-control form-control-solid" rows="3" name="field_enoverview"
-                                                                placeholder="Type Field En Overview">{{$row->field_enoverview}}</textarea>
+                                                                placeholder="Type Field En Overview">{{ $row->field_enoverview }}</textarea>
                                                         </div>
                                                         <!--end::Input group-->
 
-                                                         <!--begin::Input group-->
-                                                         <div class="d-flex flex-column mb-8">
+                                                        <!--begin::Input group-->
+                                                        <div class="d-flex flex-column mb-8">
                                                             <label class="fs-6 fw-bold mb-2">Field De Overview</label>
                                                             <textarea class="form-control form-control-solid" rows="3" name="field_dtoverview"
-                                                                placeholder="Type Field De Overview">{{$row->field_dtoverview}}</textarea>
+                                                                placeholder="Type Field De Overview">{{ $row->field_dtoverview }}</textarea>
                                                         </div>
                                                         <!--end::Input group-->
                                                         {{-- <div class="d-flex flex-column mb-8 fv-row">
@@ -347,13 +399,13 @@
                                                         </div> --}}
                                                         <!--end::Input group-->
 
-
                                                         <!--begin::Actions-->
                                                         <div class="text-center">
-                                                            <div class="btn btn-sm btn-icon btn-active-color-primary" style="margin-right: 25px"
-                                                            data-bs-dismiss="modal">
-                                                            <button type="reset" id="kt_modal_update_target_cancel"
-                                                                class="btn btn-light me-3" data-dismiss="modal" >Cancel</button>
+                                                            <div class="btn btn-sm btn-icon btn-active-color-primary"
+                                                                style="margin-right: 25px" data-bs-dismiss="modal">
+                                                                <button type="reset" id="kt_modal_update_target_cancel"
+                                                                    class="btn btn-light me-3"
+                                                                    data-dismiss="modal">Cancel</button>
                                                             </div>
                                                             <button type="submit" id="kt_modal_update_target_submit"
                                                                 class="btn btn-primary">
@@ -403,8 +455,8 @@
                         <span class="svg-icon svg-icon-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
-                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
-                                    rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                    transform="rotate(-45 6 17.3137)" fill="black" />
                                 <rect x="7.41422" y="6" width="16" height="2" rx="1"
                                     transform="rotate(45 7.41422 6)" fill="black" />
                             </svg>
@@ -417,7 +469,7 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                     <!--begin:Form-->
-                    <form id="kt_modal_new_target_form" class="form" action="{{ route('medicine-fields.store') }}"
+                    <form id="kt_modal_new_target_form" class="form" action="{{ route("medicine-fields.store") }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Heading-->
@@ -427,20 +479,16 @@
                             <!--end::Title-->
 
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Thumbnail settings-->
-                        <div class="card card-flush py-4">
-                            <!--begin::Card header-->
-                            <div class="card-header">
-                                <!--begin::Card title-->
-                                <div class="card-title">
-                                    <h2>Image</h2>
+                        <div class="d-flex flex-wrap gap-5">
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2>Image</h2>
+                                    </div>
+                                    <!--end::Card title-->
                                 </div>
-                                <!--end::Card title-->
-                            </div>
-                            <!--end::Card header-->
-                            <!--begin::Card body-->
-                            <div class="card-body text-center pt-0">
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-empty image-input-outline mb-3"
                                     data-kt-image-input="true"
@@ -480,34 +528,81 @@
                                 <!--end::Image input-->
 
                             </div>
-                            <!--end::Card body-->
-                        </div>
-                        <!--end::Thumbnail settings-->
-                        <!--begin::Input group-->
+                            <!--end::Input-->
 
+                            <!--begin::Input group-->
+                            <div class="fv-row w-100 flex-md-root">
+
+                                <div class="card-header">
+                                    <!--begin::Card title-->
+                                    <div class="card-title">
+                                        <h2>Thumbnail</h2>
+                                    </div>
+                                    <!--end::Card title-->
+                                </div>
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-empty image-input-outline mb-3"
+                                    data-kt-image-input="true"
+                                    style="background-image: url(assets/media/svg/files/blank-image.svg)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-150px h-150px"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                        title="Change thumbnail">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="thumbnail" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                        title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                        title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <!--end::Image input-->
+
+                            </div>
+                        </div>
 
                         <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">....Field En Name</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7"
-                                    data-bs-toggle="tooltip" title="Enter Field Name"></i>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                    title="Enter Field Name"></i>
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" required
-                                placeholder="Enter Field En Name" name="field_enname"  />
+                                placeholder="Enter Field En Name" name="field_enname" />
                         </div>
                         <!--end::Input group-->
                         <div class="d-flex flex-column mb-8 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Field De Name</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7"
-                                    data-bs-toggle="tooltip" title="Enter Field Name"></i>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip"
+                                    title="Enter Field Name"></i>
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" required
-                                placeholder="Enter Field De Name" name="field_dtname"  />
+                                placeholder="Enter Field De Name" name="field_dtname" />
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -518,8 +613,8 @@
                         </div>
                         <!--end::Input group-->
 
-                         <!--begin::Input group-->
-                         <div class="d-flex flex-column mb-8">
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8">
                             <label class="fs-6 fw-bold mb-2">Field De Overview</label>
                             <textarea class="form-control form-control-solid" rows="3" name="field_dtoverview"
                                 placeholder="Type Field De Overview"></textarea>
@@ -537,7 +632,6 @@
                                 name="order" />
                         </div> --}}
                         <!--end::Input group-->
-
 
                         <!--begin::Actions-->
                         <div class="text-center">

@@ -63,7 +63,11 @@ class MedicalFieldController extends Controller
             $input['field_img'] = $this->UplaodImage($attach_image);
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $attach_thumbnail = $request->file('thumbnail');
 
+            $input['thumbnail'] = $this->UplaodThumbnail($attach_thumbnail);
+        }
 
         Medical_field::create($input);
     return redirect()->route($this->routeName.'index')->with('flash_success', 'Successfully Saved!');
@@ -106,6 +110,11 @@ class MedicalFieldController extends Controller
 
             $input['field_img'] = $this->UplaodImage($attach_image);
         }
+        if ($request->hasFile('thumbnail')) {
+            $attach_thumbnail = $request->file('thumbnail');
+
+            $input['thumbnail'] = $this->UplaodThumbnail($attach_thumbnail);
+        }
 
         Medical_field::findOrFail($id)->update($input);
     //    $medical_field->update($input);
@@ -145,6 +154,26 @@ Because it related with another table');
      /* uplaud image
        */
       public function UplaodImage($file_request)
+      {
+          //  This is Image Info..
+          $file = $file_request;
+          $name = $file->getClientOriginalName();
+          $ext = $file->getClientOriginalExtension();
+          $size = $file->getSize();
+          $path = $file->getRealPath();
+          $mime = $file->getMimeType();
+
+          // Rename The Image ..
+          $imageName = $name;
+          $uploadPath = public_path('uploads/medical_fields');
+
+          // Move The image..
+          $file->move($uploadPath, $imageName);
+
+          return $imageName;
+      }
+
+      public function UplaodThumbnail($file_request)
       {
           //  This is Image Info..
           $file = $file_request;

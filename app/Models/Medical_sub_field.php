@@ -16,6 +16,7 @@ class Medical_sub_field extends Model
     'field_enoverview',
     'field_dtoverview',
     'order',
+    'thumbnail',
     ];
 
 
