@@ -18,7 +18,7 @@ if(App::getLocale()=="en"){
     return [
       'id'=>$this->id,
         'field_name'=>$this->field_enname ?? '',
-        'field_img'=>asset('uploads/medical_fields/' . $this->field_img) ?? '',
+        'field_img'=>asset('uploads/medical_fields/' . $this->thumbnail) ?? '',
 
 
     ];
@@ -26,7 +26,7 @@ if(App::getLocale()=="en"){
     return [
 'id'=>$this->id,
         'field_name'=>$this->field_dtname ?? '',
-        'field_img'=>asset('uploads/medical_fields/' . $this->field_img) ?? '',
+        'field_img'=>asset('uploads/medical_fields/' . $this->thumbnail) ?? '',
 
 
     ];
