@@ -37,7 +37,7 @@ class RegisterController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'mobile' => 'required|',
+            'mobile' => 'required|phone:EG,AT',
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password',
@@ -46,7 +46,6 @@ class RegisterController extends BaseController
         if ($validator->fails()) {
             // return $this->convertErrorsToString($validator->messages());
             return $this->sendError($validator->messages());
-
         }
 
         try {
@@ -56,12 +55,18 @@ class RegisterController extends BaseController
 
             //$input['mobile'] =  (int)$input['mobile'];
             // $input['user_type'] = 1;
-            $user = User::create($input);
+
             $phoneNumber = $input['mobile']; // replace with the recipient's phone number
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
-            $user->update(['otp' => $otp]);
-        $requestOtp=$otpService->sendOtp($phoneNumber, $otp);
-dd($requestOtp["success"]);
+
+            $requestOtp = $otpService->sendOtp($phoneNumber, $otp);
+            if ($requestOtp["success"]) {
+                $user = User::create($input);
+                $user->update(['otp' => $otp]);
+            } else {
+
+                return $this->sendError(__("langMessage.error_happens"));
+            }
             $user->accessToken = $user->createToken('MyApp')->accessToken;
 
             //send sms
@@ -69,10 +74,9 @@ dd($requestOtp["success"]);
             // $data['mobile'] = 201117615935;
             // $data['msg'] = 'تم التفعيل';
             // $sms = Helper::send_sms($data);
-// $user->smsResponse=$sms;
+            // $user->smsResponse=$sms;
 
             return $this->sendResponse(userResource::make($user), 'User has been registed');
-
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
         }
@@ -94,7 +98,6 @@ dd($requestOtp["success"]);
         if ($validator->fails()) {
             // return $this->convertErrorsToString($validator->messages());
             return $this->sendError($validator->messages());
-
         }
 
         try {
@@ -115,8 +118,7 @@ dd($requestOtp["success"]);
     }
     public function updateUser(Request $request)
     {
-        try
-        {
+        try {
 
             $user = $request->user();
             $input = [
@@ -139,13 +141,11 @@ dd($requestOtp["success"]);
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), __("langMessage.error_happens"));
         }
-
     }
 
     public function updateUserImage(Request $request)
     {
-        try
-        {
+        try {
             $validator = Validator::make($request->all(), [
                 'image' => 'required',
 
@@ -204,8 +204,7 @@ dd($requestOtp["success"]);
             return $this->convertErrorsToString($validator->messages());
         }
 
-        try
-        {
+        try {
 
             $user_id = auth()->user()->id;
             $token = $request->token;
@@ -226,14 +225,13 @@ dd($requestOtp["success"]);
 
         if ($notifications->count() > 0) {
             return $this->sendResponse(NotificationsResource::collection($notifications), 'All Notifications');
-
         } else {
             return $this->sendResponse(null, __("noNotifications"));
         }
     }
 
 
-   /**
+    /**
      * change current password
      *
      * @return \Illuminate\Http\Response
@@ -247,30 +245,26 @@ dd($requestOtp["success"]);
 
         ]);
 
-       // $auth = Auth::user();
+        // $auth = Auth::user();
         $user_id = Auth::user()->id;
         $user =  User::find($user_id);
 
- // The passwords matches
-        if (!Hash::check($request->get('current_password'), $user->password))
-        {
+        // The passwords matches
+        if (!Hash::check($request->get('current_password'), $user->password)) {
 
 
-            return $this->sendError( __("langMessage.current_pass"));
+            return $this->sendError(__("langMessage.current_pass"));
         }
 
-// Current password and new password same
-        if (strcmp($request->get('current_password'), $request->new_password) == 0)
-        {
+        // Current password and new password same
+        if (strcmp($request->get('current_password'), $request->new_password) == 0) {
 
-            return $this->sendError( __("langMessage.same_pass"));
-
+            return $this->sendError(__("langMessage.same_pass"));
         }
 
-         $user =  User::find($user_id);
+        $user =  User::find($user_id);
         $user->password =  Hash::make($request->new_password);
         $user->save();
         return $this->sendResponse(null, __("langMessage.change_pass_sucess"));
-
-}
+    }
 }
