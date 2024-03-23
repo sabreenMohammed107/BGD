@@ -61,7 +61,7 @@ class RegisterController extends BaseController
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
             $user->update(['otp' => $otp]);
         $requestOtp=$otpService->sendOtp($phoneNumber, $otp);
-dd($requestOtp);
+dd($requestOtp["success"]);
             $user->accessToken = $user->createToken('MyApp')->accessToken;
 
             //send sms
