@@ -37,7 +37,7 @@ class RegisterController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'mobile' => 'required|regex:/(43)[0-9]{9}/|/(20)[0-9]{9}/',
+            'mobile' => 'required|',
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password',
@@ -57,11 +57,11 @@ class RegisterController extends BaseController
             //$input['mobile'] =  (int)$input['mobile'];
             // $input['user_type'] = 1;
             $user = User::create($input);
-            $phoneNumber = $user->mobile; // replace with the recipient's phone number
+            $phoneNumber = $input['mobile']; // replace with the recipient's phone number
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
             $user->update(['otp' => $otp]);
-        $otpService->sendOtp($phoneNumber, $otp);
-
+        $requestOtp=$otpService->sendOtp($phoneNumber, $otp);
+dd($requestOtp);
             $user->accessToken = $user->createToken('MyApp')->accessToken;
 
             //send sms
