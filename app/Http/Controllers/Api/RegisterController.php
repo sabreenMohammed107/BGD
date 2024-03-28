@@ -58,16 +58,11 @@ class RegisterController extends BaseController
 
             $phoneNumber = $input['mobile']; // replace with the recipient's phone number
             $otp = mt_rand(100000, 999999); // replace with the generated OTP
+            $user = User::create($input);
+            $user->update(['otp' => $otp]);
+             $otpService->sendOtp($phoneNumber, $otp);
 
-            // $requestOtp = $otpService->sendOtp($phoneNumber, $otp);
-            // if ($requestOtp["success"]) {
-            //     $user = User::create($input);
-            //     $user->update(['otp' => $otp]);
-            // } else {
-
-            //     return $this->sendError(__("langMessage.error_happens"));
-            // }
-            // $user->accessToken = $user->createToken('MyApp')->accessToken;
+            $user->accessToken = $user->createToken('MyApp')->accessToken;
 
             //send sms
 
